@@ -111,8 +111,16 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       })
 
       if (!res.ok) {
-        const error = await res.json()
-        throw new Error(error.message || 'Signup failed')
+        let errorMessage = 'Signup failed'
+        try {
+          const error = await res.json()
+          errorMessage = error.error || error.message || errorMessage
+        } catch (e) {
+          // If response is not JSON, try to get text
+          const text = await res.text()
+          errorMessage = text || errorMessage
+        }
+        throw new Error(errorMessage)
       }
 
       // After successful signup, log the user in

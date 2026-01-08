@@ -120,21 +120,6 @@ export default function SignupPage() {
                 </motion.li>
               ))}
             </ul>
-
-            <div className="mt-8 p-6 bg-[#111111] rounded-2xl border border-white/10">
-              <div className="flex items-center gap-3 mb-3">
-                <div className="w-10 h-10 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full flex items-center justify-center text-lg font-medium">
-                  M
-                </div>
-                <div>
-                  <p className="font-medium">Maria K.</p>
-                  <p className="text-xs text-gray-500">Product Designer</p>
-                </div>
-              </div>
-              <p className="text-gray-400 text-sm italic">
-                "LadderFox helped me create a stunning CV in minutes. I got 3 interview calls within a week of updating my resume!"
-              </p>
-            </div>
           </motion.div>
 
           {/* Right: Form */}

@@ -3,6 +3,7 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import { PrismaAdapter } from '@next-auth/prisma-adapter';
 import { PrismaClient } from '@prisma/client';
 import type { SessionStrategy } from 'next-auth';
+import { compare } from 'bcryptjs';
 
 const prisma = new PrismaClient();
 
@@ -26,7 +27,7 @@ export const authOptions = {
         password: { label: 'Password', type: 'password' }
       },
       async authorize(credentials: any) {
-        if (!credentials?.email) return null;
+        if (!credentials?.email || !credentials?.password) return null;
         
         // For development, allow admin login
         if (credentials.email === 'admin@admin.com' && credentials.password === 'admin') {
@@ -51,7 +52,27 @@ export const authOptions = {
           };
         }
         
-        return null;
+        // Find user by email
+        const user = await prisma.user.findUnique({
+          where: { email: credentials.email }
+        });
+        
+        if (!user || !user.password) {
+          return null;
+        }
+        
+        // Verify password
+        const isValid = await compare(credentials.password, user.password);
+        
+        if (!isValid) {
+          return null;
+        }
+        
+        return {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+        };
       }
     })
   ],
