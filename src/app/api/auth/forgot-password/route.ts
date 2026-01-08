@@ -54,7 +54,11 @@ export async function POST(request: NextRequest) {
 
     if (!emailSent) {
       console.error('Failed to send password reset email to:', email);
+      console.error('Check Vercel logs for email configuration errors');
       // Still return success to prevent email enumeration
+      // But log the error for debugging
+    } else {
+      console.log('Password reset email sent successfully to:', email);
     }
 
     return NextResponse.json({

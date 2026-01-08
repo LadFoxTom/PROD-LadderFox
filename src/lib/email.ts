@@ -11,10 +11,15 @@ const createTransporter = () => {
 
   if (!user || !password) {
     console.warn('Email server credentials not configured. Emails will not be sent.');
+    console.warn('Required environment variables: EMAIL_SERVER_USER, EMAIL_SERVER_PASSWORD');
     return null;
   }
 
-  return nodemailer.createTransport({
+  // For Gmail: You can't send FROM noreply@ladderfox.com directly
+  // The "from" address will be your Gmail address, but you can set a display name
+  // For custom domain emails, use a service like SendGrid, Mailgun, or AWS SES
+  
+  const transporter = nodemailer.createTransport({
     host,
     port,
     secure: port === 465, // true for 465, false for other ports
@@ -23,6 +28,17 @@ const createTransporter = () => {
       pass: password,
     },
   });
+
+  // Verify connection (async, won't block)
+  transporter.verify((error, success) => {
+    if (error) {
+      console.error('Email server connection error:', error);
+    } else {
+      console.log('Email server is ready to send messages');
+    }
+  });
+
+  return transporter;
 };
 
 export const sendPasswordResetEmail = async (email: string, resetToken: string) => {
@@ -30,14 +46,36 @@ export const sendPasswordResetEmail = async (email: string, resetToken: string) 
   
   if (!transporter) {
     console.error('Email transporter not available. Cannot send password reset email.');
+    console.error('Missing environment variables:', {
+      hasHost: !!process.env.EMAIL_SERVER_HOST,
+      hasPort: !!process.env.EMAIL_SERVER_PORT,
+      hasUser: !!process.env.EMAIL_SERVER_USER,
+      hasPassword: !!process.env.EMAIL_SERVER_PASSWORD,
+    });
     return false;
   }
 
   const appUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.NEXTAUTH_URL || 'https://www.ladderfox.com';
   const resetUrl = `${appUrl}/auth/reset-password?token=${resetToken}`;
+  const fromEmail = process.env.EMAIL_FROM || 'noreply@ladderfox.com';
+
+  console.log('Attempting to send password reset email:', {
+    to: email,
+    from: fromEmail,
+    host: process.env.EMAIL_SERVER_HOST,
+    port: process.env.EMAIL_SERVER_PORT,
+  });
+
+  // Note: If using Gmail, the "from" address must be your Gmail address
+  // You can use a display name like: "LadderFox <your-email@gmail.com>"
+  // For custom domain emails (noreply@ladderfox.com), use SendGrid, Mailgun, or AWS SES
+  // If EMAIL_FROM is set and different from EMAIL_SERVER_USER, use it with display name
+  const fromAddress = process.env.EMAIL_FROM && process.env.EMAIL_FROM !== process.env.EMAIL_SERVER_USER
+    ? `LadderFox <${process.env.EMAIL_FROM}>`
+    : process.env.EMAIL_SERVER_USER || fromEmail;
 
   const mailOptions = {
-    from: process.env.EMAIL_FROM || 'noreply@ladderfox.com',
+    from: fromAddress,
     to: email,
     subject: 'Reset Your LadderFox Password',
     html: `
@@ -82,10 +120,21 @@ export const sendPasswordResetEmail = async (email: string, resetToken: string) 
   };
 
   try {
-    await transporter.sendMail(mailOptions);
+    const info = await transporter.sendMail(mailOptions);
+    console.log('Password reset email sent successfully:', {
+      messageId: info.messageId,
+      to: email,
+      from: fromEmail,
+    });
     return true;
-  } catch (error) {
-    console.error('Error sending password reset email:', error);
+  } catch (error: any) {
+    console.error('Error sending password reset email:', {
+      error: error.message,
+      code: error.code,
+      command: error.command,
+      response: error.response,
+      to: email,
+    });
     return false;
   }
 };
