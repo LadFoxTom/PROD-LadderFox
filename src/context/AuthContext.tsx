@@ -145,6 +145,13 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       if (result?.error) {
         throw new Error(result.error)
       }
+
+      // Wait for session to be created - refresh the session
+      if (result?.ok) {
+        // Force a session refresh to ensure it's created in the database
+        await new Promise(resolve => setTimeout(resolve, 500))
+        // The session will be updated automatically by NextAuth
+      }
     } catch (err) {
       console.error('Login error:', err)
       setError(err instanceof Error ? err.message : 'An error occurred during login')

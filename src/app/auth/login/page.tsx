@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { useAuth } from '@/context/AuthContext'
 import { useLocale } from '@/context/LocaleContext'
 import { Toaster, toast } from 'react-hot-toast'
-import { useSession } from 'next-auth/react'
+import { useSession, signIn } from 'next-auth/react'
 import { motion } from 'framer-motion'
 import { FiMail, FiLock, FiArrowLeft, FiArrowRight } from 'react-icons/fi'
 import { FcGoogle } from 'react-icons/fc'
@@ -44,13 +44,31 @@ export default function LoginPage() {
     setIsLoading(true)
     
     try {
-      await login(email, password)
-      toast.success('Login successful!')
-      router.push('/')
+      // Use signIn directly to ensure proper session creation
+      const result = await signIn('credentials', {
+        email,
+        password,
+        redirect: false,
+      })
+
+      if (result?.error) {
+        toast.error('Login failed. Please check your credentials.')
+        setIsLoading(false)
+        return
+      }
+
+      if (result?.ok) {
+        toast.success('Login successful!')
+        // Use full page reload to ensure session is properly initialized
+        setTimeout(() => {
+          window.location.href = '/'
+        }, 500)
+      } else {
+        setIsLoading(false)
+      }
     } catch (error) {
       console.error('Login error:', error)
       toast.error('Login failed. Please check your credentials.')
-    } finally {
       setIsLoading(false)
     }
   }
