@@ -1,4 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { PrismaClient } from '@prisma/client';
+import { randomBytes } from 'crypto';
+import { sendPasswordResetEmail } from '@/lib/email';
+
+const prisma = new PrismaClient();
 
 export async function POST(request: NextRequest) {
   try {
@@ -11,26 +16,56 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // TODO: Implement actual password reset logic
-    // For now, just return success to prevent email enumeration
-    // In production, you would:
-    // 1. Check if user exists
-    // 2. Generate a reset token
-    // 3. Send email with reset link
-    // 4. Store token in database with expiry
-
-    console.log(`Password reset requested for: ${email}`);
+    // Check if user exists
+    const user = await prisma.user.findUnique({
+      where: { email },
+    });
 
     // Always return success to prevent email enumeration attacks
+    // Even if user doesn't exist, return the same message
+    if (!user) {
+      return NextResponse.json({
+        message: 'If an account exists with this email, a reset link has been sent.',
+      });
+    }
+
+    // Generate reset token
+    const resetToken = randomBytes(32).toString('hex');
+    const expires = new Date();
+    expires.setHours(expires.getHours() + 1); // Token expires in 1 hour
+
+    // Store token in database using VerificationToken model
+    // Delete any existing tokens for this email first
+    await prisma.verificationToken.deleteMany({
+      where: { identifier: email },
+    });
+
+    // Create new token
+    await prisma.verificationToken.create({
+      data: {
+        identifier: email,
+        token: resetToken,
+        expires,
+      },
+    });
+
+    // Send password reset email
+    const emailSent = await sendPasswordResetEmail(email, resetToken);
+
+    if (!emailSent) {
+      console.error('Failed to send password reset email to:', email);
+      // Still return success to prevent email enumeration
+    }
+
     return NextResponse.json({
       message: 'If an account exists with this email, a reset link has been sent.',
     });
   } catch (error) {
     console.error('Forgot password error:', error);
-    return NextResponse.json(
-      { message: 'An error occurred' },
-      { status: 500 }
-    );
+    // Always return success to prevent email enumeration
+    return NextResponse.json({
+      message: 'If an account exists with this email, a reset link has been sent.',
+    });
   }
 }
 
