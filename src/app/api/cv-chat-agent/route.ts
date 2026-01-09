@@ -38,6 +38,7 @@ interface ChatRequest {
   message: string;
   cvData: CVData;
   conversationHistory: Array<{ role: string; content: string }>;
+  language?: string;
 }
 
 // Job match interface
