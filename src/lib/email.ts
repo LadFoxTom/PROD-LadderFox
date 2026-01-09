@@ -16,17 +16,21 @@ export const sendPasswordResetEmail = async (email: string, resetToken: string, 
   const appUrl = process.env.NEXT_PUBLIC_APP_URL || process.env.NEXTAUTH_URL || 'https://www.ladderfox.com';
   const resetUrl = `${appUrl}/auth/reset-password?token=${resetToken}`;
   
-  // Use noreply@ladderfox.com if domain is verified in Resend, otherwise use onboarding@resend.dev
-  const fromEmail = process.env.EMAIL_FROM || 'onboarding@resend.dev';
+  // Use onboarding@resend.dev by default (works immediately without domain verification)
+  // If you've verified ladderfox.com in Resend, you can set EMAIL_FROM=noreply@ladderfox.com
+  // For now, always use onboarding@resend.dev to ensure emails work
+  const requestedFrom = process.env.EMAIL_FROM || 'onboarding@resend.dev';
+  const useFromEmail = 'onboarding@resend.dev'; // Always use this until domain is verified
 
   console.log('Attempting to send password reset email via Resend:', {
     to: email,
-    from: fromEmail,
+    from: useFromEmail,
+    note: 'Using onboarding@resend.dev (works without domain verification). To use noreply@ladderfox.com, verify your domain in Resend first.',
   });
 
   try {
     const { data, error } = await resend.emails.send({
-      from: fromEmail,
+      from: useFromEmail,
       to: email,
       subject: 'Reset Your LadderFox Password',
       html: `
@@ -94,7 +98,7 @@ export const sendPasswordResetEmail = async (email: string, resetToken: string, 
     console.log('Password reset email sent successfully via Resend:', {
       id: data.id,
       to: email,
-      from: fromEmail,
+      from: useFromEmail,
     });
     return true;
   } catch (error: any) {
