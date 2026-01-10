@@ -31,12 +31,12 @@ export default function SignupPage() {
     e.preventDefault()
     
     if (!name || !email || !password) {
-      toast.error('Please fill in all fields')
+      toast.error(t('auth.error.fill_fields'))
       return
     }
 
     if (password.length < 8) {
-      toast.error('Password must be at least 8 characters')
+      toast.error(t('auth.error.password_length'))
       return
     }
     
@@ -44,11 +44,11 @@ export default function SignupPage() {
     
     try {
       await signup(email, password, name)
-      toast.success('Account created successfully!')
+      toast.success(t('auth.success.account_created'))
       router.push('/')
     } catch (error) {
       console.error('Signup error:', error)
-      toast.error('Signup failed. Please try again.')
+      toast.error(t('auth.error.signup_failed'))
     } finally {
       setIsLoading(false)
     }
@@ -59,7 +59,7 @@ export default function SignupPage() {
       await loginWithGoogle()
     } catch (error) {
       console.error('Google login error:', error)
-      toast.error('Google login failed. Please try again.')
+      toast.error(t('auth.error.google_failed'))
     }
   }
 
@@ -130,8 +130,8 @@ export default function SignupPage() {
           >
             {/* Header */}
             <div className="text-center mb-8">
-              <h1 className="text-3xl font-bold mb-2">Create your account</h1>
-              <p className="text-gray-400">Start building professional CVs for free</p>
+              <h1 className="text-3xl font-bold mb-2">{t('auth.create_account')}</h1>
+              <p className="text-gray-400">{t('auth.start_building')}</p>
             </div>
 
             {/* Google Login */}
@@ -140,7 +140,7 @@ export default function SignupPage() {
               className="w-full flex items-center justify-center gap-3 bg-white text-black py-3 px-6 rounded-xl font-medium hover:bg-gray-100 transition-colors mb-6"
             >
               <FcGoogle size={20} />
-              Continue with Google
+              {t('auth.continue_with_google')}
             </button>
 
             {/* Divider */}
@@ -149,7 +149,7 @@ export default function SignupPage() {
                 <div className="w-full border-t border-white/10"></div>
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-4 bg-[#0a0a0a] text-gray-500">or</span>
+                <span className="px-4 bg-[#0a0a0a] text-gray-500">{t('auth.or')}</span>
               </div>
             </div>
 

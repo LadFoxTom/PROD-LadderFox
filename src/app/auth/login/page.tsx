@@ -116,8 +116,8 @@ export default function LoginPage() {
         >
           {/* Header */}
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold mb-2">Welcome back</h1>
-            <p className="text-gray-400">Sign in to continue building your career</p>
+            <h1 className="text-3xl font-bold mb-2">{t('auth.welcome_back')}</h1>
+            <p className="text-gray-400">{t('auth.sign_in_subtitle')}</p>
           </div>
 
           {/* Google Login */}
@@ -126,7 +126,7 @@ export default function LoginPage() {
             className="w-full flex items-center justify-center gap-3 bg-white text-black py-3 px-6 rounded-xl font-medium hover:bg-gray-100 transition-colors mb-6"
           >
             <FcGoogle size={20} />
-            Continue with Google
+            {t('auth.continue_with_google')}
           </button>
 
           {/* Divider */}
@@ -135,21 +135,21 @@ export default function LoginPage() {
               <div className="w-full border-t border-white/10"></div>
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-4 bg-[#0a0a0a] text-gray-500">or</span>
+              <span className="px-4 bg-[#0a0a0a] text-gray-500">{t('auth.or')}</span>
             </div>
           </div>
 
           {/* Form */}
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">Email</label>
+              <label className="block text-sm font-medium text-gray-300 mb-2">{t('auth.email')}</label>
               <div className="relative">
                 <FiMail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} />
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="you@example.com"
+                  placeholder={t('auth.placeholder.email')}
                   className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
                   required
                 />
@@ -157,14 +157,14 @@ export default function LoginPage() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-2">Password</label>
+              <label className="block text-sm font-medium text-gray-300 mb-2">{t('auth.password')}</label>
               <div className="relative">
                 <FiLock className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} />
                 <input
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
+                  placeholder={t('auth.placeholder.password')}
                   className="w-full bg-[#1a1a1a] border border-white/10 rounded-xl py-3 pl-12 pr-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 transition-colors"
                   required
                 />
@@ -174,10 +174,10 @@ export default function LoginPage() {
             <div className="flex items-center justify-between text-sm">
               <label className="flex items-center gap-2 text-gray-400">
                 <input type="checkbox" className="rounded bg-[#1a1a1a] border-white/10" />
-                Remember me
+                {t('auth.remember_me')}
               </label>
               <Link href="/auth/forgot-password" className="text-blue-400 hover:text-blue-300">
-                Forgot password?
+                {t('auth.forgot_password')}
               </Link>
             </div>
 
@@ -192,11 +192,11 @@ export default function LoginPage() {
                     <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
                     <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
                   </svg>
-                  Signing in...
+                  {t('auth.signing_in')}
                 </>
               ) : (
                 <>
-                  Sign in
+                  {t('auth.sign_in')}
                   <FiArrowRight size={18} />
                 </>
               )}
@@ -205,9 +205,9 @@ export default function LoginPage() {
 
           {/* Sign up link */}
           <p className="text-center text-gray-400 mt-8">
-            Don't have an account?{' '}
+            {t('auth.dont_have_account')}{' '}
             <Link href="/auth/signup" className="text-blue-400 hover:text-blue-300 font-medium">
-              Sign up
+              {t('auth.signup')}
             </Link>
           </p>
         </motion.div>
