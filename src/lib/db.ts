@@ -278,7 +278,6 @@ export class UserService {
     return await prisma.user.findUnique({
       where: { id: userId },
       include: {
-        preferences: true,
         subscription: true,
       },
     })
@@ -293,7 +292,6 @@ export class UserService {
         }
       },
       include: {
-        preferences: true,
         subscription: true,
       },
     })
