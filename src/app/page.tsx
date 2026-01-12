@@ -792,6 +792,7 @@ export default function HomePage() {
   const plan = subscription?.plan || 'free';
   const isPro = plan !== 'free' && subscription?.status === 'active';
   const isFree = !isPro;
+  const subBadge = isPro ? 'Pro' : 'Free';
   
   // Chat State
   const [messages, setMessages] = useState<Message[]>([]);
@@ -1890,7 +1891,7 @@ export default function HomePage() {
                       </div>
                       
                       <div className="border-t border-white/5 py-2">
-                        <MenuItem icon={FiCreditCard} label="Subscription" onClick={() => router.push('/pricing')} badge="Pro" />
+                        <MenuItem icon={FiCreditCard} label="Subscription" onClick={() => router.push('/pricing')} badge={subBadge} />
                         <MenuItem icon={FiSettings} label="Settings" onClick={() => router.push('/settings')} />
                         <MenuItem icon={FiHelpCircle} label="Help & Support" onClick={() => router.push('/faq')} />
                       </div>

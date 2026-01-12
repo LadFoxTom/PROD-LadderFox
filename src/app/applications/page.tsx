@@ -77,7 +77,7 @@ function MenuItem({
 }
 
 export default function ApplicationsPage() {
-  const { isAuthenticated, user, isLoading: authLoading } = useAuth();
+  const { isAuthenticated, user, subscription, isLoading: authLoading } = useAuth();
   const router = useRouter();
   
   const [applications, setApplications] = useState<JobApplication[]>([]);
@@ -88,6 +88,7 @@ export default function ApplicationsPage() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [showAddModal, setShowAddModal] = useState(false);
   const userMenuRef = useRef<HTMLDivElement>(null);
+  const subBadge = subscription?.plan === 'free' || !subscription ? 'Free' : 'Pro';
 
   // Close user menu when clicking outside (works for both mouse and touch)
   useEffect(() => {
@@ -357,7 +358,7 @@ export default function ApplicationsPage() {
                           setIsUserMenuOpen(false)
                           router.push('/pricing')
                         }} 
-                        badge="Pro" 
+                        badge={subBadge} 
                       />
                       <MenuItem 
                         icon={FiSettings} 
