@@ -1831,9 +1831,10 @@ export default function HomePage() {
               <motion.button
                 whileTap={{ scale: 0.97 }}
                 onClick={() => {
-                  setIsSidebarOpen((prev) => !prev);
+                  // Show full chat overview (split view) like after first message
                   setActiveView('chat');
-                  setIsConversationActive(false);
+                  setIsConversationActive(true);
+                  setIsSidebarOpen(true);
                 }}
                 className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 rounded-lg transition-colors"
               >
