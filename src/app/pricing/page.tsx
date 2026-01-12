@@ -45,6 +45,8 @@ export default function PricingPage() {
   const currency = getUserCurrency()
   const currencySymbol = currency === 'EUR' ? '€' : '$'
   const subBadge = subscription?.status === 'active' && subscription?.plan !== 'free' ? 'Pro' : 'Free'
+  // Only show savings badges when monthly is selected, to avoid overlap when switching
+  const showSavingsBadges = billingInterval === 'monthly'
 
   const getPriceForInterval = (interval: string) => {
     switch (interval) {
@@ -270,7 +272,7 @@ export default function PricingPage() {
                     >
                       {config.label}
                     </button>
-                    {'savings' in config && config.savings && billingInterval !== interval && (
+                    {showSavingsBadges && 'savings' in config && config.savings && billingInterval !== interval && (
                       <span className="absolute -top-2 -right-2 text-[10px] bg-gradient-to-r from-green-500 to-emerald-500 text-white px-2 py-0.5 rounded-full font-medium">
                         -{config.savings}%
                       </span>
