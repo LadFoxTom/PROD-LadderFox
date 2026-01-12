@@ -11,10 +11,10 @@ export const STRIPE_PLANS = {
     name: 'Free',
     price: 0,
     features: [
-      '1 CV only',
+      '1 CV & 1 letter',
       '3 basic templates', 
-      'No PDF export (preview only)',
-      'No AI assistance',
+      'Preview only (no downloads)',
+      '10 chat prompts per day',
       'Watermark on preview',
       'Upgrade prompts on premium features'
     ],
@@ -30,10 +30,10 @@ export const STRIPE_PLANS = {
     priceQuarterly: 9.99,
     priceYearly: 39.99,
     features: [
-      'Unlimited CVs',
+      'Unlimited CVs & letters',
       'All premium templates (20+)',
       'PDF & DOCX export',
-      'AI writing assistance',
+      'AI writing assistance (unlimited prompts)',
       'No watermarks',
       'Cover letter builder',
       'Auto-save & version history'

@@ -795,6 +795,7 @@ export default function HomePage() {
   const isFree = !isPro;
   const subBadge = isPro ? 'Pro' : 'Free';
   const jobsDisabled = true;
+  const PROMPT_LIMIT = 10;
   
   // Chat State
   const [messages, setMessages] = useState<Message[]>([]);
@@ -1245,6 +1246,33 @@ export default function HomePage() {
   const handleSubmit = async (e?: React.FormEvent) => {
     e?.preventDefault();
     if ((!inputValue.trim() && !attachedFile) || isProcessing) return;
+
+    // Prompt limit for free users: max 10/day
+    const usageKey = `promptUsage_${user?.id || 'guest'}`;
+    const today = new Date().toISOString().slice(0, 10);
+    let usage = { date: today, count: 0 };
+    try {
+      const stored = localStorage.getItem(usageKey);
+      if (stored) {
+        const parsed = JSON.parse(stored);
+        if (parsed.date === today) {
+          usage = parsed;
+        }
+      }
+    } catch (err) {
+      console.warn('Prompt usage read error', err);
+    }
+    if (isFree && usage.count >= PROMPT_LIMIT) {
+      toast.error('Daglimiet bereikt (10 prompts). Upgrade naar Pro voor onbeperkt chatten.');
+      return;
+    }
+    // increment usage immediately to avoid bypassing
+    try {
+      const next = { date: today, count: usage.count + 1 };
+      localStorage.setItem(usageKey, JSON.stringify(next));
+    } catch (err) {
+      console.warn('Prompt usage write error', err);
+    }
 
     // Build the message content - include attached file if present
     const userText = inputValue.trim() || 'Please analyze this document and extract the CV/resume information.';
