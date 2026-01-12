@@ -763,7 +763,7 @@ function InlineEditor({
 }
 
 export default function HomePage() {
-  const { isAuthenticated, user } = useAuth();
+  const { isAuthenticated, user, subscription } = useAuth();
   const router = useRouter();
   const { t, language } = useLocale();
   
@@ -788,8 +788,10 @@ export default function HomePage() {
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
   const userMenuRef = useRef<HTMLDivElement>(null);
   
-  // Pro feature check (placeholder - you can integrate with your subscription system)
-  const isPro = true; // TODO: Check actual subscription status
+  // Subscription gating
+  const plan = subscription?.plan || 'free';
+  const isPro = plan !== 'free' && subscription?.status === 'active';
+  const isFree = !isPro;
   
   // Chat State
   const [messages, setMessages] = useState<Message[]>([]);
@@ -1555,6 +1557,10 @@ export default function HomePage() {
 
   // Download PDF
   const handleDownload = async () => {
+    if (!isPro) {
+      toast.error('Downloading CV is a Pro feature. Please upgrade to Pro to download.');
+      return;
+    }
     try {
       // CRITICAL: Crop photo before PDF generation (matching preview)
       let processedPhotoUrl = cvData.photoUrl
@@ -3048,8 +3054,9 @@ export default function HomePage() {
                         </button>
                         <button
                           onClick={handleDownload}
-                          className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
-                          title="Download PDF"
+                          disabled={isFree}
+                          className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                          title={isFree ? 'Pro feature: upgrade to download' : 'Download PDF'}
                         >
                           <FiDownload size={16} />
                         </button>
@@ -3058,20 +3065,30 @@ export default function HomePage() {
                     {artifactType === 'letter' && (
                       <>
                         <button
+                          disabled={isFree}
                           onClick={() => {
+                            if (isFree) {
+                              toast.error('Copying letters is a Pro feature. Please upgrade to copy or download your letter.');
+                              return;
+                            }
                             navigator.clipboard.writeText(
                               `${letterData.opening}\n\n${letterData.body}\n\n${letterData.closing}\n\n${letterData.signature}`
                             );
                             toast.success('Letter copied to clipboard');
                           }}
-                          className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
-                          title="Copy Letter"
+                          className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                          title={isFree ? 'Pro feature: upgrade to copy' : 'Copy Letter'}
                         >
                           <FiCopy size={14} />
                           <span className="hidden sm:inline">Copy</span>
                         </button>
                         <button
+                          disabled={isFree}
                           onClick={() => {
+                            if (isFree) {
+                              toast.error('Downloading letters is a Pro feature. Please upgrade to download.');
+                              return;
+                            }
                             const content = `${letterData.opening}\n\n${letterData.body}\n\n${letterData.closing}\n\n${letterData.signature}`;
                             const blob = new Blob([content], { type: 'text/plain' });
                             const url = URL.createObjectURL(blob);
@@ -3082,8 +3099,8 @@ export default function HomePage() {
                             URL.revokeObjectURL(url);
                             toast.success('Letter downloaded');
                           }}
-                          className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
-                          title="Download"
+                          className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                          title={isFree ? 'Pro feature: upgrade to download' : 'Download'}
                         >
                           <FiDownload size={16} />
                         </button>
@@ -3131,7 +3148,7 @@ export default function HomePage() {
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         exit={{ opacity: 0, x: 20 }}
-                        className="h-full"
+                        className={`h-full ${isFree ? 'select-none' : ''}`}
                       >
                         <LetterPreview 
                           data={letterData}
