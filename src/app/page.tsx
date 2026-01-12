@@ -15,7 +15,7 @@ import {
   FiClock, FiStar, FiPlus, FiMenu, FiX, FiLogOut, FiCreditCard,
   FiGrid, FiFolder, FiHelpCircle, FiExternalLink, FiAward, FiLock,
   FiTrash2, FiChevronRight, FiMail, FiImage, FiUpload,
-  FiZoomIn, FiZoomOut
+  FiZoomIn, FiZoomOut, FiList
 } from 'react-icons/fi';
 import { signOut } from 'next-auth/react';
 import { toast, Toaster } from 'react-hot-toast';
@@ -1823,6 +1823,25 @@ export default function HomePage() {
               <FiPlus size={16} />
               <span className="hidden sm:inline">New Chat</span>
             </motion.button>
+          )}
+
+          {/* Desktop Chat Overview shortcut */}
+          {isAuthenticated && (
+            <div className="hidden lg:flex items-center gap-2">
+              <motion.button
+                whileTap={{ scale: 0.97 }}
+                onClick={() => {
+                  setIsSidebarOpen(true);
+                  setActiveView('chat');
+                  setIsConversationActive(false);
+                }}
+                className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 rounded-lg transition-colors"
+              >
+                <FiList size={16} />
+                <span className="hidden xl:inline">Chat overview</span>
+                <span className="xl:hidden">Chats</span>
+              </motion.button>
+            </div>
           )}
 
           {/* Right: User Menu */}
