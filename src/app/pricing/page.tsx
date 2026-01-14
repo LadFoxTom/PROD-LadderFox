@@ -27,36 +27,6 @@ export default function PricingPage() {
   const router = useRouter()
   const { t } = useLocale()
 
-  // Debug: log when menu state changes
-  useEffect(() => {
-    console.log('[UserMenu] State changed (pricing):', { isUserMenuOpen, hasRef: !!dropdownRef.current, viewportWidth: window.innerWidth })
-    if (isUserMenuOpen && dropdownRef.current) {
-      setTimeout(() => {
-        const rect = dropdownRef.current!.getBoundingClientRect()
-        const styles = window.getComputedStyle(dropdownRef.current!)
-        console.log('[UserMenu] Dropdown element info:', {
-          rect: {
-            top: rect.top,
-            left: rect.left,
-            right: rect.right,
-            bottom: rect.bottom,
-            width: rect.width,
-            height: rect.height
-          },
-          viewport: {
-            width: window.innerWidth,
-            height: window.innerHeight
-          },
-          display: styles.display,
-          visibility: styles.visibility,
-          opacity: styles.opacity,
-          zIndex: styles.zIndex,
-          position: styles.position,
-          transform: styles.transform
-        })
-      }, 100)
-    }
-  }, [isUserMenuOpen])
 
   // Close user menu when clicking outside (mouse + touch)
   useEffect(() => {
@@ -189,10 +159,7 @@ export default function PricingPage() {
               {isAuthenticated ? (
                 <div className="relative" ref={userMenuRef} style={{ overflow: 'visible', zIndex: 100 }}>
                   <button 
-                    onClick={() => {
-                      console.log('[UserMenu] toggle click (pricing)', { wasOpen: isUserMenuOpen });
-                      setIsUserMenuOpen(!isUserMenuOpen);
-                    }}
+                    onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
                     className="flex items-center gap-2 px-3 py-2 hover:bg-white/5 rounded-lg transition-colors"
                   >
                     <div className="w-8 h-8 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full flex items-center justify-center text-sm font-medium">
@@ -201,64 +168,32 @@ export default function PricingPage() {
                     <FiChevronDown size={14} className={`text-gray-400 transition-transform ${isUserMenuOpen ? 'rotate-180' : ''}`} />
                   </button>
                   
-                  {/* User Dropdown Menu */}
+                  {/* User Dropdown Menu - Mobile: Full overlay, Desktop: Dropdown */}
                   <AnimatePresence>
                     {isUserMenuOpen && (
-                      <motion.div
-                        ref={dropdownRef}
-                        initial={{ opacity: 0, y: 8, scale: 0.96 }}
-                        animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 8, scale: 0.96 }}
-                        transition={{ duration: 0.15 }}
-                        className="fixed left-4 right-4 sm:absolute sm:left-auto sm:right-0 sm:top-full sm:mt-2 w-auto sm:w-64 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl shadow-black/40 overflow-hidden z-[9999]"
-                        style={{ 
-                          position: 'fixed',
-                          top: '56px', // Directly below header (h-14 = 56px)
-                          zIndex: 99999, // Higher than header's z-50
-                          maxWidth: 'calc(100vw - 2rem)',
-                          minWidth: '200px',
-                          maxHeight: 'calc(100vh - 72px)', // Ensure it doesn't go below viewport
-                          overflowY: 'auto',
-                          willChange: 'transform, opacity' // Optimize for animation
-                        }}
-                        onAnimationStart={() => console.log('[UserMenu] Dropdown animating in (pricing)')}
-                        onAnimationComplete={() => {
-                          if (dropdownRef.current) {
-                            const rect = dropdownRef.current.getBoundingClientRect()
-                            const styles = window.getComputedStyle(dropdownRef.current)
-                            const isVisible = rect.top >= 0 && rect.left >= 0 && 
-                                             rect.bottom <= window.innerHeight && 
-                                             rect.right <= window.innerWidth
-                            console.log('[UserMenu] Dropdown visible (pricing)', { 
-                              rect: {
-                                top: rect.top,
-                                left: rect.left,
-                                right: rect.right,
-                                bottom: rect.bottom,
-                                width: rect.width,
-                                height: rect.height
-                              },
-                              viewport: {
-                                width: window.innerWidth,
-                                height: window.innerHeight
-                              },
-                              isVisible,
-                              display: styles.display,
-                              visibility: styles.visibility,
-                              opacity: styles.opacity,
-                              zIndex: styles.zIndex,
-                              position: styles.position
-                            });
-                            if (!isVisible) {
-                              console.warn('[UserMenu] Dropdown is outside viewport!', {
-                                top: rect.top,
-                                bottom: rect.bottom,
-                                viewportHeight: window.innerHeight
-                              })
-                            }
-                          }
-                        }}
-                      >
+                      <>
+                        {/* Mobile: Backdrop overlay */}
+                        <motion.div
+                          initial={{ opacity: 0 }}
+                          animate={{ opacity: 1 }}
+                          exit={{ opacity: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[9998] sm:hidden"
+                          onClick={() => setIsUserMenuOpen(false)}
+                        />
+                        
+                        {/* Menu - Mobile: Full width from top, Desktop: Dropdown */}
+                        <motion.div
+                          ref={dropdownRef}
+                          initial={{ opacity: 0, y: -10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          transition={{ duration: 0.2, ease: 'easeOut' }}
+                          className="fixed top-14 left-0 right-0 sm:absolute sm:left-auto sm:right-0 sm:top-full sm:mt-2 sm:w-64 bg-[#1a1a1a] border-b sm:border border-white/10 sm:rounded-xl shadow-2xl shadow-black/40 overflow-y-auto z-[9999]"
+                          style={{ 
+                            maxHeight: 'calc(100vh - 56px)' // Mobile: full height minus header
+                          }}
+                        >
                           {/* User Info */}
                           <div className="px-4 py-3 border-b border-white/5">
                             <p className="font-medium text-sm">{user?.name || 'User'}</p>
@@ -301,8 +236,9 @@ export default function PricingPage() {
                             </button>
                           </div>
                         </motion.div>
-                      )}
-                    </AnimatePresence>
+                      </>
+                    )}
+                  </AnimatePresence>
                 </div>
               ) : (
                 <div className="flex items-center gap-2">

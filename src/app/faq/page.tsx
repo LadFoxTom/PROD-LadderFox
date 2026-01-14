@@ -145,28 +145,32 @@ export default function FAQPage() {
                   <FiChevronDown size={14} className={`text-gray-400 transition-transform ${isUserMenuOpen ? 'rotate-180' : ''}`} />
                 </button>
                 
+                {/* User Dropdown Menu - Mobile: Full overlay, Desktop: Dropdown */}
                 <AnimatePresence>
                   {isUserMenuOpen && (
-                    <motion.div
-                      ref={dropdownRef}
-                      initial={{ opacity: 0, y: 8, scale: 0.96 }}
-                      animate={{ opacity: 1, y: 0, scale: 1 }}
-                      exit={{ opacity: 0, y: 8, scale: 0.96 }}
-                      transition={{ duration: 0.15 }}
-                      className="fixed top-16 left-4 right-4 sm:absolute sm:left-auto sm:right-0 sm:top-full sm:mt-2 w-auto sm:w-64 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl shadow-black/40 overflow-hidden z-[9999]"
-                      style={{ 
-                        position: 'fixed',
-                        zIndex: 9999,
-                        maxWidth: 'calc(100vw - 2rem)',
-                        minWidth: '200px'
-                      }}
-                      onAnimationStart={() => console.log('[UserMenu] Dropdown animating in (faq)')}
-                      onAnimationComplete={() => console.log('[UserMenu] Dropdown visible (faq)', { 
-                        rect: dropdownRef.current?.getBoundingClientRect(),
-                        display: window.getComputedStyle(dropdownRef.current!).display,
-                        visibility: window.getComputedStyle(dropdownRef.current!).visibility
-                      })}
-                    >
+                    <>
+                      {/* Mobile: Backdrop overlay */}
+                      <motion.div
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                        transition={{ duration: 0.2 }}
+                        className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[9998] sm:hidden"
+                        onClick={() => setIsUserMenuOpen(false)}
+                      />
+                      
+                      {/* Menu - Mobile: Full width from top, Desktop: Dropdown */}
+                      <motion.div
+                        ref={dropdownRef}
+                        initial={{ opacity: 0, y: -10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.2, ease: 'easeOut' }}
+                        className="fixed top-14 left-0 right-0 sm:absolute sm:left-auto sm:right-0 sm:top-full sm:mt-2 sm:w-64 bg-[#1a1a1a] border-b sm:border border-white/10 sm:rounded-xl shadow-2xl shadow-black/40 overflow-y-auto z-[9999]"
+                        style={{ 
+                          maxHeight: 'calc(100vh - 56px)' // Mobile: full height minus header
+                        }}
+                      >
                       {/* User Info */}
                       <div className="px-4 py-3 border-b border-white/5">
                         <p className="font-medium text-sm">{user?.name || 'User'}</p>
@@ -205,7 +209,8 @@ export default function FAQPage() {
                           <FiLogOut size={16} /> Sign out
                         </button>
                       </div>
-                    </motion.div>
+                      </motion.div>
+                    </>
                   )}
                 </AnimatePresence>
               </div>
@@ -290,10 +295,10 @@ export default function FAQPage() {
                       <div className="px-5 pb-5 pl-[76px]">
                         <p className="text-gray-400 leading-relaxed">{faq.answer}</p>
                       </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </motion.div>
             ))}
           </div>
         </div>
