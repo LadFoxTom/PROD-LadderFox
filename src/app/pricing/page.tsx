@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useState, useRef, useEffect } from 'react'
-import ReactDOM from 'react-dom'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { useAuth } from '@/context/AuthContext'
@@ -28,11 +27,22 @@ export default function PricingPage() {
   const router = useRouter()
   const { t } = useLocale()
 
-  // Portal mount point for dropdown (to escape header's stacking context)
-  const [portalMounted, setPortalMounted] = useState(false)
+  // Debug: log when menu state changes
   useEffect(() => {
-    setPortalMounted(true)
-  }, [])
+    console.log('[UserMenu] State changed (pricing):', { isUserMenuOpen, hasRef: !!dropdownRef.current })
+    if (isUserMenuOpen && dropdownRef.current) {
+      const rect = dropdownRef.current.getBoundingClientRect()
+      const styles = window.getComputedStyle(dropdownRef.current)
+      console.log('[UserMenu] Dropdown element info:', {
+        rect,
+        display: styles.display,
+        visibility: styles.visibility,
+        opacity: styles.opacity,
+        zIndex: styles.zIndex,
+        position: styles.position
+      })
+    }
+  }, [isUserMenuOpen])
 
   // Close user menu when clicking outside (mouse + touch)
   useEffect(() => {
@@ -177,21 +187,32 @@ export default function PricingPage() {
                     <FiChevronDown size={14} className={`text-gray-400 transition-transform ${isUserMenuOpen ? 'rotate-180' : ''}`} />
                   </button>
                   
-                  {/* User Dropdown Menu - rendered via Portal to escape header stacking context */}
-                  {portalMounted && ReactDOM.createPortal(
-                    <AnimatePresence>
-                      {isUserMenuOpen && (
-                        <motion.div
-                          ref={dropdownRef}
-                          initial={{ opacity: 0, y: 8, scale: 0.96 }}
-                          animate={{ opacity: 1, y: 0, scale: 1 }}
-                          exit={{ opacity: 0, y: 8, scale: 0.96 }}
-                          transition={{ duration: 0.15 }}
-                          className="fixed top-16 left-4 right-4 sm:right-4 sm:left-auto sm:w-64 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl shadow-black/40 overflow-hidden"
-                          style={{ zIndex: 9999 }}
-                          onAnimationStart={() => console.log('[UserMenu] Dropdown animating in')}
-                          onAnimationComplete={() => console.log('[UserMenu] Dropdown visible')}
-                        >
+                  {/* User Dropdown Menu */}
+                  <AnimatePresence>
+                    {isUserMenuOpen && (
+                      <motion.div
+                        ref={dropdownRef}
+                        initial={{ opacity: 0, y: 8, scale: 0.96 }}
+                        animate={{ opacity: 1, y: 0, scale: 1 }}
+                        exit={{ opacity: 0, y: 8, scale: 0.96 }}
+                        transition={{ duration: 0.15 }}
+                        className="fixed top-16 left-4 right-4 sm:absolute sm:left-auto sm:right-0 sm:top-full sm:mt-2 w-auto sm:w-64 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl shadow-black/40 overflow-hidden z-[9999]"
+                        style={{ 
+                          position: 'fixed',
+                          zIndex: 9999,
+                          maxWidth: 'calc(100vw - 2rem)',
+                          minWidth: '200px'
+                        }}
+                        onAnimationStart={() => console.log('[UserMenu] Dropdown animating in (pricing)')}
+                        onAnimationComplete={() => {
+                          console.log('[UserMenu] Dropdown visible (pricing)', { 
+                            rect: dropdownRef.current?.getBoundingClientRect(),
+                            display: dropdownRef.current ? window.getComputedStyle(dropdownRef.current).display : 'null',
+                            visibility: dropdownRef.current ? window.getComputedStyle(dropdownRef.current).visibility : 'null',
+                            opacity: dropdownRef.current ? window.getComputedStyle(dropdownRef.current).opacity : 'null'
+                          });
+                        }}
+                      >
                           {/* User Info */}
                           <div className="px-4 py-3 border-b border-white/5">
                             <p className="font-medium text-sm">{user?.name || 'User'}</p>
@@ -235,9 +256,7 @@ export default function PricingPage() {
                           </div>
                         </motion.div>
                       )}
-                    </AnimatePresence>,
-                    document.body
-                  )}
+                    </AnimatePresence>
                 </div>
               ) : (
                 <div className="flex items-center gap-2">
