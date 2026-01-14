@@ -33,11 +33,36 @@ export default function PricingPage() {
   // Detect mobile and mount state
   useEffect(() => {
     setMounted(true)
-    const checkMobile = () => setIsMobile(window.innerWidth < 640)
+    const checkMobile = () => {
+      const mobile = window.innerWidth < 640
+      setIsMobile(mobile)
+      console.log('[UserMenu] Mobile detection:', { width: window.innerWidth, isMobile: mobile })
+    }
     checkMobile()
     window.addEventListener('resize', checkMobile)
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
+  
+  // Debug: log menu state
+  useEffect(() => {
+    if (isUserMenuOpen) {
+      console.log('[UserMenu] Menu opened:', { isMobile, mounted, hasRef: !!dropdownRef.current })
+      if (dropdownRef.current) {
+        const rect = dropdownRef.current.getBoundingClientRect()
+        const styles = window.getComputedStyle(dropdownRef.current)
+        console.log('[UserMenu] Menu element:', {
+          rect: { top: rect.top, left: rect.left, width: rect.width, height: rect.height },
+          styles: {
+            display: styles.display,
+            visibility: styles.visibility,
+            opacity: styles.opacity,
+            zIndex: styles.zIndex,
+            position: styles.position
+          }
+        })
+      }
+    }
+  }, [isUserMenuOpen, isMobile, mounted])
 
   // Close user menu when clicking outside (mouse + touch)
   useEffect(() => {
@@ -228,28 +253,47 @@ export default function PricingPage() {
                   </button>
                   
                   {/* User Dropdown Menu */}
-                  {mounted && (
+                  {mounted && isUserMenuOpen && (
                     <>
-                      {/* Mobile: Portal menu */}
-                      {isMobile && createPortal(
-                        <AnimatePresence>
+                      {/* Mobile: Portal menu - ALWAYS render via portal on mobile */}
+                      {isMobile && typeof document !== 'undefined' && createPortal(
+                        <AnimatePresence mode="wait">
                           {isUserMenuOpen && (
                             <>
                               <motion.div
+                                key="backdrop"
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
                                 exit={{ opacity: 0 }}
                                 transition={{ duration: 0.2 }}
-                                className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[9998]"
-                                onClick={() => setIsUserMenuOpen(false)}
+                                className="fixed inset-0 bg-black/50 backdrop-blur-sm"
+                                style={{ zIndex: 99998 }}
+                                onClick={() => {
+                                  console.log('[UserMenu] Backdrop clicked, closing menu')
+                                  setIsUserMenuOpen(false)
+                                }}
                               />
                               <motion.div
+                                key="menu"
                                 ref={dropdownRef}
                                 initial={{ opacity: 0, y: -20 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: -20 }}
                                 transition={{ duration: 0.2 }}
-                                className="fixed top-14 left-0 right-0 bottom-0 bg-[#1a1a1a] border-b border-white/10 overflow-y-auto z-[9999]"
+                                className="fixed top-14 left-0 right-0 bottom-0 bg-[#1a1a1a] border-b border-white/10 overflow-y-auto"
+                                style={{ 
+                                  zIndex: 99999,
+                                  position: 'fixed',
+                                  top: '56px',
+                                  left: 0,
+                                  right: 0,
+                                  bottom: 0
+                                }}
+                                onAnimationStart={() => console.log('[UserMenu] Menu animating in (mobile portal)')}
+                                onAnimationComplete={() => console.log('[UserMenu] Menu visible (mobile portal)', {
+                                  rect: dropdownRef.current?.getBoundingClientRect(),
+                                  styles: dropdownRef.current ? window.getComputedStyle(dropdownRef.current) : null
+                                })}
                               >
                                 {renderMenuContent()}
                               </motion.div>
