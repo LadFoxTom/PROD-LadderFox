@@ -209,13 +209,13 @@ export default function SettingsPage() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 8, scale: 0.96 }}
                     transition={{ duration: 0.15 }}
-                    className="absolute right-0 top-full mt-2 w-64 sm:w-64 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl shadow-black/40 overflow-hidden z-[100]"
-                    style={{ 
-                      position: 'absolute',
-                      zIndex: 100,
-                      maxWidth: 'calc(100vw - 2rem)',
-                      minWidth: '200px'
-                    }}
+                        className="fixed top-16 right-4 sm:absolute sm:right-0 sm:top-full sm:mt-2 w-64 sm:w-64 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl shadow-black/40 overflow-hidden z-[100]"
+                        style={{ 
+                          position: 'fixed',
+                          zIndex: 100,
+                          maxWidth: 'calc(100vw - 2rem)',
+                          minWidth: '200px'
+                        }}
                   >
                     {/* User Info */}
                     <div className="px-4 py-3 border-b border-white/5">
