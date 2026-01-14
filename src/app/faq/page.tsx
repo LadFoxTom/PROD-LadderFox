@@ -81,6 +81,7 @@ export default function FAQPage() {
   const router = useRouter();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const userMenuRef = useRef<HTMLDivElement>(null);
   const subBadge = subscription?.status === 'active' && subscription?.plan !== 'free' ? 'Pro' : 'Free';
 
   // Close user menu when clicking outside (mouse + touch)
