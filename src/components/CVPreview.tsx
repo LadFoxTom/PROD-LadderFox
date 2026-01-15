@@ -209,8 +209,11 @@ const CVPreviewComponent: FC<CVPreviewProps> = ({ data, isPreview = false, pageC
     creative: 'text-left transform -rotate-1'
   }
   
-  // Determine photo position based on layout or default to none
-  const photoPosition = data.layout?.photoPosition || 'none'
+  // Determine photo position based on layout
+  // If photo exists but position is 'none' or undefined, default to 'left' to ensure visibility
+  const photoPosition = data.photoUrl && (!data.layout?.photoPosition || data.layout?.photoPosition === 'none')
+    ? 'left'
+    : (data.layout?.photoPosition || 'none')
 
   // Determine if we should show icons
   const showIcons = data.layout?.showIcons !== undefined ? data.layout.showIcons : true

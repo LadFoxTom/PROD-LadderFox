@@ -127,7 +127,7 @@ export default function FAQPage() {
           <div className="flex items-center gap-4">
             <button
               onClick={() => router.back()}
-              className="p-2 hover:bg-white/5 rounded-lg transition-colors"
+              className="p-2 flex items-center justify-center hover:bg-white/5 rounded-lg transition-colors"
             >
               <FiChevronLeft size={20} />
             </button>
@@ -165,7 +165,7 @@ export default function FAQPage() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 8, scale: 0.96 }}
                       transition={{ duration: 0.15 }}
-                      className="hidden lg:block absolute left-auto right-0 top-full mt-2 w-64 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl shadow-black/40 overflow-y-auto z-[9999]"
+                      className="hidden lg:block absolute left-auto right-0 top-full mt-2 w-64 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl shadow-black/40 z-[9999]"
                     >
                       {/* User Info */}
                       <div className="px-4 py-3 border-b border-white/5">

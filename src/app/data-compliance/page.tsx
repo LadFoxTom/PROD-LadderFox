@@ -334,7 +334,7 @@ export default function DataCompliancePage() {
             <div className="flex items-center gap-4">
               <button
                 onClick={() => router.back()}
-                className="p-2 hover:bg-white/5 rounded-lg transition-colors"
+                className="p-2 flex items-center justify-center hover:bg-white/5 rounded-lg transition-colors"
               >
                 <FiArrowLeft size={20} />
               </button>

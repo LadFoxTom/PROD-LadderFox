@@ -974,6 +974,20 @@ export default function HomePage() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cvData.photoUrl]);
+
+  // Auto-set photoPosition to 'left' if photo exists but position is 'none' or undefined
+  useEffect(() => {
+    if (cvData.photoUrl && (!cvData.layout?.photoPosition || cvData.layout?.photoPosition === 'none')) {
+      setCvData(prev => ({
+        ...prev,
+        layout: {
+          ...prev.layout,
+          photoPosition: 'left'
+        }
+      }));
+    }
+  }, [cvData.photoUrl, cvData.layout?.photoPosition]);
+
   const [savedCVs, setSavedCVs] = useState<SavedCV[]>([]);
   const [currentCVId, setCurrentCVId] = useState<string | null>(null);
   
@@ -1873,7 +1887,7 @@ export default function HomePage() {
           <div className="flex items-center gap-4">
             <button
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-              className="p-2 hover:bg-white/5 rounded-lg transition-colors lg:hidden"
+              className="p-2 flex items-center justify-center hover:bg-white/5 rounded-lg transition-colors lg:hidden"
             >
               <FiMenu size={20} />
             </button>
@@ -1950,7 +1964,7 @@ export default function HomePage() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 8, scale: 0.96 }}
                       transition={{ duration: 0.15 }}
-                      className="hidden lg:block absolute left-auto right-0 top-full mt-2 w-64 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl shadow-black/40 overflow-y-auto z-[9999]"
+                      className="hidden lg:block absolute left-auto right-0 top-full mt-2 w-64 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl shadow-black/40 z-[9999]"
                     >
                       {/* User Info */}
                       <div className="px-4 py-3 border-b border-white/5">
@@ -2124,7 +2138,7 @@ export default function HomePage() {
                 <div className="hidden lg:flex justify-end">
                   <button
                     onClick={() => setIsSidebarOpen(false)}
-                    className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                    className="p-2 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
                     aria-label="Close sidebar"
                   >
                     <FiX size={16} />
@@ -2315,7 +2329,7 @@ export default function HomePage() {
                       <button 
                         onClick={handleAttachmentClick}
                         disabled={isUploading}
-                        className={`p-2.5 rounded-lg transition-colors ${
+                        className={`p-2.5 flex items-center justify-center rounded-lg transition-colors ${
                           isUploading 
                             ? 'text-blue-400 animate-pulse' 
                             : attachedFile
@@ -2329,7 +2343,7 @@ export default function HomePage() {
                       <button
                         onClick={() => handleSubmit()}
                         disabled={!inputValue.trim() && !attachedFile}
-                        className={`p-2.5 rounded-lg transition-all ${
+                        className={`p-2.5 flex items-center justify-center rounded-lg transition-all ${
                           inputValue.trim() || attachedFile
                             ? 'bg-white text-black hover:bg-gray-200'
                             : 'bg-white/10 text-gray-500'
@@ -2459,7 +2473,7 @@ export default function HomePage() {
                         </h2>
                         <button
                           onClick={() => setActiveView('chat')}
-                          className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                          className="p-2 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
                           title="Back to chat"
                         >
                           <FiX size={16} />
@@ -3015,7 +3029,7 @@ export default function HomePage() {
                           <button
                             onClick={handleAttachmentClick}
                             disabled={isUploading || isProcessing}
-                            className={`p-2 rounded-lg transition-colors ${
+                            className={`p-2 flex items-center justify-center rounded-lg transition-colors ${
                               isUploading 
                                 ? 'text-blue-400 animate-pulse' 
                                 : attachedFile
@@ -3029,7 +3043,7 @@ export default function HomePage() {
                           <button
                             onClick={() => handleSubmit()}
                             disabled={(!inputValue.trim() && !attachedFile) || isProcessing || isUploading}
-                            className={`p-2 rounded-lg transition-all ${
+                            className={`p-2 flex items-center justify-center rounded-lg transition-all ${
                               (inputValue.trim() || attachedFile) && !isProcessing && !isUploading
                                 ? 'bg-white text-black hover:bg-gray-200'
                                 : 'bg-white/10 text-gray-500'
@@ -3074,7 +3088,7 @@ export default function HomePage() {
                         </h2>
                         <button
                           onClick={() => setActiveView('chat')}
-                          className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                          className="p-2 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
                           title="Back to chat"
                         >
                           <FiX size={16} />
@@ -3177,9 +3191,6 @@ export default function HomePage() {
                     >
                       <FiBriefcase size={14} />
                     <span>Jobs</span>
-                    <span className="ml-1 px-1.5 py-0.5 bg-amber-500/20 text-amber-400 text-xs rounded-full">
-                      Coming soon
-                    </span>
                     </button>
                   </div>
                   <div className="flex items-center gap-1">
@@ -3221,7 +3232,7 @@ export default function HomePage() {
                             });
                             toast.success(newPosition === 'none' ? 'Photo hidden' : 'Photo shown');
                           }}
-                          className={`p-2 rounded-lg transition-colors ${
+                          className={`p-2 flex items-center justify-center rounded-lg transition-colors ${
                             cvData.layout?.photoPosition !== 'none'
                               ? 'text-blue-400 hover:bg-blue-500/10'
                               : 'text-gray-400 hover:text-white hover:bg-white/5'
@@ -3254,7 +3265,7 @@ export default function HomePage() {
                             }
                             handleDownload();
                           }}
-                          className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                          className="p-2 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
                           title={isFree ? 'Pro feature: upgrade to download' : 'Download PDF'}
                         >
                           <FiDownload size={16} />
@@ -3312,7 +3323,7 @@ export default function HomePage() {
                     )}
                     <button
                       onClick={() => setIsArtifactFullscreen(!isArtifactFullscreen)}
-                      className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                      className="p-2 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
                       title={isArtifactFullscreen ? 'Exit fullscreen' : 'Fullscreen'}
                     >
                       {isArtifactFullscreen ? <FiMinimize2 size={16} /> : <FiMaximize2 size={16} />}

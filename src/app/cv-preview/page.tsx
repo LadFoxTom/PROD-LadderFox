@@ -184,7 +184,7 @@ export default function CVPreviewPage() {
               
               <button
                 onClick={() => window.print()}
-                className="p-2 rounded-lg bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors"
+                className="p-2 flex items-center justify-center rounded-lg bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors"
                 title="Print"
               >
                 <FaPrint className="w-4 h-4" />

@@ -3,11 +3,41 @@ import { LetterData } from '@/types/letter'
 import puppeteer from 'puppeteer'
 import { Document, Packer, Paragraph, TextRun, HeadingLevel, AlignmentType, Spacing } from 'docx'
 import { LETTER_TEMPLATES } from '@/data/letterTemplates'
+import { getServerSession } from 'next-auth'
+import { authOptions } from '@/lib/auth'
+import { SubscriptionService } from '@/lib/subscription'
 
 export const dynamic = 'force-dynamic'
 
 export async function POST(request: NextRequest) {
   try {
+    // Get user session for subscription check
+    const session = await getServerSession(authOptions)
+    const userId = session?.user?.id
+
+    // Check subscription for PDF export feature
+    if (userId) {
+      const subscription = await SubscriptionService.getUserSubscription(userId)
+      if (!subscription.features.pdf_export) {
+        return NextResponse.json(
+          { 
+            error: 'PDF download is a premium feature. Please upgrade to download your letter.',
+            requiresUpgrade: true
+          },
+          { status: 403 }
+        )
+      }
+    } else {
+      // No user session - treat as free plan
+      return NextResponse.json(
+        { 
+          error: 'PDF download is a premium feature. Please log in and upgrade to download your letter.',
+          requiresUpgrade: true
+        },
+        { status: 403 }
+      )
+    }
+
     const { letterData, format } = await request.json()
 
     if (!letterData) {

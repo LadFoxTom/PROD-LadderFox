@@ -280,9 +280,19 @@ export default function DashboardPage() {
       const response = await fetch('/api/generate-pdf', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ cvData: cv.content, fileName: cv.title }),
+        body: JSON.stringify({ cvData: cv.content, fileName: cv.title, priority: 'high' }),
       })
-      if (!response.ok) throw new Error('Failed to generate PDF')
+      
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}))
+        if (response.status === 403 && errorData.requiresUpgrade) {
+          toast.error(errorData.error || 'PDF download is a premium feature. Please upgrade.')
+          router.push('/pricing')
+          return
+        }
+        throw new Error(errorData.error || 'Failed to generate PDF')
+      }
+      
       const blob = await response.blob()
       const url = URL.createObjectURL(blob)
       const a = document.createElement('a')
@@ -292,7 +302,7 @@ export default function DashboardPage() {
       URL.revokeObjectURL(url)
       toast.success('PDF downloaded')
     } catch (error) {
-      toast.error('Failed to download CV')
+      toast.error(error instanceof Error ? error.message : 'Failed to download CV')
     }
   }
 
@@ -301,9 +311,19 @@ export default function DashboardPage() {
       const response = await fetch('/api/letter-download', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ letterData: letter.content, fileName: letter.title }),
+        body: JSON.stringify({ letterData: letter.content, format: 'pdf' }),
       })
-      if (!response.ok) throw new Error('Failed to generate PDF')
+      
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}))
+        if (response.status === 403 && errorData.requiresUpgrade) {
+          toast.error(errorData.error || 'PDF download is a premium feature. Please upgrade.')
+          router.push('/pricing')
+          return
+        }
+        throw new Error(errorData.error || 'Failed to generate PDF')
+      }
+      
       const blob = await response.blob()
       const url = URL.createObjectURL(blob)
       const a = document.createElement('a')
@@ -313,7 +333,7 @@ export default function DashboardPage() {
       URL.revokeObjectURL(url)
       toast.success('PDF downloaded')
     } catch (error) {
-      toast.error('Failed to download letter')
+      toast.error(error instanceof Error ? error.message : 'Failed to download letter')
     }
   }
 
@@ -381,7 +401,7 @@ export default function DashboardPage() {
           <div className="flex items-center gap-4">
             <button
               onClick={() => router.push('/')}
-              className="p-2 hover:bg-white/5 rounded-lg transition-colors"
+              className="p-2 flex items-center justify-center hover:bg-white/5 rounded-lg transition-colors"
             >
               <FiArrowLeft size={20} />
             </button>
@@ -417,7 +437,7 @@ export default function DashboardPage() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 8, scale: 0.96 }}
                     transition={{ duration: 0.15 }}
-                    className="hidden lg:block absolute left-auto right-0 top-full mt-2 w-64 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl shadow-black/40 overflow-y-auto z-[9999]"
+                    className="hidden lg:block absolute left-auto right-0 top-full mt-2 w-64 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl shadow-black/40 z-[9999]"
                   >
                     {/* User Info */}
                     <div className="px-4 py-3 border-b border-white/5">
@@ -770,28 +790,41 @@ export default function DashboardPage() {
                           <div className={`flex items-center gap-1 ${viewMode === 'grid' ? 'justify-end' : ''}`}>
                             <button
                               onClick={() => item.type === 'cv' ? handleEditCV(item as SavedCV) : handleEditLetter(item as SavedLetter)}
-                              className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                              className="p-2 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
                               title="Edit"
                             >
                               <FiEdit2 size={16} />
                             </button>
                             <button
-                              onClick={() => item.type === 'cv' ? handleDownloadCV(item as SavedCV) : handleDownloadLetter(item as SavedLetter)}
-                              className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
-                              title="Download"
+                              onClick={() => {
+                                const isFree = !subscription || subscription.plan === 'free' || subscription.status !== 'active';
+                                if (isFree) {
+                                  toast.error('PDF download is a premium feature. Please upgrade to download.')
+                                  router.push('/pricing')
+                                  return
+                                }
+                                item.type === 'cv' ? handleDownloadCV(item as SavedCV) : handleDownloadLetter(item as SavedLetter)
+                              }}
+                              className={`p-2 flex items-center justify-center rounded-lg transition-colors ${
+                                (!subscription || subscription.plan === 'free' || subscription.status !== 'active')
+                                  ? 'text-gray-600 cursor-not-allowed opacity-50'
+                                  : 'text-gray-400 hover:text-white hover:bg-white/5'
+                              }`}
+                              title={(!subscription || subscription.plan === 'free' || subscription.status !== 'active') ? 'Upgrade to download' : 'Download'}
+                              disabled={!subscription || subscription.plan === 'free' || subscription.status !== 'active'}
                             >
                               <FiDownload size={16} />
                             </button>
                             <button
                               onClick={() => handleDuplicate(item, item.type)}
-                              className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                              className="p-2 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
                               title="Duplicate"
                             >
                               <FiCopy size={16} />
                             </button>
                             <button
                               onClick={() => handleDeleteItem(item.id, item.type)}
-                              className="p-2 text-gray-400 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
+                              className="p-2 flex items-center justify-center text-gray-400 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
                               title="Delete"
                             >
                               <FiTrash2 size={16} />

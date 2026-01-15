@@ -187,7 +187,7 @@ export default function PricingPage() {
             <div className="flex items-center gap-4">
               <button
                 onClick={() => router.back()}
-                className="p-2 hover:bg-white/5 rounded-lg transition-colors"
+                className="p-2 flex items-center justify-center hover:bg-white/5 rounded-lg transition-colors"
               >
                 <FiArrowLeft size={20} />
               </button>
@@ -222,7 +222,7 @@ export default function PricingPage() {
                         animate={{ opacity: 1, y: 0, scale: 1 }}
                         exit={{ opacity: 0, y: 8, scale: 0.96 }}
                         transition={{ duration: 0.15 }}
-                        className="hidden lg:block absolute left-auto right-0 top-full mt-2 w-64 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl shadow-black/40 overflow-y-auto z-[9999]"
+                        className="hidden lg:block absolute left-auto right-0 top-full mt-2 w-64 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl shadow-black/40 z-[9999]"
                       >
                         {renderMenuContent()}
                       </motion.div>

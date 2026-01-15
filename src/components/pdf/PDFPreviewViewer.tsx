@@ -6,12 +6,15 @@ import { CVDocumentPDF, CVTemplate, TEMPLATE_INFO } from './CVDocumentPDF'
 import { CVData } from '@/types/cv'
 import { 
   FiChevronLeft, FiChevronRight, FiDownload, FiZoomIn, FiZoomOut,
-  FiLayout, FiDroplet, FiCheck, FiEye, FiFileText
+  FiLayout, FiDroplet, FiCheck, FiEye, FiFileText, FiLock
 } from 'react-icons/fi'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useDebouncedCallback } from 'use-debounce'
 import dynamic from 'next/dynamic'
 import { cropImageForPDF } from '@/utils/imageCropper'
+import { useSubscription } from '@/hooks/useSubscription'
+import { useRouter } from 'next/navigation'
+import { toast } from 'react-hot-toast'
 
 // No longer need CVPreview for mobile - showing actual PDF instead
 
@@ -114,6 +117,9 @@ export const PDFPreviewViewer: React.FC<PDFPreviewViewerProps> = ({
   showControls = true,
   externalZoom,
 }) => {
+  const router = useRouter()
+  const { hasFeature, loading: subscriptionLoading } = useSubscription()
+  const canDownloadPDF = hasFeature('pdf_export')
   const [pdfUrl, setPdfUrl] = useState<string | null>(null)
   const [isGenerating, setIsGenerating] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -304,6 +310,13 @@ export const PDFPreviewViewer: React.FC<PDFPreviewViewerProps> = ({
   const handleDownload = useCallback(async () => {
     if (!data) return
     
+    // Check subscription before allowing download
+    if (!canDownloadPDF) {
+      toast.error('PDF download is a premium feature. Please upgrade to download your CV.')
+      router.push('/pricing')
+      return
+    }
+    
     setIsDownloading(true)
     
     try {
@@ -347,7 +360,7 @@ export const PDFPreviewViewer: React.FC<PDFPreviewViewerProps> = ({
     } finally {
       setIsDownloading(false)
     }
-  }, [data, onDownload, isMobile])
+  }, [data, onDownload, isMobile, canDownloadPDF, router])
 
   // Handle template change
   const handleTemplateChange = (templateId: CVTemplate) => {
@@ -601,13 +614,23 @@ export const PDFPreviewViewer: React.FC<PDFPreviewViewerProps> = ({
               
               <button
                 onClick={handleDownload}
-                disabled={isDownloading}
-                className="flex items-center gap-1.5 px-3 py-1.5 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white text-sm font-medium rounded-lg transition-all disabled:opacity-70"
+                disabled={isDownloading || subscriptionLoading || !canDownloadPDF}
+                className={`flex items-center gap-1.5 px-3 py-1.5 text-white text-sm font-medium rounded-lg transition-all disabled:opacity-70 ${
+                  canDownloadPDF 
+                    ? 'bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600' 
+                    : 'bg-gray-500 hover:bg-gray-600 cursor-not-allowed'
+                }`}
+                title={!canDownloadPDF ? 'Upgrade to download PDF' : 'Download PDF'}
               >
                 {isDownloading ? (
                   <>
                     <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
                     <span className="hidden sm:inline">Preparing...</span>
+                  </>
+                ) : !canDownloadPDF ? (
+                  <>
+                    <FiLock size={14} />
+                    <span className="hidden sm:inline">Upgrade to Download</span>
                   </>
                 ) : (
                   <>
@@ -694,9 +717,14 @@ export const PDFPreviewViewer: React.FC<PDFPreviewViewerProps> = ({
                       <p className="text-gray-500 mb-4">Your browser doesn't support PDF preview.</p>
                       <button
                         onClick={handleDownload}
-                        className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+                        disabled={!canDownloadPDF}
+                        className={`px-4 py-2 text-white rounded-lg transition-all disabled:opacity-50 ${
+                          canDownloadPDF 
+                            ? 'bg-blue-500 hover:bg-blue-600' 
+                            : 'bg-gray-500 cursor-not-allowed'
+                        }`}
                       >
-                        Download PDF
+                        {canDownloadPDF ? 'Download PDF' : 'Upgrade to Download'}
                       </button>
                     </div>
                   </object>
@@ -707,13 +735,22 @@ export const PDFPreviewViewer: React.FC<PDFPreviewViewerProps> = ({
               <div className="mt-4 px-4" style={{ maxWidth: '100%', width: '100%' }}>
                 <button
                   onClick={handleDownload}
-                  disabled={isDownloading}
-                  className="w-full flex items-center justify-center gap-2 py-4 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-semibold rounded-xl shadow-lg transition-all disabled:opacity-70"
+                  disabled={isDownloading || subscriptionLoading || !canDownloadPDF}
+                  className={`w-full flex items-center justify-center gap-2 py-4 text-white font-semibold rounded-xl shadow-lg transition-all disabled:opacity-70 ${
+                    canDownloadPDF 
+                      ? 'bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600' 
+                      : 'bg-gray-500 hover:bg-gray-600 cursor-not-allowed'
+                  }`}
                 >
                   {isDownloading ? (
                     <>
                       <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
                       <span>Preparing PDF...</span>
+                    </>
+                  ) : !canDownloadPDF ? (
+                    <>
+                      <FiLock size={20} />
+                      <span>Upgrade to Download PDF</span>
                     </>
                   ) : (
                     <>
@@ -723,7 +760,10 @@ export const PDFPreviewViewer: React.FC<PDFPreviewViewerProps> = ({
                   )}
                 </button>
                 <p className="text-center text-xs text-gray-500 dark:text-gray-400 mt-2">
-                  Your CV will be downloaded as a professional PDF
+                  {canDownloadPDF 
+                    ? 'Your CV will be downloaded as a professional PDF'
+                    : 'Upgrade to a premium plan to download your CV as PDF'
+                  }
                 </p>
               </div>
             </motion.div>

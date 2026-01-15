@@ -3,6 +3,7 @@ import { pdfQueue } from '@/lib/pdf-queue';
 import { rateLimiter } from '../../../lib/rate-limiter';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
+import { SubscriptionService } from '@/lib/subscription';
 
 export const dynamic = 'force-dynamic';
 
@@ -22,9 +23,32 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Get user session for usage tracking
+    // Get user session for usage tracking and subscription check
     const session = await getServerSession(authOptions);
     const userId = session?.user?.id;
+
+    // Check subscription for PDF export feature
+    if (userId) {
+      const subscription = await SubscriptionService.getUserSubscription(userId);
+      if (!subscription.features.pdf_export) {
+        return NextResponse.json(
+          { 
+            error: 'PDF download is a premium feature. Please upgrade to download your CV.',
+            requiresUpgrade: true
+          },
+          { status: 403 }
+        );
+      }
+    } else {
+      // No user session - treat as free plan
+      return NextResponse.json(
+        { 
+          error: 'PDF download is a premium feature. Please log in and upgrade to download your CV.',
+          requiresUpgrade: true
+        },
+        { status: 403 }
+      );
+    }
 
     const { cvData, fileName, priority = 'normal' } = await request.json();
     

@@ -118,6 +118,11 @@ const PDFExport: React.FC<PDFExportProps> = ({ cvData, fileName = 'cv' }) => {
           throw new Error(`Rate limit exceeded. Please try again in ${errorData.retryAfter} seconds.`);
         }
         
+        if (response.status === 403) {
+          const errorData = await response.json().catch(() => ({}));
+          throw new Error(errorData.error || 'PDF download is a premium feature. Please upgrade to download.');
+        }
+        
         const errorText = await response.text();
         console.error('PDF export response error:', response.status, errorText);
         throw new Error(`Failed to generate PDF: ${response.status} ${errorText}`);
