@@ -122,10 +122,10 @@ export default function SettingsPage() {
         body: JSON.stringify(profile),
       })
       if (!res.ok) throw new Error('Failed to update profile')
-      toast.success('Profile updated successfully')
+      toast.success(t('settings.profile_updated'))
       await refreshUser()
     } catch (err) {
-      toast.error('Failed to update profile')
+      toast.error(t('settings.profile_update_failed'))
     } finally {
       setSaving(false)
     }
@@ -133,7 +133,7 @@ export default function SettingsPage() {
 
   const handleManageSubscription = async () => {
     if (!subscription || subscription.plan === 'free') {
-      toast.error('No active subscription to manage')
+      toast.error(t('settings.no_subscription'))
       return
     }
     setIsManagingSubscription(true)
@@ -147,7 +147,7 @@ export default function SettingsPage() {
       const { url } = await response.json()
       window.location.href = url
     } catch (error) {
-      toast.error('Failed to open customer portal')
+      toast.error(t('settings.portal_failed'))
     } finally {
       setIsManagingSubscription(false)
     }
@@ -169,8 +169,8 @@ export default function SettingsPage() {
     return (
       <div className="min-h-screen bg-[#0a0a0a] flex items-center justify-center text-white">
         <div className="text-center">
-          <h1 className="text-2xl font-bold mb-4">Please log in</h1>
-          <p className="text-gray-400 mb-4">You need to be logged in to access settings.</p>
+          <h1 className="text-2xl font-bold mb-4">{t('settings.please_log_in')}</h1>
+          <p className="text-gray-400 mb-4">{t('settings.login_required')}</p>
           <button onClick={() => router.push('/auth/login')} className="px-4 py-2 bg-blue-500 rounded-lg">
             {t('nav.sign_in')}
           </button>
@@ -238,8 +238,8 @@ export default function SettingsPage() {
                       <button onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard?tab=cvs'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
                         <FiFolder size={16} /> {t('nav.my_cvs')}
                       </button>
-                      <button onClick={() => { setIsUserMenuOpen(false); router.push('/applications'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
-                        <FiBriefcase size={16} /> {t('nav.job_applications')}
+                      <button onClick={() => { setIsUserMenuOpen(false); toast('Job Applications coming soon 🚧'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
+                        <FiBriefcase size={16} /> {t('nav.job_applications_coming_soon')}
                       </button>
                     </div>
                     
@@ -315,11 +315,11 @@ export default function SettingsPage() {
                     <span className="text-sm">{t('nav.my_cvs')}</span>
                   </button>
                   <button
-                    onClick={() => { setIsUserMenuOpen(false); router.push('/applications'); }}
+                    onClick={() => { setIsUserMenuOpen(false); toast('Job Applications coming soon 🚧'); }}
                     className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
                   >
                     <FiBriefcase size={14} className="text-gray-400" />
-                    <span className="text-sm">{t('nav.job_applications')}</span>
+                    <span className="text-sm">{t('nav.job_applications_coming_soon')}</span>
                   </button>
                 </div>
                 
@@ -369,8 +369,8 @@ export default function SettingsPage() {
         <div className="max-w-5xl mx-auto px-4 py-8">
           {/* Header */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
-            <h1 className="text-3xl font-bold">Settings</h1>
-            <p className="text-gray-400 mt-1">Manage your account and subscription</p>
+            <h1 className="text-3xl font-bold">{t('settings.title')}</h1>
+            <p className="text-gray-400 mt-1">{t('settings.subtitle')}</p>
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
@@ -383,7 +383,7 @@ export default function SettingsPage() {
                     activeSection === 'profile' ? 'bg-white/10 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'
                   }`}
                 >
-                  <FiUser size={18} /> Profile
+                  <FiUser size={18} /> {t('settings.profile')}
                 </button>
                 <button
                   onClick={() => setActiveSection('subscription')}
@@ -391,19 +391,19 @@ export default function SettingsPage() {
                     activeSection === 'subscription' ? 'bg-white/10 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'
                   }`}
                 >
-                  <FiCreditCard size={18} /> Subscription
+                  <FiCreditCard size={18} /> {t('settings.subscription')}
                 </button>
               </div>
 
               {/* Quick Actions */}
               <div className="bg-[#111111] border border-white/5 rounded-xl p-4 mt-4">
-                <h3 className="text-sm font-medium text-gray-400 mb-3">Quick Actions</h3>
+                <h3 className="text-sm font-medium text-gray-400 mb-3">{t('settings.quick_actions')}</h3>
                 <div className="space-y-2">
                   <button onClick={() => router.push('/')} className="w-full flex items-center gap-2 px-3 py-2 text-sm text-gray-300 hover:bg-white/5 rounded-lg">
-                    <FiPlus size={14} /> Create New CV
+                    <FiPlus size={14} /> {t('settings.create_new_cv')}
                   </button>
                   <button onClick={() => router.push('/dashboard')} className="w-full flex items-center gap-2 px-3 py-2 text-sm text-gray-300 hover:bg-white/5 rounded-lg">
-                    <FiGrid size={14} /> View Dashboard
+                    <FiGrid size={14} /> {t('settings.view_dashboard')}
                   </button>
                 </div>
               </div>
@@ -415,62 +415,62 @@ export default function SettingsPage() {
                 <div className="bg-[#111111] border border-white/5 rounded-xl p-6">
                   <div className="flex items-center gap-3 mb-6">
                     <FiUser className="text-blue-400" size={20} />
-                    <h2 className="text-xl font-semibold">Profile Information</h2>
+                    <h2 className="text-xl font-semibold">{t('settings.profile_information')}</h2>
                   </div>
                   
                   <form onSubmit={e => { e.preventDefault(); handleProfileSave(); }} className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-medium text-gray-400 mb-2">First Name</label>
+                        <label className="block text-sm font-medium text-gray-400 mb-2">{t('settings.first_name')}</label>
                         <input type="text" name="firstName" value={profile.firstName} onChange={handleProfileChange} 
                           className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500" />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-400 mb-2">Last Name</label>
+                        <label className="block text-sm font-medium text-gray-400 mb-2">{t('settings.last_name')}</label>
                         <input type="text" name="lastName" value={profile.lastName} onChange={handleProfileChange} 
                           className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500" />
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-400 mb-2">Email</label>
+                      <label className="block text-sm font-medium text-gray-400 mb-2">{t('settings.email')}</label>
                       <input type="email" name="email" value={profile.email} disabled
                         className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-gray-500 cursor-not-allowed" />
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-medium text-gray-400 mb-2">Phone</label>
+                        <label className="block text-sm font-medium text-gray-400 mb-2">{t('settings.phone')}</label>
                         <input type="text" name="phone" value={profile.phone} onChange={handleProfileChange} 
                           className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500" />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-400 mb-2">Job Title</label>
+                        <label className="block text-sm font-medium text-gray-400 mb-2">{t('settings.job_title')}</label>
                         <input type="text" name="jobTitle" value={profile.jobTitle} onChange={handleProfileChange} 
                           className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500" />
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-400 mb-2">Company</label>
+                      <label className="block text-sm font-medium text-gray-400 mb-2">{t('settings.company')}</label>
                       <input type="text" name="company" value={profile.company} onChange={handleProfileChange} 
                         className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500" />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-400 mb-2">Bio</label>
+                      <label className="block text-sm font-medium text-gray-400 mb-2">{t('settings.bio')}</label>
                       <textarea name="bio" value={profile.bio} onChange={handleProfileChange} rows={3}
                         className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 resize-none" />
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-medium text-gray-400 mb-2">LinkedIn URL</label>
+                        <label className="block text-sm font-medium text-gray-400 mb-2">{t('settings.linkedin_url')}</label>
                         <input type="text" name="linkedinUrl" value={profile.linkedinUrl} onChange={handleProfileChange} 
                           className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500" />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-400 mb-2">Website URL</label>
+                        <label className="block text-sm font-medium text-gray-400 mb-2">{t('settings.website_url')}</label>
                         <input type="text" name="websiteUrl" value={profile.websiteUrl} onChange={handleProfileChange} 
                           className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500" />
                       </div>
@@ -478,17 +478,17 @@ export default function SettingsPage() {
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       <div>
-                        <label className="block text-sm font-medium text-gray-400 mb-2">City</label>
+                        <label className="block text-sm font-medium text-gray-400 mb-2">{t('settings.city')}</label>
                         <input type="text" name="city" value={profile.city} onChange={handleProfileChange} 
                           className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500" />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-400 mb-2">State</label>
+                        <label className="block text-sm font-medium text-gray-400 mb-2">{t('settings.state')}</label>
                         <input type="text" name="state" value={profile.state} onChange={handleProfileChange} 
                           className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500" />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-400 mb-2">Country</label>
+                        <label className="block text-sm font-medium text-gray-400 mb-2">{t('settings.country')}</label>
                         <input type="text" name="country" value={profile.country} onChange={handleProfileChange} 
                           className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500" />
                       </div>
@@ -501,7 +501,7 @@ export default function SettingsPage() {
                         className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 rounded-xl font-medium transition-all disabled:opacity-50"
                       >
                         <FiSave size={16} />
-                        {saving ? 'Saving...' : 'Save Changes'}
+                        {saving ? t('settings.saving') : t('settings.save_changes')}
                       </button>
                     </div>
                   </form>
@@ -515,7 +515,7 @@ export default function SettingsPage() {
                     <div className="flex items-center justify-between mb-6">
                       <div className="flex items-center gap-3">
                         <FiCreditCard className="text-blue-400" size={20} />
-                        <h2 className="text-xl font-semibold">Current Plan</h2>
+                        <h2 className="text-xl font-semibold">{t('settings.current_plan')}</h2>
                       </div>
                       <span className={`px-3 py-1 rounded-full text-xs font-medium ${
                         subscription?.status === 'active' ? 'bg-green-500/10 text-green-400' :
@@ -534,14 +534,14 @@ export default function SettingsPage() {
                         <h3 className="text-2xl font-bold capitalize">{subscription?.plan || 'Free'} Plan</h3>
                         {subscription?.currentPeriodEnd && (
                           <p className="text-sm text-gray-400">
-                            Renews on {new Date(subscription.currentPeriodEnd).toLocaleDateString()}
+                            {t('settings.renews_on')} {new Date(subscription.currentPeriodEnd).toLocaleDateString()}
                           </p>
                         )}
                       </div>
                     </div>
 
                     <div className="mb-6">
-                      <h4 className="text-sm font-medium text-gray-400 mb-3">Plan Features</h4>
+                      <h4 className="text-sm font-medium text-gray-400 mb-3">{t('settings.plan_features')}</h4>
                       <ul className="grid grid-cols-1 md:grid-cols-2 gap-2">
                         {getPlanFeatures(subscription?.plan || 'free').map((feature, index) => (
                           <li key={index} className="flex items-center gap-2 text-sm text-gray-300">
@@ -560,7 +560,7 @@ export default function SettingsPage() {
                           className="flex items-center gap-2 px-4 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-sm font-medium transition-colors disabled:opacity-50"
                         >
                           <FiExternalLink size={16} />
-                          {isManagingSubscription ? 'Opening...' : 'Manage Subscription'}
+                          {isManagingSubscription ? t('settings.opening') : t('settings.manage_subscription')}
                         </button>
                       ) : (
                         <button
@@ -568,7 +568,7 @@ export default function SettingsPage() {
                           className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 rounded-xl text-sm font-medium transition-all"
                         >
                           <FiStar size={16} />
-                          Upgrade to Pro
+                          {t('settings.upgrade_to_pro')}
                         </button>
                       )}
                     </div>
@@ -576,16 +576,16 @@ export default function SettingsPage() {
 
                   {/* Danger Zone */}
                   <div className="bg-[#111111] border border-red-500/20 rounded-xl p-6">
-                    <h3 className="text-lg font-semibold text-red-400 mb-2">Danger Zone</h3>
+                    <h3 className="text-lg font-semibold text-red-400 mb-2">{t('settings.danger_zone')}</h3>
                     <p className="text-sm text-gray-400 mb-4">
-                      Once you delete your account, there is no going back. Please be certain.
+                      {t('settings.delete_account_warning')}
                     </p>
                     <button
                       onClick={() => signOut({ callbackUrl: '/' })}
                       className="flex items-center gap-2 px-4 py-2.5 bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 text-red-400 rounded-xl text-sm font-medium transition-colors"
                     >
                       <FiLogOut size={16} />
-                      Sign Out
+                      {t('settings.sign_out')}
                     </button>
                   </div>
                 </div>

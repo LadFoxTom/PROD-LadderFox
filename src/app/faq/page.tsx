@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import { useLocale } from '@/context/LocaleContext';
 import { signOut } from 'next-auth/react';
+import { toast } from 'react-hot-toast';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   FiChevronDown, FiChevronLeft, FiHelpCircle, FiMail, FiMessageCircle,
@@ -13,67 +14,74 @@ import {
   FiFolder, FiBriefcase
 } from 'react-icons/fi';
 
-// FAQ data
-const faqs = [
+// FAQ data - will be populated with translations
+type FAQItem = {
+  icon: React.ComponentType<{ size?: number }>;
+  category: string;
+  question: string;
+  answer: string;
+};
+
+const getFaqs = (t: (key: string) => string): FAQItem[] => [
   {
     icon: FiZap,
-    category: 'Getting Started',
-    question: 'What is LadderFox?',
-    answer: 'LadderFox is a modern, AI-powered career platform that helps you create professional CVs, find matching jobs, and manage your job applications. Simply chat with our AI assistant to build your CV, get personalized career advice, and discover opportunities that match your skills.'
+    category: t('faq.categories.getting_started'),
+    question: t('faq.what_is_ladderfox'),
+    answer: t('faq.what_is_ladderfox_answer')
   },
   {
     icon: FiCreditCard,
-    category: 'Pricing',
-    question: 'Is LadderFox free to use?',
-    answer: 'LadderFox offers a free plan with access to basic features including CV creation, templates, and PDF downloads. Premium features like advanced AI analysis, unlimited job matching, and priority support are available with a paid subscription.'
+    category: t('faq.categories.pricing'),
+    question: t('faq.is_free'),
+    answer: t('faq.is_free_answer')
   },
   {
     icon: FiEdit3,
-    category: 'Getting Started',
-    question: 'How do I create a CV?',
-    answer: 'Creating a CV is easy! Just start a conversation with our AI assistant on the homepage. You can either upload an existing CV/resume, or describe your experience and skills naturally. The AI will extract and structure your information, and you can see your CV update in real-time.'
+    category: t('faq.categories.getting_started'),
+    question: t('faq.how_create_cv'),
+    answer: t('faq.how_create_cv_answer')
   },
   {
     icon: FiDownload,
-    category: 'Features',
-    question: 'Can I download my CV as a PDF?',
-    answer: 'Yes! You can preview and download your CV as a high-quality PDF at any time. The PDF looks exactly like the preview, with professional formatting and styling. You can also choose from multiple templates before downloading.'
+    category: t('faq.categories.features'),
+    question: t('faq.can_download_pdf'),
+    answer: t('faq.can_download_pdf_answer')
   },
   {
     icon: FiFileText,
-    category: 'Features',
-    question: 'Are LadderFox templates ATS-friendly?',
-    answer: 'Absolutely! All our templates are designed to be ATS (Applicant Tracking System) friendly, ensuring your CV passes automated screenings used by most companies. We use clean formatting, standard section headers, and proper structure.'
+    category: t('faq.categories.features'),
+    question: t('faq.ats_friendly'),
+    answer: t('faq.ats_friendly_answer')
   },
   {
     icon: FiShield,
-    category: 'Privacy',
-    question: 'How is my data protected?',
-    answer: 'Your privacy is our top priority. All data is encrypted in transit and at rest. We never share your personal information with third parties. You can delete your account and all associated data at any time from your settings.'
+    category: t('faq.categories.privacy'),
+    question: t('faq.data_protection'),
+    answer: t('faq.data_protection_answer')
   },
   {
     icon: FiEdit3,
-    category: 'Features',
-    question: 'Can I edit my CV after saving?',
-    answer: 'Of course! You can edit, update, and download your CV as many times as you like. Just open your saved CV from the dashboard or sidebar, make changes through the chat, and save again. All your versions are preserved.'
+    category: t('faq.categories.features'),
+    question: t('faq.can_edit_after_save'),
+    answer: t('faq.can_edit_after_save_answer')
   },
   {
     icon: FiMessageCircle,
-    category: 'Support',
-    question: 'How can I contact support?',
-    answer: 'You can reach our support team via email at info@ladderfox.com. We typically respond within 24 hours. For common questions, check this FAQ page or use the AI assistant which can help with most queries.'
+    category: t('faq.categories.support'),
+    question: t('faq.contact_support'),
+    answer: t('faq.contact_support_answer')
   },
   {
     icon: FiGlobe,
-    category: 'Features',
-    question: 'What languages are supported?',
-    answer: 'LadderFox supports multiple languages including English, Dutch, German, French, and Spanish. The AI can process CVs in any language and help you create content in your preferred language.'
+    category: t('faq.categories.features'),
+    question: t('faq.languages_supported'),
+    answer: t('faq.languages_supported_answer')
   },
   {
     icon: FiSmartphone,
-    category: 'Features',
-    question: 'Can I use LadderFox on mobile devices?',
-    answer: 'Yes! LadderFox is fully responsive and works great on smartphones and tablets. You can create, edit, and download your CV from any device with a web browser.'
+    category: t('faq.categories.features'),
+    question: t('faq.mobile_support'),
+    answer: t('faq.mobile_support_answer')
   },
 ];
 
@@ -86,6 +94,7 @@ export default function FAQPage() {
   const userMenuRef = useRef<HTMLDivElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
   const subBadge = subscription?.status === 'active' && subscription?.plan !== 'free' ? 'Pro' : 'Free';
+  const faqs = getFaqs(t);
 
   // Close user menu when clicking outside (mouse + touch)
   useEffect(() => {
@@ -172,8 +181,8 @@ export default function FAQPage() {
                         <button onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard?tab=cvs'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
                           <FiFolder size={16} /> {t('nav.my_cvs')}
                         </button>
-                        <button onClick={() => { setIsUserMenuOpen(false); router.push('/applications'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
-                          <FiBriefcase size={16} /> {t('nav.job_applications')}
+                        <button onClick={() => { setIsUserMenuOpen(false); toast('Job Applications coming soon 🚧'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
+                          <FiBriefcase size={16} /> {t('nav.job_applications_coming_soon')}
                         </button>
                       </div>
                       
@@ -206,13 +215,13 @@ export default function FAQPage() {
                   onClick={() => router.push('/auth/login')}
                   className="px-4 py-2 text-sm text-gray-300 hover:text-white transition-colors"
                 >
-                  Sign in
+                  {t('nav.sign_in')}
                 </button>
                 <button
                   onClick={() => router.push('/auth/signup')}
                   className="px-4 py-2 bg-white text-black text-sm font-medium rounded-lg hover:bg-gray-100 transition-colors"
                 >
-                  Get Started
+                  {t('nav.get_started')}
                 </button>
               </div>
             )}
@@ -265,11 +274,11 @@ export default function FAQPage() {
                     <span className="text-sm">{t('nav.my_cvs')}</span>
                   </button>
                   <button
-                    onClick={() => { setIsUserMenuOpen(false); router.push('/applications'); }}
+                    onClick={() => { setIsUserMenuOpen(false); toast('Job Applications coming soon 🚧'); }}
                     className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
                   >
                     <FiBriefcase size={14} className="text-gray-400" />
-                    <span className="text-sm">{t('nav.job_applications')}</span>
+                    <span className="text-sm">{t('nav.job_applications_coming_soon')}</span>
                   </button>
                 </div>
                 
@@ -323,9 +332,9 @@ export default function FAQPage() {
             <div className="w-16 h-16 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
               <FiHelpCircle size={32} className="text-blue-400" />
             </div>
-            <h1 className="text-4xl font-bold mb-4">Help & Support</h1>
+            <h1 className="text-4xl font-bold mb-4">{t('faq.page.hero.title')}</h1>
             <p className="text-gray-400 text-lg">
-              Find answers to common questions about LadderFox. Can't find what you're looking for? Contact our support team.
+              {t('faq.page.hero.subtitle')}
             </p>
           </div>
         </div>

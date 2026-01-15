@@ -1962,7 +1962,7 @@ export default function HomePage() {
                       <div className="py-2">
                         <MenuItem icon={FiGrid} label={t('nav.dashboard')} onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard'); }} />
                         <MenuItem icon={FiFolder} label={t('nav.my_cvs')} onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard?tab=cvs'); }} />
-                        <MenuItem icon={FiBriefcase} label={t('nav.job_applications')} onClick={() => { setIsUserMenuOpen(false); router.push('/applications'); }} />
+                        <MenuItem icon={FiBriefcase} label={t('nav.job_applications_coming_soon')} onClick={() => { setIsUserMenuOpen(false); toast('Job Applications coming soon 🚧'); }} />
                       </div>
                       
                       <div className="border-t border-white/5 py-2">
@@ -2048,11 +2048,11 @@ export default function HomePage() {
                     <span className="text-sm">{t('nav.my_cvs')}</span>
                   </button>
                   <button
-                    onClick={() => { setIsUserMenuOpen(false); router.push('/applications'); }}
+                    onClick={() => { setIsUserMenuOpen(false); toast('Job Applications coming soon 🚧'); }}
                     className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
                   >
                     <FiBriefcase size={14} className="text-gray-400" />
-                    <span className="text-sm">{t('nav.job_applications')}</span>
+                    <span className="text-sm">{t('nav.job_applications_coming_soon')}</span>
                   </button>
                 </div>
                 

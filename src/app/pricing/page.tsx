@@ -75,8 +75,8 @@ export default function PricingPage() {
         <button onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard?tab=cvs'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
           <FiFolder size={16} /> {t('nav.my_cvs')}
         </button>
-        <button onClick={() => { setIsUserMenuOpen(false); router.push('/applications'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
-          <FiBriefcase size={16} /> {t('nav.job_applications')}
+        <button onClick={() => { setIsUserMenuOpen(false); toast('Job Applications coming soon 🚧'); }} className="w-full flex items-center gap-3 px-4 py-2.5 text-sm text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
+          <FiBriefcase size={16} /> {t('nav.job_applications_coming_soon')}
         </button>
       </div>
       
@@ -294,11 +294,11 @@ export default function PricingPage() {
                       <span className="text-sm">{t('nav.my_cvs')}</span>
                     </button>
                     <button
-                      onClick={() => { setIsUserMenuOpen(false); router.push('/applications'); }}
+                      onClick={() => { setIsUserMenuOpen(false); toast('Job Applications coming soon 🚧'); }}
                       className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
                     >
                       <FiBriefcase size={14} className="text-gray-400" />
-                      <span className="text-sm">{t('nav.job_applications')}</span>
+                      <span className="text-sm">{t('nav.job_applications_coming_soon')}</span>
                     </button>
                   </div>
                   

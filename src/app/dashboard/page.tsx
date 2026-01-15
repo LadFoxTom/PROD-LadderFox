@@ -445,10 +445,10 @@ export default function DashboardPage() {
                       />
                       <MenuItem 
                         icon={FiBriefcase} 
-                        label={t('nav.job_applications')} 
+                        label={t('nav.job_applications_coming_soon')} 
                         onClick={() => {
                           setIsUserMenuOpen(false)
-                          router.push('/applications')
+                          toast('Job Applications coming soon 🚧')
                         }} 
                       />
                     </div>
@@ -545,11 +545,11 @@ export default function DashboardPage() {
                     <span className="text-sm">{t('nav.my_cvs')}</span>
                   </button>
                   <button
-                    onClick={() => { setIsUserMenuOpen(false); router.push('/applications'); }}
+                    onClick={() => { setIsUserMenuOpen(false); toast('Job Applications coming soon 🚧'); }}
                     className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
                   >
                     <FiBriefcase size={14} className="text-gray-400" />
-                    <span className="text-sm">{t('nav.job_applications')}</span>
+                    <span className="text-sm">{t('nav.job_applications_coming_soon')}</span>
                   </button>
                 </div>
                 
