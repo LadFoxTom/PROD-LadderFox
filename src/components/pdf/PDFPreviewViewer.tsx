@@ -360,7 +360,7 @@ export const PDFPreviewViewer: React.FC<PDFPreviewViewerProps> = ({
     } finally {
       setIsDownloading(false)
     }
-  }, [data, onDownload, isMobile, canDownloadPDF, router])
+  }, [data, onDownload, isMobile, canDownloadPDF, router, processedPhotoUrl])
 
   // Handle template change
   const handleTemplateChange = (templateId: CVTemplate) => {

@@ -6,27 +6,54 @@
  */
 
 import { ChatOpenAI } from "@langchain/openai";
-import { CareerServiceStateType } from "../state/agent-state";
+import { HumanMessage, SystemMessage } from "@langchain/core/messages";
+import { CareerServiceStateType, ImageContent } from "../state/agent-state";
 import { WorkflowActions } from "../state/agent-state";
 import { IntentClassificationSchema, safeParse } from "../state/schemas";
+import { hasImages, extractText } from "../utils/image-processing";
 
-const model = new ChatOpenAI({
-  modelName: process.env.OPENAI_MODEL || "gpt-4-turbo-preview",
-  temperature: 0.3, // Low temperature for consistent intent classification
-  apiKey: process.env.OPENAI_API_KEY,
-});
+// Helper to convert ImageContent to LangChain format
+function convertToLangChainContent(content: string | Array<string | ImageContent>): string | Array<{ type: string; [key: string]: any }> {
+  if (typeof content === "string") {
+    return content;
+  }
+  
+  return content.map(item => {
+    if (typeof item === "string") {
+      return { type: "text", text: item };
+    } else {
+      return item;
+    }
+  });
+}
+
+// Use vision-capable model when images are present, otherwise use standard model
+function getModel(hasImages: boolean) {
+  return new ChatOpenAI({
+    modelName: hasImages 
+      ? (process.env.OPENAI_VISION_MODEL || "gpt-4o") // gpt-4o supports vision
+      : (process.env.OPENAI_MODEL || "gpt-4-turbo-preview"),
+    temperature: 0.3, // Low temperature for consistent intent classification
+    apiKey: process.env.OPENAI_API_KEY,
+  });
+}
+
 
 /**
  * Create intent classification prompt
  */
-function createIntentPrompt(userMessage: string, context: {
+function createIntentPrompt(userMessage: string, hasImages: boolean, context: {
   hasCVData: boolean;
   hasJobContext: boolean;
   hasApplicationId: boolean;
 }): string {
-  return `You are an AI career assistant router. Analyze the user's message and classify their intent.
+  const imageNote = hasImages 
+    ? "\n\nNOTE: The user has included image(s) in their message. Analyze the image(s) along with the text to understand their intent. Images may contain CVs, job postings, documents, or other relevant information."
+    : "";
 
-USER MESSAGE: "${userMessage}"
+  return `You are an AI career assistant router. Analyze the user's message${hasImages ? " and any included images" : ""} and classify their intent.
+
+USER MESSAGE: "${userMessage}"${imageNote}
 
 CONTEXT:
 - User has CV data: ${context.hasCVData ? "Yes" : "No"}
@@ -100,7 +127,10 @@ export async function orchestratorAgent(
       };
     }
 
-    const latestMessage = userMessages[userMessages.length - 1].content;
+    const latestMessage = userMessages[userMessages.length - 1];
+    const messageContent = latestMessage.content;
+    const containsImages = hasImages(messageContent);
+    const messageText = extractText(messageContent);
 
     // Prepare context for classification
     const context = {
@@ -110,20 +140,36 @@ export async function orchestratorAgent(
     };
 
     // Create classification prompt
-    const prompt = createIntentPrompt(latestMessage, context);
+    const prompt = createIntentPrompt(messageText, containsImages, context);
+
+    // Get appropriate model (vision-capable if images present)
+    const model = getModel(containsImages);
+
+    // Build messages for LLM - support images if present
+    const messages: (SystemMessage | HumanMessage)[] = [
+      new SystemMessage(
+        "You are an intent classification expert. Always respond with valid JSON matching the requested format." +
+        (containsImages ? " When images are provided, analyze them carefully to understand the user's intent." : "")
+      ),
+    ];
+
+    if (containsImages && Array.isArray(messageContent)) {
+      // Include images in the message
+      const imageItems = messageContent.filter((item): item is ImageContent => 
+        typeof item === "object" && item !== null && "type" in item && item.type === "image_url"
+      );
+      // Build content array: text first, then images
+      const contentArray: Array<string | ImageContent> = [prompt, ...imageItems];
+      const langChainContent = convertToLangChainContent(contentArray);
+      messages.push(new HumanMessage(langChainContent as any));
+    } else {
+      // Just text
+      messages.push(new HumanMessage(prompt));
+    }
 
     // Call LLM for intent classification
-    console.log("[Orchestrator] Calling GPT-4 for intent classification");
-    const response = await model.invoke([
-      {
-        role: "system",
-        content: "You are an intent classification expert. Always respond with valid JSON matching the requested format.",
-      },
-      {
-        role: "user",
-        content: prompt,
-      },
-    ]);
+    console.log(`[Orchestrator] Calling ${containsImages ? "vision-capable" : "standard"} model for intent classification`);
+    const response = await model.invoke(messages);
 
     const responseText = response.content.toString();
     console.log("[Orchestrator] Received classification from GPT-4");
@@ -209,7 +255,7 @@ export async function orchestratorAgent(
 
     // If general chat, respond directly
     if (nextAction === WorkflowActions.RESPOND_GENERAL) {
-      const response = await handleGeneralChat(latestMessage, state);
+      const response = await handleGeneralChat(messageText, containsImages, messageContent, state);
       return {
         currentIntent: intent,
         messages: [{
@@ -259,8 +305,54 @@ function generateDataRequestMessage(intent: string, missingData: string[]): stri
 /**
  * Handle general conversation
  */
-async function handleGeneralChat(message: string, state: CareerServiceStateType): Promise<string> {
+async function handleGeneralChat(
+  message: string, 
+  hasImages: boolean, 
+  messageContent: string | Array<string | ImageContent>,
+  state: CareerServiceStateType
+): Promise<string> {
   const lowerMessage = message.toLowerCase();
+
+  // If images are present, use vision model to analyze them
+  if (hasImages) {
+    const model = getModel(true);
+    const visionPrompt = `The user has sent you ${Array.isArray(messageContent) 
+      ? messageContent.filter(item => typeof item === "object" && "type" in item && item.type === "image_url").length 
+      : 0} image(s)${message ? ` with the message: "${message}"` : ""}.
+
+Analyze the image(s) and provide helpful information. The images might contain:
+- CV/resume content
+- Job postings
+- Documents
+- Screenshots
+- Other career-related information
+
+Provide a helpful response based on what you see in the image(s). If it's a CV, offer to help analyze it. If it's a job posting, offer to help with matching or cover letters. Be conversational and helpful.`;
+
+    const messages: (SystemMessage | HumanMessage)[] = [
+      new SystemMessage("You are a helpful AI career assistant. Analyze images carefully and provide useful insights."),
+    ];
+
+    if (Array.isArray(messageContent)) {
+      const imageItems = messageContent.filter((item): item is ImageContent => 
+        typeof item === "object" && item !== null && "type" in item && item.type === "image_url"
+      );
+      // Build content array: text first, then images
+      const contentArray: Array<string | ImageContent> = [visionPrompt, ...imageItems];
+      const langChainContent = convertToLangChainContent(contentArray);
+      messages.push(new HumanMessage(langChainContent as any));
+    } else {
+      messages.push(new HumanMessage(visionPrompt));
+    }
+
+    try {
+      const response = await model.invoke(messages);
+      return response.content.toString();
+    } catch (error) {
+      console.error("[Orchestrator] Error processing images:", error);
+      return "I can see you've shared an image, but I had trouble analyzing it. Could you describe what's in the image or try again?";
+    }
+  }
 
   // Handle common greetings and questions
   if (lowerMessage.match(/^(hi|hello|hey|greetings)/)) {

@@ -12,6 +12,7 @@ import { invokeCareerWorkflow } from "@/lib/workflows/career-workflow";
 import { saveConversationState, loadConversationState } from "@/lib/workflows/state-persistence";
 import { PrismaClient } from "@prisma/client";
 import { randomUUID } from "crypto";
+import { ImageContent } from "@/lib/state/agent-state";
 
 const prisma = new PrismaClient();
 
@@ -46,13 +47,44 @@ export async function POST(request: NextRequest) {
 
     // Parse request body
     const body = await request.json();
-    const { message, sessionId, cvId } = body;
+    const { message, images, sessionId, cvId } = body;
 
-    if (!message || typeof message !== "string") {
+    // Validate that we have either a message or images
+    if (!message && (!images || !Array.isArray(images) || images.length === 0)) {
       return NextResponse.json(
-        { error: "Message is required" },
+        { error: "Message or images are required" },
         { status: 400 }
       );
+    }
+
+    // Build message content - support both text and images
+    let messageContent: string | Array<string | ImageContent>;
+    
+    if (images && Array.isArray(images) && images.length > 0) {
+      // Build content array with text and images
+      const contentArray: Array<string | ImageContent> = [];
+      
+      // Add text message if provided
+      if (message && typeof message === "string") {
+        contentArray.push(message);
+      }
+      
+      // Add images
+      images.forEach((imageUrl: string) => {
+        if (typeof imageUrl === "string" && imageUrl.trim()) {
+          contentArray.push({
+            type: "image_url",
+            image_url: {
+              url: imageUrl, // Can be data URL (base64) or external URL
+            },
+          });
+        }
+      });
+      
+      messageContent = contentArray;
+    } else {
+      // Just text message
+      messageContent = message || "";
     }
 
     // Generate or use provided session ID
@@ -111,7 +143,7 @@ export async function POST(request: NextRequest) {
         ...(existingState?.messages || []),
         {
           role: "user" as const,
-          content: message,
+          content: messageContent,
           timestamp: new Date(),
         },
       ],
@@ -135,9 +167,21 @@ export async function POST(request: NextRequest) {
     const assistantMessages = result.messages.filter(m => m.role === "assistant");
     const latestMessage = assistantMessages[assistantMessages.length - 1];
 
+    // Convert message content to string for response (if it's an array, extract text parts)
+    let messageText = "I'm here to help!";
+    if (latestMessage?.content) {
+      if (typeof latestMessage.content === "string") {
+        messageText = latestMessage.content;
+      } else if (Array.isArray(latestMessage.content)) {
+        // Extract text parts from content array
+        const textParts = latestMessage.content.filter((item): item is string => typeof item === "string");
+        messageText = textParts.join(" ") || "I've processed your image(s).";
+      }
+    }
+
     // Prepare response
     const response = {
-      message: latestMessage?.content || "I'm here to help!",
+      message: messageText,
       sessionId: conversationSessionId,
       cvAnalysis: result.cvAnalysis || null,
       jobMatches: result.jobMatches || null,

@@ -9,7 +9,7 @@ export default function ResetPasswordPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   // Get token and ensure it's properly decoded
-  const rawToken = searchParams.get('token');
+  const rawToken = searchParams?.get('token');
   const token = rawToken ? decodeURIComponent(rawToken) : null;
 
   const [password, setPassword] = useState('');

@@ -936,7 +936,7 @@ export default function HomePage() {
         }
       }
     }
-  }, []); // Only run once on mount
+  }, [t]); // Include t for consistency
 
   // Initialize photos array from existing photoUrl (only if not loading from localStorage)
   useEffect(() => {
@@ -2325,9 +2325,6 @@ export default function HomePage() {
                       }
                       rows={1}
                       className="flex-1 bg-transparent px-4 sm:px-6 pr-20 sm:pr-24 text-base sm:text-lg resize-none focus:outline-none [&::-webkit-scrollbar]:hidden"
-                      style={{
-                        color: 'var(--text-primary)',
-                      }}
                       style={{ 
                         height: '64px',
                         minHeight: '64px', 
@@ -2338,7 +2335,8 @@ export default function HomePage() {
                         overflowY: 'hidden',
                         scrollbarWidth: 'none',
                         textAlign: 'left',
-                        boxSizing: 'border-box'
+                        boxSizing: 'border-box',
+                        color: 'var(--text-primary)',
                       } as React.CSSProperties}
                       disabled={isUploading}
                     />

@@ -165,7 +165,7 @@ export default function FAQPage() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 8, scale: 0.96 }}
                       transition={{ duration: 0.15 }}
-                      className="hidden lg:block absolute left-auto right-0 top-full mt-2 w-64 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl shadow-black/40 z-[9999]"
+                      className="hidden lg:block absolute left-auto right-0 top-full mt-2 w-72 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl shadow-black/40 z-[9999]"
                     >
                       {/* User Info */}
                       <div className="px-4 py-3 border-b border-white/5">
@@ -352,7 +352,7 @@ export default function FAQPage() {
               >
                 <button
                   onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                  className="w-full flex items-center gap-4 p-5 text-left hover:bg-white/5 transition-colors"
+                  className="w-full flex items-center gap-4 p-5 text-left hover:bg-white/5 transition-colors focus:outline-none"
                 >
                   <div className={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 ${
                     openIndex === index 

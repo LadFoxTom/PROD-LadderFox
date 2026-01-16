@@ -82,27 +82,46 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
     }
   }
 
+  // Helper function to get nested value from object using dot notation
+  const getNestedValue = (obj: any, path: string): any => {
+    if (!obj || typeof obj !== 'object') return undefined
+    const keys = path.split('.')
+    let current = obj
+    for (const key of keys) {
+      if (current === null || current === undefined || typeof current !== 'object') {
+        return undefined
+      }
+      current = current[key]
+      if (current === undefined) {
+        return undefined
+      }
+    }
+    return current
+  }
+
   const t = (key: string): string => {
     // During SSR or before hydration, always use English to prevent hydration mismatches
     if (!isHydrated) {
       const englishTranslation = translations.en
-      if (englishTranslation && englishTranslation[key]) {
-        return englishTranslation[key]
+      const value = getNestedValue(englishTranslation, key)
+      if (value !== undefined && typeof value === 'string') {
+        return value
       }
       return key
     }
 
     // First try to get the translation from the current language
     const currentTranslation = translations[language]
-    
-    if (currentTranslation && currentTranslation[key]) {
-      return currentTranslation[key]
+    const currentValue = getNestedValue(currentTranslation, key)
+    if (currentValue !== undefined && typeof currentValue === 'string') {
+      return currentValue
     }
 
     // Fallback to English
     const englishTranslation = translations.en
-    if (englishTranslation && englishTranslation[key]) {
-      return englishTranslation[key]
+    const englishValue = getNestedValue(englishTranslation, key)
+    if (englishValue !== undefined && typeof englishValue === 'string') {
+      return englishValue
     }
 
     // If still not found, return the key

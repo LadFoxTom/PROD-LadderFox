@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import { useLocale } from '@/context/LocaleContext';
@@ -117,19 +117,7 @@ export default function ApplicationsPage() {
     }
   }, [isUserMenuOpen]);
 
-  // Fetch applications
-  useEffect(() => {
-    if (!authLoading && !isAuthenticated) {
-      router.push('/auth/login');
-      return;
-    }
-
-    if (isAuthenticated) {
-      fetchApplications();
-    }
-  }, [isAuthenticated, authLoading]);
-
-  const fetchApplications = async () => {
+  const fetchApplications = useCallback(async () => {
     setIsLoading(true);
     try {
       // Try to fetch from API
@@ -160,7 +148,14 @@ export default function ApplicationsPage() {
     } finally {
       setIsLoading(false);
     }
-  };
+  }, []); // router is stable, fetchApplications doesn't use it
+
+  // Fetch applications on mount
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchApplications();
+    }
+  }, [isAuthenticated, fetchApplications]);
 
   const loadFromLocalStorage = () => {
     try {
@@ -320,7 +315,7 @@ export default function ApplicationsPage() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 8, scale: 0.96 }}
                     transition={{ duration: 0.15 }}
-                    className="hidden lg:block absolute left-auto right-0 top-full mt-2 w-64 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl shadow-black/40 z-[9999]"
+                    className="hidden lg:block absolute left-auto right-0 top-full mt-2 w-72 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl shadow-black/40 z-[9999]"
                   >
                     {/* User Info */}
                     <div className="px-4 py-3 border-b border-white/5">

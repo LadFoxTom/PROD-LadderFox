@@ -10,13 +10,18 @@ import { CVData } from '@/types/cv';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { sanitizeCVDataForLLM, extractProfessionalInfo } from '@/utils/cvDataSanitizer';
+import { ImageContent } from '@/lib/state/agent-state';
 
-// Initialize OpenAI model
-const model = new ChatOpenAI({
-  modelName: process.env.OPENAI_MODEL || 'gpt-4-turbo-preview',
-  temperature: 0.3,
-  apiKey: process.env.OPENAI_API_KEY,
-});
+// Initialize OpenAI model - use vision model when needed
+function getModel(hasImages: boolean) {
+  return new ChatOpenAI({
+    modelName: hasImages 
+      ? (process.env.OPENAI_VISION_MODEL || 'gpt-4o') // gpt-4o supports vision
+      : (process.env.OPENAI_MODEL || 'gpt-4-turbo-preview'),
+    temperature: 0.3,
+    apiKey: process.env.OPENAI_API_KEY,
+  });
+}
 
 // Available templates and colors
 const TEMPLATES = ['modern', 'classic', 'minimal', 'creative', 'executive', 'tech'];
@@ -36,6 +41,7 @@ const COLORS: Record<string, string> = {
 
 interface ChatRequest {
   message: string;
+  images?: string[]; // Array of image URLs (base64 data URLs or external URLs)
   cvData: CVData;
   conversationHistory: Array<{ role: string; content: string }>;
   language?: string;
@@ -307,6 +313,7 @@ Respond with JSON only:
 }`;
 
     console.log('[Smart Job Search] Using LLM to analyze request...');
+    const model = getModel(false); // No images for reasoning
     const reasoningResponse = await model.invoke([
       {
         role: 'system',
@@ -905,7 +912,18 @@ export async function POST(request: NextRequest) {
     const isAuthenticated = !!session?.user?.email;
     
     const body: ChatRequest = await request.json();
-    let { message, cvData, conversationHistory, language = 'en' } = body;
+    let { message, images, cvData, conversationHistory, language = 'en' } = body;
+    
+    // Validate that we have either a message or images
+    if (!message && (!images || !Array.isArray(images) || images.length === 0)) {
+      return NextResponse.json({
+        response: "Please provide a message or upload an image to analyze.",
+        cvUpdates: {},
+        error: "Message or images required",
+      }, { status: 400 });
+    }
+    
+    const hasImages = images && Array.isArray(images) && images.length > 0;
     
     // Language mapping for LLM
     const languageMap: Record<string, string> = {
@@ -971,26 +989,59 @@ export async function POST(request: NextRequest) {
     let prompt: string;
     
     if (requestType === 'style') {
-      prompt = STYLE_PROMPT.replace('{userMessage}', message);
+      prompt = STYLE_PROMPT.replace('{userMessage}', message || '');
     } else {
+      const imageNote = hasImages 
+        ? "\n\nIMPORTANT: The user has included image(s). Analyze the image(s) carefully to extract CV information, job details, or other relevant content. If the image contains a CV or resume, extract all relevant information including personal details, experience, education, skills, etc."
+        : "";
       prompt = EXTRACTION_PROMPT
         .replace('{currentCV}', JSON.stringify(cvData, null, 2))
-        .replace('{userMessage}', message);
+        .replace('{userMessage}', (message || '') + imageNote);
     }
 
     // Add language instruction
     const languageInstruction = ` Always respond in ${responseLanguage}. All your responses, questions, and suggestions must be in ${responseLanguage}.`;
     
-    const response = await model.invoke([
+    // Get appropriate model
+    const model = getModel(hasImages || false);
+    
+    // Build messages - include images if present
+    const messages: Array<{ role: string; content: string | Array<string | ImageContent> }> = [
       {
         role: 'system',
-        content: `You are a CV building assistant. Always respond with valid JSON only.${languageInstruction}`,
+        content: `You are a CV building assistant. Always respond with valid JSON only.${languageInstruction}` +
+                (hasImages ? " When images are provided, analyze them carefully to extract CV information, job postings, or other relevant content." : ""),
       },
-      {
+    ];
+    
+    if (hasImages && images) {
+      // Build content array with text and images
+      const contentArray: Array<string | ImageContent> = [prompt];
+      
+      // Add images
+      images.forEach((imageUrl: string) => {
+        if (typeof imageUrl === "string" && imageUrl.trim()) {
+          contentArray.push({
+            type: "image_url",
+            image_url: {
+              url: imageUrl, // Can be data URL (base64) or external URL
+            },
+          });
+        }
+      });
+      
+      messages.push({
+        role: 'user',
+        content: contentArray,
+      });
+    } else {
+      messages.push({
         role: 'user',
         content: prompt,
-      },
-    ]);
+      });
+    }
+    
+    const response = await model.invoke(messages as any);
 
     const responseText = response.content.toString();
 

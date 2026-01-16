@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { useAuth } from '@/context/AuthContext'
 import { useRouter } from 'next/navigation'
 import { useLocale } from '@/context/LocaleContext'
@@ -148,15 +148,7 @@ export default function DashboardPage() {
     }
   }, [isUserMenuOpen])
 
-  useEffect(() => {
-    if (!isAuthenticated) {
-      router.push('/auth/login?next=/dashboard')
-      return
-    }
-    fetchSavedItems()
-  }, [isAuthenticated, router])
-
-  const fetchSavedItems = async () => {
+  const fetchSavedItems = useCallback(async () => {
     try {
       const cvResponse = await fetch('/api/cv')
       let cvs: SavedCV[] = []
@@ -211,7 +203,15 @@ export default function DashboardPage() {
     } finally {
       setLoading(false)
     }
-  }
+  }, [t])
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      router.push('/auth/login?next=/dashboard')
+      return
+    }
+    fetchSavedItems()
+  }, [isAuthenticated, router, fetchSavedItems])
 
   const handleCreateNewCV = () => {
     // Activate splitscreen view with CV and Letter both visible
@@ -437,7 +437,7 @@ export default function DashboardPage() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 8, scale: 0.96 }}
                     transition={{ duration: 0.15 }}
-                    className="hidden lg:block absolute left-auto right-0 top-full mt-2 w-64 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl shadow-black/40 z-[9999]"
+                    className="hidden lg:block absolute left-auto right-0 top-full mt-2 w-72 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-2xl shadow-black/40 z-[9999]"
                   >
                     {/* User Info */}
                     <div className="px-4 py-3 border-b border-white/5">
@@ -664,7 +664,7 @@ export default function DashboardPage() {
             ].map((stat, idx) => (
               <div key={idx} className="bg-[#111111] border border-white/5 rounded-xl p-5">
                 <div className="flex items-center gap-3">
-                  <div className={`p-2 rounded-lg bg-${stat.color}-500/10`}>
+                  <div className={`p-2 flex items-center justify-center rounded-lg bg-${stat.color}-500/10`}>
                     <stat.icon size={20} className={`text-${stat.color}-400`} />
                   </div>
                   <div>
@@ -725,13 +725,13 @@ export default function DashboardPage() {
                       <div className="flex bg-white/5 rounded-lg p-1">
                         <button
                           onClick={() => setViewMode('list')}
-                          className={`p-2 rounded-md ${viewMode === 'list' ? 'bg-white/10' : ''}`}
+                          className={`p-2 flex items-center justify-center rounded-md ${viewMode === 'list' ? 'bg-white/10' : ''}`}
                         >
                           <FiList size={16} />
                         </button>
                         <button
                           onClick={() => setViewMode('grid')}
-                          className={`p-2 rounded-md ${viewMode === 'grid' ? 'bg-white/10' : ''}`}
+                          className={`p-2 flex items-center justify-center rounded-md ${viewMode === 'grid' ? 'bg-white/10' : ''}`}
                         >
                           <FiGrid size={16} />
                         </button>
@@ -858,7 +858,7 @@ export default function DashboardPage() {
                     <div className="space-y-4">
                       {stats.recentActivity.map((activity, idx) => (
                         <div key={idx} className="flex items-start gap-3">
-                          <div className={`p-1.5 rounded-lg ${
+                          <div className={`p-1.5 flex items-center justify-center rounded-lg ${
                             activity.type === 'created' ? 'bg-green-500/10 text-green-400' :
                             activity.type === 'updated' ? 'bg-blue-500/10 text-blue-400' :
                             'bg-gray-500/10 text-gray-400'

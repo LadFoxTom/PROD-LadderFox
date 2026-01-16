@@ -9,11 +9,22 @@ import { Annotation } from "@langchain/langgraph";
 import { CVData } from "@/types/cv";
 
 /**
+ * Image content for messages
+ */
+export interface ImageContent {
+  type: "image_url";
+  image_url: {
+    url: string; // Can be data URL (base64) or external URL
+  };
+}
+
+/**
  * Message structure for conversation history
+ * Supports both text and image content
  */
 export interface Message {
   role: "user" | "assistant" | "system";
-  content: string;
+  content: string | Array<string | ImageContent>;
   timestamp?: Date;
 }
 
