@@ -468,7 +468,7 @@ export default function DashboardPage() {
                         label={t('nav.job_applications_coming_soon')} 
                         onClick={() => {
                           setIsUserMenuOpen(false)
-                          toast('Job Applications coming soon 🚧')
+                          toast(t('toast.job_applications_coming_soon'))
                         }} 
                       />
                     </div>
@@ -565,7 +565,7 @@ export default function DashboardPage() {
                     <span className="text-sm">{t('nav.my_cvs')}</span>
                   </button>
                   <button
-                    onClick={() => { setIsUserMenuOpen(false); toast('Job Applications coming soon 🚧'); }}
+                    onClick={() => { setIsUserMenuOpen(false); toast(t('toast.job_applications_coming_soon')); }}
                     className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
                   >
                     <FiBriefcase size={14} className="text-gray-400" />

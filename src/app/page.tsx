@@ -836,11 +836,11 @@ export default function HomePage() {
 
   // Debounced toast notifications to avoid spam while typing
   const debouncedCVToast = useDebouncedCallback(() => {
-    toast.success('CV updated');
+    toast.success(t('toast.cv_updated'));
   }, 1500); // Show toast 1.5 seconds after user stops typing
   
   const debouncedLetterToast = useDebouncedCallback(() => {
-    toast.success('Letter updated');
+    toast.success(t('toast.letter_updated'));
   }, 1500);
   
   // Refs
@@ -924,7 +924,7 @@ export default function HomePage() {
           localStorage.removeItem('cv_builder_messages');
           localStorage.removeItem('cv_builder_question_index');
           
-          toast.success('CV loaded!');
+          toast.success(t('toast.cv_loaded'));
           isLoadingFromLocalStorage.current = false;
         } catch (err) {
           console.error('Error loading CV from localStorage:', err);
@@ -1164,7 +1164,7 @@ export default function HomePage() {
         toast.success('CV loaded!');
       }
     } catch (err) {
-      toast.error('Failed to load CV');
+      toast.error(t('toast.cv_load_failed'));
     }
     setIsSidebarOpen(false);
   };
@@ -1172,7 +1172,7 @@ export default function HomePage() {
   // Save current CV
   const handleSaveCV = async () => {
     if (!isAuthenticated) {
-      toast.error('Please sign in to save');
+      toast.error(t('toast.please_sign_in'));
       return;
     }
     
@@ -1198,7 +1198,7 @@ export default function HomePage() {
       const data = await res.json();
       if (data.cv?.id) {
         setCurrentCVId(data.cv.id);
-        toast.success('CV saved!');
+        toast.success(t('toast.cv_saved'));
         // Refresh saved CVs list
         const cvsRes = await fetch('/api/cv');
         const cvsData = await cvsRes.json();
@@ -1211,7 +1211,7 @@ export default function HomePage() {
         }
       }
     } catch (err) {
-      toast.error('Failed to save CV');
+      toast.error(t('toast.cv_save_failed'));
     }
   };
 
@@ -1413,7 +1413,7 @@ export default function HomePage() {
             setJobs(result.jobs);
             setArtifactType('jobs');
           } else {
-            toast('Jobs coming soon 🚧');
+            toast(t('toast.jobs_coming_soon'));
             setArtifactType('cv');
           }
         } else if (result.artifactType === 'letter' && result.letterUpdates) {
@@ -1507,7 +1507,7 @@ export default function HomePage() {
             setJobs(result.jobs);
             setArtifactType('jobs');
           } else {
-            toast('Jobs coming soon 🚧');
+            toast(t('toast.jobs_coming_soon'));
             setArtifactType('cv');
           }
         } else if (result.artifactType === 'letter' && result.letterUpdates) {
@@ -1576,7 +1576,7 @@ export default function HomePage() {
             setJobs(result.jobs);
             setArtifactType('jobs');
           } else {
-            toast('Jobs coming soon 🚧');
+            toast(t('toast.jobs_coming_soon'));
             setArtifactType('cv');
           }
         } else if (result.artifactType === 'letter' && result.letterUpdates) {
@@ -1616,7 +1616,7 @@ export default function HomePage() {
         if (isTimeout) {
           toast.error('Request timed out. Try breaking your input into smaller parts.');
         } else {
-          toast.error('Failed to process request. Please try again.');
+          toast.error(t('toast.request_failed'));
         }
       }
     } finally {
@@ -1635,7 +1635,7 @@ export default function HomePage() {
   // Copy CV content
   const handleCopy = () => {
     navigator.clipboard.writeText(JSON.stringify(cvData, null, 2));
-    toast.success('CV data copied!');
+    toast.success(t('toast.cv_data_copied'));
   };
 
   // Zoom handlers
@@ -1698,11 +1698,11 @@ export default function HomePage() {
       if (result.success) {
         toast.success('PDF downloaded successfully!');
       } else {
-        toast.error(result.error || 'Failed to download PDF');
+        toast.error(result.error || t('toast.pdf_download_failed'));
       }
     } catch (err) {
       console.error('Download error:', err);
-      toast.error('Failed to download PDF');
+      toast.error(t('toast.pdf_download_failed'));
     }
   };
 
@@ -1751,9 +1751,9 @@ export default function HomePage() {
         console.log('API save failed, using localStorage');
       }
       
-      toast.success(`Saved: ${job.title} at ${job.company}`);
+      toast.success(t('toast.job_saved').replace('{jobTitle}', job.title).replace('{company}', job.company));
     } catch (e) {
-      toast.error('Failed to save job');
+      toast.error(t('toast.job_save_failed'));
     }
   };
 
@@ -1806,7 +1806,7 @@ export default function HomePage() {
 
     // Validate file size (max 10MB)
     if (file.size > 10 * 1024 * 1024) {
-      toast.error('File is too large. Maximum size is 10MB.');
+      toast.error(t('toast.file_too_large'));
       return;
     }
 
@@ -1868,7 +1868,7 @@ export default function HomePage() {
   // Remove attached file
   const handleRemoveAttachment = () => {
     setAttachedFile(null);
-    toast.success('Attachment removed');
+    toast.success(t('toast.attachment_removed'));
   };
 
   // Trigger file input click
@@ -1976,7 +1976,7 @@ export default function HomePage() {
                       <div className="py-2">
                         <MenuItem icon={FiGrid} label={t('nav.dashboard')} onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard'); }} />
                         <MenuItem icon={FiFolder} label={t('nav.my_cvs')} onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard?tab=cvs'); }} />
-                        <MenuItem icon={FiBriefcase} label={t('nav.job_applications_coming_soon')} onClick={() => { setIsUserMenuOpen(false); toast('Job Applications coming soon 🚧'); }} />
+                        <MenuItem icon={FiBriefcase} label={t('nav.job_applications_coming_soon')} onClick={() => { setIsUserMenuOpen(false); toast(t('toast.job_applications_coming_soon')); }} />
                       </div>
                       
                       <div className="border-t border-white/5 py-2">
@@ -2502,7 +2502,7 @@ export default function HomePage() {
                                     photoPosition: newPosition
                                   }
                                 });
-                                toast.success(newPosition === 'none' ? 'Photo hidden' : 'Photo shown');
+                                toast.success(newPosition === 'none' ? t('toast.photo_hidden') : t('toast.photo_shown'));
                               }}
                               className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
                                 cvData.layout?.photoPosition !== 'none'
@@ -2621,7 +2621,7 @@ export default function HomePage() {
                                         photoPosition: cvData.layout?.photoPosition || 'left'
                                       }
                                     });
-                                    toast.success('Photo selected');
+                                    toast.success(t('toast.photo_selected'));
                                   }}
                                 >
                                   <img
@@ -3184,10 +3184,10 @@ export default function HomePage() {
                     </button>
                     <button
                     onClick={() => {
-                      toast('Jobs coming soon 🚧');
+                      toast(t('toast.jobs_coming_soon'));
                     }}
                     className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm transition-colors text-gray-500 cursor-not-allowed opacity-60"
-                    title="Jobs coming soon"
+                    title={t('toast.jobs_coming_soon')}
                     >
                       <FiBriefcase size={14} />
                     <span>Jobs</span>
@@ -3277,7 +3277,7 @@ export default function HomePage() {
                         <button
                           onClick={() => {
                             if (isFree) {
-                              toast.error('Copying letters is a Pro feature. Please upgrade to copy or download your letter.');
+                              toast.error(t('toast.copy_letter_pro_feature'));
                               router.push('/pricing');
                               return;
                             }
@@ -3377,7 +3377,7 @@ export default function HomePage() {
                       >
                         <div className="space-y-3">
                           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 text-amber-300 text-sm font-medium">
-                            <FiBriefcase size={14} /> Jobs coming soon
+                            <FiBriefcase size={14} /> {t('toast.jobs_coming_soon')}
                           </div>
                           <p className="text-gray-400 text-sm max-w-md">
                             We’re still polishing the job matching experience. It will be available soon.
