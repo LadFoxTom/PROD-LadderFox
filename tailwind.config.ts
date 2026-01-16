@@ -29,6 +29,25 @@ const config: Config = {
           yellow: '#FFB703',
           orange: '#FB8500',
         },
+        // Theme-aware colors using CSS variables
+        bg: {
+          primary: 'var(--bg-primary)',
+          secondary: 'var(--bg-secondary)',
+          tertiary: 'var(--bg-tertiary)',
+          elevated: 'var(--bg-elevated)',
+          hover: 'var(--bg-hover)',
+        },
+        text: {
+          primary: 'var(--text-primary)',
+          secondary: 'var(--text-secondary)',
+          tertiary: 'var(--text-tertiary)',
+          disabled: 'var(--text-disabled)',
+        },
+        border: {
+          subtle: 'var(--border-subtle)',
+          medium: 'var(--border-medium)',
+          strong: 'var(--border-strong)',
+        },
       },
       spacing: {
         '128': '32rem',

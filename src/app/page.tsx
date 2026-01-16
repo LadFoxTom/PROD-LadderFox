@@ -24,6 +24,7 @@ import { JobSwiper, JobMatch } from '@/components/JobSwiper';
 import TemplateQuickSelector from '@/components/TemplateQuickSelector';
 import { CVTemplate } from '@/components/pdf/CVDocumentPDF';
 import { sanitizeCVDataForAPI as sanitizeForAPI } from '@/utils/cvDataSanitizer';
+import { ThemeSwitcher } from '@/components/ThemeSwitcher';
 
 // Dynamically import PDF preview viewer (React-PDF based for guaranteed preview=export consistency)
 const PDFPreviewViewer = dynamic(
@@ -1877,11 +1878,11 @@ export default function HomePage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white" style={{ maxWidth: '100vw', overflowX: 'hidden', width: '100%' }}>
+    <div className="min-h-screen text-white" style={{ maxWidth: '100vw', overflowX: 'hidden', width: '100%', backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
       <Toaster position="top-center" toastOptions={{ style: { background: '#1a1a1a', color: '#fff' } }} />
       
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 h-14 bg-[#0a0a0a]/80 backdrop-blur-xl border-b border-white/5 z-50" style={{ overflow: 'visible' }}>
+      <header className="fixed top-0 left-0 right-0 h-14 backdrop-blur-xl border-b z-50" style={{ overflow: 'visible', backgroundColor: 'var(--bg-primary)', borderColor: 'var(--border-subtle)', opacity: 0.95 }}>
         <div className="h-full max-w-screen-2xl mx-auto px-4 flex items-center justify-between" style={{ overflow: 'visible' }}>
           {/* Left: Logo & Menu */}
           <div className="flex items-center gap-4">
@@ -1938,8 +1939,9 @@ export default function HomePage() {
             </div>
           )}
 
-          {/* Right: User Menu */}
+          {/* Right: Theme Switcher & User Menu */}
           <div className="flex items-center gap-2">
+            <ThemeSwitcher />
             {isAuthenticated ? (
               <div className="relative" ref={userMenuRef} style={{ overflow: 'visible', zIndex: 100 }}>
                 <button 

@@ -26,6 +26,11 @@
   "common.photos": "Foto's",
   "common.upload_photos": "Foto's Uploaden",
   "common.your_photos": "Jouw Foto's",
+  
+  "theme.day": "Dag",
+  "theme.night": "Nacht",
+  "theme.switch_to_day": "Schakel over naar dag thema",
+  "theme.switch_to_night": "Schakel over naar nacht thema",
   "auth.login": "Inloggen",
   "auth.signup": "Registreren",
   "auth.logout": "Uitloggen",
@@ -155,7 +160,7 @@
   "toast.cv_updated": "CV bijgewerkt",
   "toast.letter_updated": "Brief bijgewerkt",
   "toast.cv_data_copied": "CV gegevens gekopieerd!",
-  "toast.download_pro_feature": "CV downloaden is een Pro functie. Upgrade om te downloaden.",
+  "toast.download_pro_feature": "CV downloaden is een pro functie. Upgrade om te downloaden.",
   "toast.pdf_downloaded": "PDF succesvol gedownload!",
   "toast.pdf_download_failed": "PDF downloaden mislukt",
   "toast.job_saved": "Opgeslagen: {jobTitle} bij {company}",
@@ -177,7 +182,7 @@
   "toast.photo_add_failed": "Foto's toevoegen mislukt",
   "toast.photo_selected": "Foto geselecteerd",
   "toast.photo_removed": "Foto verwijderd",
-  "toast.copy_letter_pro_feature": "Brieven kopiëren is een Pro functie. Upgrade om je brief te kopiëren of te downloaden.",
+  "toast.copy_letter_pro_feature": "Brieven kopiëren is een pro functie. Upgrade om je brief te kopiëren of te downloaden.",
   "intro.welcome": "Welkom bij de CV Bouwer! Ik help je stap voor stap een professioneel CV te maken. Laten we beginnen met het verzamelen van je basisinformatie.",
   "question.fullName": "Wat is je volledige naam?",
   "question.title": "Welke functietitel wil je gebruiken op je CV? (Je huidige positie of de positie waar je voor solliciteert)",
@@ -197,7 +202,7 @@
   "question.education_dates": "Wanneer ben je begonnen en afgerond met deze opleiding? (bijv. 2016 - 2020)",
   "question.education_details": "Wat heb je gestudeerd en wat waren je belangrijkste prestaties?",
   "question.education_more": "Wil je nog een opleiding toevoegen? (optioneel)",
-  "question.skills": "Wat zijn je belangrijkste vaardigheden en competenties? (bijv. JavaScript, Project Management, Leiderschap)",
+  "question.skills": "Wat zijn je belangrijkste vaardigheden en competenties? (bijv. JavaScript, project management, leiderschap)",
   "question.languages": "Welke talen spreek je? (optioneel)",
   "question.hobbies": "Wat zijn je interesses en activiteiten buiten het werk? (optioneel)",
   "question.certifications": "Heb je professionele certificeringen of licenties? (optioneel)",
@@ -217,7 +222,7 @@
   "response.experience_dates": "Perfect! Vertel me nu over je belangrijkste prestaties en verantwoordelijkheden in deze rol. Wat heb je bereikt? (Gebruik opsommingstekens of aparte regels)",
   "response.experience_details": "Prestaties opgeslagen! 🎉 Heb je nog een baan om toe te voegen? Zo ja, vertel me de functietitel en het bedrijf. Zo nee, typ \"klaar\" om naar onderwijs te gaan.",
   "response.experience_more": "Geweldig! Laten we nog een baan toevoegen. Wat is de functietitel en het bedrijf?",
-  "response.education_intro": "Uitstekend! Laten we nu je opleiding toevoegen. Wat is je hoogste opleidingsniveau? (bijv. \"Bachelor in Computerwetenschappen aan Universiteit van Technologie\")",
+  "response.education_intro": "Uitstekend! Laten we nu je opleiding toevoegen. Wat is je hoogste opleidingsniveau? (bijv. \"Bachelor in Computerwetenschappen aan universiteit van technologie\")",
   "response.education_dates": "Perfect! Wanneer ben je begonnen en afgerond met deze opleiding? (bijv. \"2016 - 2020\")",
   "response.education_details": "Opleiding opgeslagen! 🎓 Heb je nog een opleidingsvermelding om toe te voegen? Zo ja, vertel me de graad en instelling. Zo nee, typ \"klaar\" om naar vaardigheden te gaan.",
   "response.education_more": "Geweldig! Laten we nog een opleidingsvermelding toevoegen. Wat is de graad en instelling?",
@@ -799,7 +804,7 @@
   "cv_guide.academic_vs_industry.industry.point3": "Gebruik sectorspecifieke trefwoorden en terminologie",
   "cv_guide.academic_vs_industry.industry.point4": "Benadruk kwantificeerbare prestaties en zakelijke resultaten",
   "cv_guide.practical_tips.title": "Aanvullende Praktische Tips",
-  "cv_guide.practical_tips.master_cv.title": "Onderhoud een Master CV",
+  "cv_guide.practical_tips.master_cv.title": "Onderhoud een master CV",
   "cv_guide.practical_tips.master_cv.description": "Houd een uitgebreid document bij met al je ervaring en prestaties. Pas een versie aan voor elke sollicitatie.",
   "cv_guide.practical_tips.format.title": "Gebruik Professioneel Formaat",
   "cv_guide.practical_tips.format.description": "Kies een duidelijke, leesbare lettertype (10-12 pt), consistente opmaak en voldoende witruimte.",
@@ -1178,9 +1183,9 @@
   "question.summary_simple": "Schrijf een korte professionele samenvatting (2-3 zinnen) over je ervaring en carrièredoelen:",
   "question.experience_intro_simple": "Laten we je werkervaring toevoegen. Wat is je meest recente functietitel?",
   "question.education_intro_simple": "Wat is je hoogste opleidingsniveau? (bijv. VWO, Bachelor, Master, PhD)",
-  "question.skills_intro_simple": "Wat zijn je belangrijkste vaardigheden? (bijv. JavaScript, Projectmanagement, Leiderschap, Communicatie)",
+  "question.skills_intro_simple": "Wat zijn je belangrijkste vaardigheden? (bijv. JavaScript, projectmanagement, leiderschap, communicatie)",
   "question.languages_intro_simple": "Welke talen spreek je? (bijv. Engels, Nederlands, Spaans, Frans)",
-  "question.languages_proficiency_simple": "Geweldig! Nu voor elke taal, geef je competentieniveau aan. Je kunt termen gebruiken zoals: Moedertaal, Vloeiend, Gevorderd, Gemiddeld, Basis, of CEFR-niveaus (A1, A2, B1, B2, C1, C2). Bijvoorbeeld: 'Engels: Vloeiend, Spaans: B2, Frans: Basis'",
+  "question.languages_proficiency_simple": "Geweldig! Nu voor elke taal, geef je competentieniveau aan. Je kunt termen gebruiken zoals: moedertaal, vloeiend, gevorderd, gemiddeld, basis, of CEFR-niveaus (A1, A2, B1, B2, C1, C2). Bijvoorbeeld: 'Engels: vloeiend, Spaans: B2, Frans: basis'",
   "quick_cv.excellent_summary": "Uitstekende samenvatting! Dit zal je CV helpen opvallen.",
   "quick_cv.work_experience_question": "Heb je werkervaring? (Ja/Nee)",
   "quick_cv.no_problem_education": "Geen probleem! Laten we verder gaan met je opleiding.",
@@ -1264,5 +1269,173 @@
 
   "profile.firstName": "Voornaam",
   "profile.lastName": "Achternaam",
-  "profile.name": "Volledige naam"
+  "profile.name": "Volledige naam",
+
+  "data_compliance": {
+    "meta": {
+      "title": "Gegevensbescherming & Privacy",
+      "description": "Leer meer over LadderFox's gegevensbeschermingspraktijken, GDPR-naleving, AI-verwerking en uw privacyrechten.",
+      "keywords": "gegevensbescherming, privacybeleid, GDPR, AI-verwerking, gegevensbescherming, privacyrechten"
+    },
+    "title": "Gegevensbescherming & Privacy",
+    "subtitle": "Transparante informatie over hoe wij uw gegevens behandelen, AI-verwerking en uw privacyrechten",
+    "sections": {
+      "privacy": "Privacybeleid",
+      "terms": "Servicevoorwaarden",
+      "ai": "AI-verwerking",
+      "cookies": "Cookiebeleid",
+      "rights": "Uw Rechten"
+    },
+    "privacy": {
+      "important_note": "Belangrijke Privacykennisgeving",
+      "important_description": "Wij zijn toegewijd aan het beschermen van uw privacy en het waarborgen van naleving van internationale gegevensbeschermingsregelgeving, waaronder GDPR, CCPA en LGPD.",
+      "data_collection": {
+        "title": "Gegevens die wij verzamelen",
+        "personal": "Persoonlijke Informatie",
+        "name": "Naam en contactgegevens",
+        "email": "E-mailadres",
+        "contact": "Telefoonnummer en adres",
+        "professional": "Professionele informatie en CV-inhoud",
+        "technical": "Technische Gegevens",
+        "ip": "IP-adres en apparaatinformatie",
+        "browser": "Browsertype en instellingen",
+        "usage": "Gebruikspatronen en voorkeuren",
+        "session": "Sessiegegevens en cookies"
+      },
+      "purposes": {
+        "title": "Hoe wij uw gegevens gebruiken",
+        "service": "Serviceverlening",
+        "service_desc": "Om CV-bouw en optimalisatiediensten te leveren",
+        "ai": "AI-verwerking",
+        "ai_desc": "Om uw documenten te verbeteren met behulp van kunstmatige intelligentie",
+        "analytics": "Analytics",
+        "analytics_desc": "Om onze diensten en gebruikerservaring te verbeteren"
+      },
+      "retention": {
+        "title": "Gegevensbewaarperioden",
+        "documents": "CV-documenten",
+        "account": "Accountgegevens",
+        "billing": "Factureringsgegevens",
+        "logs": "Systeemlogs",
+        "days": "dagen",
+        "years": "jaar",
+        "months": "maanden",
+        "active": "Zolang account actief is"
+      }
+    },
+    "terms": {
+      "disclaimer": {
+        "title": "Belangrijke Juridische Disclaimer",
+        "description": "LadderFox biedt AI-ondersteunde CV-bouwtools. Wij zijn niet verantwoordelijk voor de inhoud, nauwkeurigheid of resultaten van uw sollicitaties."
+      },
+      "service": {
+        "title": "Servicebeschrijving",
+        "what": "Wat wij bieden",
+        "description": "AI-aangedreven CV- en motivatiebriefbouwtools met sjablonen en optimalisatiefuncties.",
+        "limitations": "Servicebeperkingen",
+        "no_guarantee": "Geen garantie op werkplaatsing of sollicitatiegesprek succes",
+        "no_liability": "Geen aansprakelijkheid voor sollicitatieresultaten",
+        "user_responsibility": "Gebruiker verantwoordelijk voor inhoudnauwkeurigheid",
+        "service_changes": "Service kan zonder kennisgeving worden gewijzigd"
+      },
+      "liability": {
+        "title": "Aansprakelijkheidsbeperkingen",
+        "limitation": "Beperkte Aansprakelijkheid",
+        "description": "Onze aansprakelijkheid is strikt beperkt zoals hieronder uiteengezet. Wij zijn niet verantwoordelijk voor indirecte, gevolgschade of strafschade.",
+        "max_amount": "Maximale Aansprakelijkheid",
+        "exclusions": "Uitzonderingen",
+        "exclusions_desc": "Opzettelijk wangedrag, grove nalatigheid of schending van toepasselijke wetgeving"
+      }
+    },
+    "ai": {
+      "important": {
+        "title": "AI-verwerkingskennisgeving",
+        "description": "Wij gebruiken kunstmatige intelligentie om uw CV en motivatiebrieven te optimaliseren. Dit omvat het verwerken van uw inhoud via AI-diensten van derden."
+      },
+      "processing": {
+        "title": "AI-verwerkingsdetails",
+        "what": "Wat AI doet",
+        "content_analysis": "Analyseert uw inhoud voor verbeteringen",
+        "suggestions": "Biedt schrijfsuggesties en alternatieven",
+        "optimization": "Optimaliseert tekst voor betere impact",
+        "grammar_check": "Controleert grammatica en spelling",
+        "providers": "AI-serviceproviders",
+        "third_party": "AI-diensten van derden (OpenAI, etc.)",
+        "encrypted": "Gegevens versleuteld tijdens verzending",
+        "temporary": "Alleen tijdelijke verwerking"
+      },
+      "disclaimer": {
+        "title": "AI-disclaimer",
+        "warning": "Belangrijke AI-beperkingen",
+        "no_guarantee": "AI-suggesties zijn niet gegarandeerd accuraat of geschikt",
+        "user_review": "Controleer en bewerk altijd AI-gegenereerde inhoud",
+        "no_liability": "Wij zijn niet aansprakelijk voor AI-gegenereerde inhoud",
+        "professional_advice": "AI is geen vervanging voor professioneel carrièreadvies"
+      }
+    },
+    "cookies": {
+      "types": {
+        "title": "Soorten cookies die wij gebruiken",
+        "essential": "Essentiële Cookies",
+        "essential_desc": "Vereist voor basisfunctionaliteit en beveiliging van de website",
+        "essential_required": "Kan niet worden uitgeschakeld",
+        "analytics": "Analytics Cookies",
+        "analytics_desc": "Helpen ons begrijpen hoe bezoekers onze website gebruiken",
+        "analytics_optional": "Kan worden uitgeschakeld",
+        "marketing": "Marketing Cookies",
+        "marketing_desc": "Gebruikt voor gepersonaliseerde advertenties en inhoud",
+        "marketing_optional": "Kan worden uitgeschakeld"
+      },
+      "management": {
+        "title": "Cookies beheren",
+        "how": "Hoe u uw cookies beheert",
+        "browser_settings": "Pas browserinstellingen aan om cookies te blokkeren",
+        "cookie_banner": "Gebruik onze cookie-toestemmingsbanner",
+        "contact": "Neem contact met ons op om u af te melden voor specifieke cookies",
+        "third_party": "Beheer cookies van derden via hun instellingen"
+      }
+    },
+    "rights": {
+      "your_rights": {
+        "title": "Uw Privacyrechten"
+      },
+      "access": {
+        "title": "Recht op Inzage",
+        "description": "Vraag een kopie aan van alle persoonlijke gegevens die wij over u bewaren"
+      },
+      "correction": {
+        "title": "Recht op Rectificatie",
+        "description": "Vraag correctie aan van onjuiste of onvolledige gegevens"
+      },
+      "deletion": {
+        "title": "Recht op Verwijdering",
+        "description": "Vraag verwijdering aan van uw persoonlijke gegevens (met uitzonderingen)"
+      },
+      "portability": {
+        "title": "Recht op Gegevensoverdraagbaarheid",
+        "description": "Vraag uw gegevens aan in een draagbaar, machineleesbaar formaat"
+      },
+      "exercise": {
+        "title": "Uw Rechten Uitoefenen",
+        "how": "Hoe u uw rechten uitoefent",
+        "email": "Neem contact met ons op via e-mail",
+        "response_time": "Reactietijd",
+        "verification": "Identiteitsverificatie vereist",
+        "days": "dagen"
+      },
+      "complaints": {
+        "title": "Klachten Indienen",
+        "authorities": "Gegevensbeschermingsautoriteiten",
+        "netherlands": "Nederland",
+        "eu": "Europese Unie"
+      }
+    },
+    "footer": {
+      "last_updated": "Laatst Bijgewerkt",
+      "last_updated_date": "9 december 2024",
+      "contact": "Contact",
+      "version": "Versie",
+      "compliant": "Naleving van"
+    }
+  }
 }

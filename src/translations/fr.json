@@ -274,6 +274,18 @@
   "common.photos": "Photos",
   "common.upload_photos": "Télécharger des Photos",
   "common.your_photos": "Vos Photos",
+  
+  "theme.day": "Jour",
+  "theme.night": "Nuit",
+  "theme.switch_to_day": "Passer au thème Jour",
+  "theme.switch_to_night": "Passer au thème Nuit",
+  
+  "theme.day": "Jour",
+  "theme.night": "Nuit",
+  "theme.switch_to_day": "Passer au thème Jour",
+  "theme.switch_to_night": "Passer au thème Nuit",
+  "common.upload_photos": "Télécharger des Photos",
+  "common.your_photos": "Vos Photos",
   "common.feature_request": "Demande de Fonctionnalité",
   "common.features": "Fonctionnalités",
   "common.fee": "Frais",

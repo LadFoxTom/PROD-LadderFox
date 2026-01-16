@@ -82,6 +82,55 @@ body {
   --color-ladderfox-orange: #FB8500;
 }
 
+/* Theme Variables - Night Theme (Default) */
+:root[data-theme="night"],
+:root:not([data-theme]) {
+  /* Backgrounds */
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #0d0d0d;
+  --bg-tertiary: #1a1a1a;
+  --bg-elevated: #1f1f1f;
+  --bg-hover: rgba(255, 255, 255, 0.05);
+  
+  /* Text */
+  --text-primary: #ffffff;
+  --text-secondary: #d1d5db;
+  --text-tertiary: #9ca3af;
+  --text-disabled: #6b7280;
+  
+  /* Borders */
+  --border-subtle: rgba(255, 255, 255, 0.05);
+  --border-medium: rgba(255, 255, 255, 0.10);
+  --border-strong: rgba(255, 255, 255, 0.20);
+  
+  /* Overlay */
+  --overlay: rgba(0, 0, 0, 0.5);
+}
+
+/* Theme Variables - Day Theme */
+:root[data-theme="day"] {
+  /* Backgrounds */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f9fafb;
+  --bg-tertiary: #f3f4f6;
+  --bg-elevated: #e5e7eb;
+  --bg-hover: rgba(0, 0, 0, 0.05);
+  
+  /* Text */
+  --text-primary: #111827;
+  --text-secondary: #4b5563;
+  --text-tertiary: #6b7280;
+  --text-disabled: #9ca3af;
+  
+  /* Borders */
+  --border-subtle: rgba(0, 0, 0, 0.05);
+  --border-medium: rgba(0, 0, 0, 0.10);
+  --border-strong: rgba(0, 0, 0, 0.20);
+  
+  /* Overlay */
+  --overlay: rgba(0, 0, 0, 0.3);
+}
+
 @layer base {
   html {
     -webkit-tap-highlight-color: transparent;
@@ -89,10 +138,11 @@ body {
   }
   
   body {
-    @apply antialiased text-gray-900;
-    background: var(--color-ladderfox-light);
-    color: var(--color-ladderfox-dark);
+    @apply antialiased;
+    background: var(--bg-primary);
+    color: var(--text-primary);
     font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   a {
