@@ -185,7 +185,7 @@ export default function FAQPage() {
                           <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
                             <FiGrid size={18} />
                           </div>
-                          <span className="flex-1 text-left ml-2 overflow-hidden text-ellipsis whitespace-nowrap min-w-0">{t('nav.dashboard')}</span>
+                          <span className="flex-1 text-left ml-2">{t('nav.dashboard')}</span>
                         </button>
                         <button 
                           onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard?tab=cvs'); }} 
@@ -194,7 +194,7 @@ export default function FAQPage() {
                           <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
                             <FiFolder size={18} />
                           </div>
-                          <span className="flex-1 text-left ml-2 overflow-hidden text-ellipsis whitespace-nowrap min-w-0">{t('nav.my_cvs')}</span>
+                          <span className="flex-1 text-left ml-2">{t('nav.my_cvs')}</span>
                         </button>
                         <button 
                           onClick={() => { setIsUserMenuOpen(false); toast(t('toast.job_applications_coming_soon')); }} 
@@ -205,7 +205,7 @@ export default function FAQPage() {
                           <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
                             <FiBriefcase size={18} className="opacity-50" />
                           </div>
-                          <span className="flex-1 text-left ml-2 overflow-hidden text-ellipsis whitespace-nowrap min-w-0">{t('nav.job_applications_short')}</span>
+                          <span className="flex-1 text-left ml-2">{t('nav.job_applications_short')}</span>
                         </button>
                       </div>
                       
@@ -220,7 +220,7 @@ export default function FAQPage() {
                           <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
                             <FiCreditCard size={18} />
                           </div>
-                          <span className="flex-1 text-left ml-2 overflow-hidden text-ellipsis whitespace-nowrap min-w-0">{t('nav.subscription')}</span>
+                          <span className="flex-1 text-left ml-2">{t('nav.subscription')}</span>
                           <span className="ml-1.5 px-1.5 py-0.5 bg-gray-700/50 text-gray-300 text-[10px] font-medium rounded-full flex-shrink-0">{subBadge}</span>
                         </button>
                         <button 
@@ -232,7 +232,7 @@ export default function FAQPage() {
                           <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
                             <FiSettings size={18} />
                           </div>
-                          <span className="flex-1 text-left ml-2 overflow-hidden text-ellipsis whitespace-nowrap min-w-0">{t('nav.settings')}</span>
+                          <span className="flex-1 text-left ml-2">{t('nav.settings')}</span>
                         </button>
                         <button 
                           onClick={() => { setIsUserMenuOpen(false); router.push('/faq'); }} 
@@ -243,7 +243,7 @@ export default function FAQPage() {
                           <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
                             <FiHelpCircle size={18} />
                           </div>
-                          <span className="flex-1 text-left ml-2 overflow-hidden text-ellipsis whitespace-nowrap min-w-0">{t('nav.help_support_short')}</span>
+                          <span className="flex-1 text-left ml-2">{t('nav.help_support_short')}</span>
                         </button>
                       </div>
                       
@@ -256,7 +256,7 @@ export default function FAQPage() {
                           <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
                             <FiLogOut size={18} />
                           </div>
-                          <span className="flex-1 text-left ml-2 overflow-hidden text-ellipsis whitespace-nowrap min-w-0">{t('nav.sign_out')}</span>
+                          <span className="flex-1 text-left ml-2">{t('nav.sign_out')}</span>
                         </button>
                       </div>
                     </motion.div>

@@ -3689,8 +3689,8 @@ function MenuItem({
         <Icon size={18} className={disabled ? 'opacity-50' : ''} />
       </div>
       
-      {/* Label - flex-grow to fill space with overflow handling */}
-      <span className="flex-1 text-left ml-2 overflow-hidden text-ellipsis whitespace-nowrap min-w-0">{label}</span>
+      {/* Label - flex-grow to fill space */}
+      <span className="flex-1 text-left ml-2">{label}</span>
       
       {/* Badge - right-aligned, absolute positioned to not affect width */}
       {badge && (
