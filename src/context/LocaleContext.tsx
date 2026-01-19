@@ -68,6 +68,8 @@ export function LocaleProvider({ children }: { children: React.ReactNode }) {
         localStorage.setItem('language', browserLang)
       } else {
         console.log('[LocaleContext] Browser language not supported, defaulting to English')
+        setLanguageState('en')
+        localStorage.setItem('language', 'en')
       }
     }
     

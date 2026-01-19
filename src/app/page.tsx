@@ -25,6 +25,7 @@ import TemplateQuickSelector from '@/components/TemplateQuickSelector';
 import { CVTemplate } from '@/components/pdf/CVDocumentPDF';
 import { sanitizeCVDataForAPI as sanitizeForAPI } from '@/utils/cvDataSanitizer';
 import { ThemeSwitcher } from '@/components/ThemeSwitcher';
+import { LanguageSelector } from '@/components/LanguageSelector';
 
 // Dynamically import PDF preview viewer (React-PDF based for guaranteed preview=export consistency)
 const PDFPreviewViewer = dynamic(
@@ -1967,8 +1968,9 @@ export default function HomePage() {
             </div>
           )}
 
-          {/* Right: Theme Switcher & User Menu */}
+          {/* Right: Language Selector, Theme Switcher & User Menu */}
           <div className="flex items-center gap-2">
+            <LanguageSelector />
             <ThemeSwitcher />
             {isAuthenticated ? (
               <div className="relative" ref={userMenuRef} style={{ overflow: 'visible', zIndex: 100 }}>
