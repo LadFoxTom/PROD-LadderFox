@@ -2190,14 +2190,27 @@ export default function HomePage() {
               animate={{ x: 0 }}
               exit={{ x: -280 }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-14 left-0 bottom-0 w-[280px] bg-[#111111] border-r border-white/5 z-40 overflow-y-auto"
+              className="fixed top-14 left-0 bottom-0 w-[280px] z-40 overflow-y-auto"
+              style={{ 
+                backgroundColor: 'var(--bg-secondary)',
+                borderRight: '1px solid var(--border-subtle)',
+              }}
             >
               <div className="p-4 space-y-4">
                 {/* Desktop close button */}
                 <div className="hidden lg:flex justify-end">
                   <button
                     onClick={() => setIsSidebarOpen(false)}
-                    className="p-2 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                    className="p-2 flex items-center justify-center rounded-lg transition-colors"
+                    style={{ color: 'var(--text-tertiary)' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.color = 'var(--text-primary)';
+                      e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.color = 'var(--text-tertiary)';
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }}
                     aria-label="Close sidebar"
                   >
                     <FiX size={16} />
@@ -2214,7 +2227,17 @@ export default function HomePage() {
                     setIsSidebarOpen(false);
                     setActiveView('chat');
                   }}
-                  className="w-full flex items-center gap-3 px-4 py-3 bg-white/5 hover:bg-white/10 rounded-xl transition-colors mb-6"
+                  className="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-colors mb-6"
+                  style={{
+                    backgroundColor: 'var(--bg-tertiary)',
+                    color: 'var(--text-primary)',
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = 'var(--bg-elevated)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)';
+                  }}
                 >
                   <FiPlus size={18} />
                   <span>New conversation</span>
@@ -2222,7 +2245,7 @@ export default function HomePage() {
 
                 {/* Saved CVs */}
                 <div className="mb-6">
-                  <h3 className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-3 px-2">
+                  <h3 className="text-xs font-medium uppercase tracking-wider mb-3 px-2" style={{ color: 'var(--text-tertiary)' }}>
                     {t('nav.my_cvs')}
                   </h3>
                   <div className="space-y-1">
@@ -2231,19 +2254,31 @@ export default function HomePage() {
                         <button
                           key={cv.id}
                           onClick={() => handleLoadCV(cv.id)}
-                          className={`w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left ${
-                            currentCVId === cv.id ? 'bg-white/5' : ''
-                          }`}
+                          className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors text-left"
+                          style={{
+                            backgroundColor: currentCVId === cv.id ? 'var(--bg-hover)' : 'transparent',
+                            color: 'var(--text-primary)',
+                          }}
+                          onMouseEnter={(e) => {
+                            if (currentCVId !== cv.id) {
+                              e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                            }
+                          }}
+                          onMouseLeave={(e) => {
+                            if (currentCVId !== cv.id) {
+                              e.currentTarget.style.backgroundColor = 'transparent';
+                            }
+                          }}
                         >
                           <FiFileText size={14} className="text-blue-400 flex-shrink-0" />
                           <div className="flex-1 min-w-0">
                             <p className="text-sm truncate">{cv.title}</p>
-                            <p className="text-xs text-gray-500">{cv.updatedAt}</p>
+                            <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>{cv.updatedAt}</p>
                           </div>
                         </button>
                       ))
                     ) : (
-                      <p className="text-xs text-gray-500 px-3 py-2">
+                      <p className="text-xs px-3 py-2" style={{ color: 'var(--text-tertiary)' }}>
                         {isAuthenticated ? 'No saved CVs yet' : 'Sign in to see your CVs'}
                       </p>
                     )}
@@ -2252,14 +2287,21 @@ export default function HomePage() {
 
                 {/* Quick Actions */}
                 <div>
-                  <h3 className="text-xs font-medium text-gray-500 uppercase tracking-wider mb-3 px-2">
+                  <h3 className="text-xs font-medium uppercase tracking-wider mb-3 px-2" style={{ color: 'var(--text-tertiary)' }}>
                     {t('landing.main.quick_actions')}
                   </h3>
                   <button 
                     onClick={() => router.push('/dashboard')}
-                    className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
+                    className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors text-left"
+                    style={{ color: 'var(--text-primary)' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }}
                   >
-                    <FiGrid size={14} className="text-gray-400" />
+                    <FiGrid size={14} style={{ color: 'var(--text-tertiary)' }} />
                     <span className="text-sm">Dashboard</span>
                   </button>
                   {/* Photo Management */}
@@ -2270,7 +2312,14 @@ export default function HomePage() {
                       setArtifactType('cv');
                       setIsSidebarOpen(false);
                     }}
-                    className="w-full flex items-center gap-3 px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left"
+                    className="w-full flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors text-left"
+                    style={{ color: 'var(--text-primary)' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }}
                   >
                     <FiImage size={14} className="text-blue-400" />
                     <span className="text-sm">{t('common.photos')}</span>
@@ -2287,7 +2336,14 @@ export default function HomePage() {
                       setArtifactType('cv');
                       setIsSidebarOpen(false);
                     }}
-                    className="w-full flex items-center justify-between px-3 py-2.5 hover:bg-white/5 rounded-lg transition-colors text-left group"
+                    className="w-full flex items-center justify-between px-3 py-2.5 rounded-lg transition-colors text-left group"
+                    style={{ color: 'var(--text-primary)' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }}
                   >
                     <div className="flex items-center gap-3">
                       <FiAward size={14} className="text-purple-400" />
@@ -3416,7 +3472,6 @@ export default function HomePage() {
                         <h2 className="text-sm font-medium flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
                           <FiAward size={16} className="text-purple-400" />
                           CV Editor
-                          <span className="text-[10px] px-1.5 py-0.5 bg-purple-500/20 text-purple-400 rounded font-medium">PRO</span>
                         </h2>
                         <button
                           onClick={() => setActiveView('chat')}
