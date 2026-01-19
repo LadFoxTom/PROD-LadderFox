@@ -1900,7 +1900,7 @@ export default function HomePage() {
             >
               <FiMenu size={20} />
             </button>
-            <a href="/" className="flex items-center gap-2">
+            <a href="/" className="flex items-center gap-2" style={{ color: 'inherit' }} onMouseEnter={(e) => { e.currentTarget.style.color = 'inherit'; }} onMouseLeave={(e) => { e.currentTarget.style.color = 'inherit'; }}>
               <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center font-bold text-sm">
                 LF
               </div>
