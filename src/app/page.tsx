@@ -1889,7 +1889,14 @@ export default function HomePage() {
           <div className="flex items-center gap-4">
             <button
               onClick={() => setIsSidebarOpen(!isSidebarOpen)}
-              className="p-2 flex items-center justify-center hover:bg-white/5 rounded-lg transition-colors lg:hidden"
+              className="p-2 flex items-center justify-center rounded-lg transition-colors lg:hidden"
+              style={{ color: 'var(--text-primary)' }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}
             >
               <FiMenu size={20} />
             </button>
@@ -1913,7 +1920,17 @@ export default function HomePage() {
                 setCurrentCVId(null);
                 setActiveView('chat');
               }}
-              className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 rounded-lg transition-colors"
+              className="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors"
+              style={{
+                backgroundColor: 'var(--bg-tertiary)',
+                color: 'var(--text-primary)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--bg-elevated)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)';
+              }}
             >
               <FiPlus size={16} />
               <span className="hidden sm:inline">New Chat</span>
@@ -1931,7 +1948,17 @@ export default function HomePage() {
                   setIsConversationActive(true);
                   setIsSidebarOpen(true);
                 }}
-                className="flex items-center gap-2 px-4 py-2 bg-white/5 hover:bg-white/10 rounded-lg transition-colors"
+                className="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors"
+                style={{
+                  backgroundColor: 'var(--bg-tertiary)',
+                  color: 'var(--text-primary)',
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--bg-elevated)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)';
+                }}
               >
                 <FiList size={16} />
                 <span className="hidden xl:inline">Chat overview</span>
@@ -1950,12 +1977,22 @@ export default function HomePage() {
                     console.log('[UserMenu] toggle click (home)', { wasOpen: isUserMenuOpen });
                     setIsUserMenuOpen(!isUserMenuOpen);
                   }}
-                  className="flex items-center gap-2 px-3 py-2 hover:bg-white/5 rounded-lg transition-colors"
+                  className="flex items-center gap-2 px-3 py-2 rounded-lg transition-colors"
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'transparent';
+                  }}
                 >
                   <div className="w-8 h-8 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-full flex items-center justify-center text-sm font-medium">
                     {user?.name?.[0] || 'U'}
                   </div>
-                  <FiChevronDown size={14} className={`text-gray-400 transition-transform ${isUserMenuOpen ? 'rotate-180' : ''}`} />
+                  <FiChevronDown 
+                    size={14} 
+                    className={`transition-transform ${isUserMenuOpen ? 'rotate-180' : ''}`}
+                    style={{ color: 'var(--text-tertiary)' }}
+                  />
                 </button>
                 
                 {/* Desktop: Original dropdown (mobile menu is at root level) */}
@@ -1967,13 +2004,20 @@ export default function HomePage() {
                       animate={{ opacity: 1, y: 0, scale: 1 }}
                       exit={{ opacity: 0, y: 8, scale: 0.96 }}
                       transition={{ duration: 0.15 }}
-                      className="hidden lg:block absolute left-auto right-0 top-full mt-2 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.3)] z-[9999]"
-                      style={{ width: '320px', minWidth: '320px', maxWidth: '320px' }}
+                      className="hidden lg:block absolute left-auto right-0 top-full mt-2 rounded-xl z-[9999]"
+                      style={{ 
+                        width: '320px', 
+                        minWidth: '320px', 
+                        maxWidth: '320px',
+                        backgroundColor: 'var(--bg-elevated)',
+                        border: '1px solid var(--border-medium)',
+                        boxShadow: 'var(--shadow-lg)',
+                      }}
                     >
                       {/* User Info */}
-                      <div className="px-3 py-2.5 border-b border-white/10">
-                        <p className="font-semibold text-sm text-white leading-tight mb-0.5 truncate">{user?.name || 'User'}</p>
-                        <p className="text-[11px] text-gray-400 truncate leading-relaxed" style={{ opacity: 0.7 }}>{user?.email || 'user@example.com'}</p>
+                      <div className="px-3 py-2.5" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
+                        <p className="font-semibold text-sm leading-tight mb-0.5 truncate" style={{ color: 'var(--text-primary)' }}>{user?.name || 'User'}</p>
+                        <p className="text-[11px] truncate leading-relaxed" style={{ color: 'var(--text-tertiary)', opacity: 0.7 }}>{user?.email || 'user@example.com'}</p>
                       </div>
                       
                       {/* Navigation Items */}
@@ -1998,7 +2042,7 @@ export default function HomePage() {
                       </div>
                       
                       {/* Account Items */}
-                      <div className="border-t border-white/10 py-1.5">
+                      <div className="py-1.5" style={{ borderTop: '1px solid var(--border-subtle)' }}>
                         <MenuItem 
                           icon={FiCreditCard} 
                           label={t('nav.subscription')} 
@@ -2021,7 +2065,7 @@ export default function HomePage() {
                       </div>
                       
                       {/* Action Items */}
-                      <div className="border-t border-white/10 py-1.5">
+                      <div className="py-1.5" style={{ borderTop: '1px solid var(--border-subtle)' }}>
                         <MenuItem 
                           icon={FiLogOut} 
                           label={t('nav.sign_out')} 
@@ -3638,7 +3682,16 @@ export default function HomePage() {
                         </button>
                         <button
                           onClick={handleCopy}
-                          className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                          className="p-2 rounded-lg transition-colors"
+                          style={{ color: 'var(--text-tertiary)' }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.color = 'var(--text-primary)';
+                            e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.color = 'var(--text-tertiary)';
+                            e.currentTarget.style.backgroundColor = 'transparent';
+                          }}
                           title="Copy"
                         >
                           <FiCopy size={16} />
@@ -3652,7 +3705,16 @@ export default function HomePage() {
                             }
                             handleDownload();
                           }}
-                          className="p-2 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                          className="p-2 flex items-center justify-center rounded-lg transition-colors"
+                          style={{ color: 'var(--text-tertiary)' }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.color = 'var(--text-primary)';
+                            e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.color = 'var(--text-tertiary)';
+                            e.currentTarget.style.backgroundColor = 'transparent';
+                          }}
                           title={isFree ? 'Pro feature: upgrade to download' : 'Download PDF'}
                         >
                           <FiDownload size={16} />
@@ -3673,7 +3735,14 @@ export default function HomePage() {
                             );
                             toast.success('Letter copied to clipboard');
                           }}
-                          className="flex items-center gap-1.5 px-3 py-1.5 text-sm text-gray-300 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                          className="flex items-center gap-1.5 px-3 py-1.5 text-sm rounded-lg transition-colors"
+                          style={{ color: 'var(--text-primary)' }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.backgroundColor = 'transparent';
+                          }}
                           title={isFree ? 'Pro feature: upgrade to copy' : 'Copy Letter'}
                         >
                           <FiCopy size={14} />
@@ -3696,7 +3765,16 @@ export default function HomePage() {
                             URL.revokeObjectURL(url);
                             toast.success('Letter downloaded');
                           }}
-                          className="p-2 text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                          className="p-2 rounded-lg transition-colors"
+                          style={{ color: 'var(--text-tertiary)' }}
+                          onMouseEnter={(e) => {
+                            e.currentTarget.style.color = 'var(--text-primary)';
+                            e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                          }}
+                          onMouseLeave={(e) => {
+                            e.currentTarget.style.color = 'var(--text-tertiary)';
+                            e.currentTarget.style.backgroundColor = 'transparent';
+                          }}
                           title={isFree ? 'Pro feature: upgrade to download' : 'Download'}
                         >
                           <FiDownload size={16} />
@@ -3704,13 +3782,22 @@ export default function HomePage() {
                       </>
                     )}
                     {artifactType === 'jobs' && savedJobs.length > 0 && (
-                      <span className="text-xs text-gray-400">
+                      <span className="text-xs" style={{ color: 'var(--text-tertiary)' }}>
                         {savedJobs.length} saved
                       </span>
                     )}
                     <button
                       onClick={() => setIsArtifactFullscreen(!isArtifactFullscreen)}
-                      className="p-2 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/5 rounded-lg transition-colors"
+                      className="p-2 flex items-center justify-center rounded-lg transition-colors"
+                      style={{ color: 'var(--text-tertiary)' }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.color = 'var(--text-primary)';
+                        e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.color = 'var(--text-tertiary)';
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                      }}
                       title={isArtifactFullscreen ? 'Exit fullscreen' : 'Fullscreen'}
                     >
                       {isArtifactFullscreen ? <FiMinimize2 size={16} /> : <FiMaximize2 size={16} />}
@@ -3952,20 +4039,29 @@ function MenuItem({
           ? 'opacity-50 cursor-not-allowed' 
           : 'cursor-pointer'
         }
-        ${isActive 
-          ? 'bg-white/5 border-l-3 border-blue-500' 
-          : ''
-        }
-        ${variant === 'danger' 
-          ? disabled
-            ? 'text-gray-400'
-            : 'text-gray-300 hover:bg-white/8 hover:text-white'
-          : disabled
-            ? 'text-gray-400'
-            : 'text-gray-300 hover:bg-white/5 hover:text-white'
-        }
       `}
-      style={isActive ? { borderLeftWidth: '3px' } : undefined}
+      style={{
+        ...(isActive ? { 
+          borderLeftWidth: '3px',
+          borderLeftColor: '#3b82f6',
+          backgroundColor: 'var(--bg-hover)',
+        } : {}),
+        color: disabled 
+          ? 'var(--text-disabled)'
+          : variant === 'danger'
+            ? 'var(--text-primary)'
+            : 'var(--text-primary)',
+      }}
+      onMouseEnter={(e) => {
+        if (!disabled && !isActive) {
+          e.currentTarget.style.backgroundColor = variant === 'danger' ? 'rgba(239, 68, 68, 0.1)' : 'var(--bg-hover)';
+        }
+      }}
+      onMouseLeave={(e) => {
+        if (!disabled && !isActive) {
+          e.currentTarget.style.backgroundColor = 'transparent';
+        }
+      }}
     >
       {/* Icon container - fixed width for alignment */}
       <div className="w-5 h-5 flex items-center justify-center flex-shrink-0">
@@ -3977,12 +4073,24 @@ function MenuItem({
       
       {/* Badge - right-aligned, absolute positioned to not affect width */}
       {badge && (
-        <span className="ml-1.5 px-1.5 py-0.5 bg-gray-700/50 text-gray-300 text-[10px] font-medium rounded-full flex-shrink-0">
+        <span 
+          className="ml-1.5 px-1.5 py-0.5 text-[10px] font-medium rounded-full flex-shrink-0"
+          style={{
+            backgroundColor: 'var(--bg-tertiary)',
+            color: 'var(--text-secondary)',
+          }}
+        >
           {badge}
         </span>
       )}
       
-      {external && <FiExternalLink size={14} className="ml-2 text-gray-500 flex-shrink-0" />}
+      {external && (
+        <FiExternalLink 
+          size={14} 
+          className="ml-2 flex-shrink-0" 
+          style={{ color: 'var(--text-tertiary)' }}
+        />
+      )}
     </button>
   );
 }
