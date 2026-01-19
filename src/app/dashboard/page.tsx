@@ -470,7 +470,7 @@ export default function DashboardPage() {
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 8, scale: 0.96 }}
                     transition={{ duration: 0.15 }}
-                    className="hidden lg:block absolute left-auto right-0 top-full mt-2 w-48 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.3)] z-[9999]"
+                    className="hidden lg:block absolute left-auto right-0 top-full mt-2 w-80 bg-[#1a1a1a] border border-white/10 rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.3)] z-[9999]"
                   >
                     {/* User Info */}
                     <div className="px-3 py-2.5 border-b border-white/10">
