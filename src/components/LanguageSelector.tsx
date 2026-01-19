@@ -24,7 +24,7 @@ const FlagIcon: React.FC<{ code: string; className?: string }> = ({ code, classN
     <img 
       src={flagSrc} 
       alt={`${code.toUpperCase()} flag`}
-      className={`${className} rounded-full object-cover`}
+      className={`${className} rounded object-cover`}
       style={{ aspectRatio: '1 / 1' }}
     />
   )
@@ -59,12 +59,12 @@ export function LanguageSelector() {
   if (!isClient) {
     return (
       <button
-        className="p-2 flex items-center justify-center rounded-full transition-colors min-w-[44px] min-h-[44px] touch-manipulation"
+        className="p-2 flex items-center justify-center rounded-lg transition-colors min-w-[44px] min-h-[44px] touch-manipulation"
         style={{
           backgroundColor: 'transparent',
         }}
       >
-        <FlagIcon code="en" className="w-6 h-6" />
+        <FlagIcon code="en" className="w-5 h-5" />
       </button>
     )
   }
@@ -77,14 +77,14 @@ export function LanguageSelector() {
         onMouseLeave={() => setIsHovered(false)}
         onTouchStart={() => setIsHovered(true)}
         onTouchEnd={() => setIsHovered(false)}
-        className="p-2 flex items-center justify-center rounded-full transition-colors min-w-[44px] min-h-[44px] touch-manipulation"
+        className="p-2 flex items-center justify-center rounded-lg transition-colors min-w-[44px] min-h-[44px] touch-manipulation"
         style={{
           backgroundColor: isHovered ? 'var(--bg-hover)' : 'transparent',
         }}
         title={currentLanguage?.name || 'Language'}
         aria-label="Select language"
       >
-        <FlagIcon code={language} className="w-6 h-6" />
+        <FlagIcon code={language} className="w-5 h-5" />
       </button>
 
       <AnimatePresence>
