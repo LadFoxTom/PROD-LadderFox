@@ -108,7 +108,7 @@ export function LanguageSelector() {
               backgroundColor: 'var(--bg-elevated)',
               border: '1px solid var(--border-medium)',
               boxShadow: 'var(--shadow-lg)',
-              width: 'auto',
+              width: '44px',
               minWidth: '44px',
             }}
           >
