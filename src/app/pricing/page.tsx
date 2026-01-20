@@ -1056,13 +1056,23 @@ export default function PricingPage() {
               transition={{ delay: 0.6 }}
               className="text-center mt-16"
             >
-              <h2 className="text-2xl font-bold mb-4">{t('pricing.cta.title')}</h2>
-              <p className="text-gray-400 mb-8">
+              <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--text-heading)' }}>{t('pricing.cta.title')}</h2>
+              <p className="mb-8" style={{ color: 'var(--text-secondary)' }}>
                 {t('pricing.cta.subtitle')}
               </p>
               <button
                 onClick={() => router.push('/')}
-                className="bg-white text-black px-8 py-3 rounded-xl font-medium hover:bg-gray-100 transition-colors"
+                className="px-8 py-3 rounded-xl font-medium transition-colors"
+                style={{
+                  backgroundColor: 'var(--bg-elevated)',
+                  color: 'var(--text-primary)'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--bg-elevated)';
+                }}
               >
                 {t('pricing.cta.button')}
               </button>
