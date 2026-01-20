@@ -173,9 +173,6 @@ export function LanguageSelector() {
                   }}>
                     <FlagIcon code={lang.code} />
                   </div>
-                  {language === lang.code && (
-                    <span className="ml-1.5" style={{ color: '#3b82f6', fontSize: '12px' }}>✓</span>
-                  )}
                 </button>
               ))}
             </div>
