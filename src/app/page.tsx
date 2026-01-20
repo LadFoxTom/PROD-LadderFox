@@ -2117,21 +2117,42 @@ export default function HomePage() {
               animate={{ x: 0 }}
               exit={{ x: 280 }}
               transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-              className="fixed top-14 right-0 bottom-0 w-[280px] bg-[#1a1a1a] border-l border-white/5 z-40 overflow-y-auto lg:hidden"
+              className="fixed top-14 right-0 bottom-0 w-[280px] z-40 overflow-y-auto lg:hidden"
+              style={{
+                backgroundColor: 'var(--bg-elevated)',
+                borderLeft: '1px solid var(--border-subtle)',
+              }}
             >
               <div className="p-4 space-y-4">
                 {/* User Info */}
-                <div className="px-4 py-3 border-b border-white/10 mb-4">
-                  <p className="font-semibold text-base text-white leading-tight mb-1">{user?.name || 'User'}</p>
-                  <p className="text-xs text-gray-400 truncate leading-relaxed" style={{ opacity: 0.7 }}>{user?.email || 'user@example.com'}</p>
+                <div className="px-4 py-3 mb-4" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
+                  <p className="font-semibold text-base leading-tight mb-1" style={{ color: 'var(--text-primary)' }}>{user?.name || 'User'}</p>
+                  <p className="text-xs truncate leading-relaxed" style={{ color: 'var(--text-tertiary)', opacity: 0.7 }}>{user?.email || 'user@example.com'}</p>
                 </div>
                 
                 {/* Navigation Items */}
                 <div className="space-y-1">
                   <button
                     onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard'); }}
-                    className={`w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 rounded-lg ${pathname === '/dashboard' ? 'bg-white/5 border-l-3 border-blue-500' : ''}`}
-                    style={pathname === '/dashboard' ? { borderLeftWidth: '3px' } : undefined}
+                    className="w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium transition-all duration-150 rounded-lg"
+                    style={{
+                      ...(pathname === '/dashboard' ? { 
+                        borderLeftWidth: '3px',
+                        borderLeftColor: '#3b82f6',
+                        backgroundColor: 'var(--bg-hover)',
+                      } : {}),
+                      color: 'var(--text-primary)',
+                    }}
+                    onMouseEnter={(e) => {
+                      if (pathname !== '/dashboard') {
+                        e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (pathname !== '/dashboard') {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                      }
+                    }}
                     aria-current={pathname === '/dashboard' ? 'page' : undefined}
                   >
                     <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
@@ -2141,7 +2162,14 @@ export default function HomePage() {
                   </button>
                   <button
                     onClick={() => { setIsUserMenuOpen(false); router.push('/dashboard?tab=cvs'); }}
-                    className="w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 rounded-lg"
+                    className="w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium transition-all duration-150 rounded-lg"
+                    style={{ color: 'var(--text-primary)' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }}
                   >
                     <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
                       <FiFolder size={20} />
@@ -2152,7 +2180,8 @@ export default function HomePage() {
                     onClick={() => { setIsUserMenuOpen(false); toast(t('toast.job_applications_coming_soon')); }}
                     disabled
                     aria-disabled="true"
-                    className="w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-400 opacity-50 cursor-not-allowed rounded-lg"
+                    className="w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium opacity-50 cursor-not-allowed rounded-lg"
+                    style={{ color: 'var(--text-disabled)' }}
                   >
                     <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
                       <FiBriefcase size={20} className="opacity-50" />
@@ -2162,23 +2191,57 @@ export default function HomePage() {
                 </div>
                 
                 {/* Account Items */}
-                <div className="border-t border-white/10 pt-1.5 mt-1.5 space-y-1">
+                <div className="pt-1.5 mt-1.5 space-y-1" style={{ borderTop: '1px solid var(--border-subtle)' }}>
                   <button
                     onClick={() => { setIsUserMenuOpen(false); router.push('/pricing'); }}
-                    className={`w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 rounded-lg ${pathname === '/pricing' ? 'bg-white/5 border-l-3 border-blue-500' : ''}`}
-                    style={pathname === '/pricing' ? { borderLeftWidth: '3px' } : undefined}
+                    className="w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium transition-all duration-150 rounded-lg"
+                    style={{
+                      ...(pathname === '/pricing' ? { 
+                        borderLeftWidth: '3px',
+                        borderLeftColor: '#3b82f6',
+                        backgroundColor: 'var(--bg-hover)',
+                      } : {}),
+                      color: 'var(--text-primary)',
+                    }}
+                    onMouseEnter={(e) => {
+                      if (pathname !== '/pricing') {
+                        e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (pathname !== '/pricing') {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                      }
+                    }}
                     aria-current={pathname === '/pricing' ? 'page' : undefined}
                   >
                     <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
                       <FiCreditCard size={20} />
                     </div>
                     <span className="flex-1 text-left ml-3">{t('nav.subscription')}</span>
-                    <span className="ml-auto px-2.5 py-1 bg-gray-700/50 text-gray-300 text-xs font-medium rounded-full flex-shrink-0">{subBadge}</span>
+                    <span className="ml-auto px-2.5 py-1 text-xs font-medium rounded-full flex-shrink-0" style={{ backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-secondary)' }}>{subBadge}</span>
                   </button>
                   <button
                     onClick={() => { setIsUserMenuOpen(false); router.push('/settings'); }}
-                    className={`w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 rounded-lg ${pathname === '/settings' ? 'bg-white/5 border-l-3 border-blue-500' : ''}`}
-                    style={pathname === '/settings' ? { borderLeftWidth: '3px' } : undefined}
+                    className="w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium transition-all duration-150 rounded-lg"
+                    style={{
+                      ...(pathname === '/settings' ? { 
+                        borderLeftWidth: '3px',
+                        borderLeftColor: '#3b82f6',
+                        backgroundColor: 'var(--bg-hover)',
+                      } : {}),
+                      color: 'var(--text-primary)',
+                    }}
+                    onMouseEnter={(e) => {
+                      if (pathname !== '/settings') {
+                        e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (pathname !== '/settings') {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                      }
+                    }}
                     aria-current={pathname === '/settings' ? 'page' : undefined}
                   >
                     <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
@@ -2188,8 +2251,25 @@ export default function HomePage() {
                   </button>
                   <button
                     onClick={() => { setIsUserMenuOpen(false); router.push('/faq'); }}
-                    className={`w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 rounded-lg ${pathname === '/faq' ? 'bg-white/5 border-l-3 border-blue-500' : ''}`}
-                    style={pathname === '/faq' ? { borderLeftWidth: '3px' } : undefined}
+                    className="w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium transition-all duration-150 rounded-lg"
+                    style={{
+                      ...(pathname === '/faq' ? { 
+                        borderLeftWidth: '3px',
+                        borderLeftColor: '#3b82f6',
+                        backgroundColor: 'var(--bg-hover)',
+                      } : {}),
+                      color: 'var(--text-primary)',
+                    }}
+                    onMouseEnter={(e) => {
+                      if (pathname !== '/faq') {
+                        e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (pathname !== '/faq') {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                      }
+                    }}
                     aria-current={pathname === '/faq' ? 'page' : undefined}
                   >
                     <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
@@ -2199,11 +2279,34 @@ export default function HomePage() {
                   </button>
                 </div>
                 
+                {/* Theme & Language */}
+                <div className="pt-1.5 mt-1.5" style={{ borderTop: '1px solid var(--border-subtle)' }}>
+                  <div className="px-4 py-2">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--text-tertiary)' }}>Language</span>
+                      <LanguageSelector />
+                    </div>
+                  </div>
+                  <div className="px-4 py-2">
+                    <div className="flex items-center justify-between gap-2">
+                      <span className="text-xs font-medium uppercase tracking-wider" style={{ color: 'var(--text-tertiary)' }}>Theme</span>
+                      <ThemeSwitcher />
+                    </div>
+                  </div>
+                </div>
+                
                 {/* Action Items */}
-                <div className="border-t border-white/10 pt-1.5 mt-1.5">
+                <div className="pt-1.5 mt-1.5" style={{ borderTop: '1px solid var(--border-subtle)' }}>
                   <button
                     onClick={() => { setIsUserMenuOpen(false); signOut({ callbackUrl: '/' }); }}
-                    className="w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-all duration-150 rounded-lg"
+                    className="w-full flex items-center min-h-[44px] px-4 py-3 text-sm font-medium transition-all duration-150 rounded-lg"
+                    style={{ color: 'var(--text-primary)' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                    }}
                   >
                     <div className="w-6 h-6 flex items-center justify-center flex-shrink-0">
                       <FiLogOut size={20} />
