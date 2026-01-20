@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { FiCheckCircle, FiXCircle, FiAlertCircle, FiInfo, FiRefreshCw } from 'react-icons/fi';
 
 interface ATSCheckerProps {
@@ -32,12 +32,69 @@ interface ATSAssessment {
   };
 }
 
+const ATS_ASSESSMENT_STORAGE_KEY = 'ats_assessment_cache';
+const ATS_CV_HASH_KEY = 'ats_cv_hash';
+
+// Simple hash function to create a fingerprint of CV data
+const createCVHash = (cvData: any): string => {
+  try {
+    // Create a simplified version of CV data for hashing (exclude volatile fields)
+    const { photos, photoUrl, ...stableData } = cvData;
+    const dataString = JSON.stringify(stableData);
+    
+    // Simple hash - sum of character codes
+    let hash = 0;
+    for (let i = 0; i < dataString.length; i++) {
+      const char = dataString.charCodeAt(i);
+      hash = ((hash << 5) - hash) + char;
+      hash = hash & hash; // Convert to 32-bit integer
+    }
+    return hash.toString();
+  } catch (error) {
+    console.error('[ATS Checker] Error creating CV hash:', error);
+    return Date.now().toString(); // Fallback to timestamp
+  }
+};
+
 const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
   const [assessment, setAssessment] = useState<ATSAssessment | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchAssessment = async () => {
+  // Fetch new assessment (only when explicitly called or CV changes)
+  const fetchAssessment = useCallback(async (forceRefresh = false) => {
+    if (!cvData) return;
+
+    // Check cache first unless forcing refresh
+    if (!forceRefresh && typeof window !== 'undefined') {
+      try {
+        const cachedAssessment = localStorage.getItem(ATS_ASSESSMENT_STORAGE_KEY);
+        const cachedHash = localStorage.getItem(ATS_CV_HASH_KEY);
+        const currentHash = createCVHash(cvData);
+
+        if (cachedAssessment && cachedHash === currentHash) {
+          try {
+            const parsed = JSON.parse(cachedAssessment);
+            setAssessment(parsed);
+            console.log('[ATS Checker] Using cached assessment');
+            return;
+          } catch (parseError) {
+            console.error('[ATS Checker] Error parsing cached assessment:', parseError);
+            // Clear invalid cache
+            localStorage.removeItem(ATS_ASSESSMENT_STORAGE_KEY);
+            localStorage.removeItem(ATS_CV_HASH_KEY);
+          }
+        } else if (cachedHash && cachedHash !== currentHash) {
+          // CV has changed, clear old cache
+          console.log('[ATS Checker] CV data changed, clearing old cache');
+          localStorage.removeItem(ATS_ASSESSMENT_STORAGE_KEY);
+          localStorage.removeItem(ATS_CV_HASH_KEY);
+        }
+      } catch (error) {
+        console.error('[ATS Checker] Error checking cache:', error);
+      }
+    }
+
     setIsLoading(true);
     setError(null);
 
@@ -56,20 +113,31 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
       }
 
       const data = await response.json();
-      setAssessment(data.assessment);
+      const assessmentData = data.assessment;
+      
+      // Store in cache
+      if (typeof window !== 'undefined' && assessmentData) {
+        const currentHash = createCVHash(cvData);
+        localStorage.setItem(ATS_ASSESSMENT_STORAGE_KEY, JSON.stringify(assessmentData));
+        localStorage.setItem(ATS_CV_HASH_KEY, currentHash);
+        console.log('[ATS Checker] Assessment cached');
+      }
+      
+      setAssessment(assessmentData);
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to assess CV');
       console.error('[ATS Checker] Error:', err);
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [cvData]);
 
+  // Load cached assessment or fetch new one when CV data is available
   useEffect(() => {
     if (cvData) {
-      fetchAssessment();
+      fetchAssessment(false); // Try cache first, fetch if needed
     }
-  }, [cvData]);
+  }, [cvData, fetchAssessment]); // Re-run if CV data changes
 
   const getScoreColor = (score: number) => {
     if (score >= 80) return 'text-green-500';
@@ -425,7 +493,7 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
 
       {/* Refresh Button */}
       <button
-        onClick={fetchAssessment}
+        onClick={() => fetchAssessment(true)}
         disabled={isLoading}
         className="w-full px-4 py-2 rounded-lg text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
         style={{
@@ -444,7 +512,7 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
         }}
       >
         <FiRefreshCw className={isLoading ? 'animate-spin' : ''} size={14} />
-        Refresh Assessment
+        {isLoading ? 'Assessing...' : 'Refresh Assessment'}
       </button>
     </div>
   );
