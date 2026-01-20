@@ -1219,31 +1219,68 @@ export default function DashboardPage() {
               </div>
 
               {/* Quick Actions */}
-              <div className="bg-[#111111] border border-white/5 rounded-xl overflow-hidden">
-                <div className="px-4 py-3 border-b border-white/5">
-                  <h3 className="font-medium text-white">{t('dashboard.quick_actions')}</h3>
+              <div className="rounded-xl overflow-hidden" style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}>
+                <div className="px-4 py-3" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
+                  <h3 className="font-medium" style={{ color: 'var(--text-primary)' }}>{t('dashboard.quick_actions')}</h3>
                 </div>
                 <div className="p-4 space-y-2">
                   <button
                     onClick={handleCreateNewCV}
-                    className="w-full flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 rounded-xl hover:border-blue-500/40 transition-colors text-left"
+                    className="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-colors text-left"
+                    style={{
+                      background: 'linear-gradient(to right, rgba(59, 130, 246, 0.1), rgba(168, 85, 247, 0.1))',
+                      border: '1px solid rgba(59, 130, 246, 0.2)',
+                      color: 'var(--text-primary)'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = 'rgba(59, 130, 246, 0.4)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = 'rgba(59, 130, 246, 0.2)';
+                    }}
                   >
                     <FiPlus className="text-blue-400 flex-shrink-0" size={18} />
-                    <span className="text-sm font-medium text-white">{t('dashboard.create_new_cv')}</span>
+                    <span className="text-sm font-medium">{t('dashboard.create_new_cv')}</span>
                   </button>
                   <button
                     onClick={handleCreateNewLetter}
-                    className="w-full flex items-center gap-3 px-4 py-3 bg-white/5 border border-white/5 rounded-xl hover:border-white/10 transition-colors text-left"
+                    className="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-colors text-left"
+                    style={{
+                      backgroundColor: 'var(--bg-tertiary)',
+                      border: '1px solid var(--border-subtle)',
+                      color: 'var(--text-primary)'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--border-medium)';
+                      e.currentTarget.style.backgroundColor = 'var(--bg-elevated)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--border-subtle)';
+                      e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)';
+                    }}
                   >
-                    <FiMail className="text-gray-400 flex-shrink-0" size={18} />
-                    <span className="text-sm text-gray-300">{t('dashboard.create_cover_letter')}</span>
+                    <FiMail className="flex-shrink-0" size={18} style={{ color: 'var(--text-tertiary)' }} />
+                    <span className="text-sm">{t('dashboard.create_cover_letter')}</span>
                   </button>
                   <button
                     onClick={() => router.push('/pricing')}
-                    className="w-full flex items-center gap-3 px-4 py-3 bg-white/5 border border-white/5 rounded-xl hover:border-white/10 transition-colors text-left"
+                    className="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-colors text-left"
+                    style={{
+                      backgroundColor: 'var(--bg-tertiary)',
+                      border: '1px solid var(--border-subtle)',
+                      color: 'var(--text-primary)'
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--border-medium)';
+                      e.currentTarget.style.backgroundColor = 'var(--bg-elevated)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.borderColor = 'var(--border-subtle)';
+                      e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)';
+                    }}
                   >
-                    <FiCreditCard className="text-gray-400 flex-shrink-0" size={18} />
-                    <span className="text-sm text-gray-300">{t('dashboard.upgrade_plan')}</span>
+                    <FiCreditCard className="flex-shrink-0" size={18} style={{ color: 'var(--text-tertiary)' }} />
+                    <span className="text-sm">{t('dashboard.upgrade_plan')}</span>
                   </button>
                 </div>
               </div>
