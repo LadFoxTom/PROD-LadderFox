@@ -1903,7 +1903,7 @@ export default function HomePage() {
               <FiMenu size={20} />
             </button>
             <a href="/" className="flex items-center gap-2" style={{ color: 'inherit' }} onMouseEnter={(e) => { e.currentTarget.style.color = 'inherit'; }} onMouseLeave={(e) => { e.currentTarget.style.color = 'inherit'; }}>
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center font-bold text-sm">
+              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center font-bold text-sm text-white">
                 LF
               </div>
               <span className="font-semibold text-lg hidden sm:block">LadderFox</span>
@@ -4115,7 +4115,7 @@ function MessageBubble({ message }: { message: Message }) {
         {/* Avatar */}
         {!isUser && (
           <div className="flex items-center gap-2 mb-2">
-            <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center text-[10px] font-bold">
+            <div className="w-6 h-6 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center text-[10px] font-bold text-white">
               LF
             </div>
             <span className="text-xs" style={{ color: 'var(--text-tertiary)' }}>LadderFox</span>

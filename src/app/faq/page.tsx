@@ -133,7 +133,7 @@ export default function FAQPage() {
               <FiChevronLeft size={20} />
             </button>
             <a href="/" className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center font-bold text-sm">
+              <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center font-bold text-sm text-white">
                 LF
               </div>
               <span className="font-semibold text-lg hidden sm:block">LadderFox</span>
