@@ -751,7 +751,7 @@ export default function FAQPage() {
         </div>
 
         {/* FAQ List */}
-        <div className="max-w-3xl mx-auto px-4 py-12">
+        <div className="max-w-6xl mx-auto px-4 py-12">
           <div className="space-y-3">
             {faqs.map((faq, index) => (
               <motion.div
@@ -867,7 +867,7 @@ export default function FAQPage() {
 
         {/* Footer */}
         <footer className="py-8 px-4" style={{ borderTop: '1px solid var(--border-subtle)' }}>
-          <div className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm" style={{ color: 'var(--text-tertiary)' }}>
+          <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm" style={{ color: 'var(--text-tertiary)' }}>
             <p>© {new Date().getFullYear()} LadderFox. All rights reserved.</p>
             <div className="flex items-center gap-6">
               <a href="/privacy" className="transition-colors" style={{ color: 'var(--text-tertiary)' }} onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--text-primary)'; }} onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--text-tertiary)'; }}>Privacy</a>
