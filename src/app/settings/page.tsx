@@ -274,17 +274,27 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
-      <Toaster position="top-center" toastOptions={{ style: { background: '#1a1a1a', color: '#fff' } }} />
+    <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
+      <Toaster position="top-center" toastOptions={{ style: { background: 'var(--bg-tertiary)', color: 'var(--text-primary)' } }} />
       
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 h-14 bg-[#0a0a0a]/80 backdrop-blur-xl border-b border-white/5 z-50">
-        <div className="h-full max-w-screen-2xl mx-auto px-4 flex items-center justify-between">
+      <header className="fixed top-0 left-0 right-0 h-14 backdrop-blur-xl border-b z-50" style={{ overflow: 'visible', backgroundColor: 'var(--bg-primary)', borderColor: 'var(--border-subtle)', opacity: 0.95 }}>
+        <div className="h-full max-w-screen-2xl mx-auto px-4 flex items-center justify-between" style={{ overflow: 'visible' }}>
           <div className="flex items-center gap-4">
-            <button onClick={() => router.back()} className="p-2 flex items-center justify-center hover:bg-white/5 rounded-lg transition-colors">
+            <button 
+              onClick={() => router.back()} 
+              className="p-2 flex items-center justify-center rounded-lg transition-colors"
+              style={{ color: 'var(--text-primary)' }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}
+            >
               <FiArrowLeft size={20} />
             </button>
-            <Link href="/" className="flex items-center gap-2">
+            <Link href="/" className="flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
               <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center font-bold text-sm text-white">
                 LF
               </div>
@@ -742,40 +752,92 @@ export default function SettingsPage() {
         <div className="max-w-5xl mx-auto px-4 py-8">
           {/* Header */}
           <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
-            <h1 className="text-3xl font-bold">{t('settings.title')}</h1>
-            <p className="text-gray-400 mt-1">{t('settings.subtitle')}</p>
+            <h1 className="text-3xl font-bold" style={{ color: 'var(--text-heading)' }}>{t('settings.title')}</h1>
+            <p className="mt-1" style={{ color: 'var(--text-secondary)' }}>{t('settings.subtitle')}</p>
           </motion.div>
 
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
             {/* Sidebar Navigation */}
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
-              <div className="bg-[#111111] border border-white/5 rounded-xl p-2 space-y-1">
+              <div className="rounded-xl p-2 space-y-1" style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}>
                 <button
                   onClick={() => setActiveSection('profile')}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
-                    activeSection === 'profile' ? 'bg-white/10 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'
-                  }`}
+                  className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors"
+                  style={{
+                    backgroundColor: activeSection === 'profile' ? 'var(--bg-hover)' : 'transparent',
+                    color: activeSection === 'profile' ? 'var(--text-primary)' : 'var(--text-tertiary)'
+                  }}
+                  onMouseEnter={(e) => {
+                    if (activeSection !== 'profile') {
+                      e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                      e.currentTarget.style.color = 'var(--text-primary)';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (activeSection !== 'profile') {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                      e.currentTarget.style.color = 'var(--text-tertiary)';
+                    }
+                  }}
                 >
                   <FiUser size={18} /> {t('settings.profile')}
                 </button>
                 <button
                   onClick={() => setActiveSection('subscription')}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
-                    activeSection === 'subscription' ? 'bg-white/10 text-white' : 'text-gray-400 hover:text-white hover:bg-white/5'
-                  }`}
+                  className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors"
+                  style={{
+                    backgroundColor: activeSection === 'subscription' ? 'var(--bg-hover)' : 'transparent',
+                    color: activeSection === 'subscription' ? 'var(--text-primary)' : 'var(--text-tertiary)'
+                  }}
+                  onMouseEnter={(e) => {
+                    if (activeSection !== 'subscription') {
+                      e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                      e.currentTarget.style.color = 'var(--text-primary)';
+                    }
+                  }}
+                  onMouseLeave={(e) => {
+                    if (activeSection !== 'subscription') {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                      e.currentTarget.style.color = 'var(--text-tertiary)';
+                    }
+                  }}
                 >
                   <FiCreditCard size={18} /> {t('settings.subscription')}
                 </button>
               </div>
 
               {/* Quick Actions */}
-              <div className="bg-[#111111] border border-white/5 rounded-xl p-4 mt-4">
-                <h3 className="text-sm font-medium text-gray-400 mb-3">{t('settings.quick_actions')}</h3>
+              <div className="rounded-xl p-4 mt-4" style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}>
+                <h3 className="text-sm font-medium mb-3" style={{ color: 'var(--text-tertiary)' }}>{t('settings.quick_actions')}</h3>
                 <div className="space-y-2">
-                  <button onClick={() => router.push('/')} className="w-full flex items-center gap-2 px-3 py-2 text-sm text-gray-300 hover:bg-white/5 rounded-lg">
+                  <button 
+                    onClick={() => router.push('/')} 
+                    className="w-full flex items-center gap-2 px-3 py-2 text-sm rounded-lg transition-colors"
+                    style={{ color: 'var(--text-secondary)' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                      e.currentTarget.style.color = 'var(--text-primary)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                      e.currentTarget.style.color = 'var(--text-secondary)';
+                    }}
+                  >
                     <FiPlus size={14} /> {t('settings.create_new_cv')}
                   </button>
-                  <button onClick={() => router.push('/dashboard')} className="w-full flex items-center gap-2 px-3 py-2 text-sm text-gray-300 hover:bg-white/5 rounded-lg">
+                  <button 
+                    onClick={() => router.push('/dashboard')} 
+                    className="w-full flex items-center gap-2 px-3 py-2 text-sm rounded-lg transition-colors"
+                    style={{ color: 'var(--text-secondary)' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                      e.currentTarget.style.color = 'var(--text-primary)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                      e.currentTarget.style.color = 'var(--text-secondary)';
+                    }}
+                  >
                     <FiGrid size={14} /> {t('settings.view_dashboard')}
                   </button>
                 </div>
@@ -785,85 +847,282 @@ export default function SettingsPage() {
             {/* Main Content */}
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="lg:col-span-3">
               {activeSection === 'profile' && (
-                <div className="bg-[#111111] border border-white/5 rounded-xl p-6">
+                <div className="rounded-xl p-6" style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}>
                   <div className="flex items-center gap-3 mb-6">
                     <FiUser className="text-blue-400" size={20} />
-                    <h2 className="text-xl font-semibold">{t('settings.profile_information')}</h2>
+                    <h2 className="text-xl font-semibold" style={{ color: 'var(--text-heading)' }}>{t('settings.profile_information')}</h2>
                   </div>
                   
                   <form onSubmit={e => { e.preventDefault(); handleProfileSave(); }} className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-medium text-gray-400 mb-2">{t('settings.first_name')}</label>
-                        <input type="text" name="firstName" value={profile.firstName} onChange={handleProfileChange} 
-                          className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500" />
+                        <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-tertiary)' }}>{t('settings.first_name')}</label>
+                        <input 
+                          type="text" 
+                          name="firstName" 
+                          value={profile.firstName} 
+                          onChange={handleProfileChange} 
+                          className="w-full rounded-xl py-3 px-4 focus:outline-none transition-colors"
+                          style={{
+                            backgroundColor: 'var(--bg-input)',
+                            border: '1px solid var(--border-subtle)',
+                            color: 'var(--text-primary)',
+                            placeholderColor: 'var(--placeholder-color)'
+                          }}
+                          onFocus={(e) => {
+                            e.currentTarget.style.borderColor = '#3b82f6';
+                          }}
+                          onBlur={(e) => {
+                            e.currentTarget.style.borderColor = 'var(--border-subtle)';
+                          }}
+                        />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-400 mb-2">{t('settings.last_name')}</label>
-                        <input type="text" name="lastName" value={profile.lastName} onChange={handleProfileChange} 
-                          className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500" />
+                        <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-tertiary)' }}>{t('settings.last_name')}</label>
+                        <input 
+                          type="text" 
+                          name="lastName" 
+                          value={profile.lastName} 
+                          onChange={handleProfileChange} 
+                          className="w-full rounded-xl py-3 px-4 focus:outline-none transition-colors"
+                          style={{
+                            backgroundColor: 'var(--bg-input)',
+                            border: '1px solid var(--border-subtle)',
+                            color: 'var(--text-primary)',
+                            placeholderColor: 'var(--placeholder-color)'
+                          }}
+                          onFocus={(e) => {
+                            e.currentTarget.style.borderColor = '#3b82f6';
+                          }}
+                          onBlur={(e) => {
+                            e.currentTarget.style.borderColor = 'var(--border-subtle)';
+                          }}
+                        />
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-400 mb-2">{t('settings.email')}</label>
-                      <input type="email" name="email" value={profile.email} disabled
-                        className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-gray-500 cursor-not-allowed" />
+                      <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-tertiary)' }}>{t('settings.email')}</label>
+                      <input 
+                        type="email" 
+                        name="email" 
+                        value={profile.email} 
+                        disabled
+                        className="w-full rounded-xl py-3 px-4 cursor-not-allowed"
+                        style={{
+                          backgroundColor: 'var(--bg-tertiary)',
+                          border: '1px solid var(--border-subtle)',
+                          color: 'var(--text-disabled)'
+                        }}
+                      />
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-medium text-gray-400 mb-2">{t('settings.phone')}</label>
-                        <input type="text" name="phone" value={profile.phone} onChange={handleProfileChange} 
-                          className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500" />
+                        <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-tertiary)' }}>{t('settings.phone')}</label>
+                        <input 
+                          type="text" 
+                          name="phone" 
+                          value={profile.phone} 
+                          onChange={handleProfileChange} 
+                          className="w-full rounded-xl py-3 px-4 focus:outline-none transition-colors"
+                          style={{
+                            backgroundColor: 'var(--bg-input)',
+                            border: '1px solid var(--border-subtle)',
+                            color: 'var(--text-primary)',
+                            placeholderColor: 'var(--placeholder-color)'
+                          }}
+                          onFocus={(e) => {
+                            e.currentTarget.style.borderColor = '#3b82f6';
+                          }}
+                          onBlur={(e) => {
+                            e.currentTarget.style.borderColor = 'var(--border-subtle)';
+                          }}
+                        />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-400 mb-2">{t('settings.job_title')}</label>
-                        <input type="text" name="jobTitle" value={profile.jobTitle} onChange={handleProfileChange} 
-                          className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500" />
+                        <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-tertiary)' }}>{t('settings.job_title')}</label>
+                        <input 
+                          type="text" 
+                          name="jobTitle" 
+                          value={profile.jobTitle} 
+                          onChange={handleProfileChange} 
+                          className="w-full rounded-xl py-3 px-4 focus:outline-none transition-colors"
+                          style={{
+                            backgroundColor: 'var(--bg-input)',
+                            border: '1px solid var(--border-subtle)',
+                            color: 'var(--text-primary)',
+                            placeholderColor: 'var(--placeholder-color)'
+                          }}
+                          onFocus={(e) => {
+                            e.currentTarget.style.borderColor = '#3b82f6';
+                          }}
+                          onBlur={(e) => {
+                            e.currentTarget.style.borderColor = 'var(--border-subtle)';
+                          }}
+                        />
                       </div>
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-400 mb-2">{t('settings.company')}</label>
-                      <input type="text" name="company" value={profile.company} onChange={handleProfileChange} 
-                        className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500" />
+                      <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-tertiary)' }}>{t('settings.company')}</label>
+                      <input 
+                        type="text" 
+                        name="company" 
+                        value={profile.company} 
+                        onChange={handleProfileChange} 
+                        className="w-full rounded-xl py-3 px-4 focus:outline-none transition-colors"
+                        style={{
+                          backgroundColor: 'var(--bg-input)',
+                          border: '1px solid var(--border-subtle)',
+                          color: 'var(--text-primary)',
+                          placeholderColor: 'var(--placeholder-color)'
+                        }}
+                        onFocus={(e) => {
+                          e.currentTarget.style.borderColor = '#3b82f6';
+                        }}
+                        onBlur={(e) => {
+                          e.currentTarget.style.borderColor = 'var(--border-subtle)';
+                        }}
+                      />
                     </div>
 
                     <div>
-                      <label className="block text-sm font-medium text-gray-400 mb-2">{t('settings.bio')}</label>
-                      <textarea name="bio" value={profile.bio} onChange={handleProfileChange} rows={3}
-                        className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500 resize-none" />
+                      <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-tertiary)' }}>{t('settings.bio')}</label>
+                      <textarea 
+                        name="bio" 
+                        value={profile.bio} 
+                        onChange={handleProfileChange} 
+                        rows={3}
+                        className="w-full rounded-xl py-3 px-4 focus:outline-none transition-colors resize-none"
+                        style={{
+                          backgroundColor: 'var(--bg-input)',
+                          border: '1px solid var(--border-subtle)',
+                          color: 'var(--text-primary)',
+                          placeholderColor: 'var(--placeholder-color)'
+                        }}
+                        onFocus={(e) => {
+                          e.currentTarget.style.borderColor = '#3b82f6';
+                        }}
+                        onBlur={(e) => {
+                          e.currentTarget.style.borderColor = 'var(--border-subtle)';
+                        }}
+                      />
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
-                        <label className="block text-sm font-medium text-gray-400 mb-2">{t('settings.linkedin_url')}</label>
-                        <input type="text" name="linkedinUrl" value={profile.linkedinUrl} onChange={handleProfileChange} 
-                          className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500" />
+                        <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-tertiary)' }}>{t('settings.linkedin_url')}</label>
+                        <input 
+                          type="text" 
+                          name="linkedinUrl" 
+                          value={profile.linkedinUrl} 
+                          onChange={handleProfileChange} 
+                          className="w-full rounded-xl py-3 px-4 focus:outline-none transition-colors"
+                          style={{
+                            backgroundColor: 'var(--bg-input)',
+                            border: '1px solid var(--border-subtle)',
+                            color: 'var(--text-primary)',
+                            placeholderColor: 'var(--placeholder-color)'
+                          }}
+                          onFocus={(e) => {
+                            e.currentTarget.style.borderColor = '#3b82f6';
+                          }}
+                          onBlur={(e) => {
+                            e.currentTarget.style.borderColor = 'var(--border-subtle)';
+                          }}
+                        />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-400 mb-2">{t('settings.website_url')}</label>
-                        <input type="text" name="websiteUrl" value={profile.websiteUrl} onChange={handleProfileChange} 
-                          className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500" />
+                        <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-tertiary)' }}>{t('settings.website_url')}</label>
+                        <input 
+                          type="text" 
+                          name="websiteUrl" 
+                          value={profile.websiteUrl} 
+                          onChange={handleProfileChange} 
+                          className="w-full rounded-xl py-3 px-4 focus:outline-none transition-colors"
+                          style={{
+                            backgroundColor: 'var(--bg-input)',
+                            border: '1px solid var(--border-subtle)',
+                            color: 'var(--text-primary)',
+                            placeholderColor: 'var(--placeholder-color)'
+                          }}
+                          onFocus={(e) => {
+                            e.currentTarget.style.borderColor = '#3b82f6';
+                          }}
+                          onBlur={(e) => {
+                            e.currentTarget.style.borderColor = 'var(--border-subtle)';
+                          }}
+                        />
                       </div>
                     </div>
 
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                       <div>
-                        <label className="block text-sm font-medium text-gray-400 mb-2">{t('settings.city')}</label>
-                        <input type="text" name="city" value={profile.city} onChange={handleProfileChange} 
-                          className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500" />
+                        <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-tertiary)' }}>{t('settings.city')}</label>
+                        <input 
+                          type="text" 
+                          name="city" 
+                          value={profile.city} 
+                          onChange={handleProfileChange} 
+                          className="w-full rounded-xl py-3 px-4 focus:outline-none transition-colors"
+                          style={{
+                            backgroundColor: 'var(--bg-input)',
+                            border: '1px solid var(--border-subtle)',
+                            color: 'var(--text-primary)',
+                            placeholderColor: 'var(--placeholder-color)'
+                          }}
+                          onFocus={(e) => {
+                            e.currentTarget.style.borderColor = '#3b82f6';
+                          }}
+                          onBlur={(e) => {
+                            e.currentTarget.style.borderColor = 'var(--border-subtle)';
+                          }}
+                        />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-400 mb-2">{t('settings.state')}</label>
-                        <input type="text" name="state" value={profile.state} onChange={handleProfileChange} 
-                          className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500" />
+                        <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-tertiary)' }}>{t('settings.state')}</label>
+                        <input 
+                          type="text" 
+                          name="state" 
+                          value={profile.state} 
+                          onChange={handleProfileChange} 
+                          className="w-full rounded-xl py-3 px-4 focus:outline-none transition-colors"
+                          style={{
+                            backgroundColor: 'var(--bg-input)',
+                            border: '1px solid var(--border-subtle)',
+                            color: 'var(--text-primary)',
+                            placeholderColor: 'var(--placeholder-color)'
+                          }}
+                          onFocus={(e) => {
+                            e.currentTarget.style.borderColor = '#3b82f6';
+                          }}
+                          onBlur={(e) => {
+                            e.currentTarget.style.borderColor = 'var(--border-subtle)';
+                          }}
+                        />
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-gray-400 mb-2">{t('settings.country')}</label>
-                        <input type="text" name="country" value={profile.country} onChange={handleProfileChange} 
-                          className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500" />
+                        <label className="block text-sm font-medium mb-2" style={{ color: 'var(--text-tertiary)' }}>{t('settings.country')}</label>
+                        <input 
+                          type="text" 
+                          name="country" 
+                          value={profile.country} 
+                          onChange={handleProfileChange} 
+                          className="w-full rounded-xl py-3 px-4 focus:outline-none transition-colors"
+                          style={{
+                            backgroundColor: 'var(--bg-input)',
+                            border: '1px solid var(--border-subtle)',
+                            color: 'var(--text-primary)',
+                            placeholderColor: 'var(--placeholder-color)'
+                          }}
+                          onFocus={(e) => {
+                            e.currentTarget.style.borderColor = '#3b82f6';
+                          }}
+                          onBlur={(e) => {
+                            e.currentTarget.style.borderColor = 'var(--border-subtle)';
+                          }}
+                        />
                       </div>
                     </div>
 
@@ -884,17 +1143,23 @@ export default function SettingsPage() {
               {activeSection === 'subscription' && (
                 <div className="space-y-6">
                   {/* Current Plan */}
-                  <div className="bg-[#111111] border border-white/5 rounded-xl p-6">
+                  <div className="rounded-xl p-6" style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}>
                     <div className="flex items-center justify-between mb-6">
                       <div className="flex items-center gap-3">
                         <FiCreditCard className="text-blue-400" size={20} />
-                        <h2 className="text-xl font-semibold">{t('settings.current_plan')}</h2>
+                        <h2 className="text-xl font-semibold" style={{ color: 'var(--text-heading)' }}>{t('settings.current_plan')}</h2>
                       </div>
-                      <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                        subscription?.status === 'active' ? 'bg-green-500/10 text-green-400' :
-                        subscription?.status === 'past_due' ? 'bg-yellow-500/10 text-yellow-400' :
-                        'bg-gray-500/10 text-gray-400'
-                      }`}>
+                      <span 
+                        className="px-3 py-1 rounded-full text-xs font-medium"
+                        style={{
+                          backgroundColor: subscription?.status === 'active' ? 'rgba(34, 197, 94, 0.1)' :
+                            subscription?.status === 'past_due' ? 'rgba(234, 179, 8, 0.1)' :
+                            'var(--bg-tertiary)',
+                          color: subscription?.status === 'active' ? '#4ade80' :
+                            subscription?.status === 'past_due' ? '#fbbf24' :
+                            'var(--text-tertiary)'
+                        }}
+                      >
                         {subscription?.status || 'inactive'}
                       </span>
                     </div>
@@ -904,9 +1169,9 @@ export default function SettingsPage() {
                         <FiStar className="text-blue-400" size={24} />
                       </div>
                       <div>
-                        <h3 className="text-2xl font-bold capitalize">{subscription?.plan || 'Free'} Plan</h3>
+                        <h3 className="text-2xl font-bold capitalize" style={{ color: 'var(--text-heading)' }}>{subscription?.plan || 'Free'} Plan</h3>
                         {subscription?.currentPeriodEnd && (
-                          <p className="text-sm text-gray-400">
+                          <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
                             {t('settings.renews_on')} {new Date(subscription.currentPeriodEnd).toLocaleDateString()}
                           </p>
                         )}
@@ -930,7 +1195,24 @@ export default function SettingsPage() {
                         <button
                           onClick={handleManageSubscription}
                           disabled={isManagingSubscription}
-                          className="flex items-center gap-2 px-4 py-2.5 bg-white/5 hover:bg-white/10 border border-white/10 rounded-xl text-sm font-medium transition-colors disabled:opacity-50"
+                          className="flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-colors disabled:opacity-50"
+                          style={{
+                            backgroundColor: 'var(--bg-tertiary)',
+                            border: '1px solid var(--border-subtle)',
+                            color: 'var(--text-primary)'
+                          }}
+                          onMouseEnter={(e) => {
+                            if (!e.currentTarget.disabled) {
+                              e.currentTarget.style.backgroundColor = 'var(--bg-elevated)';
+                              e.currentTarget.style.borderColor = 'var(--border-medium)';
+                            }
+                          }}
+                          onMouseLeave={(e) => {
+                            if (!e.currentTarget.disabled) {
+                              e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)';
+                              e.currentTarget.style.borderColor = 'var(--border-subtle)';
+                            }
+                          }}
                         >
                           <FiExternalLink size={16} />
                           {isManagingSubscription ? t('settings.opening') : t('settings.manage_subscription')}

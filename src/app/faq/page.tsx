@@ -213,19 +213,28 @@ export default function FAQPage() {
   }, [isUserMenuOpen]);
 
   return (
-    <div className="min-h-screen bg-[#0a0a0a] text-white">
+    <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
+      <Toaster position="top-center" toastOptions={{ style: { background: 'var(--bg-tertiary)', color: 'var(--text-primary)' } }} />
+      
       {/* Header */}
-      <header className="fixed top-0 left-0 right-0 h-14 bg-[#0a0a0a]/80 backdrop-blur-xl border-b border-white/5 z-50">
-        <div className="h-full max-w-screen-xl mx-auto px-4 flex items-center justify-between">
+      <header className="fixed top-0 left-0 right-0 h-14 backdrop-blur-xl border-b z-50" style={{ overflow: 'visible', backgroundColor: 'var(--bg-primary)', borderColor: 'var(--border-subtle)', opacity: 0.95 }}>
+        <div className="h-full max-w-screen-xl mx-auto px-4 flex items-center justify-between" style={{ overflow: 'visible' }}>
           {/* Left: Back & Logo */}
           <div className="flex items-center gap-4">
             <button
               onClick={() => router.back()}
-              className="p-2 flex items-center justify-center hover:bg-white/5 rounded-lg transition-colors"
+              className="p-2 flex items-center justify-center rounded-lg transition-colors"
+              style={{ color: 'var(--text-primary)' }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.backgroundColor = 'transparent';
+              }}
             >
               <FiChevronLeft size={20} />
             </button>
-            <a href="/" className="flex items-center gap-2">
+            <a href="/" className="flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
               <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center font-bold text-sm text-white">
                 LF
               </div>
@@ -344,13 +353,30 @@ export default function FAQPage() {
               <div className="flex items-center gap-2">
                 <button
                   onClick={() => router.push('/auth/login')}
-                  className="px-4 py-2 text-sm text-gray-300 hover:text-white transition-colors"
+                  className="px-4 py-2 text-sm transition-colors"
+                  style={{ color: 'var(--text-secondary)' }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = 'var(--text-primary)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = 'var(--text-secondary)';
+                  }}
                 >
                   {t('nav.sign_in')}
                 </button>
                 <button
                   onClick={() => router.push('/auth/signup')}
-                  className="px-4 py-2 bg-white text-black text-sm font-medium rounded-lg hover:bg-gray-100 transition-colors"
+                  className="px-4 py-2 text-sm font-medium rounded-lg transition-colors"
+                  style={{ 
+                    backgroundColor: 'var(--bg-elevated)',
+                    color: 'var(--text-primary)'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'var(--bg-elevated)';
+                  }}
                 >
                   {t('nav.get_started')}
                 </button>
@@ -700,13 +726,13 @@ export default function FAQPage() {
       {/* Main Content */}
       <main className="pt-14">
         {/* Hero */}
-        <div className="py-16 px-4 text-center border-b border-white/5">
+        <div className="py-16 px-4 text-center" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
           <div className="max-w-2xl mx-auto">
             <div className="w-16 h-16 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
               <FiHelpCircle size={32} className="text-blue-400" />
             </div>
-            <h1 className="text-4xl font-bold mb-4">{t('faq.page.hero.title')}</h1>
-            <p className="text-gray-400 text-lg">
+            <h1 className="text-4xl font-bold mb-4" style={{ color: 'var(--text-heading)' }}>{t('faq.page.hero.title')}</h1>
+            <p className="text-lg" style={{ color: 'var(--text-secondary)' }}>
               {t('faq.page.hero.subtitle')}
             </p>
           </div>
@@ -721,28 +747,40 @@ export default function FAQPage() {
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.05 }}
-                className="bg-[#1a1a1a] border border-white/5 rounded-xl overflow-hidden"
+                className="rounded-xl overflow-hidden"
+                style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}
               >
                 <button
                   onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                  className="w-full flex items-center gap-4 p-5 text-left hover:bg-white/5 transition-colors focus:outline-none"
+                  className="w-full flex items-center gap-4 p-5 text-left transition-colors focus:outline-none"
+                  style={{ color: 'var(--text-primary)' }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.backgroundColor = 'transparent';
+                  }}
                 >
-                  <div className={`w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0 ${
-                    openIndex === index 
-                      ? 'bg-blue-500/20 text-blue-400' 
-                      : 'bg-white/5 text-gray-400'
-                  }`}>
+                  <div 
+                    className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
+                    style={{
+                      backgroundColor: openIndex === index ? 'rgba(59, 130, 246, 0.2)' : 'var(--bg-tertiary)',
+                      color: openIndex === index ? '#60a5fa' : 'var(--text-tertiary)'
+                    }}
+                  >
                     <faq.icon size={20} />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">{faq.category}</p>
-                    <p className="font-medium text-white">{faq.question}</p>
+                    <p className="text-xs uppercase tracking-wide mb-1" style={{ color: 'var(--text-tertiary)' }}>{faq.category}</p>
+                    <p className="font-medium" style={{ color: 'var(--text-primary)' }}>{faq.question}</p>
                   </div>
                   <FiChevronDown 
                     size={20} 
-                    className={`text-gray-400 transition-transform flex-shrink-0 ${
-                      openIndex === index ? 'rotate-180' : ''
-                    }`} 
+                    className="transition-transform flex-shrink-0"
+                    style={{ 
+                      color: 'var(--text-tertiary)',
+                      transform: openIndex === index ? 'rotate(180deg)' : 'rotate(0deg)'
+                    }} 
                   />
                 </button>
                 
@@ -756,7 +794,7 @@ export default function FAQPage() {
                       className="overflow-hidden"
                     >
                       <div className="px-5 pb-5 pl-[76px]">
-                        <p className="text-gray-400 leading-relaxed">{faq.answer}</p>
+                        <p className="leading-relaxed" style={{ color: 'var(--text-secondary)' }}>{faq.answer}</p>
                       </div>
                       </motion.div>
                     )}
@@ -768,22 +806,45 @@ export default function FAQPage() {
 
         {/* Contact Section */}
         <div className="max-w-3xl mx-auto px-4 pb-20">
-          <div className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 border border-white/10 rounded-2xl p-8 text-center">
-            <h2 className="text-2xl font-bold mb-3">Still have questions?</h2>
-            <p className="text-gray-400 mb-6">
+          <div className="rounded-2xl p-8 text-center" style={{ background: 'linear-gradient(to bottom right, rgba(59, 130, 246, 0.1), rgba(168, 85, 247, 0.1))', border: '1px solid var(--border-medium)' }}>
+            <h2 className="text-2xl font-bold mb-3" style={{ color: 'var(--text-heading)' }}>Still have questions?</h2>
+            <p className="mb-6" style={{ color: 'var(--text-secondary)' }}>
               Can't find what you're looking for? Our support team is here to help.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a
                 href="mailto:info@ladderfox.com"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white text-black font-medium rounded-xl hover:bg-gray-100 transition-colors"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-xl transition-colors"
+                style={{
+                  backgroundColor: 'var(--bg-elevated)',
+                  color: 'var(--text-primary)'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--bg-elevated)';
+                }}
               >
                 <FiMail size={18} />
                 Email Support
               </a>
               <a
                 href="/"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-white/5 border border-white/10 text-white font-medium rounded-xl hover:bg-white/10 transition-colors"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-xl transition-colors"
+                style={{
+                  backgroundColor: 'var(--bg-tertiary)',
+                  border: '1px solid var(--border-subtle)',
+                  color: 'var(--text-primary)'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--bg-elevated)';
+                  e.currentTarget.style.borderColor = 'var(--border-medium)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.backgroundColor = 'var(--bg-tertiary)';
+                  e.currentTarget.style.borderColor = 'var(--border-subtle)';
+                }}
               >
                 <FiMessageCircle size={18} />
                 Ask AI Assistant
@@ -793,13 +854,13 @@ export default function FAQPage() {
         </div>
 
         {/* Footer */}
-        <footer className="border-t border-white/5 py-8 px-4">
-          <div className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-gray-500">
+        <footer className="py-8 px-4" style={{ borderTop: '1px solid var(--border-subtle)' }}>
+          <div className="max-w-3xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm" style={{ color: 'var(--text-tertiary)' }}>
             <p>© {new Date().getFullYear()} LadderFox. All rights reserved.</p>
             <div className="flex items-center gap-6">
-              <a href="/privacy" className="hover:text-white transition-colors">Privacy</a>
-              <a href="/terms" className="hover:text-white transition-colors">Terms</a>
-              <a href="/data-compliance" className="hover:text-white transition-colors">Data Compliance</a>
+              <a href="/privacy" className="transition-colors" style={{ color: 'var(--text-tertiary)' }} onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--text-primary)'; }} onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--text-tertiary)'; }}>Privacy</a>
+              <a href="/terms" className="transition-colors" style={{ color: 'var(--text-tertiary)' }} onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--text-primary)'; }} onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--text-tertiary)'; }}>Terms</a>
+              <a href="/data-compliance" className="transition-colors" style={{ color: 'var(--text-tertiary)' }} onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--text-primary)'; }} onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--text-tertiary)'; }}>Data Compliance</a>
             </div>
           </div>
         </footer>
