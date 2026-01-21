@@ -276,9 +276,9 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
       </div>
 
       {/* Score Breakdown */}
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         <div className={`rounded-lg p-4 border ${getScoreBgColor(assessment.atsScore)}`}>
-          <div className="flex items-center justify-between mb-2">
+          <div className="flex items-center justify-between mb-3">
             <span className="text-xs font-medium" style={{ color: 'var(--text-secondary)' }}>
               ATS Compatibility
             </span>
@@ -287,13 +287,13 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
             </span>
           </div>
           {assessment.explanation?.atsExplanation && (
-            <p className="text-xs mt-2 line-clamp-2" style={{ color: 'var(--text-tertiary)' }}>
+            <p className="text-xs leading-relaxed" style={{ color: 'var(--text-tertiary)' }}>
               {assessment.explanation.atsExplanation}
             </p>
           )}
         </div>
         <div className={`rounded-lg p-4 border ${getScoreBgColor(assessment.contentScore)}`}>
-          <div className="flex items-center justify-between mb-2">
+          <div className="flex items-center justify-between mb-3">
             <span className="text-xs font-medium" style={{ color: 'var(--text-secondary)' }}>
               Content Quality
             </span>
@@ -302,7 +302,7 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
             </span>
           </div>
           {assessment.explanation?.contentExplanation && (
-            <p className="text-xs mt-2 line-clamp-2" style={{ color: 'var(--text-tertiary)' }}>
+            <p className="text-xs leading-relaxed" style={{ color: 'var(--text-tertiary)' }}>
               {assessment.explanation.contentExplanation}
             </p>
           )}
