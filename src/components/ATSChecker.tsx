@@ -187,7 +187,7 @@ const ATSChecker: React.FC<ATSCheckerProps> = ({ cvData, onClose }) => {
             {error}
           </p>
           <button
-            onClick={fetchAssessment}
+            onClick={() => fetchAssessment(true)}
             className="mt-3 px-4 py-2 rounded-lg text-sm font-medium transition-colors"
             style={{
               backgroundColor: 'var(--bg-hover)',
