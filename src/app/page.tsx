@@ -820,7 +820,9 @@ export default function HomePage() {
   const dropdownRef = useRef<HTMLDivElement>(null);
   
   // Subscription gating
-  const plan = subscription?.status === 'active' ? (subscription?.plan || 'free') : 'free';
+  // Treat 'trialing' as active (trial users have full access)
+  const isActiveOrTrialing = subscription?.status === 'active' || subscription?.status === 'trialing';
+  const plan = isActiveOrTrialing ? (subscription?.plan || 'free') : 'free';
   const isPro = plan !== 'free';
   const isFree = !isPro;
   const subBadge = isPro ? 'Pro' : 'Free';

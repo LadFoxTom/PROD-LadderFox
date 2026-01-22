@@ -25,10 +25,12 @@ export const STRIPE_PLANS = {
   },
   basic: {
     name: 'Basic Plan',
-    price: 39.99,
-    priceMonthly: 3.99,
+    price: 14.99, // Monthly price after trial
+    priceMonthly: 14.99,
+    priceTrial: 4.99, // Setup fee for 7-day trial
     priceQuarterly: 9.99,
     priceYearly: 39.99,
+    trialDays: 7, // 7-day trial period
     features: [
       'Unlimited CVs & letters',
       'All premium templates (20+)',
@@ -42,6 +44,11 @@ export const STRIPE_PLANS = {
       monthly: {
         EUR: process.env.STRIPE_BASIC_MONTHLY_PRICE_ID_EUR,
         USD: process.env.STRIPE_BASIC_MONTHLY_PRICE_ID_USD
+      },
+      trial: {
+        // One-time setup fee for trial
+        EUR: process.env.STRIPE_BASIC_TRIAL_SETUP_FEE_PRICE_ID_EUR,
+        USD: process.env.STRIPE_BASIC_TRIAL_SETUP_FEE_PRICE_ID_USD
       },
       quarterly: {
         EUR: process.env.STRIPE_BASIC_QUARTERLY_PRICE_ID_EUR,
@@ -95,10 +102,21 @@ export const BILLING_INTERVALS = {
 
 export class StripeService {
   // Create a checkout session for subscription
-  static async createCheckoutSession(userId: string, priceId: string, successUrl: string, cancelUrl: string) {
+  static async createCheckoutSession(
+    userId: string, 
+    priceId: string, 
+    successUrl: string, 
+    cancelUrl: string,
+    options?: {
+      isTrial?: boolean;
+      trialSetupFeePriceId?: string;
+      currency?: string;
+    }
+  ) {
     try {
       console.log('[Stripe] Creating checkout session for user:', userId)
       console.log('[Stripe] Price ID:', priceId)
+      console.log('[Stripe] Is Trial:', options?.isTrial)
       
       // Get or create Stripe customer
       const user = await UserService.getUser(userId)
@@ -124,30 +142,56 @@ export class StripeService {
         console.log('[Stripe] Subscription record created')
       }
 
-      // Create checkout session
-      console.log('[Stripe] Creating checkout session with:', {
-        customer: customerId,
-        priceId,
-        successUrl,
-        cancelUrl
-      })
+      // Build line items
+      const lineItems: Stripe.Checkout.SessionCreateParams.LineItem[] = []
       
-      const session = await stripe.checkout.sessions.create({
+      // If trial, add setup fee as one-time payment
+      if (options?.isTrial && options?.trialSetupFeePriceId) {
+        lineItems.push({
+          price: options.trialSetupFeePriceId,
+          quantity: 1,
+        })
+      }
+      
+      // Add subscription price
+      lineItems.push({
+        price: priceId,
+        quantity: 1,
+      })
+
+      // Create checkout session config
+      const sessionConfig: Stripe.Checkout.SessionCreateParams = {
         customer: customerId,
         payment_method_types: ['card'],
-        line_items: [
-          {
-            price: priceId,
-            quantity: 1,
-          },
-        ],
+        line_items: lineItems,
         mode: 'subscription',
         success_url: successUrl,
         cancel_url: cancelUrl,
         metadata: {
-          userId: userId
+          userId: userId,
+          isTrial: options?.isTrial ? 'true' : 'false'
         }
+      }
+
+      // Add trial period if this is a trial subscription
+      if (options?.isTrial) {
+        sessionConfig.subscription_data = {
+          trial_period_days: 7, // 7-day trial
+          metadata: {
+            userId: userId,
+            isTrial: 'true'
+          }
+        }
+      }
+
+      console.log('[Stripe] Creating checkout session with:', {
+        customer: customerId,
+        lineItems: lineItems.length,
+        isTrial: options?.isTrial,
+        trialDays: options?.isTrial ? 7 : undefined
       })
+      
+      const session = await stripe.checkout.sessions.create(sessionConfig)
 
       console.log('[Stripe] Checkout session created successfully:', session.id)
       return session
@@ -224,9 +268,13 @@ export class StripeService {
     // Determine plan from price ID
     let plan = 'free'
     
-    // Check Basic plan prices
-    const basicPrices = Object.values(STRIPE_PLANS.basic.stripePriceIds).flatMap(interval => Object.values(interval))
-    if (basicPrices.includes(priceId)) {
+    // Check Basic plan prices (including monthly for trial)
+    const basicMonthlyPrices = Object.values(STRIPE_PLANS.basic.stripePriceIds.monthly || {})
+    const basicQuarterlyPrices = Object.values(STRIPE_PLANS.basic.stripePriceIds.quarterly || {})
+    const basicYearlyPrices = Object.values(STRIPE_PLANS.basic.stripePriceIds.yearly || {})
+    const allBasicPrices = [...basicMonthlyPrices, ...basicQuarterlyPrices, ...basicYearlyPrices]
+    
+    if (allBasicPrices.includes(priceId)) {
       plan = 'basic'
     }
     
@@ -236,11 +284,16 @@ export class StripeService {
       plan = 'pro'
     }
 
+    // Determine subscription status
+    // If subscription has trial_end in the future, it's in trial
+    const isInTrial = subscription.trial_end && subscription.trial_end > Math.floor(Date.now() / 1000)
+    const subscriptionStatus = isInTrial ? 'trialing' : subscription.status
+
     // Update subscription
     await UserService.updateSubscription(user.id, {
       stripeSubscriptionId: subscription.id,
       stripePriceId: priceId,
-      status: subscription.status,
+      status: subscriptionStatus,
       plan: plan,
       currentPeriodStart: new Date(subscription.current_period_start * 1000),
       currentPeriodEnd: new Date(subscription.current_period_end * 1000),

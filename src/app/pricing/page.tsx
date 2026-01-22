@@ -238,7 +238,8 @@ export default function PricingPage() {
   const getPriceForInterval = (interval: string) => {
     switch (interval) {
       case 'monthly':
-        return STRIPE_PLANS.basic.priceMonthly
+        // For monthly, show trial price (setup fee)
+        return STRIPE_PLANS.basic.priceTrial || STRIPE_PLANS.basic.priceMonthly
       case 'quarterly':
         return STRIPE_PLANS.basic.priceQuarterly
       case 'yearly':
@@ -920,10 +921,19 @@ export default function PricingPage() {
                     <div className="flex items-baseline gap-1">
                       <span className="text-4xl font-bold" style={{ color: 'var(--text-primary)' }}>{currencySymbol}{getPriceForInterval(billingInterval)}</span>
                       <span style={{ color: 'var(--text-secondary)' }}>
-                        /{billingInterval === 'monthly' ? 'mo' : billingInterval === 'quarterly' ? 'qtr' : 'yr'}
+                        {billingInterval === 'monthly' ? ' trial' : billingInterval === 'quarterly' ? '/qtr' : '/yr'}
                       </span>
                     </div>
-                    {billingInterval !== 'monthly' && (
+                    {billingInterval === 'monthly' ? (
+                      <div className="mt-1 space-y-0.5">
+                        <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+                          {t('pricing.trial_info', { trialPrice: currencySymbol + STRIPE_PLANS.basic.priceTrial, monthlyPrice: currencySymbol + STRIPE_PLANS.basic.priceMonthly, days: STRIPE_PLANS.basic.trialDays })}
+                        </p>
+                        <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>
+                          {t('pricing.trial_auto_renew')}
+                        </p>
+                      </div>
+                    ) : (
                       <p className="mt-1 text-sm" style={{ color: 'var(--text-secondary)' }}>
                         {currencySymbol}{getMonthlyPrice(billingInterval)}/month
                       </p>
