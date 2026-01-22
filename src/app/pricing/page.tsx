@@ -11,7 +11,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { 
   FiCheck, FiX, FiArrowLeft, FiShield, FiClock, FiZap, 
   FiFileText, FiDownload, FiStar, FiCreditCard, FiChevronDown,
-  FiGrid, FiSettings, FiLogOut, FiHelpCircle, FiFolder, FiBriefcase, FiExternalLink, FiClipboard
+  FiGrid, FiSettings, FiLogOut, FiHelpCircle, FiFolder, FiBriefcase, FiExternalLink, FiClipboard, FiPlus
 } from 'react-icons/fi'
 import { signOut } from 'next-auth/react'
 import Head from 'next/head'
@@ -760,28 +760,147 @@ export default function PricingPage() {
         </AnimatePresence>
         
         <main className="pt-14 min-h-screen">
-          <div className="max-w-6xl mx-auto px-4 py-16">
+          <div className="max-w-5xl mx-auto px-4 py-8">
             {/* Header */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="text-center mb-16"
-            >
-              <h1 className="text-4xl sm:text-5xl font-bold mb-6 leading-tight" style={{ color: 'var(--text-heading)' }}>
-                {t('pricing.badge')}
-              </h1>
-              <p className="text-lg max-w-2xl mx-auto mt-4" style={{ color: 'var(--text-secondary)' }}>
-                {t('pricing.subtitle')}
-              </p>
+            <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
+              <h1 className="text-3xl font-bold" style={{ color: 'var(--text-heading)' }}>{t('pricing.title')}</h1>
+              <p className="mt-1" style={{ color: 'var(--text-secondary)' }}>{t('pricing.subtitle')}</p>
             </motion.div>
 
-            {/* Billing Toggle */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.1 }}
-              className="flex justify-center mb-12"
-            >
+            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+              {/* Sidebar Navigation */}
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}>
+                <div className="rounded-xl p-2 space-y-1" style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}>
+                  <button
+                    onClick={() => setBillingInterval('monthly')}
+                    className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors"
+                    style={{
+                      backgroundColor: billingInterval === 'monthly' ? 'var(--bg-hover)' : 'transparent',
+                      color: billingInterval === 'monthly' ? 'var(--text-primary)' : 'var(--text-tertiary)'
+                    }}
+                    onMouseEnter={(e) => {
+                      if (billingInterval !== 'monthly') {
+                        e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                        e.currentTarget.style.color = 'var(--text-primary)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (billingInterval !== 'monthly') {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                        e.currentTarget.style.color = 'var(--text-tertiary)';
+                      }
+                    }}
+                  >
+                    <FiCreditCard size={18} /> {t('pricing.billing.monthly')}
+                  </button>
+                  <button
+                    onClick={() => setBillingInterval('quarterly')}
+                    className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors"
+                    style={{
+                      backgroundColor: billingInterval === 'quarterly' ? 'var(--bg-hover)' : 'transparent',
+                      color: billingInterval === 'quarterly' ? 'var(--text-primary)' : 'var(--text-tertiary)'
+                    }}
+                    onMouseEnter={(e) => {
+                      if (billingInterval !== 'quarterly') {
+                        e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                        e.currentTarget.style.color = 'var(--text-primary)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (billingInterval !== 'quarterly') {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                        e.currentTarget.style.color = 'var(--text-tertiary)';
+                      }
+                    }}
+                  >
+                    <FiCreditCard size={18} /> {t('pricing.billing.quarterly')}
+                  </button>
+                  <button
+                    onClick={() => setBillingInterval('yearly')}
+                    className="w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors"
+                    style={{
+                      backgroundColor: billingInterval === 'yearly' ? 'var(--bg-hover)' : 'transparent',
+                      color: billingInterval === 'yearly' ? 'var(--text-primary)' : 'var(--text-tertiary)'
+                    }}
+                    onMouseEnter={(e) => {
+                      if (billingInterval !== 'yearly') {
+                        e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                        e.currentTarget.style.color = 'var(--text-primary)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (billingInterval !== 'yearly') {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                        e.currentTarget.style.color = 'var(--text-tertiary)';
+                      }
+                    }}
+                  >
+                    <FiCreditCard size={18} /> {t('pricing.billing.yearly')}
+                  </button>
+                </div>
+
+                {/* Quick Actions */}
+                <div className="rounded-xl p-4 mt-4" style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}>
+                  <h3 className="text-sm font-medium mb-3" style={{ color: 'var(--text-tertiary)' }}>{t('settings.quick_actions')}</h3>
+                  <div className="space-y-2">
+                    <button 
+                      onClick={() => router.push('/')} 
+                      className="w-full flex items-center gap-2 px-3 py-2 text-sm rounded-lg transition-colors"
+                      style={{ color: 'var(--text-secondary)' }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                        e.currentTarget.style.color = 'var(--text-primary)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                        e.currentTarget.style.color = 'var(--text-secondary)';
+                      }}
+                    >
+                      <FiPlus size={14} /> {t('settings.create_new_cv')}
+                    </button>
+                    <button 
+                      onClick={() => router.push('/dashboard')} 
+                      className="w-full flex items-center gap-2 px-3 py-2 text-sm rounded-lg transition-colors"
+                      style={{ color: 'var(--text-secondary)' }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                        e.currentTarget.style.color = 'var(--text-primary)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                        e.currentTarget.style.color = 'var(--text-secondary)';
+                      }}
+                    >
+                      <FiGrid size={14} /> {t('settings.view_dashboard')}
+                    </button>
+                    <button 
+                      onClick={() => router.push('/settings')} 
+                      className="w-full flex items-center gap-2 px-3 py-2 text-sm rounded-lg transition-colors"
+                      style={{ color: 'var(--text-secondary)' }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                        e.currentTarget.style.color = 'var(--text-primary)';
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                        e.currentTarget.style.color = 'var(--text-secondary)';
+                      }}
+                    >
+                      <FiSettings size={14} /> {t('settings.title')}
+                    </button>
+                  </div>
+                </div>
+              </motion.div>
+
+              {/* Main Content */}
+              <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="lg:col-span-3">
+                {/* Billing Toggle - Now inside main content */}
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.1 }}
+                  className="flex justify-center mb-8"
+                >
               <div className="rounded-xl p-1 flex" style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}>
                 {Object.entries(BILLING_INTERVALS).map(([interval, config]) => (
                   <button
@@ -814,8 +933,8 @@ export default function PricingPage() {
               </div>
             </motion.div>
 
-            {/* Pricing Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-16">
+                {/* Pricing Cards */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               {/* Free Plan */}
               <motion.div 
                 initial={{ opacity: 0, y: 20 }}
@@ -998,13 +1117,13 @@ export default function PricingPage() {
               </motion.div>
             </div>
 
-            {/* Trust Indicators */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4 }}
-              className="flex flex-wrap justify-center gap-8 mb-16"
-            >
+                {/* Trust Indicators */}
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 }}
+                  className="flex flex-wrap justify-center gap-8 mb-8"
+                >
               <div className="flex items-center gap-2" style={{ color: 'var(--text-secondary)' }}>
                 <FiShield className="text-green-500" size={18} />
                 <span className="text-sm">{t('pricing.trust_indicators.secure_payment')}</span>
@@ -1023,13 +1142,13 @@ export default function PricingPage() {
               </div>
             </motion.div>
 
-            {/* Feature Comparison */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.5 }}
-              className="max-w-3xl mx-auto"
-            >
+                {/* Feature Comparison */}
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.5 }}
+                  className="mb-8"
+                >
               <h2 className="text-2xl font-bold text-center mb-8" style={{ color: 'var(--text-heading)' }}>{t('pricing.comparison.title')}</h2>
               <div className="rounded-2xl overflow-hidden" style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}>
                 <table className="w-full">
@@ -1081,13 +1200,13 @@ export default function PricingPage() {
               </div>
             </motion.div>
 
-            {/* CTA Section */}
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.6 }}
-              className="text-center mt-16"
-            >
+                {/* CTA Section */}
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.6 }}
+                  className="text-center mt-8"
+                >
               <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--text-heading)' }}>{t('pricing.cta.title')}</h2>
               <p className="mb-8" style={{ color: 'var(--text-secondary)' }}>
                 {t('pricing.cta.subtitle')}
@@ -1106,9 +1225,11 @@ export default function PricingPage() {
                   e.currentTarget.style.backgroundColor = 'var(--bg-elevated)';
                 }}
               >
-                {t('pricing.cta.button')}
-              </button>
-            </motion.div>
+                  {t('pricing.cta.button')}
+                </button>
+              </motion.div>
+              </motion.div>
+            </div>
           </div>
         </main>
       </div>
