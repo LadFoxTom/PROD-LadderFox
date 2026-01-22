@@ -241,7 +241,8 @@ export default function PricingPage() {
         // For monthly, show trial price (setup fee)
         return STRIPE_PLANS.basic.priceTrial || STRIPE_PLANS.basic.priceMonthly
       case 'quarterly':
-        return STRIPE_PLANS.basic.priceQuarterly
+        // priceQuarterly is per month, so multiply by 3 for total quarterly price
+        return (STRIPE_PLANS.basic.priceQuarterly * 3).toFixed(2)
       case 'yearly':
         return STRIPE_PLANS.basic.priceYearly
       default:
@@ -250,9 +251,19 @@ export default function PricingPage() {
   }
 
   const getMonthlyPrice = (interval: string) => {
-    const price = getPriceForInterval(interval)
-    const months = BILLING_INTERVALS[interval as keyof typeof BILLING_INTERVALS].months
-    return (price / months).toFixed(2)
+    switch (interval) {
+      case 'monthly':
+        // After trial, monthly price
+        return STRIPE_PLANS.basic.priceMonthly.toFixed(2)
+      case 'quarterly':
+        // priceQuarterly is already per month
+        return STRIPE_PLANS.basic.priceQuarterly.toFixed(2)
+      case 'yearly':
+        // Calculate monthly equivalent for yearly
+        return (STRIPE_PLANS.basic.priceYearly / 12).toFixed(2)
+      default:
+        return STRIPE_PLANS.basic.priceMonthly.toFixed(2)
+    }
   }
 
   const handleSubscribe = async (plan: string, interval?: string) => {
