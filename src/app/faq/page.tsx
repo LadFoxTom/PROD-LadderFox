@@ -13,7 +13,7 @@ import {
   FiChevronDown, FiChevronLeft, FiHelpCircle, FiMail, FiMessageCircle,
   FiGrid, FiSettings, FiLogOut, FiCreditCard, FiUser, FiFileText,
   FiShield, FiSmartphone, FiGlobe, FiDownload, FiEdit3, FiZap,
-  FiFolder, FiBriefcase, FiX, FiExternalLink
+  FiFolder, FiBriefcase, FiX, FiExternalLink, FiClipboard
 } from 'react-icons/fi';
 
 // Menu Item Component (matching homepage)
@@ -322,6 +322,12 @@ export default function FAQPage() {
                           icon={FiBriefcase} 
                           label={t('nav.job_applications_short')} 
                           onClick={() => { setIsUserMenuOpen(false); toast(t('toast.job_applications_coming_soon')); }}
+                          disabled={true}
+                        />
+                        <MenuItem 
+                          icon={FiClipboard} 
+                          label={t('nav.tests_short')} 
+                          onClick={() => { setIsUserMenuOpen(false); toast(t('toast.tests_coming_soon')); }}
                           disabled={true}
                         />
                       </div>

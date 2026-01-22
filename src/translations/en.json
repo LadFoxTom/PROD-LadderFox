@@ -17,6 +17,9 @@
   "nav.job_applications": "Job Applications",
   "nav.job_applications_short": "Applications",
   "nav.job_applications_coming_soon": "Job Applications (Coming Soon)",
+  "nav.tests": "Tests",
+  "nav.tests_short": "Tests",
+  "nav.tests_coming_soon": "Tests (Coming Soon)",
   "nav.help_support": "Help & Support",
   "nav.help_support_short": "Help",
   "nav.sign_out": "Sign out",
@@ -756,6 +759,7 @@
   
   "toast.jobs_coming_soon": "Jobs coming soon 🚧",
   "toast.job_applications_coming_soon": "Job Applications coming soon 🚧",
+  "toast.tests_coming_soon": "Tests coming soon 🚧",
   "toast.cv_updated": "CV updated",
   "toast.letter_updated": "Letter updated",
   "toast.cv_data_copied": "CV data copied!",

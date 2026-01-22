@@ -15,7 +15,7 @@ import {
   FiClock, FiStar, FiPlus, FiMenu, FiX, FiLogOut, FiCreditCard,
   FiGrid, FiFolder, FiHelpCircle, FiExternalLink, FiAward, FiLock,
   FiTrash2, FiChevronRight, FiMail, FiImage, FiUpload,
-  FiZoomIn, FiZoomOut, FiList, FiCheckCircle
+  FiZoomIn, FiZoomOut, FiList, FiCheckCircle, FiClipboard
 } from 'react-icons/fi';
 import { signOut } from 'next-auth/react';
 import { toast, Toaster } from 'react-hot-toast';
@@ -2041,6 +2041,12 @@ export default function HomePage() {
                           icon={FiBriefcase} 
                           label={t('nav.job_applications_short')} 
                           onClick={() => { setIsUserMenuOpen(false); toast(t('toast.job_applications_coming_soon')); }}
+                          disabled={true}
+                        />
+                        <MenuItem 
+                          icon={FiClipboard} 
+                          label={t('nav.tests_short')} 
+                          onClick={() => { setIsUserMenuOpen(false); toast(t('toast.tests_coming_soon')); }}
                           disabled={true}
                         />
                       </div>

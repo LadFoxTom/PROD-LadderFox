@@ -10,7 +10,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { 
   FiArrowLeft, FiUser, FiCreditCard, FiSettings, FiLogOut, 
   FiChevronDown, FiGrid, FiHelpCircle, FiCheck, FiStar,
-  FiSave, FiPlus, FiExternalLink, FiFolder, FiBriefcase, FiX
+  FiSave, FiPlus, FiExternalLink, FiFolder, FiBriefcase, FiX, FiClipboard
 } from 'react-icons/fi'
 
 // Menu Item Component (matching homepage)
@@ -380,6 +380,12 @@ export default function SettingsPage() {
                         icon={FiBriefcase} 
                         label={t('nav.job_applications_short')} 
                         onClick={() => { setIsUserMenuOpen(false); toast(t('toast.job_applications_coming_soon')); }}
+                        disabled={true}
+                      />
+                      <MenuItem 
+                        icon={FiClipboard} 
+                        label={t('nav.tests_short')} 
+                        onClick={() => { setIsUserMenuOpen(false); toast(t('toast.tests_coming_soon')); }}
                         disabled={true}
                       />
                     </div>

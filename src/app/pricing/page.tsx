@@ -11,7 +11,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { 
   FiCheck, FiX, FiArrowLeft, FiShield, FiClock, FiZap, 
   FiFileText, FiDownload, FiStar, FiCreditCard, FiChevronDown,
-  FiGrid, FiSettings, FiLogOut, FiHelpCircle, FiFolder, FiBriefcase, FiExternalLink
+  FiGrid, FiSettings, FiLogOut, FiHelpCircle, FiFolder, FiBriefcase, FiExternalLink, FiClipboard
 } from 'react-icons/fi'
 import { signOut } from 'next-auth/react'
 import Head from 'next/head'
@@ -190,6 +190,12 @@ export default function PricingPage() {
           icon={FiBriefcase} 
           label={t('nav.job_applications_short')} 
           onClick={() => { setIsUserMenuOpen(false); toast(t('toast.job_applications_coming_soon')); }}
+          disabled={true}
+        />
+        <MenuItem 
+          icon={FiClipboard} 
+          label={t('nav.tests_short')} 
+          onClick={() => { setIsUserMenuOpen(false); toast(t('toast.tests_coming_soon')); }}
           disabled={true}
         />
       </div>

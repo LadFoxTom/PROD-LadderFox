@@ -11,7 +11,7 @@ import {
   FiTrendingUp, FiClock, FiAward, FiBell, FiMail, FiMessageSquare,
   FiArrowLeft, FiFileText, FiChevronDown, FiGrid, FiList, FiSearch,
   FiSettings, FiLogOut, FiFolder, FiBriefcase, FiCreditCard, FiHelpCircle,
-  FiExternalLink, FiMoreVertical, FiX
+  FiExternalLink, FiMoreVertical, FiX, FiClipboard
 } from 'react-icons/fi'
 import { signOut } from 'next-auth/react'
 import { CVData } from '@/types/cv'
@@ -551,6 +551,15 @@ export default function DashboardPage() {
                         onClick={() => {
                           setIsUserMenuOpen(false)
                           toast(t('toast.job_applications_coming_soon'))
+                        }}
+                        disabled={true}
+                      />
+                      <MenuItem 
+                        icon={FiClipboard} 
+                        label={t('nav.tests_short')} 
+                        onClick={() => {
+                          setIsUserMenuOpen(false)
+                          toast(t('toast.tests_coming_soon'))
                         }}
                         disabled={true}
                       />

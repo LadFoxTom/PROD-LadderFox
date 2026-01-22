@@ -13,7 +13,7 @@ import {
   FiChevronDown, FiChevronLeft, FiBriefcase, FiPlus, FiExternalLink,
   FiCalendar, FiMapPin, FiDollarSign, FiClock, FiEdit2, FiTrash2,
   FiCheck, FiX, FiFilter, FiSearch, FiMoreVertical, FiGrid, FiSettings,
-  FiLogOut, FiCreditCard, FiHelpCircle, FiInbox, FiStar, FiEye, FiFolder
+  FiLogOut, FiCreditCard, FiHelpCircle, FiInbox, FiStar, FiEye, FiFolder, FiClipboard
 } from 'react-icons/fi';
 
 // Application status types
@@ -436,6 +436,15 @@ export default function ApplicationsPage() {
                           router.push('/applications')
                         }}
                         isActive={pathname === '/applications'}
+                      />
+                      <MenuItem 
+                        icon={FiClipboard} 
+                        label={t('nav.tests_short')} 
+                        onClick={() => {
+                          setIsUserMenuOpen(false)
+                          toast(t('toast.tests_coming_soon'))
+                        }}
+                        disabled={true}
                       />
                     </div>
                     

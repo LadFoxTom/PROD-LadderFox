@@ -142,6 +142,7 @@
   
   "toast.jobs_coming_soon": "Trabajos próximamente 🚧",
   "toast.job_applications_coming_soon": "Solicitudes de empleo próximamente 🚧",
+  "toast.tests_coming_soon": "Pruebas próximamente 🚧",
   "toast.cv_updated": "CV actualizado",
   "toast.letter_updated": "Carta actualizada",
   "toast.cv_data_copied": "¡Datos del CV copiados!",
@@ -1084,6 +1085,9 @@
   "nav.job_applications": "Solicitudes de Empleo",
   "nav.job_applications_short": "Solicitudes",
   "nav.job_applications_coming_soon": "Solicitudes de Empleo (Próximamente)",
+  "nav.tests": "Pruebas",
+  "nav.tests_short": "Pruebas",
+  "nav.tests_coming_soon": "Pruebas (Próximamente)",
   "nav.help_support": "Ayuda y Soporte",
   "nav.help_support_short": "Ayuda",
   "nav.sign_out": "Cerrar Sesión",

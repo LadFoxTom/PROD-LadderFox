@@ -17,6 +17,9 @@
   "nav.job_applications": "Sollicitaties",
   "nav.job_applications_short": "Sollicitaties",
   "nav.job_applications_coming_soon": "Sollicitaties (Binnenkort)",
+  "nav.tests": "Tests",
+  "nav.tests_short": "Tests",
+  "nav.tests_coming_soon": "Tests (Binnenkort)",
   "nav.help_support": "Help & Ondersteuning",
   "nav.help_support_short": "Help",
   "nav.sign_out": "Uitloggen",
@@ -159,6 +162,7 @@
   
   "toast.jobs_coming_soon": "Banen komen binnenkort 🚧",
   "toast.job_applications_coming_soon": "Sollicitaties komen binnenkort 🚧",
+  "toast.tests_coming_soon": "Tests komen binnenkort 🚧",
   "toast.cv_updated": "CV bijgewerkt",
   "toast.letter_updated": "Brief bijgewerkt",
   "toast.cv_data_copied": "CV gegevens gekopieerd!",
