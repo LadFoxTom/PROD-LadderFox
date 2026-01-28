@@ -3,6 +3,7 @@
 import React, { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { CVTemplate, TEMPLATE_INFO, TemplateInfo } from './pdf/CVDocumentPDF'
+import { useLocale } from '@/context/LocaleContext'
 import { 
   FiLayout, FiCheck, FiZap, FiTarget, FiAward, 
   FiGrid, FiFileText, FiStar, FiTrendingUp, FiUsers
@@ -172,6 +173,7 @@ export const TemplateQuickSelector: React.FC<TemplateQuickSelectorProps> = ({
   onTemplateChange,
   className = '',
 }) => {
+  const { t } = useLocale()
   const [activeCategory, setActiveCategory] = useState<'all' | 'ats-layout' | 'style'>('all')
   const [hoveredTemplate, setHoveredTemplate] = useState<string | null>(null)
 
@@ -223,8 +225,7 @@ export const TemplateQuickSelector: React.FC<TemplateQuickSelectorProps> = ({
           <div className="flex items-start gap-2">
             <FiZap className="text-blue-500 mt-0.5 flex-shrink-0" />
             <div className="text-xs text-blue-700 dark:text-blue-300">
-              <span className="font-medium">ATS-Optimized templates</span> are designed for maximum parseability by 
-              Applicant Tracking Systems. They use single-column layouts, standard fonts, and avoid complex formatting.
+              {t('template.selector.ats_info_banner')}
             </div>
           </div>
         </motion.div>

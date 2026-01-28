@@ -1481,5 +1481,7 @@
   "cv_editor.save_continue": "Opslaan & Doorgaan",
   "cv_editor.leave_prompt": "Je hebt niet-opgeslagen wijzigingen in je CV of brief. Wil je opslaan voordat je vertrekt?",
   "cv_editor.leave_without_saving": "Doorgaan zonder opslaan",
-  "cv_editor.leave_cancel": "Blijven"
+  "cv_editor.leave_cancel": "Blijven",
+  
+  "template.selector.ats_info_banner": "ATS-geoptimaliseerde templates zijn ontworpen voor maximale parseerbaarheid door Applicant Tracking Systems. Ze gebruiken enkele-kolom layouts, standaard lettertypen en vermijden complexe opmaak."
 }

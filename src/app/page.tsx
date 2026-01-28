@@ -988,11 +988,22 @@ export default function HomePage() {
               setSelectedPhotoIndex(draftSelectedIndex);
             }
             
-            isDraftLoadedRef.current = true;
-            setHasUnsavedChanges(true);
             setIsConversationActive(true);
             setArtifactType('cv');
             toast.success(t('toast.cv_loaded'));
+            // Set baseline after draft is loaded so we can detect actual changes
+            setTimeout(() => {
+              const snapshot = JSON.stringify({
+                cvData: draftCv,
+                letterData: draftLetter,
+                photos: draftPhotos,
+                selectedPhotoIndex: draftSelectedIndex,
+              });
+              initialSnapshotRef.current = snapshot;
+              lastSavedSnapshotRef.current = snapshot;
+              isDraftLoadedRef.current = false;
+              setHasUnsavedChanges(false);
+            }, 0);
           } catch (err) {
             console.error('Error loading CV draft from localStorage:', err);
             localStorage.removeItem('cv_builder_draft');
@@ -1205,6 +1216,22 @@ export default function HomePage() {
   // Track unsaved changes
   useEffect(() => {
     if (isLoadingFromLocalStorage.current) return;
+    
+    // Check if CV has meaningful data (not just template/layout defaults)
+    const hasMeaningfulData = cvData.fullName || 
+      (cvData.experience && cvData.experience.length > 0) ||
+      (cvData.education && cvData.education.length > 0) ||
+      letterData.body ||
+      photos.length > 0;
+    
+    // If no meaningful data and conversation is not active, no unsaved changes
+    if (!hasMeaningfulData && !isConversationActive) {
+      setHasUnsavedChanges(false);
+      initialSnapshotRef.current = null;
+      lastSavedSnapshotRef.current = null;
+      return;
+    }
+    
     const snapshot = getDraftSnapshot();
     if (initialSnapshotRef.current === null) {
       initialSnapshotRef.current = snapshot;
@@ -1213,8 +1240,9 @@ export default function HomePage() {
     }
     const baseline = lastSavedSnapshotRef.current ?? initialSnapshotRef.current;
     const isDirty = baseline ? snapshot !== baseline : false;
-    setHasUnsavedChanges(isDraftLoadedRef.current ? true : isDirty);
-  }, [getDraftSnapshot]);
+    // Only set hasUnsavedChanges based on actual changes, not on draft load status
+    setHasUnsavedChanges(isDirty);
+  }, [getDraftSnapshot, cvData, letterData, photos, isConversationActive]);
 
   // Warn on page unload if there are unsaved changes
   useEffect(() => {
@@ -2196,6 +2224,11 @@ export default function HomePage() {
                 setCvData({ template: 'modern', layout: { accentColor: '#3b82f6', showIcons: true } });
                 setCurrentCVId(null);
                 setActiveView('chat');
+                // Reset unsaved changes tracking when starting new chat
+                initialSnapshotRef.current = null;
+                lastSavedSnapshotRef.current = null;
+                isDraftLoadedRef.current = false;
+                setHasUnsavedChanges(false);
               }}
               className="flex items-center gap-2 px-4 py-2 rounded-lg transition-colors"
               style={{
@@ -2634,7 +2667,7 @@ export default function HomePage() {
                 <div className="flex items-center gap-2 justify-end">
                   <button
                     onClick={handleLeaveCancel}
-                    className="px-3 py-2 text-sm rounded-lg transition-colors"
+                    className="px-4 py-2 text-sm rounded-lg transition-colors min-w-[140px]"
                     style={{ color: 'var(--text-tertiary)' }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.color = 'var(--text-primary)';
@@ -2649,7 +2682,7 @@ export default function HomePage() {
                   </button>
                   <button
                     onClick={handleLeaveWithoutSaving}
-                    className="px-3 py-2 text-sm rounded-lg transition-colors"
+                    className="px-4 py-2 text-sm rounded-lg transition-colors min-w-[140px]"
                     style={{ color: 'var(--text-secondary)' }}
                     onMouseEnter={(e) => {
                       e.currentTarget.style.color = 'var(--text-primary)';
@@ -2665,7 +2698,7 @@ export default function HomePage() {
                   <button
                     onClick={handleLeaveSave}
                     disabled={isSavingBeforeLeave}
-                    className="px-4 py-2 text-sm font-medium rounded-lg transition-colors disabled:opacity-50"
+                    className="px-4 py-2 text-sm font-medium rounded-lg transition-colors disabled:opacity-50 min-w-[140px]"
                     style={{
                       backgroundColor: 'var(--color-ladderfox-blue)',
                       color: '#ffffff'
@@ -2848,6 +2881,11 @@ export default function HomePage() {
                     setCurrentCVId(null);
                     setIsSidebarOpen(false);
                     setActiveView('chat');
+                    // Reset unsaved changes tracking when starting new chat
+                    initialSnapshotRef.current = null;
+                    lastSavedSnapshotRef.current = null;
+                    isDraftLoadedRef.current = false;
+                    setHasUnsavedChanges(false);
                   }}
                   className="w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-colors mb-6"
                   style={{

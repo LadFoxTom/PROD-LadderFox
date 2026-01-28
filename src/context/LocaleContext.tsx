@@ -6,8 +6,23 @@ import nl from '@/translations/nl.json'
 import fr from '@/translations/fr.json'
 import es from '@/translations/es.json'
 import de from '@/translations/de.json'
+import it from '@/translations/it.json'
+import pl from '@/translations/pl.json'
+import ro from '@/translations/ro.json'
+import hu from '@/translations/hu.json'
+import el from '@/translations/el.json'
+import cs from '@/translations/cs.json'
+import pt from '@/translations/pt.json'
+import sv from '@/translations/sv.json'
+import bg from '@/translations/bg.json'
+import da from '@/translations/da.json'
+import fi from '@/translations/fi.json'
+import sk from '@/translations/sk.json'
+import no from '@/translations/no.json'
+import hr from '@/translations/hr.json'
+import sr from '@/translations/sr.json'
 
-type Language = 'en' | 'nl' | 'fr' | 'es' | 'de'
+type Language = 'en' | 'nl' | 'fr' | 'es' | 'de' | 'it' | 'pl' | 'ro' | 'hu' | 'el' | 'cs' | 'pt' | 'sv' | 'bg' | 'da' | 'fi' | 'sk' | 'no' | 'hr' | 'sr'
 
 interface LocaleContextType {
   language: Language
@@ -23,7 +38,22 @@ const translations: Record<Language, Record<string, any>> = {
   nl,
   fr,
   es,
-  de
+  de,
+  it,
+  pl,
+  ro,
+  hu,
+  el,
+  cs,
+  pt,
+  sv,
+  bg,
+  da,
+  fi,
+  sk,
+  no,
+  hr,
+  sr
 }
 
 
@@ -33,7 +63,22 @@ const availableLanguages = [
   { code: 'nl' as Language, name: 'Nederlands' },
   { code: 'fr' as Language, name: 'Français' },
   { code: 'es' as Language, name: 'Español' },
-  { code: 'de' as Language, name: 'Deutsch' }
+  { code: 'de' as Language, name: 'Deutsch' },
+  { code: 'it' as Language, name: 'Italiano' },
+  { code: 'pl' as Language, name: 'Polski' },
+  { code: 'ro' as Language, name: 'Română' },
+  { code: 'hu' as Language, name: 'Magyar' },
+  { code: 'el' as Language, name: 'Ελληνικά' },
+  { code: 'cs' as Language, name: 'Čeština' },
+  { code: 'pt' as Language, name: 'Português' },
+  { code: 'sv' as Language, name: 'Svenska' },
+  { code: 'bg' as Language, name: 'Български' },
+  { code: 'da' as Language, name: 'Dansk' },
+  { code: 'fi' as Language, name: 'Suomi' },
+  { code: 'sk' as Language, name: 'Slovenčina' },
+  { code: 'no' as Language, name: 'Norsk' },
+  { code: 'hr' as Language, name: 'Hrvatski' },
+  { code: 'sr' as Language, name: 'Српски' }
 ]
 
 const LocaleContext = createContext<LocaleContextType | undefined>(undefined)

@@ -11,7 +11,22 @@ const FlagIcon: React.FC<{ code: string; className?: string }> = ({ code, classN
     'nl': '/flags/nl.svg',
     'fr': '/flags/fr.svg',
     'es': '/flags/es.svg',
-    'de': '/flags/de.svg'
+    'de': '/flags/de.svg',
+    'it': '/flags/it.svg',
+    'pl': '/flags/pl.svg',
+    'ro': '/flags/ro.svg',
+    'hu': '/flags/hu.svg',
+    'el': '/flags/gr.svg',
+    'cs': '/flags/cz.svg',
+    'pt': '/flags/pt.svg',
+    'sv': '/flags/se.svg',
+    'bg': '/flags/bg.svg',
+    'da': '/flags/dk.svg',
+    'fi': '/flags/fi.svg',
+    'sk': '/flags/sk.svg',
+    'no': '/flags/no.svg',
+    'hr': '/flags/hr.svg',
+    'sr': '/flags/rs.svg'
   }
 
   const flagSrc = flagMap[code]
