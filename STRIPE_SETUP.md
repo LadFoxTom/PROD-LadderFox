@@ -14,9 +14,10 @@ This guide covers the setup of the new pricing structure for the CV Builder appl
 
 | Billing Interval | EUR Price | USD Price | Monthly Equivalent | Savings |
 |------------------|-----------|-----------|-------------------|---------|
-| Monthly | €3.99 | $4.99 | €3.99/month | - |
-| Quarterly | €9.99 | $12.99 | €3.33/month | 17% |
-| Yearly | €39.99 | $49.99 | €3.33/month | 17% |
+| Trial (7 days) | €3.99 | $4.99 | - | - |
+| Monthly | €14.99 | $18.99 | €14.99/month | - |
+| Quarterly | €35.97 | $45.99 | €11.99/month | 20% |
+| Yearly | €83.88 | $107.99 | €6.99/month | 53% |
 
 ## Stripe Dashboard Setup
 
@@ -31,17 +32,23 @@ This guide covers the setup of the new pricing structure for the CV Builder appl
 
 For each billing interval and currency, create a separate price:
 
+#### Trial Setup Fee (One-time)
+- **EUR Trial**: €3.99 (one-time payment for 7-day trial)
+- **USD Trial**: $4.99 (one-time payment for 7-day trial)
+
 #### Monthly Prices
-- **EUR Monthly**: €3.99/month (recurring)
-- **USD Monthly**: $4.99/month (recurring)
+- **EUR Monthly**: €14.99/month (recurring, after 7-day trial)
+- **USD Monthly**: $18.99/month (recurring, after 7-day trial)
+
+**Note**: All billing intervals (monthly, quarterly, yearly) now include a 7-day trial with a €3.99 setup fee.
 
 #### Quarterly Prices
-- **EUR Quarterly**: €9.99 every 3 months (recurring)
-- **USD Quarterly**: $12.99 every 3 months (recurring)
+- **EUR Quarterly**: €35.97 every 3 months (recurring, €11.99/month, includes 7-day trial)
+- **USD Quarterly**: $45.99 every 3 months (recurring, $15.33/month, includes 7-day trial)
 
 #### Yearly Prices
-- **EUR Yearly**: €39.99/year (recurring)
-- **USD Yearly**: $49.99/year (recurring)
+- **EUR Yearly**: €83.88/year (recurring, €6.99/month, includes 7-day trial)
+- **USD Yearly**: $107.99/year (recurring, $9.00/month, includes 7-day trial)
 
 ### 3. Copy Price IDs
 
@@ -50,11 +57,13 @@ After creating each price, copy the Price ID (starts with `price_`) and add it t
 ```env
 # Basic Plan Prices - EUR
 STRIPE_BASIC_MONTHLY_PRICE_ID_EUR="price_1ABC123..."
+STRIPE_BASIC_TRIAL_SETUP_FEE_PRICE_ID_EUR="price_1TRIAL..."
 STRIPE_BASIC_QUARTERLY_PRICE_ID_EUR="price_1DEF456..."
 STRIPE_BASIC_YEARLY_PRICE_ID_EUR="price_1GHI789..."
 
 # Basic Plan Prices - USD
 STRIPE_BASIC_MONTHLY_PRICE_ID_USD="price_1JKL012..."
+STRIPE_BASIC_TRIAL_SETUP_FEE_PRICE_ID_USD="price_1TRIAL..."
 STRIPE_BASIC_QUARTERLY_PRICE_ID_USD="price_1MNO345..."
 STRIPE_BASIC_YEARLY_PRICE_ID_USD="price_1PQR678..."
 ```

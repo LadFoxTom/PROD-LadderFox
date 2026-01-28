@@ -241,12 +241,13 @@ export default function PricingPage() {
         // For monthly, show trial price (setup fee)
         return STRIPE_PLANS.basic.priceTrial || STRIPE_PLANS.basic.priceMonthly
       case 'quarterly':
-        // priceQuarterly is per month, so multiply by 3 for total quarterly price
-        return (STRIPE_PLANS.basic.priceQuarterly * 3).toFixed(2)
+        // For quarterly, show trial price (setup fee) - same for all intervals
+        return STRIPE_PLANS.basic.priceTrial || (STRIPE_PLANS.basic.priceQuarterly * 3).toFixed(2)
       case 'yearly':
-        return STRIPE_PLANS.basic.priceYearly
+        // For yearly, show trial price (setup fee) - same for all intervals
+        return STRIPE_PLANS.basic.priceTrial || STRIPE_PLANS.basic.priceYearly
       default:
-        return STRIPE_PLANS.basic.priceYearly
+        return STRIPE_PLANS.basic.priceTrial || STRIPE_PLANS.basic.priceYearly
     }
   }
 
@@ -315,7 +316,7 @@ export default function PricingPage() {
     <>
       <Head>
         <title>Pricing - LadderFox CV Builder</title>
-        <meta name="description" content="Choose the perfect plan for your CV building needs. Free plan available with premium features starting at €49.99/year." />
+        <meta name="description" content="Choose the perfect plan for your CV building needs. Free plan available with premium features starting at €3.99 for 7-day trial, then €14.99/month." />
       </Head>
       
       <div className="min-h-screen" style={{ backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
@@ -1051,26 +1052,25 @@ export default function PricingPage() {
                     <div className="flex items-baseline gap-1">
                       <span className="text-4xl font-bold" style={{ color: 'var(--text-primary)' }}>{currencySymbol}{getPriceForInterval(billingInterval)}</span>
                       <span style={{ color: 'var(--text-secondary)' }}>
-                        {billingInterval === 'monthly' ? ' trial' : billingInterval === 'quarterly' ? '/qtr' : '/yr'}
+                        {billingInterval === 'monthly' ? ' trial' : billingInterval === 'quarterly' ? ' trial' : ' trial'}
                       </span>
                     </div>
-                    {billingInterval === 'monthly' ? (
-                      <div className="mt-1 space-y-0.5">
-                        <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
-                          {t('pricing.trial_info')
-                            .replace('{trialPrice}', currencySymbol + STRIPE_PLANS.basic.priceTrial)
-                            .replace('{monthlyPrice}', currencySymbol + STRIPE_PLANS.basic.priceMonthly)
-                            .replace('{days}', STRIPE_PLANS.basic.trialDays.toString())}
-                        </p>
-                        <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>
-                          {t('pricing.trial_auto_renew')}
-                        </p>
-                      </div>
-                    ) : (
-                      <p className="mt-1 text-sm" style={{ color: 'var(--text-secondary)' }}>
-                        {currencySymbol}{getMonthlyPrice(billingInterval)}/month
+                    <div className="mt-1 space-y-0.5">
+                      <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+                        {t('pricing.trial_info')
+                          .replace('{trialPrice}', currencySymbol + STRIPE_PLANS.basic.priceTrial)
+                          .replace('{monthlyPrice}', currencySymbol + getMonthlyPrice(billingInterval))
+                          .replace('{days}', STRIPE_PLANS.basic.trialDays.toString())}
                       </p>
-                    )}
+                      <p className="text-xs" style={{ color: 'var(--text-tertiary)' }}>
+                        {billingInterval === 'monthly' 
+                          ? t('pricing.trial_auto_renew')
+                          : billingInterval === 'quarterly'
+                          ? `After trial, automatically renews to ${currencySymbol}${getMonthlyPrice(billingInterval)}/month (${currencySymbol}${(parseFloat(getMonthlyPrice(billingInterval)) * 3).toFixed(2)} per quarter)`
+                          : `After trial, automatically renews to ${currencySymbol}${getMonthlyPrice(billingInterval)}/month (${currencySymbol}${(parseFloat(getMonthlyPrice(billingInterval)) * 12).toFixed(2)} per year)`
+                        }
+                      </p>
+                    </div>
                   </div>
                   
                   {/* Features list - grows to fill space */}

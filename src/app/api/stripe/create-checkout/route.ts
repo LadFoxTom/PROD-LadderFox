@@ -47,53 +47,54 @@ export async function POST(request: NextRequest) {
     if (plan === 'basic') {
       const basicPlan = planConfig as typeof STRIPE_PLANS.basic
       
-      // For monthly basic plan, use trial pricing (7-day trial with setup fee)
-      const useTrial = interval === 'monthly'
+      // All intervals (monthly, quarterly, yearly) support 7-day trial with setup fee
+      const useTrial = true
       
-      if (useTrial) {
-        // Get monthly price for recurring subscription
-        const monthlyPrices = basicPlan.stripePriceIds.monthly
-        priceId = monthlyPrices[currency as keyof typeof monthlyPrices]
-        
-        // Get trial setup fee price
-        const trialPrices = basicPlan.stripePriceIds.trial
-        const trialSetupFeePriceId = trialPrices?.[currency as keyof typeof trialPrices]
-        
-        if (!priceId || !trialSetupFeePriceId) {
-          return NextResponse.json(
-            { error: 'Trial pricing not configured for this currency' },
-            { status: 400 }
-          )
-        }
-        
-        // Create checkout with trial
-        const checkoutSession = await StripeService.createCheckoutSession(
-          session.user.id,
-          priceId,
-          successUrl,
-          cancelUrl,
-          {
-            isTrial: true,
-            trialSetupFeePriceId: trialSetupFeePriceId,
-            currency: currency
-          }
-        )
-        
-        return NextResponse.json({ 
-          sessionId: checkoutSession.id,
-          url: checkoutSession.url 
-        })
+      // Get the price ID for the selected interval
+      let intervalPrices
+      if (interval === 'monthly') {
+        intervalPrices = basicPlan.stripePriceIds.monthly
+      } else if (interval === 'quarterly') {
+        intervalPrices = basicPlan.stripePriceIds.quarterly
+      } else if (interval === 'yearly') {
+        intervalPrices = basicPlan.stripePriceIds.yearly
       } else {
-        // For quarterly/yearly, use regular pricing (no trial)
-        const intervalPrices = basicPlan.stripePriceIds[interval as keyof typeof basicPlan.stripePriceIds]
-        if (!intervalPrices) {
-          return NextResponse.json(
-            { error: 'Invalid billing interval' },
-            { status: 400 }
-          )
-        }
-        priceId = intervalPrices[currency as keyof typeof intervalPrices]
+        return NextResponse.json(
+          { error: 'Invalid billing interval' },
+          { status: 400 }
+        )
       }
+      
+      priceId = intervalPrices[currency as keyof typeof intervalPrices]
+      
+      // Get trial setup fee price
+      const trialPrices = basicPlan.stripePriceIds.trial
+      const trialSetupFeePriceId = trialPrices?.[currency as keyof typeof trialPrices]
+      
+      if (!priceId || !trialSetupFeePriceId) {
+        return NextResponse.json(
+          { error: 'Trial pricing not configured for this currency' },
+          { status: 400 }
+        )
+      }
+      
+      // Create checkout with trial for all intervals
+      const checkoutSession = await StripeService.createCheckoutSession(
+        session.user.id,
+        priceId,
+        successUrl,
+        cancelUrl,
+        {
+          isTrial: true,
+          trialSetupFeePriceId: trialSetupFeePriceId,
+          currency: currency
+        }
+      )
+      
+      return NextResponse.json({ 
+        sessionId: checkoutSession.id,
+        url: checkoutSession.url 
+      })
     } else if (plan === 'pro') {
       // Pro plan is coming soon, but handle for future
       const proPlan = planConfig as typeof STRIPE_PLANS.pro

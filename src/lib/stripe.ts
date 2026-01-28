@@ -27,9 +27,9 @@ export const STRIPE_PLANS = {
     name: 'Basic Plan',
     price: 14.99, // Monthly price after trial
     priceMonthly: 14.99,
-    priceTrial: 4.99, // Setup fee for 7-day trial
-    priceQuarterly: 9.99,
-    priceYearly: 39.99,
+    priceTrial: 3.99, // Setup fee for 7-day trial (applies to all intervals)
+    priceQuarterly: 11.99, // Per month (€35.97 for 3 months, 20% discount)
+    priceYearly: 83.88, // Per year (€6.99/month, 53% discount)
     trialDays: 7, // 7-day trial period
     features: [
       'Unlimited CVs & letters',
