@@ -6515,6 +6515,573 @@ export const PROFESSIONS: Profession[] = [
         ]
       }
     }
+  },
+  // Education: Professor
+  {
+    id: 'professor',
+    category: 'education',
+    translations: {
+      en: {
+        name: 'Professor',
+        slug: 'professor',
+        description: 'Professors teach at universities and colleges, conduct research, publish academic work, and mentor students. They work in higher education institutions and contribute to academic knowledge in their field.',
+        tips: [
+          'Highlight your academic qualifications and degrees',
+          'Emphasize research publications and academic achievements',
+          'Showcase teaching experience and student mentorship',
+          'Include conference presentations and academic service',
+          'Demonstrate expertise in your field of study'
+        ],
+        skills: [
+          'Academic research and publication',
+          'Curriculum development and course design',
+          'Student instruction and mentorship',
+          'Grant writing and research funding',
+          'Academic writing and peer review',
+          'Conference presentations and public speaking',
+          'Departmental service and committee work'
+        ],
+        whyGood: [
+          'Clear structure highlighting academic credentials',
+          'Emphasizes research contributions and publications',
+          'Shows progression of academic career',
+          'Demonstrates commitment to education and scholarship',
+          'ATS-friendly format with academic keywords'
+        ]
+      },
+      nl: {
+        name: 'Hoogleraar',
+        slug: 'hoogleraar',
+        description: 'Hoogleraren geven les aan universiteiten en hogescholen, doen onderzoek, publiceren academisch werk en begeleiden studenten. Ze werken in instellingen voor hoger onderwijs en dragen bij aan academische kennis in hun vakgebied.',
+        tips: [
+          'Benadruk je academische kwalificaties en graden',
+          'Leg nadruk op onderzoekspublicaties en academische prestaties',
+          'Toon onderwijservaring en studentbegeleiding',
+          'Vermeld conferentiepresentaties en academische dienstverlening',
+          'Demonstreer expertise in je vakgebied'
+        ],
+        skills: [
+          'Academisch onderzoek en publicatie',
+          'Curriculumontwikkeling en cursusontwerp',
+          'Studenteninstructie en begeleiding',
+          'Subsidieaanvragen en onderzoeksfinanciering',
+          'Academisch schrijven en peer review',
+          'Conferentiepresentaties en publiek spreken',
+          'Departementale dienstverlening en commissiewerk'
+        ],
+        whyGood: [
+          'Duidelijke structuur die academische kwalificaties benadrukt',
+          'Legt nadruk op onderzoeksbijdragen en publicaties',
+          'Toont progressie van academische carrière',
+          'Demonstreert toewijding aan onderwijs en wetenschap',
+          'ATS-vriendelijk formaat met academische trefwoorden'
+        ]
+      },
+      fr: {
+        name: 'Professeur',
+        slug: 'professeur',
+        description: 'Les professeurs enseignent dans les universités et collèges, mènent des recherches, publient des travaux académiques et encadrent les étudiants. Ils travaillent dans des établissements d\'enseignement supérieur et contribuent aux connaissances académiques dans leur domaine.',
+        tips: [
+          'Mettez en avant vos qualifications académiques et diplômes',
+          'Soulignez les publications de recherche et réalisations académiques',
+          'Montrez l\'expérience d\'enseignement et mentorat étudiant',
+          'Incluez présentations de conférences et service académique',
+          'Démontrez l\'expertise dans votre domaine d\'étude'
+        ],
+        skills: [
+          'Recherche académique et publication',
+          'Développement de curriculum et conception de cours',
+          'Instruction et mentorat des étudiants',
+          'Rédaction de subventions et financement de recherche',
+          'Rédaction académique et évaluation par les pairs',
+          'Présentations de conférences et prise de parole en public',
+          'Service départemental et travail de comité'
+        ],
+        whyGood: [
+          'Structure claire mettant en évidence les qualifications académiques',
+          'Met l\'accent sur les contributions à la recherche et publications',
+          'Montre la progression de la carrière académique',
+          'Démontre l\'engagement envers l\'éducation et la recherche',
+          'Format compatible ATS avec mots-clés académiques'
+        ]
+      },
+      es: {
+        name: 'Profesor',
+        slug: 'profesor',
+        description: 'Los profesores enseñan en universidades y colegios, realizan investigaciones, publican trabajos académicos y orientan a estudiantes. Trabajan en instituciones de educación superior y contribuyen al conocimiento académico en su campo.',
+        tips: [
+          'Destaca tus calificaciones académicas y títulos',
+          'Enfatiza publicaciones de investigación y logros académicos',
+          'Muestra experiencia docente y mentoría estudiantil',
+          'Incluye presentaciones en conferencias y servicio académico',
+          'Demuestra experiencia en tu campo de estudio'
+        ],
+        skills: [
+          'Investigación académica y publicación',
+          'Desarrollo de currículo y diseño de cursos',
+          'Instrucción y mentoría estudiantil',
+          'Redacción de subvenciones y financiamiento de investigación',
+          'Escritura académica y revisión por pares',
+          'Presentaciones en conferencias y oratoria',
+          'Servicio departamental y trabajo en comités'
+        ],
+        whyGood: [
+          'Estructura clara que destaca credenciales académicas',
+          'Enfatiza contribuciones de investigación y publicaciones',
+          'Muestra progresión de carrera académica',
+          'Demuestra compromiso con educación y erudición',
+          'Formato compatible con ATS con palabras clave académicas'
+        ]
+      },
+      de: {
+        name: 'Professor',
+        slug: 'professor',
+        description: 'Professoren unterrichten an Universitäten und Hochschulen, führen Forschungen durch, veröffentlichen akademische Arbeiten und betreuen Studenten. Sie arbeiten in Hochschuleinrichtungen und tragen zum akademischen Wissen in ihrem Bereich bei.',
+        tips: [
+          'Heben Sie Ihre akademischen Qualifikationen und Abschlüsse hervor',
+          'Betonen Sie Forschungsveröffentlichungen und akademische Leistungen',
+          'Zeigen Sie Unterrichtserfahrung und Studentenbetreuung',
+          'Fügen Sie Konferenzpräsentationen und akademischen Service hinzu',
+          'Demonstrieren Sie Expertise in Ihrem Studienbereich'
+        ],
+        skills: [
+          'Akademische Forschung und Veröffentlichung',
+          'Lehrplanentwicklung und Kursgestaltung',
+          'Studentenunterricht und Betreuung',
+          'Antragstellung und Forschungsfinanzierung',
+          'Akademisches Schreiben und Peer-Review',
+          'Konferenzpräsentationen und öffentliches Sprechen',
+          'Abteilungsservice und Ausschussarbeit'
+        ],
+        whyGood: [
+          'Klare Struktur, die akademische Qualifikationen hervorhebt',
+          'Betont Forschungsbeiträge und Veröffentlichungen',
+          'Zeigt Fortschritt der akademischen Karriere',
+          'Demonstriert Engagement für Bildung und Wissenschaft',
+          'ATS-freundliches Format mit akademischen Schlüsselwörtern'
+        ]
+      },
+      it: {
+        name: 'Professore',
+        slug: 'professore',
+        description: 'I professori insegnano nelle università e nei college, conducono ricerche, pubblicano lavori accademici e guidano gli studenti. Lavorano in istituzioni di istruzione superiore e contribuiscono alla conoscenza accademica nel loro campo.',
+        tips: [
+          'Evidenzia le tue qualifiche accademiche e lauree',
+          'Enfatizza pubblicazioni di ricerca e risultati accademici',
+          'Mostra esperienza di insegnamento e mentorato studentesco',
+          'Includi presentazioni a conferenze e servizio accademico',
+          'Dimostra competenza nel tuo campo di studio'
+        ],
+        skills: [
+          'Ricerca accademica e pubblicazione',
+          'Sviluppo del curriculum e progettazione dei corsi',
+          'Istruzione e mentorato degli studenti',
+          'Scrittura di sovvenzioni e finanziamento della ricerca',
+          'Scrittura accademica e revisione tra pari',
+          'Presentazioni a conferenze e public speaking',
+          'Servizio dipartimentale e lavoro in commissioni'
+        ],
+        whyGood: [
+          'Struttura chiara che evidenzia le credenziali accademiche',
+          'Enfatizza i contributi alla ricerca e le pubblicazioni',
+          'Mostra la progressione della carriera accademica',
+          'Dimostra impegno per l\'educazione e la borsa di studio',
+          'Formato compatibile ATS con parole chiave accademiche'
+        ]
+      },
+      pl: {
+        name: 'Profesor',
+        slug: 'profesor',
+        description: 'Profesorowie nauczają na uniwersytetach i college\'ach, prowadzą badania, publikują prace akademickie i mentorują studentów. Pracują w instytucjach szkolnictwa wyższego i przyczyniają się do wiedzy akademickiej w swojej dziedzinie.',
+        tips: [
+          'Podkreśl swoje kwalifikacje akademickie i stopnie',
+          'Podkreśl publikacje badawcze i osiągnięcia akademickie',
+          'Pokaż doświadczenie w nauczaniu i mentorowaniu studentów',
+          'Uwzględnij prezentacje na konferencjach i służbę akademicką',
+          'Wykazuj wiedzę w swojej dziedzinie studiów'
+        ],
+        skills: [
+          'Badania akademickie i publikacje',
+          'Rozwój programu nauczania i projektowanie kursów',
+          'Instrukcja i mentorowanie studentów',
+          'Pisanie wniosków o granty i finansowanie badań',
+          'Pisanie akademickie i recenzja',
+          'Prezentacje na konferencjach i wystąpienia publiczne',
+          'Służba wydziałowa i praca w komisjach'
+        ],
+        whyGood: [
+          'Jasna struktura podkreślająca kwalifikacje akademickie',
+          'Podkreśla wkład w badania i publikacje',
+          'Pokazuje postęp kariery akademickiej',
+          'Wykazuje zaangażowanie w edukację i naukę',
+          'Format przyjazny dla ATS z kluczowymi słowami akademickimi'
+        ]
+      },
+      ro: {
+        name: 'Profesor',
+        slug: 'profesor',
+        description: 'Profesorii predau la universități și colegii, conduc cercetări, publică lucrări academice și ghidează studenții. Lucrează în instituții de învățământ superior și contribuie la cunoștințele academice în domeniul lor.',
+        tips: [
+          'Evidențiază calificările și diplomele academice',
+          'Subliniază publicațiile de cercetare și realizările academice',
+          'Prezintă experiența de predare și mentorat studențesc',
+          'Include prezentări la conferințe și serviciu academic',
+          'Demonstrează expertiza în domeniul tău de studiu'
+        ],
+        skills: [
+          'Cercetare academică și publicare',
+          'Dezvoltare curriculum și proiectare cursuri',
+          'Instruire și mentorat studenți',
+          'Scriere granturi și finanțare cercetare',
+          'Scriere academică și peer review',
+          'Prezentări la conferințe și public speaking',
+          'Serviciu departamental și lucru în comitete'
+        ],
+        whyGood: [
+          'Structură clară care evidențiază calificările academice',
+          'Subliniază contribuțiile la cercetare și publicații',
+          'Arată progresia carierei academice',
+          'Demonstrează angajamentul față de educație și știință',
+          'Format compatibil ATS cu cuvinte cheie academice'
+        ]
+      },
+      hu: {
+        name: 'Professzor',
+        slug: 'professzor',
+        description: 'A professzorok egyetemeken és főiskolákon tanítanak, kutatásokat végeznek, akadémiai munkákat publikálnak és diákokat mentorálnak. Felsőoktatási intézményekben dolgoznak és hozzájárulnak az akadémiai tudáshoz a területükön.',
+        tips: [
+          'Hangsúlyozza akadémiai képzettségét és diplomáit',
+          'Hangsúlyozza a kutatási publikációkat és akadémiai eredményeket',
+          'Mutassa be a tanítási tapasztalatot és diákmentorálást',
+          'Tartalmazza a konferencia-előadásokat és akadémiai szolgálatot',
+          'Mutassa be a szakterületén szerzett szakértelmét'
+        ],
+        skills: [
+          'Akadémiai kutatás és publikáció',
+          'Tananyagfejlesztés és kurzus tervezés',
+          'Diákok oktatása és mentorálása',
+          'Pályázatírás és kutatásfinanszírozás',
+          'Akadémiai írás és peer review',
+          'Konferencia-előadások és nyilvános beszéd',
+          'Tanszéki szolgálat és bizottsági munka'
+        ],
+        whyGood: [
+          'Világos struktúra, amely kiemeli az akadémiai képzettségeket',
+          'Hangsúlyozza a kutatási hozzájárulásokat és publikációkat',
+          'Mutatja az akadémiai karrier fejlődését',
+          'Bemutatja az oktatáshoz és tudományhoz való elkötelezettséget',
+          'ATS-barát formátum akadémiai kulcsszavakkal'
+        ]
+      },
+      el: {
+        name: 'Καθηγητής',
+        slug: 'kathigitis',
+        description: 'Οι καθηγητές διδάσκουν σε πανεπιστήμια και κολέγια, διεξάγουν έρευνα, δημοσιεύουν ακαδημαϊκά έργα και καθοδηγούν φοιτητές. Εργάζονται σε ιδρύματα ανώτατης εκπαίδευσης και συμβάλλουν στην ακαδημαϊκή γνώση στον τομέα τους.',
+        tips: [
+          'Επισημάνετε τις ακαδημαϊκές σας προσόντα και πτυχία',
+          'Τονίστε τις ερευνητικές δημοσιεύσεις και ακαδημαϊκά επιτεύγματα',
+          'Παρουσιάστε εμπειρία διδασκαλίας και καθοδήγησης φοιτητών',
+          'Συμπεριλάβετε παρουσιάσεις σε συνέδρια και ακαδημαϊκή υπηρεσία',
+          'Αποδείξτε εμπειρογνωμοσύνη στον τομέα σας'
+        ],
+        skills: [
+          'Ακαδημαϊκή έρευνα και δημοσίευση',
+          'Ανάπτυξη προγράμματος σπουδών και σχεδιασμός μαθημάτων',
+          'Εκπαίδευση και καθοδήγηση φοιτητών',
+          'Συγγραφή επιχορηγήσεων και χρηματοδότηση έρευνας',
+          'Ακαδημαϊκή γραφή και αξιολόγηση από ομοτίμους',
+          'Παρουσιάσεις σε συνέδρια και δημόσια ομιλία',
+          'Τμηματική υπηρεσία και εργασία σε επιτροπές'
+        ],
+        whyGood: [
+          'Σαφής δομή που επισημαίνει τα ακαδημαϊκά προσόντα',
+          'Τονίζει τις ερευνητικές συνεισφορές και δημοσιεύσεις',
+          'Δείχνει την πρόοδο της ακαδημαϊκής καριέρας',
+          'Αποδεικνύει δέσμευση στην εκπαίδευση και τη μάθηση',
+          'Μορφή συμβατή με ATS με ακαδημαϊκές λέξεις-κλειδιά'
+        ]
+      },
+      cs: {
+        name: 'Profesor',
+        slug: 'profesor',
+        description: 'Profesoři vyučují na univerzitách a vysokých školách, provádějí výzkum, publikují akademické práce a mentorují studenty. Pracují v institucích vyššího vzdělávání a přispívají k akademickým znalostem ve svém oboru.',
+        tips: [
+          'Zdůrazněte své akademické kvalifikace a tituly',
+          'Zdůrazněte výzkumné publikace a akademické úspěchy',
+          'Ukažte zkušenosti s výukou a mentorováním studentů',
+          'Zahrňte prezentace na konferencích a akademickou službu',
+          'Prokažte odbornost ve svém oboru'
+        ],
+        skills: [
+          'Akademický výzkum a publikace',
+          'Vývoj kurikula a návrh kurzů',
+          'Výuka a mentorování studentů',
+          'Psaní grantů a financování výzkumu',
+          'Akademické psaní a peer review',
+          'Prezentace na konferencích a veřejné vystupování',
+          'Katedrová služba a práce v komisích'
+        ],
+        whyGood: [
+          'Jasná struktura zdůrazňující akademické kvalifikace',
+          'Zdůrazňuje výzkumné příspěvky a publikace',
+          'Ukazuje pokrok akademické kariéry',
+          'Prokazuje závazek k vzdělávání a vědě',
+          'Formát kompatibilní s ATS s akademickými klíčovými slovy'
+        ]
+      },
+      pt: {
+        name: 'Professor',
+        slug: 'professor',
+        description: 'Professores ensinam em universidades e faculdades, conduzem pesquisas, publicam trabalhos acadêmicos e orientam estudantes. Trabalham em instituições de ensino superior e contribuem para o conhecimento acadêmico em seu campo.',
+        tips: [
+          'Destaque suas qualificações acadêmicas e diplomas',
+          'Enfatize publicações de pesquisa e conquistas acadêmicas',
+          'Mostre experiência de ensino e mentoría estudantil',
+          'Inclua apresentações em conferências e serviço acadêmico',
+          'Demonstre expertise em seu campo de estudo'
+        ],
+        skills: [
+          'Pesquisa acadêmica e publicação',
+          'Desenvolvimento de currículo e design de cursos',
+          'Instrução e mentoría de estudantes',
+          'Redação de subsídios e financiamento de pesquisa',
+          'Escrita acadêmica e revisão por pares',
+          'Apresentações em conferências e oratória',
+          'Serviço departamental e trabalho em comitês'
+        ],
+        whyGood: [
+          'Estrutura clara destacando credenciais acadêmicas',
+          'Enfatiza contribuições de pesquisa e publicações',
+          'Mostra progressão da carreira acadêmica',
+          'Demonstra compromisso com educação e erudição',
+          'Formato compatível com ATS com palavras-chave acadêmicas'
+        ]
+      },
+      sv: {
+        name: 'Professor',
+        slug: 'professor',
+        description: 'Professorer undervisar vid universitet och högskolor, bedriver forskning, publicerar akademiskt arbete och mentorar studenter. De arbetar vid högre utbildningsinstitutioner och bidrar till akademisk kunskap inom sitt område.',
+        tips: [
+          'Framhäv dina akademiska kvalifikationer och examina',
+          'Betona forskningspublikationer och akademiska prestationer',
+          'Visa undervisningserfarenhet och studentmentorskap',
+          'Inkludera konferenspresentationer och akademisk service',
+          'Visa expertis inom ditt studieområde'
+        ],
+        skills: [
+          'Akademisk forskning och publicering',
+          'Läroplanutveckling och kursdesign',
+          'Studentundervisning och mentorskap',
+          'Bidragsskrivande och forskningsfinansiering',
+          'Akademiskt skrivande och peer review',
+          'Konferenspresentationer och offentligt talande',
+          'Avdelningsservice och kommittéarbete'
+        ],
+        whyGood: [
+          'Tydlig struktur som framhäver akademiska kvalifikationer',
+          'Betonar forskningsbidrag och publikationer',
+          'Visar progression av akademisk karriär',
+          'Visar engagemang för utbildning och forskning',
+          'ATS-vänligt format med akademiska nyckelord'
+        ]
+      },
+      bg: {
+        name: 'Професор',
+        slug: 'profesor',
+        description: 'Професорите преподават в университети и колежи, провеждат изследвания, публикуват академични трудове и менторстват студенти. Работят в институции за висше образование и допринасят за академичните знания в своята област.',
+        tips: [
+          'Подчертайте академичните си квалификации и степени',
+          'Акцентирайте върху изследователски публикации и академични постижения',
+          'Покажете опит в преподаването и менторство на студенти',
+          'Включете презентации на конференции и академична служба',
+          'Демонстрирайте експертиза в своята област на изследване'
+        ],
+        skills: [
+          'Академично изследване и публикуване',
+          'Разработване на учебна програма и дизайн на курсове',
+          'Обучение и менторство на студенти',
+          'Писане на грантове и финансиране на изследвания',
+          'Академично писане и рецензиране',
+          'Презентации на конференции и публично говорене',
+          'Катедрална служба и работа в комисии'
+        ],
+        whyGood: [
+          'Ясна структура, подчертаваща академичните квалификации',
+          'Акцентира върху изследователските приноси и публикации',
+          'Показва прогресия на академичната кариера',
+          'Демонстрира ангажираност към образованието и науката',
+          'Формат, съвместим с ATS с академични ключови думи'
+        ]
+      },
+      da: {
+        name: 'Professor',
+        slug: 'professor',
+        description: 'Professorer underviser på universiteter og højskoler, udfører forskning, publicerer akademisk arbejde og vejleder studerende. De arbejder på højere uddannelsesinstitutioner og bidrager til akademisk viden inden for deres område.',
+        tips: [
+          'Fremhæv dine akademiske kvalifikationer og grader',
+          'Fremhæv forskningspublikationer og akademiske præstationer',
+          'Vis undervisningserfaring og studentmentorskap',
+          'Inkluder konferencepræsentationer og akademisk service',
+          'Demonstrer ekspertise inden for dit studieområde'
+        ],
+        skills: [
+          'Akademisk forskning og publicering',
+          'Læreplanudvikling og kursusdesign',
+          'Studentundervisning og mentorskap',
+          'Grantskrivning og forskningsfinansiering',
+          'Akademisk skrivning og peer review',
+          'Konferencepræsentationer og offentligt talende',
+          'Afdelingstjeneste og komitéarbejde'
+        ],
+        whyGood: [
+          'Tydelig struktur, der fremhæver akademiske kvalifikationer',
+          'Fremhæver forskningsbidrag og publikationer',
+          'Vis progression af akademisk karriere',
+          'Demonstrer forpligtelse til uddannelse og forskning',
+          'ATS-venligt format med akademiske nøgleord'
+        ]
+      },
+      fi: {
+        name: 'Professori',
+        slug: 'professori',
+        description: 'Professorit opettavat yliopistoissa ja korkeakouluissa, tekevät tutkimusta, julkaisevat akateemisia töitä ja mentorovat opiskelijoita. He työskentelevät korkeakouluissa ja osallistuvat akateemiseen tietoon alallaan.',
+        tips: [
+          'Korosta akateemiset pätevyytesi ja tutkinnot',
+          'Korosta tutkimusjulkaisuja ja akateemisia saavutuksia',
+          'Näytä opetuskokemusta ja opiskelijamentorointia',
+          'Sisällytä konferenssiesitykset ja akateeminen palvelu',
+          'Näytä asiantuntemusta alallasi'
+        ],
+        skills: [
+          'Akateeminen tutkimus ja julkaisu',
+          'Opetussuunnitelman kehittäminen ja kurssisuunnittelu',
+          'Opiskelijoiden opettaminen ja mentorointi',
+          'Apurahojen kirjoittaminen ja tutkimusrahoitus',
+          'Akateeminen kirjoittaminen ja vertaisarviointi',
+          'Konferenssiesitykset ja julkiset esitykset',
+          'Laitoshuolto ja komiteatyö'
+        ],
+        whyGood: [
+          'Selkeä rakenne, joka korostaa akateemisia pätevyyksiä',
+          'Korostaa tutkimuspanoksia ja julkaisuja',
+          'Näyttää akateemisen uran kehityksen',
+          'Näyttää sitoutumisen koulutukseen ja tieteeseen',
+          'ATS-yhteensopiva muoto akateemisilla avainsanoilla'
+        ]
+      },
+      sk: {
+        name: 'Profesor',
+        slug: 'profesor',
+        description: 'Profesori vyučujú na univerzitách a vysokých školách, vykonávajú výskum, publikujú akademické práce a mentorujú študentov. Pracujú v inštitúciách vyššieho vzdelávania a prispievajú k akademickým znalostiam vo svojom odbore.',
+        tips: [
+          'Zdôraznite svoje akademické kvalifikácie a tituly',
+          'Zdôraznite výskumné publikácie a akademické úspechy',
+          'Ukážte skúsenosti s výučbou a mentorovaním študentov',
+          'Zahrňte prezentácie na konferenciách a akademickú službu',
+          'Preukážte odbornosť vo svojom odbore'
+        ],
+        skills: [
+          'Akademický výskum a publikácie',
+          'Vývoj kurikula a návrh kurzov',
+          'Výučba a mentorovanie študentov',
+          'Písanie grantov a financovanie výskumu',
+          'Akademické písanie a peer review',
+          'Prezentácie na konferenciách a verejné vystupovanie',
+          'Katedrová služba a práca v komisiách'
+        ],
+        whyGood: [
+          'Jasná štruktúra zdôrazňujúca akademické kvalifikácie',
+          'Zdôrazňuje výskumné príspevky a publikácie',
+          'Ukazuje pokrok akademickej kariéry',
+          'Preukazuje záväzok k vzdelávaniu a vede',
+          'Formát kompatibilný s ATS s akademickými kľúčovými slovami'
+        ]
+      },
+      no: {
+        name: 'Professor',
+        slug: 'professor',
+        description: 'Professorer underviser ved universiteter og høyskoler, driver forskning, publiserer akademisk arbeid og mentorar studenter. De arbeider ved høyere utdanningsinstitusjoner og bidrar til akademisk kunnskap innenfor sitt felt.',
+        tips: [
+          'Fremhev dine akademiske kvalifikasjoner og grader',
+          'Fremhev forskningspublikasjoner og akademiske prestasjoner',
+          'Vis undervisningserfaring og studentmentorskap',
+          'Inkluder konferansepresentasjoner og akademisk tjeneste',
+          'Vis ekspertise innenfor ditt studieområde'
+        ],
+        skills: [
+          'Akademisk forskning og publisering',
+          'Læreplanutvikling og kursdesign',
+          'Studentundervisning og mentorskap',
+          'Grantskriving og forskningsfinansiering',
+          'Akademisk skriving og peer review',
+          'Konferansepresentasjoner og offentlig talende',
+          'Avdelingsservice og komitéarbeid'
+        ],
+        whyGood: [
+          'Tydelig struktur som fremhever akademiske kvalifikasjoner',
+          'Fremhever forskningsbidrag og publikasjoner',
+          'Vis progresjon av akademisk karriere',
+          'Vis forpliktelse til utdanning og forskning',
+          'ATS-vennlig format med akademiske nøkkelord'
+        ]
+      },
+      hr: {
+        name: 'Profesor',
+        slug: 'profesor',
+        description: 'Profesori predaju na sveučilištima i fakultetima, provode istraživanja, objavljuju akademske radove i mentoriraju studente. Rade u visokim učilištima i doprinose akademskom znanju u svom području.',
+        tips: [
+          'Istaknite svoje akademske kvalifikacije i diplome',
+          'Naglasite istraživačke publikacije i akademska postignuća',
+          'Pokažite iskustvo u nastavi i mentorstvu studenata',
+          'Uključite prezentacije na konferencijama i akademsku službu',
+          'Pokažite stručnost u svom području studija'
+        ],
+        skills: [
+          'Akademsko istraživanje i objavljivanje',
+          'Razvoj kurikuluma i dizajn tečajeva',
+          'Nastava i mentorstvo studenata',
+          'Pisanje grantova i financiranje istraživanja',
+          'Akademsko pisanje i recenzija',
+          'Prezentacije na konferencijama i javno govorenje',
+          'Odsječna služba i rad u odborima'
+        ],
+        whyGood: [
+          'Jasna struktura koja ističe akademske kvalifikacije',
+          'Naglašava istraživačke doprinose i publikacije',
+          'Pokazuje napredak akademske karijere',
+          'Pokazuje predanost obrazovanju i znanosti',
+          'Format kompatibilan s ATS s akademskim ključnim riječima'
+        ]
+      },
+      sr: {
+        name: 'Професор',
+        slug: 'profesor',
+        description: 'Професори предају на универзитетима и факултетима, спроводе истраживања, објављују академске радове и менторишу студенте. Раде у високим училиштима и доприносе академском знању у свом пољу.',
+        tips: [
+          'Истакните своје академске квалификације и дипломе',
+          'Нагласите истраживачке публикације и академска достигнућа',
+          'Покажите искуство у настави и менторству студената',
+          'Укључите презентације на конференцијама и академску службу',
+          'Покажите стручност у свом пољу студија'
+        ],
+        skills: [
+          'Академско истраживање и објављивање',
+          'Развој курикулума и дизајн курсева',
+          'Настава и менторство студената',
+          'Писање грантова и финансирање истраживања',
+          'Академско писање и рецензија',
+          'Презентације на конференцијама и јавно говорење',
+          'Одсечна служба и рад у одборима'
+        ],
+        whyGood: [
+          'Јасна структура која истиче академске квалификације',
+          'Наглашава истраживачке доприносе и публикације',
+          'Показује напредак академске каријере',
+          'Показује посвећеност образовању и науци',
+          'Формат компатибилан са ATS са академским кључним речима'
+        ]
+      }
+    }
   }
   // Note: More professions can be added here with full translations
 ]
