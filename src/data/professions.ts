@@ -8216,6 +8216,573 @@ export const PROFESSIONS: Profession[] = [
         ]
       }
     }
+  },
+  // Creative: Photographer
+  {
+    id: 'photographer',
+    category: 'creative',
+    translations: {
+      en: {
+        name: 'Photographer',
+        slug: 'photographer',
+        description: 'Photographers capture and create images using technical expertise, creativity, and composition skills. They work in various settings including studios, events, commercial shoots, and photojournalism.',
+        tips: [
+          'Showcase your portfolio with diverse photography styles',
+          'Highlight technical skills with cameras, lighting, and editing software',
+          'Emphasize experience with different types of photography',
+          'Include client work and published pieces',
+          'Demonstrate ability to work under pressure and meet deadlines'
+        ],
+        skills: [
+          'Camera operation and photography techniques',
+          'Lighting setup and composition',
+          'Photo editing software (Photoshop, Lightroom)',
+          'Portrait, event, and commercial photography',
+          'Color correction and post-processing',
+          'Client communication and collaboration',
+          'Equipment maintenance and technical knowledge'
+        ],
+        whyGood: [
+          'Clear structure highlighting photography portfolio',
+          'Emphasizes technical skills and artistic vision',
+          'Shows progression of photography experience',
+          'Demonstrates versatility across photography styles',
+          'ATS-friendly format with photography keywords'
+        ]
+      },
+      nl: {
+        name: 'Fotograaf',
+        slug: 'fotograaf',
+        description: 'Fotografen maken en creëren beelden met behulp van technische expertise, creativiteit en compositieve vaardigheden. Ze werken in verschillende settings zoals studio\'s, evenementen, commerciële shoots en fotojournalistiek.',
+        tips: [
+          'Toon je portfolio met diverse fotografiestijlen',
+          'Benadruk technische vaardigheden met camera\'s, belichting en bewerkingssoftware',
+          'Leg nadruk op ervaring met verschillende soorten fotografie',
+          'Vermeld klantwerk en gepubliceerde stukken',
+          'Demonstreer vermogen om onder druk te werken en deadlines te halen'
+        ],
+        skills: [
+          'Camerabediening en fotografietechnieken',
+          'Belichting setup en compositie',
+          'Foto bewerkingssoftware (Photoshop, Lightroom)',
+          'Portret-, evenementen- en commerciële fotografie',
+          'Kleurcorrectie en nabewerking',
+          'Klantcommunicatie en samenwerking',
+          'Apparatuuronderhoud en technische kennis'
+        ],
+        whyGood: [
+          'Duidelijke structuur die fotografierepertoire benadrukt',
+          'Legt nadruk op technische vaardigheden en artistieke visie',
+          'Toont progressie van fotografie-ervaring',
+          'Demonstreert veelzijdigheid in fotografiestijlen',
+          'ATS-vriendelijk formaat met fotografie trefwoorden'
+        ]
+      },
+      fr: {
+        name: 'Photographe',
+        slug: 'photographe',
+        description: 'Les photographes capturent et créent des images en utilisant l\'expertise technique, la créativité et les compétences en composition. Ils travaillent dans divers contextes, notamment studios, événements, prises de vue commerciales et photojournalisme.',
+        tips: [
+          'Présentez votre portfolio avec des styles de photographie diversifiés',
+          'Mettez en avant les compétences techniques avec les appareils photo, l\'éclairage et les logiciels d\'édition',
+          'Soulignez l\'expérience avec différents types de photographie',
+          'Incluez le travail client et les pièces publiées',
+          'Démontrez la capacité à travailler sous pression et à respecter les délais'
+        ],
+        skills: [
+          'Utilisation de caméras et techniques de photographie',
+          'Configuration de l\'éclairage et composition',
+          'Logiciels d\'édition photo (Photoshop, Lightroom)',
+          'Photographie portrait, événementielle et commerciale',
+          'Correction des couleurs et post-traitement',
+          'Communication et collaboration avec les clients',
+          'Maintenance de l\'équipement et connaissances techniques'
+        ],
+        whyGood: [
+          'Structure claire mettant en évidence le portfolio photographique',
+          'Met l\'accent sur les compétences techniques et la vision artistique',
+          'Montre la progression de l\'expérience en photographie',
+          'Démontre la polyvalence à travers les styles de photographie',
+          'Format compatible ATS avec mots-clés de photographie'
+        ]
+      },
+      es: {
+        name: 'Fotógrafo',
+        slug: 'fotografo',
+        description: 'Los fotógrafos capturan y crean imágenes utilizando experiencia técnica, creatividad y habilidades de composición. Trabajan en diversos entornos, incluyendo estudios, eventos, sesiones comerciales y fotoperiodismo.',
+        tips: [
+          'Muestra tu portafolio con diversos estilos fotográficos',
+          'Destaca habilidades técnicas con cámaras, iluminación y software de edición',
+          'Enfatiza experiencia con diferentes tipos de fotografía',
+          'Incluye trabajo con clientes y piezas publicadas',
+          'Demuestra capacidad para trabajar bajo presión y cumplir plazos'
+        ],
+        skills: [
+          'Operación de cámaras y técnicas fotográficas',
+          'Configuración de iluminación y composición',
+          'Software de edición de fotos (Photoshop, Lightroom)',
+          'Fotografía de retrato, eventos y comercial',
+          'Corrección de color y postprocesamiento',
+          'Comunicación y colaboración con clientes',
+          'Mantenimiento de equipos y conocimiento técnico'
+        ],
+        whyGood: [
+          'Estructura clara que destaca portafolio fotográfico',
+          'Enfatiza habilidades técnicas y visión artística',
+          'Muestra progresión de experiencia en fotografía',
+          'Demuestra versatilidad en estilos fotográficos',
+          'Formato compatible con ATS con palabras clave de fotografía'
+        ]
+      },
+      de: {
+        name: 'Fotograf',
+        slug: 'fotograf',
+        description: 'Fotografen erfassen und erstellen Bilder mit technischem Fachwissen, Kreativität und Kompositionsfähigkeiten. Sie arbeiten in verschiedenen Umgebungen, einschließlich Studios, Veranstaltungen, kommerziellen Shootings und Fotojournalismus.',
+        tips: [
+          'Präsentieren Sie Ihr Portfolio mit vielfältigen Fotografiestilen',
+          'Heben Sie technische Fähigkeiten mit Kameras, Beleuchtung und Bearbeitungssoftware hervor',
+          'Betonen Sie Erfahrung mit verschiedenen Arten der Fotografie',
+          'Fügen Sie Kundenarbeit und veröffentlichte Stücke hinzu',
+          'Demonstrieren Sie die Fähigkeit, unter Druck zu arbeiten und Fristen einzuhalten'
+        ],
+        skills: [
+          'Kamerabedienung und Fotografietechniken',
+          'Beleuchtungsaufbau und Komposition',
+          'Foto-Bearbeitungssoftware (Photoshop, Lightroom)',
+          'Porträt-, Event- und Werbefotografie',
+          'Farbkorrektur und Nachbearbeitung',
+          'Kundenkommunikation und Zusammenarbeit',
+          'Gerätewartung und technisches Wissen'
+        ],
+        whyGood: [
+          'Klare Struktur, die das Fotografieportfolio hervorhebt',
+          'Betont technische Fähigkeiten und künstlerische Vision',
+          'Zeigt Fortschritt der Fotografieerfahrung',
+          'Demonstriert Vielseitigkeit in Fotografiestilen',
+          'ATS-freundliches Format mit Fotografieschlüsselwörtern'
+        ]
+      },
+      it: {
+        name: 'Fotografo',
+        slug: 'fotografo',
+        description: 'I fotografi catturano e creano immagini utilizzando competenze tecniche, creatività e abilità di composizione. Lavorano in vari contesti, inclusi studi, eventi, servizi commerciali e fotogiornalismo.',
+        tips: [
+          'Mostra il tuo portfolio con stili fotografici diversi',
+          'Evidenzia le competenze tecniche con fotocamere, illuminazione e software di editing',
+          'Enfatizza l\'esperienza con diversi tipi di fotografia',
+          'Includi lavoro con clienti e pezzi pubblicati',
+          'Dimostra la capacità di lavorare sotto pressione e rispettare le scadenze'
+        ],
+        skills: [
+          'Utilizzo di fotocamere e tecniche fotografiche',
+          'Setup di illuminazione e composizione',
+          'Software di editing fotografico (Photoshop, Lightroom)',
+          'Fotografia ritrattistica, di eventi e commerciale',
+          'Correzione del colore e post-produzione',
+          'Comunicazione e collaborazione con i clienti',
+          'Manutenzione delle attrezzature e conoscenze tecniche'
+        ],
+        whyGood: [
+          'Struttura chiara che evidenzia il portfolio fotografico',
+          'Enfatizza le competenze tecniche e la visione artistica',
+          'Mostra la progressione dell\'esperienza fotografica',
+          'Dimostra versatilità negli stili fotografici',
+          'Formato compatibile con ATS con parole chiave fotografiche'
+        ]
+      },
+      pl: {
+        name: 'Fotograf',
+        slug: 'fotograf',
+        description: 'Fotografowie przechwytują i tworzą obrazy wykorzystując wiedzę techniczną, kreatywność i umiejętności kompozycyjne. Pracują w różnych środowiskach, w tym w studiach, na wydarzeniach, sesjach komercyjnych i fotoreportażach.',
+        tips: [
+          'Pokaż swoje portfolio z różnorodnymi stylami fotografii',
+          'Podkreśl umiejętności techniczne z aparatami, oświetleniem i oprogramowaniem do edycji',
+          'Podkreśl doświadczenie z różnymi typami fotografii',
+          'Uwzględnij pracę z klientami i opublikowane dzieła',
+          'Wykazuj zdolność do pracy pod presją i dotrzymywania terminów'
+        ],
+        skills: [
+          'Obsługa aparatu i techniki fotografii',
+          'Konfiguracja oświetlenia i kompozycja',
+          'Oprogramowanie do edycji zdjęć (Photoshop, Lightroom)',
+          'Fotografia portretowa, wydarzeniowa i komercyjna',
+          'Korekta kolorów i postprodukcja',
+          'Komunikacja i współpraca z klientami',
+          'Konserwacja sprzętu i wiedza techniczna'
+        ],
+        whyGood: [
+          'Jasna struktura podkreślająca portfolio fotograficzne',
+          'Kładzie nacisk na umiejętności techniczne i wizję artystyczną',
+          'Pokazuje postęp doświadczenia fotograficznego',
+          'Wykazuje wszechstronność w stylach fotografii',
+          'Format przyjazny dla ATS z kluczowymi słowami fotograficznymi'
+        ]
+      },
+      ro: {
+        name: 'Fotograf',
+        slug: 'fotograf',
+        description: 'Fotografii capturează și creează imagini folosind expertiză tehnică, creativitate și abilități de compoziție. Ei lucrează în diverse medii, inclusiv studiouri, evenimente, ședințe comerciale și fotoreportaj.',
+        tips: [
+          'Prezintă portofoliul tău cu stiluri diverse de fotografie',
+          'Evidențiază abilitățile tehnice cu camere, iluminat și software de editare',
+          'Subliniază experiența cu diferite tipuri de fotografie',
+          'Include lucrări cu clienți și piese publicate',
+          'Demonstrează capacitatea de a lucra sub presiune și de a respecta termenele limită'
+        ],
+        skills: [
+          'Operare cameră și tehnici de fotografie',
+          'Configurare iluminat și compoziție',
+          'Software de editare foto (Photoshop, Lightroom)',
+          'Fotografie portret, eveniment și comercială',
+          'Corecție culoare și post-procesare',
+          'Comunicare și colaborare cu clienții',
+          'Întreținere echipament și cunoștințe tehnice'
+        ],
+        whyGood: [
+          'Structură clară care evidențiază portofoliul fotografic',
+          'Subliniază abilitățile tehnice și viziunea artistică',
+          'Arată progresia experienței în fotografie',
+          'Demonstrează versatilitate în stiluri de fotografie',
+          'Format compatibil cu ATS cu cuvinte cheie fotografice'
+        ]
+      },
+      hu: {
+        name: 'Fotós',
+        slug: 'fotos',
+        description: 'A fotósok technikai szakértelem, kreativitás és kompozíciós készségek segítségével készítenek és hoznak létre képeket. Különböző környezetekben dolgoznak, beleértve a stúdiókat, eseményeket, kereskedelmi fotózásokat és fotóriporteri munkát.',
+        tips: [
+          'Mutassa be portfólióját különböző fotózástechnikai stílusokkal',
+          'Hangsúlyozza a technikai készségeket kamerákkal, világítással és szerkesztő szoftverekkel',
+          'Kiemeli a különböző típusú fotográfia tapasztalatait',
+          'Tartalmazza az ügyfélmunkát és a publikált darabokat',
+          'Mutassa be a nyomás alatt való munkavégzés és a határidők betartásának képességét'
+        ],
+        skills: [
+          'Kamera működtetés és fotográfiai technikák',
+          'Világítás beállítása és kompozíció',
+          'Fotó szerkesztő szoftver (Photoshop, Lightroom)',
+          'Portré-, esemény- és kereskedelmi fotográfia',
+          'Színkorrekció és utómunka',
+          'Ügyfélkommunikáció és együttműködés',
+          'Berendezések karbantartása és műszaki tudás'
+        ],
+        whyGood: [
+          'Világos struktúra, amely kiemeli a fotográfiai portfóliót',
+          'Hangsúlyozza a technikai készségeket és művészi látásmódot',
+          'Mutatja a fotográfiai tapasztalat fejlődését',
+          'Bemutatja a sokoldalúságot a fotográfiai stílusokban',
+          'ATS-barát formátum fotográfiai kulcsszavakkal'
+        ]
+      },
+      el: {
+        name: 'Φωτογράφος',
+        slug: 'fotografos',
+        description: 'Οι φωτογράφοι καταγράφουν και δημιουργούν εικόνες χρησιμοποιώντας τεχνική εμπειρογνωμοσύνη, δημιουργικότητα και δεξιότητες σύνθεσης. Εργάζονται σε διάφορες ρυθμίσεις, συμπεριλαμβανομένων στούντιο, εκδηλώσεων, εμπορικών λήψεων και φωτορεπορτάζ.',
+        tips: [
+          'Παρουσιάστε το portfolio σας με διαφορετικά στυλ φωτογραφίας',
+          'Επισημάνετε τις τεχνικές δεξιότητες με κάμερες, φωτισμό και λογισμικό επεξεργασίας',
+          'Τονίστε την εμπειρία με διαφορετικούς τύπους φωτογραφίας',
+          'Συμπεριλάβετε εργασία με πελάτες και δημοσιευμένα έργα',
+          'Αποδείξτε την ικανότητα εργασίας υπό πίεση και συμμόρφωσης με προθεσμίες'
+        ],
+        skills: [
+          'Λειτουργία κάμερας και τεχνικές φωτογραφίας',
+          'Ρύθμιση φωτισμού και σύνθεση',
+          'Λογισμικό επεξεργασίας φωτογραφιών (Photoshop, Lightroom)',
+          'Πορτρέτο, εκδηλώσεις και εμπορική φωτογραφία',
+          'Διόρθωση χρώματος και μετα-επεξεργασία',
+          'Επικοινωνία και συνεργασία με πελάτες',
+          'Συντήρηση εξοπλισμού και τεχνικές γνώσεις'
+        ],
+        whyGood: [
+          'Σαφής δομή που επισημαίνει το portfolio φωτογραφίας',
+          'Τονίζει τις τεχνικές δεξιότητες και καλλιτεχνική όραση',
+          'Δείχνει την πρόοδο της εμπειρίας φωτογραφίας',
+          'Αποδεικνύει ευελιξία σε στυλ φωτογραφίας',
+          'Μορφή συμβατή με ATS με λέξεις-κλειδιά φωτογραφίας'
+        ]
+      },
+      cs: {
+        name: 'Fotograf',
+        slug: 'fotograf',
+        description: 'Fotografové zachycují a vytvářejí obrazy pomocí technické odbornosti, kreativity a kompozičních dovedností. Pracují v různých prostředích, včetně studií, akcí, komerčních focení a fotoreportáží.',
+        tips: [
+          'Předveďte své portfolio s různorodými fotografickými styly',
+          'Zdůrazněte technické dovednosti s fotoaparáty, osvětlením a editačním softwarem',
+          'Zdůrazněte zkušenosti s různými typy fotografie',
+          'Zahrňte práci s klienty a publikované práce',
+          'Prokažte schopnost pracovat pod tlakem a dodržovat termíny'
+        ],
+        skills: [
+          'Provoz fotoaparátu a fotografické techniky',
+          'Nastavení osvětlení a kompozice',
+          'Software pro úpravu fotek (Photoshop, Lightroom)',
+          'Portrétní, akční a komerční fotografie',
+          'Korekce barev a postprodukce',
+          'Komunikace a spolupráce s klienty',
+          'Údržba zařízení a technické znalosti'
+        ],
+        whyGood: [
+          'Jasná struktura zdůrazňující fotografické portfolio',
+          'Zdůrazňuje technické dovednosti a uměleckou vizi',
+          'Ukazuje pokrok fotografických zkušeností',
+          'Prokazuje všestrannost ve fotografických stylech',
+          'Formát kompatibilní s ATS s fotografickými klíčovými slovy'
+        ]
+      },
+      pt: {
+        name: 'Fotógrafo',
+        slug: 'fotografo',
+        description: 'Fotógrafos capturam e criam imagens usando experiência técnica, criatividade e habilidades de composição. Trabalham em diversos ambientes, incluindo estúdios, eventos, sessões comerciais e fotojornalismo.',
+        tips: [
+          'Mostre seu portfólio com diversos estilos fotográficos',
+          'Destaque habilidades técnicas com câmeras, iluminação e software de edição',
+          'Enfatize experiência com diferentes tipos de fotografia',
+          'Inclua trabalho com clientes e peças publicadas',
+          'Demonstre capacidade de trabalhar sob pressão e cumprir prazos'
+        ],
+        skills: [
+          'Operação de câmeras e técnicas fotográficas',
+          'Configuração de iluminação e composição',
+          'Software de edição de fotos (Photoshop, Lightroom)',
+          'Fotografia de retrato, eventos e comercial',
+          'Correção de cor e pós-processamento',
+          'Comunicação e colaboração com clientes',
+          'Manutenção de equipamentos e conhecimento técnico'
+        ],
+        whyGood: [
+          'Estrutura clara destacando portfólio fotográfico',
+          'Enfatiza habilidades técnicas e visão artística',
+          'Mostra progressão de experiência em fotografia',
+          'Demonstra versatilidade em estilos fotográficos',
+          'Formato compatível com ATS com palavras-chave fotográficas'
+        ]
+      },
+      sv: {
+        name: 'Fotograf',
+        slug: 'fotograf',
+        description: 'Fotografer fångar och skapar bilder med hjälp av teknisk expertis, kreativitet och kompositionsfärdigheter. De arbetar i olika miljöer, inklusive studior, evenemang, kommersiella fotograferingar och fotoreportage.',
+        tips: [
+          'Visa ditt portfolio med olika fotografiska stilar',
+          'Framhäv tekniska färdigheter med kameror, belysning och redigeringsprogram',
+          'Betona erfarenhet med olika typer av fotografering',
+          'Inkludera kundarbete och publicerade verk',
+          'Visa förmåga att arbeta under press och möta deadlines'
+        ],
+        skills: [
+          'Kamerahantering och fotografitekniker',
+          'Belysningssetup och komposition',
+          'Fotoredigeringsprogram (Photoshop, Lightroom)',
+          'Porträtt-, evenemang- och kommersiell fotografering',
+          'Färgkorrigering och efterbehandling',
+          'Kundkommunikation och samarbete',
+          'Utrustningsunderhåll och teknisk kunskap'
+        ],
+        whyGood: [
+          'Tydlig struktur som framhäver fotografiskt portfolio',
+          'Betonar tekniska färdigheter och artistisk vision',
+          'Visar progression av fotografierfarenhet',
+          'Visar mångsidighet inom fotografiska stilar',
+          'ATS-vänligt format med fotografiska nyckelord'
+        ]
+      },
+      bg: {
+        name: 'Фотограф',
+        slug: 'fotograf',
+        description: 'Фотографите заснемат и създават изображения, използвайки техническа експертиза, творчество и умения за композиция. Те работят в различни среди, включително студиа, събития, търговски снимки и фоторепортаж.',
+        tips: [
+          'Покажете портфолиото си с различни фотографски стилове',
+          'Подчертайте техническите умения с камери, осветление и софтуер за редактиране',
+          'Акцентирайте върху опита с различни видове фотография',
+          'Включете работа с клиенти и публикувани произведения',
+          'Демонстрирайте способност за работа под налягане и спазване на срокове'
+        ],
+        skills: [
+          'Експлоатация на камера и фотографски техники',
+          'Настройка на осветление и композиция',
+          'Софтуер за редактиране на снимки (Photoshop, Lightroom)',
+          'Портретна, събитийна и търговска фотография',
+          'Корекция на цветове и постобработка',
+          'Комуникация и сътрудничество с клиенти',
+          'Поддръжка на оборудване и технически знания'
+        ],
+        whyGood: [
+          'Ясна структура, която подчертава фотографското портфолио',
+          'Акцентира върху техническите умения и художествената визия',
+          'Показва прогресия на фотографския опит',
+          'Демонстрира гъвкавост в фотографските стилове',
+          'Формат, съвместим с ATS с фотографски ключови думи'
+        ]
+      },
+      da: {
+        name: 'Fotograf',
+        slug: 'fotograf',
+        description: 'Fotografer fanger og skaber billeder ved hjælp af teknisk ekspertise, kreativitet og kompositionsfærdigheder. De arbejder i forskellige miljøer, herunder studier, begivenheder, kommercielle fotograferinger og fotoreportage.',
+        tips: [
+          'Præsenter dit portfolio med forskellige fotografiske stilarter',
+          'Fremhæv tekniske færdigheder med kameraer, belysning og redigeringssoftware',
+          'Fremhæv erfaring med forskellige typer fotografering',
+          'Inkluder kundearbejde og publicerede værker',
+          'Vis evne til at arbejde under pres og overholde deadlines'
+        ],
+        skills: [
+          'Kamerabediening og fotografitekniker',
+          'Belysningsopsætning og komposition',
+          'Foto redigeringssoftware (Photoshop, Lightroom)',
+          'Portræt-, begivenheds- og kommerciel fotografering',
+          'Farvekorrektion og efterbehandling',
+          'Kundekommunikation og samarbejde',
+          'Udstyr vedligeholdelse og teknisk viden'
+        ],
+        whyGood: [
+          'Tydelig struktur, der fremhæver fotografisk portfolio',
+          'Fremhæver tekniske færdigheder og kunstnerisk vision',
+          'Vis progression af fotografierfaring',
+          'Vis alsidighed på tværs af fotografiske stilarter',
+          'ATS-venligt format med fotografiske nøgleord'
+        ]
+      },
+      fi: {
+        name: 'Valokuvaaja',
+        slug: 'valokuvaaja',
+        description: 'Valokuvaajat tallentavat ja luovat kuvia käyttäen teknistä asiantuntemusta, luovuutta ja sommittelutaitoja. He työskentelevät eri ympäristöissä, mukaan lukien studiot, tapahtumat, kaupalliset kuvaukset ja valokuvajournalismi.',
+        tips: [
+          'Näytä portfolio erilaisilla valokuvaus tyyleillä',
+          'Korosta tekniset taidot kameroiden, valaistuksen ja muokkausohjelmien kanssa',
+          'Korosta kokemusta erilaisista valokuvaus tyypeistä',
+          'Sisällytä asiakastyö ja julkaistut teokset',
+          'Näytä kyky työskennellä paineen alla ja täyttää määräajat'
+        ],
+        skills: [
+          'Kameran käyttö ja valokuvaus tekniikat',
+          'Valaistus asennus ja sommittelu',
+          'Valokuvien muokkausohjelmistot (Photoshop, Lightroom)',
+          'Muotokuva-, tapahtuma- ja kaupallinen valokuvaus',
+          'Värikorjaus ja jälkikäsittely',
+          'Asiakasviestintä ja yhteistyö',
+          'Laitteiston ylläpito ja tekninen tieto'
+        ],
+        whyGood: [
+          'Selkeä rakenne, joka korostaa valokuvausportfoliota',
+          'Korostaa tekniset taidot ja taiteellisen näkemyksen',
+          'Näyttää valokuvauskokemuksen kehityksen',
+          'Näyttää monipuolisuutta valokuvaus tyyleissä',
+          'ATS-yhteensopiva muoto valokuvausavainsanoilla'
+        ]
+      },
+      sk: {
+        name: 'Fotograf',
+        slug: 'fotograf',
+        description: 'Fotografi zachytávajú a vytvárajú obrazy pomocou technickej odbornosti, kreativity a kompozičných zručností. Pracujú v rôznych prostrediach, vrátane štúdií, akcií, komerčných fotografií a fotoreportáží.',
+        tips: [
+          'Ukážte svoje portfolio s rôznorodými fotografickými štýlmi',
+          'Zdôraznite technické zručnosti s fotoaparátmi, osvetlením a editačným softvérom',
+          'Zdôraznite skúsenosti s rôznymi typmi fotografie',
+          'Zahrňte prácu s klientmi a publikované diela',
+          'Preukážte schopnosť pracovať pod tlakom a dodržiavať termíny'
+        ],
+        skills: [
+          'Prevádzka fotoaparátu a fotografické techniky',
+          'Nastavenie osvetlenia a kompozícia',
+          'Softvér na úpravu fotografií (Photoshop, Lightroom)',
+          'Portrétna, akčná a komerčná fotografia',
+          'Korekcia farieb a postprodukcia',
+          'Komunikácia a spolupráca s klientmi',
+          'Údržba zariadení a technické znalosti'
+        ],
+        whyGood: [
+          'Jasná štruktúra zdôrazňujúca fotografické portfolio',
+          'Zdôrazňuje technické zručnosti a umeleckú víziu',
+          'Ukazuje pokrok fotografických skúseností',
+          'Preukazuje všestrannosť vo fotografických štýloch',
+          'Formát kompatibilný s ATS s fotografickými kľúčovými slovami'
+        ]
+      },
+      no: {
+        name: 'Fotograf',
+        slug: 'fotograf',
+        description: 'Fotografer fanger og skaper bilder ved hjelp av teknisk ekspertise, kreativitet og komposisjonsferdigheter. De arbeider i ulike miljøer, inkludert studier, arrangementer, kommersielle fotograferinger og fotoreportasje.',
+        tips: [
+          'Vis porteføljen din med ulike fotografiske stilarter',
+          'Fremhev tekniske ferdigheter med kameraer, belysning og redigeringsprogramvare',
+          'Fremhev erfaring med ulike typer fotografering',
+          'Inkluder kundearbeid og publiserte verk',
+          'Vis evne til å arbeide under press og overholde frister'
+        ],
+        skills: [
+          'Kamerabruk og fotografiteknikker',
+          'Belysningsoppsett og komposisjon',
+          'Foto redigeringsprogramvare (Photoshop, Lightroom)',
+          'Portrett-, arrangement- og kommersiell fotografering',
+          'Fargekorrigering og etterbehandling',
+          'Kundekommunikasjon og samarbeid',
+          'Utstyr vedlikehold og teknisk kunnskap'
+        ],
+        whyGood: [
+          'Tydelig struktur som fremhever fotografisk portefølje',
+          'Fremhever tekniske ferdigheter og kunstnerisk visjon',
+          'Vis progresjon av fotografierfaring',
+          'Vis alsidighet på tvers av fotografiske stilarter',
+          'ATS-vennlig format med fotografiske nøkkelord'
+        ]
+      },
+      hr: {
+        name: 'Fotograf',
+        slug: 'fotograf',
+        description: 'Fotografi snimaju i stvaraju slike koristeći tehničku stručnost, kreativnost i vještine kompozicije. Rade u različitim okruženjima, uključujući studije, događaje, komercijalne snimanja i foto novinarstvo.',
+        tips: [
+          'Pokažite svoj portfolio s različitim fotografskim stilovima',
+          'Naglasite tehničke vještine s kamerama, osvjetljenjem i softverom za uređivanje',
+          'Naglasite iskustvo s različitim vrstama fotografije',
+          'Uključite rad s klijentima i objavljena djela',
+          'Pokažite sposobnost rada pod pritiskom i poštivanja rokova'
+        ],
+        skills: [
+          'Rad s kamerom i fotografiske tehnike',
+          'Postavljanje osvjetljenja i kompozicija',
+          'Softver za uređivanje fotografija (Photoshop, Lightroom)',
+          'Portretna, događajna i komercijalna fotografija',
+          'Korekcija boja i post-produkcija',
+          'Komunikacija i suradnja s klijentima',
+          'Održavanje opreme i tehnička znanja'
+        ],
+        whyGood: [
+          'Jasna struktura koja ističe fotografski portfolio',
+          'Naglašava tehničke vještine i umjetničku viziju',
+          'Pokazuje napredak fotografskog iskustva',
+          'Pokazuje svestranost u fotografskim stilovima',
+          'Format kompatibilan s ATS s fotografskim ključnim riječima'
+        ]
+      },
+      sr: {
+        name: 'Фотограф',
+        slug: 'fotograf',
+        description: 'Фотографи снимају и стварају слике користећи техничку стручност, креативност и вештине композиције. Раде у различитим окружењима, укључујући студије, догађаје, комерцијалне снимке и фото новинарство.',
+        tips: [
+          'Покажите свој портфолио са различитим фотографским стиловима',
+          'Нагласите техничке вештине са камерама, осветљењем и софтвером за уређивање',
+          'Нагласите искуство са различитим врстама фотографије',
+          'Укључите рад са клијентима и објављена дела',
+          'Покажите способност рада под притиском и поштовања рокова'
+        ],
+        skills: [
+          'Рад са камером и фотографске технике',
+          'Постављање осветљења и композиција',
+          'Софтвер за уређивање фотографија (Photoshop, Lightroom)',
+          'Портретна, догађајна и комерцијална фотографија',
+          'Корекција боја и пост-продукција',
+          'Комуникација и сарадња са клијентима',
+          'Одржавање опреме и техничка знања'
+        ],
+        whyGood: [
+          'Јасна структура која истиче фотографски портфолио',
+          'Наглашава техничке вештине и уметничку визију',
+          'Показује напредак фотографског искуства',
+          'Показује свестраност у фотографским стиловима',
+          'Формат компатибилан са ATS са фотографским кључним речима'
+        ]
+      }
+    }
   }
   // Note: More professions can be added here with full translations
 ]
