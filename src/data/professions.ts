@@ -9404,6 +9404,492 @@ export const PROFESSIONS: Profession[] = [
       hr: { name: 'Strojarski Inženjer', slug: 'strojarski-inzenjer', description: 'Strojarski inženjeri dizajniraju, razvijaju, grade i testiraju mehaničke i termičke uređaje, uključujući alate, motore i strojeve. Rade u različitim industrijama kako bi stvorili rješenja za mehaničke sustave.', tips: ['Istaknite svoju diplomu strojarskog inženjerstva i certifikate', 'Naglasite kompetenciju u CAD softveru i tehničke vještine', 'Pokažite projekte mehaničkog dizajna i inovacije', 'Uključite iskustvo s proizvodnim procesima i materijalima', 'Pokažite znanje termodinamike i mehanike'], skills: ['CAD softver (SolidWorks, AutoCAD, CATIA)', 'Termodinamika i prijenos topline', 'Mehanički dizajn i analiza', 'FEA i simulacijski alati', 'Proizvodni procesi i materijali', 'Upravljanje projektima i dokumentacija', 'Rješavanje problema i inovacije'], whyGood: ['Jasna struktura koja ističe stručnost u strojarskom inženjerstvu', 'Naglašava tehničke vještine i kompetenciju u CAD-u', 'Pokazuje praktično iskustvo na projektima i rezultate', 'Pokazuje razumijevanje mehaničkih principa', 'Format kompatibilan s ATS s inženjerskim ključnim riječima'] },
       sr: { name: 'Машински Инжењер', slug: 'masinski-inzenjer', description: 'Машински инжењери дизајнирају, развијају, граде и тестирају механичке и термичке уређаје, укључујући алате, моторе и машине. Раде у различитим индустријама како би створили решења за механичке системе.', tips: ['Истакните своју диплому машинског инжењерства и сертификате', 'Нагласите компетенцију у CAD софтверу и техничке вештине', 'Покажите пројекте механичког дизајна и иновације', 'Укључите искуство са производним процесима и материјалима', 'Покажите знање термодинамике и механике'], skills: ['CAD софтвер (SolidWorks, AutoCAD, CATIA)', 'Термодинамика и пренос топлоте', 'Механички дизајн и анализа', 'FEA и симулациони алати', 'Производни процеси и материјали', 'Управљање пројектима и документација', 'Решавање проблема и иновације'], whyGood: ['Јасна структура која истиче стручност у машинском инжењерству', 'Наглашава техничке вештине и компетенцију у CAD-у', 'Показује практично искуство на пројектима и резултате', 'Показује разумевање механичких принципа', 'Формат компатибилан са ATS са инжењерским кључним речима'] }
     }
+  },
+  // Engineering: Civil Engineer
+  {
+    id: 'civil-engineer',
+    category: 'engineering',
+    translations: {
+      en: {
+        name: 'Civil Engineer',
+        slug: 'civil-engineer',
+        description: 'Civil engineers design, build, and maintain infrastructure projects such as roads, bridges, buildings, water systems, and other large-scale construction projects. They ensure structural integrity and public safety.',
+        tips: [
+          'Highlight your civil engineering degree and PE license',
+          'Emphasize experience with infrastructure and construction projects',
+          'Showcase proficiency with engineering software (AutoCAD, Civil 3D)',
+          'Include knowledge of building codes and regulations',
+          'Demonstrate project management and site supervision skills'
+        ],
+        skills: [
+          'Structural analysis and design',
+          'AutoCAD and Civil 3D',
+          'Project management and scheduling',
+          'Geotechnical and foundation engineering',
+          'Construction materials and methods',
+          'Building codes and safety regulations',
+          'Site inspection and quality control'
+        ],
+        whyGood: [
+          'Clear structure highlighting civil engineering expertise',
+          'Emphasizes licensure and certifications',
+          'Shows infrastructure project experience',
+          'Demonstrates understanding of safety and regulations',
+          'ATS-friendly format with civil engineering keywords'
+        ]
+      },
+      nl: { name: 'Civiel Ingenieur', slug: 'civiel-ingenieur', description: '', tips: [], skills: [], whyGood: [] },
+      fr: { name: 'Ingénieur Civil', slug: 'ingenieur-civil', description: '', tips: [], skills: [], whyGood: [] },
+      es: { name: 'Ingeniero Civil', slug: 'ingeniero-civil', description: '', tips: [], skills: [], whyGood: [] },
+      de: { name: 'Bauingenieur', slug: 'bauingenieur', description: '', tips: [], skills: [], whyGood: [] },
+      it: { name: 'Ingegnere Civile', slug: 'ingegnere-civile', description: '', tips: [], skills: [], whyGood: [] },
+      pl: { name: 'Inżynier Budownictwa', slug: 'inzynier-budownictwa', description: '', tips: [], skills: [], whyGood: [] },
+      ro: { name: 'Inginer Civil', slug: 'inginer-civil', description: '', tips: [], skills: [], whyGood: [] },
+      hu: { name: 'Építőmérnök', slug: 'epitomernok', description: '', tips: [], skills: [], whyGood: [] },
+      el: { name: 'Πολιτικός Μηχανικός', slug: 'politikos-michanikos', description: '', tips: [], skills: [], whyGood: [] },
+      cs: { name: 'Stavební Inženýr', slug: 'stavebni-inzenyr', description: '', tips: [], skills: [], whyGood: [] },
+      pt: { name: 'Engenheiro Civil', slug: 'engenheiro-civil', description: '', tips: [], skills: [], whyGood: [] },
+      sv: { name: 'Civilingenjör', slug: 'civilingenjo', description: '', tips: [], skills: [], whyGood: [] },
+      bg: { name: 'Строителен Инженер', slug: 'stroitelen-inzhener', description: '', tips: [], skills: [], whyGood: [] },
+      da: { name: 'Bygningsingeniør', slug: 'bygningsingenior', description: '', tips: [], skills: [], whyGood: [] },
+      fi: { name: 'Rakennusinsinööri', slug: 'rakennusinsinoori', description: '', tips: [], skills: [], whyGood: [] },
+      sk: { name: 'Stavebný Inžinier', slug: 'stavebny-inzinier', description: '', tips: [], skills: [], whyGood: [] },
+      no: { name: 'Bygningsingeniør', slug: 'bygningsingenior', description: '', tips: [], skills: [], whyGood: [] },
+      hr: { name: 'Građevinski Inženjer', slug: 'gradjevinski-inzenjer', description: '', tips: [], skills: [], whyGood: [] },
+      sr: { name: 'Грађевински Инжењер', slug: 'gradjevinski-inzenjer', description: '', tips: [], skills: [], whyGood: [] }
+    }
+  },
+  // Sales: Account Manager
+  {
+    id: 'account-manager',
+    category: 'sales',
+    translations: {
+      en: {
+        name: 'Account Manager',
+        slug: 'account-manager',
+        description: 'Account managers maintain and grow relationships with existing clients, ensuring customer satisfaction and identifying opportunities for upselling and cross-selling products or services.',
+        tips: [
+          'Highlight your client relationship management experience',
+          'Emphasize revenue growth and retention metrics',
+          'Showcase CRM software proficiency',
+          'Include examples of client success stories',
+          'Demonstrate communication and negotiation skills'
+        ],
+        skills: [
+          'Client relationship management',
+          'Sales and account growth',
+          'CRM software (Salesforce, HubSpot)',
+          'Contract negotiation',
+          'Customer service and support',
+          'Strategic account planning',
+          'Presentation and communication'
+        ],
+        whyGood: [
+          'Clear structure highlighting client management expertise',
+          'Emphasizes revenue growth and retention',
+          'Shows customer satisfaction achievements',
+          'Demonstrates relationship-building abilities',
+          'ATS-friendly format with sales keywords'
+        ]
+      },
+      nl: { name: 'Accountmanager', slug: 'accountmanager', description: '', tips: [], skills: [], whyGood: [] },
+      fr: { name: 'Responsable de Compte', slug: 'responsable-compte', description: '', tips: [], skills: [], whyGood: [] },
+      es: { name: 'Gerente de Cuentas', slug: 'gerente-cuentas', description: '', tips: [], skills: [], whyGood: [] },
+      de: { name: 'Kundenbetreuer', slug: 'kundenbetreuer', description: '', tips: [], skills: [], whyGood: [] },
+      it: { name: 'Account Manager', slug: 'account-manager', description: '', tips: [], skills: [], whyGood: [] },
+      pl: { name: 'Menedżer Konta', slug: 'menedzer-konta', description: '', tips: [], skills: [], whyGood: [] },
+      ro: { name: 'Manager de Cont', slug: 'manager-cont', description: '', tips: [], skills: [], whyGood: [] },
+      hu: { name: 'Ügyfélfelelős', slug: 'ugyfelfelelos', description: '', tips: [], skills: [], whyGood: [] },
+      el: { name: 'Διαχειριστής Λογαριασμών', slug: 'diacheiristis-logariasmou', description: '', tips: [], skills: [], whyGood: [] },
+      cs: { name: 'Správce Účtů', slug: 'spravce-uctu', description: '', tips: [], skills: [], whyGood: [] },
+      pt: { name: 'Gerente de Contas', slug: 'gerente-contas', description: '', tips: [], skills: [], whyGood: [] },
+      sv: { name: 'Kontoansvarig', slug: 'kontoansvarig', description: '', tips: [], skills: [], whyGood: [] },
+      bg: { name: 'Мениджър Клиенти', slug: 'menidzhar-klienti', description: '', tips: [], skills: [], whyGood: [] },
+      da: { name: 'Account Manager', slug: 'account-manager', description: '', tips: [], skills: [], whyGood: [] },
+      fi: { name: 'Asiakkuuspäällikkö', slug: 'asiakkuuspaalliko', description: '', tips: [], skills: [], whyGood: [] },
+      sk: { name: 'Správca Účtov', slug: 'spravca-uctov', description: '', tips: [], skills: [], whyGood: [] },
+      no: { name: 'Kontoansvarlig', slug: 'kontoansvarlig', description: '', tips: [], skills: [], whyGood: [] },
+      hr: { name: 'Voditelj Računa', slug: 'voditelj-racuna', description: '', tips: [], skills: [], whyGood: [] },
+      sr: { name: 'Менаџер Налога', slug: 'menadzer-naloga', description: '', tips: [], skills: [], whyGood: [] }
+    }
+  },
+  // Sales: Retail Manager
+  {
+    id: 'retail-manager',
+    category: 'sales',
+    translations: {
+      en: {
+        name: 'Retail Manager',
+        slug: 'retail-manager',
+        description: 'Retail managers oversee store operations, manage staff, ensure customer satisfaction, and drive sales performance. They handle inventory, merchandising, and ensure smooth day-to-day operations.',
+        tips: [
+          'Highlight your retail management and leadership experience',
+          'Emphasize sales performance and revenue growth',
+          'Showcase staff training and team development',
+          'Include inventory management and merchandising skills',
+          'Demonstrate customer service excellence'
+        ],
+        skills: [
+          'Store operations and management',
+          'Staff recruitment and training',
+          'Sales and performance analysis',
+          'Inventory and merchandising',
+          'Customer service excellence',
+          'POS systems and retail software',
+          'Team leadership and motivation'
+        ],
+        whyGood: [
+          'Clear structure highlighting retail management expertise',
+          'Emphasizes sales performance and team leadership',
+          'Shows operational efficiency achievements',
+          'Demonstrates customer satisfaction focus',
+          'ATS-friendly format with retail keywords'
+        ]
+      },
+      nl: { name: 'Retail Manager', slug: 'retail-manager', description: '', tips: [], skills: [], whyGood: [] },
+      fr: { name: 'Directeur de Magasin', slug: 'directeur-magasin', description: '', tips: [], skills: [], whyGood: [] },
+      es: { name: 'Gerente de Tienda', slug: 'gerente-tienda', description: '', tips: [], skills: [], whyGood: [] },
+      de: { name: 'Filialleiter', slug: 'filialleiter', description: '', tips: [], skills: [], whyGood: [] },
+      it: { name: 'Responsabile Negozio', slug: 'responsabile-negozio', description: '', tips: [], skills: [], whyGood: [] },
+      pl: { name: 'Menedżer Sklepu', slug: 'menedzer-sklepu', description: '', tips: [], skills: [], whyGood: [] },
+      ro: { name: 'Manager Retail', slug: 'manager-retail', description: '', tips: [], skills: [], whyGood: [] },
+      hu: { name: 'Üzletvezető', slug: 'uzletvezeto', description: '', tips: [], skills: [], whyGood: [] },
+      el: { name: 'Διευθυντής Καταστήματος', slug: 'diefthyntis-katastimatos', description: '', tips: [], skills: [], whyGood: [] },
+      cs: { name: 'Manažer Prodejny', slug: 'manazer-prodejny', description: '', tips: [], skills: [], whyGood: [] },
+      pt: { name: 'Gerente de Loja', slug: 'gerente-loja', description: '', tips: [], skills: [], whyGood: [] },
+      sv: { name: 'Butikschef', slug: 'butikschef', description: '', tips: [], skills: [], whyGood: [] },
+      bg: { name: 'Мениджър Магазин', slug: 'menidzhar-magazin', description: '', tips: [], skills: [], whyGood: [] },
+      da: { name: 'Butikschef', slug: 'butikschef', description: '', tips: [], skills: [], whyGood: [] },
+      fi: { name: 'Myymäläpäällikkö', slug: 'myymalapaallikko', description: '', tips: [], skills: [], whyGood: [] },
+      sk: { name: 'Manažér Predajne', slug: 'manazer-predajne', description: '', tips: [], skills: [], whyGood: [] },
+      no: { name: 'Butikksjef', slug: 'butikksjef', description: '', tips: [], skills: [], whyGood: [] },
+      hr: { name: 'Voditelj Trgovine', slug: 'voditelj-trgovine', description: '', tips: [], skills: [], whyGood: [] },
+      sr: { name: 'Менаџер Продавнице', slug: 'menadzer-prodavnice', description: '', tips: [], skills: [], whyGood: [] }
+    }
+  },
+  // Administration: Office Manager
+  {
+    id: 'office-manager',
+    category: 'administration',
+    translations: {
+      en: {
+        name: 'Office Manager',
+        slug: 'office-manager',
+        description: 'Office managers oversee administrative operations, manage office staff, coordinate facilities, and ensure efficient day-to-day operations. They handle budgets, supplies, and support company operations.',
+        tips: [
+          'Highlight your office management and organizational skills',
+          'Emphasize experience with budget management and cost control',
+          'Showcase staff coordination and team support',
+          'Include proficiency with office software and systems',
+          'Demonstrate problem-solving and multitasking abilities'
+        ],
+        skills: [
+          'Office administration and operations',
+          'Budget management and cost control',
+          'Staff coordination and supervision',
+          'Microsoft Office Suite',
+          'Vendor and facility management',
+          'Event planning and coordination',
+          'Communication and organization'
+        ],
+        whyGood: [
+          'Clear structure highlighting office management expertise',
+          'Emphasizes organizational and coordination skills',
+          'Shows operational efficiency achievements',
+          'Demonstrates budget and resource management',
+          'ATS-friendly format with administrative keywords'
+        ]
+      },
+      nl: { name: 'Officemanager', slug: 'officemanager', description: '', tips: [], skills: [], whyGood: [] },
+      fr: { name: 'Responsable de Bureau', slug: 'responsable-bureau', description: '', tips: [], skills: [], whyGood: [] },
+      es: { name: 'Gerente de Oficina', slug: 'gerente-oficina', description: '', tips: [], skills: [], whyGood: [] },
+      de: { name: 'Büroleiter', slug: 'buroleiter', description: '', tips: [], skills: [], whyGood: [] },
+      it: { name: 'Responsabile Ufficio', slug: 'responsabile-ufficio', description: '', tips: [], skills: [], whyGood: [] },
+      pl: { name: 'Menedżer Biura', slug: 'menedzer-biura', description: '', tips: [], skills: [], whyGood: [] },
+      ro: { name: 'Manager de Birou', slug: 'manager-birou', description: '', tips: [], skills: [], whyGood: [] },
+      hu: { name: 'Irodavezető', slug: 'irodavezeto', description: '', tips: [], skills: [], whyGood: [] },
+      el: { name: 'Διευθυντής Γραφείου', slug: 'diefthyntis-grafeiou', description: '', tips: [], skills: [], whyGood: [] },
+      cs: { name: 'Manažer Kanceláře', slug: 'manazer-kancelare', description: '', tips: [], skills: [], whyGood: [] },
+      pt: { name: 'Gerente de Escritório', slug: 'gerente-escritorio', description: '', tips: [], skills: [], whyGood: [] },
+      sv: { name: 'Kontorschef', slug: 'kontorschef', description: '', tips: [], skills: [], whyGood: [] },
+      bg: { name: 'Офис Мениджър', slug: 'ofis-menidzhar', description: '', tips: [], skills: [], whyGood: [] },
+      da: { name: 'Kontorchef', slug: 'kontorchef', description: '', tips: [], skills: [], whyGood: [] },
+      fi: { name: 'Toimistopäällikkö', slug: 'toimistopaalliko', description: '', tips: [], skills: [], whyGood: [] },
+      sk: { name: 'Manažér Kancelárie', slug: 'manazer-kancelarie', description: '', tips: [], skills: [], whyGood: [] },
+      no: { name: 'Kontorsjef', slug: 'kontorsjef', description: '', tips: [], skills: [], whyGood: [] },
+      hr: { name: 'Voditelj Ureda', slug: 'voditelj-ureda', description: '', tips: [], skills: [], whyGood: [] },
+      sr: { name: 'Менаџер Канцеларије', slug: 'menadzer-kancelarije', description: '', tips: [], skills: [], whyGood: [] }
+    }
+  },
+  // Administration: Executive Assistant
+  {
+    id: 'executive-assistant',
+    category: 'administration',
+    translations: {
+      en: {
+        name: 'Executive Assistant',
+        slug: 'executive-assistant',
+        description: 'Executive assistants provide high-level administrative support to executives and senior management. They manage schedules, coordinate meetings, handle correspondence, and support strategic initiatives.',
+        tips: [
+          'Highlight your executive support and coordination experience',
+          'Emphasize discretion and confidentiality',
+          'Showcase calendar management and travel coordination',
+          'Include proficiency with advanced office software',
+          'Demonstrate communication and organizational excellence'
+        ],
+        skills: [
+          'Executive support and assistance',
+          'Calendar and meeting management',
+          'Travel coordination and logistics',
+          'Advanced Microsoft Office',
+          'Document preparation and editing',
+          'Confidentiality and discretion',
+          'Communication and problem-solving'
+        ],
+        whyGood: [
+          'Clear structure highlighting executive support expertise',
+          'Emphasizes organizational and coordination skills',
+          'Shows discretion and professionalism',
+          'Demonstrates multitasking and efficiency',
+          'ATS-friendly format with administrative keywords'
+        ]
+      },
+      nl: { name: 'Directiesecretaresse', slug: 'directiesecretaresse', description: '', tips: [], skills: [], whyGood: [] },
+      fr: { name: 'Assistant de Direction', slug: 'assistant-direction', description: '', tips: [], skills: [], whyGood: [] },
+      es: { name: 'Asistente Ejecutivo', slug: 'asistente-ejecutivo', description: '', tips: [], skills: [], whyGood: [] },
+      de: { name: 'Assistent der Geschäftsleitung', slug: 'assistent-geschaftsleitung', description: '', tips: [], skills: [], whyGood: [] },
+      it: { name: 'Assistente Esecutivo', slug: 'assistente-esecutivo', description: '', tips: [], skills: [], whyGood: [] },
+      pl: { name: 'Asystent Zarządu', slug: 'asystent-zarzadu', description: '', tips: [], skills: [], whyGood: [] },
+      ro: { name: 'Asistent Executiv', slug: 'asistent-executiv', description: '', tips: [], skills: [], whyGood: [] },
+      hu: { name: 'Ügyvezető Asszisztens', slug: 'ugyvezeto-asszisztens', description: '', tips: [], skills: [], whyGood: [] },
+      el: { name: 'Βοηθός Διευθυντή', slug: 'voithos-diefthynti', description: '', tips: [], skills: [], whyGood: [] },
+      cs: { name: 'Asistent Vedení', slug: 'asistent-vedeni', description: '', tips: [], skills: [], whyGood: [] },
+      pt: { name: 'Assistente Executivo', slug: 'assistente-executivo', description: '', tips: [], skills: [], whyGood: [] },
+      sv: { name: 'Verkställande Assistent', slug: 'verkstallande-assistent', description: '', tips: [], skills: [], whyGood: [] },
+      bg: { name: 'Изпълнителен Асистент', slug: 'izpalnitel-asistent', description: '', tips: [], skills: [], whyGood: [] },
+      da: { name: 'Administrerende Assistent', slug: 'administrerende-assistent', description: '', tips: [], skills: [], whyGood: [] },
+      fi: { name: 'Toimitusjohtajan Assistentti', slug: 'toimitusjohtajan-assistentti', description: '', tips: [], skills: [], whyGood: [] },
+      sk: { name: 'Asistent Vedenia', slug: 'asistent-vedenia', description: '', tips: [], skills: [], whyGood: [] },
+      no: { name: 'Administrerende Assistent', slug: 'administrerende-assistent', description: '', tips: [], skills: [], whyGood: [] },
+      hr: { name: 'Izvršni Asistent', slug: 'izvrsni-asistent', description: '', tips: [], skills: [], whyGood: [] },
+      sr: { name: 'Извршни Асистент', slug: 'izvrsni-asistent', description: '', tips: [], skills: [], whyGood: [] }
+    }
+  },
+  // Hospitality: Hotel Manager
+  {
+    id: 'hotel-manager',
+    category: 'hospitality',
+    translations: {
+      en: {
+        name: 'Hotel Manager',
+        slug: 'hotel-manager',
+        description: 'Hotel managers oversee all hotel operations, including guest services, staff management, budgeting, and facility maintenance. They ensure exceptional guest experiences and profitable operations.',
+        tips: [
+          'Highlight your hospitality management experience',
+          'Emphasize guest satisfaction scores and reviews',
+          'Showcase staff training and team development',
+          'Include revenue management and budgeting skills',
+          'Demonstrate crisis management and problem-solving'
+        ],
+        skills: [
+          'Hotel operations and management',
+          'Guest services and satisfaction',
+          'Staff recruitment and training',
+          'Revenue and budget management',
+          'Property management systems',
+          'Event coordination',
+          'Customer service excellence'
+        ],
+        whyGood: [
+          'Clear structure highlighting hospitality management expertise',
+          'Emphasizes guest satisfaction and service excellence',
+          'Shows operational efficiency and profitability',
+          'Demonstrates leadership and team development',
+          'ATS-friendly format with hospitality keywords'
+        ]
+      },
+      nl: { name: 'Hotelmanager', slug: 'hotelmanager', description: '', tips: [], skills: [], whyGood: [] },
+      fr: { name: 'Directeur d\'Hôtel', slug: 'directeur-hotel', description: '', tips: [], skills: [], whyGood: [] },
+      es: { name: 'Gerente de Hotel', slug: 'gerente-hotel', description: '', tips: [], skills: [], whyGood: [] },
+      de: { name: 'Hotelmanager', slug: 'hotelmanager', description: '', tips: [], skills: [], whyGood: [] },
+      it: { name: 'Direttore d\'Albergo', slug: 'direttore-albergo', description: '', tips: [], skills: [], whyGood: [] },
+      pl: { name: 'Menedżer Hotelu', slug: 'menedzer-hotelu', description: '', tips: [], skills: [], whyGood: [] },
+      ro: { name: 'Manager Hotel', slug: 'manager-hotel', description: '', tips: [], skills: [], whyGood: [] },
+      hu: { name: 'Szállodavezető', slug: 'szallodavezeto', description: '', tips: [], skills: [], whyGood: [] },
+      el: { name: 'Διευθυντής Ξενοδοχείου', slug: 'diefthyntis-xenodocheiou', description: '', tips: [], skills: [], whyGood: [] },
+      cs: { name: 'Manažer Hotelu', slug: 'manazer-hotelu', description: '', tips: [], skills: [], whyGood: [] },
+      pt: { name: 'Gerente de Hotel', slug: 'gerente-hotel', description: '', tips: [], skills: [], whyGood: [] },
+      sv: { name: 'Hotellchef', slug: 'hotellchef', description: '', tips: [], skills: [], whyGood: [] },
+      bg: { name: 'Мениджър Хотел', slug: 'menidzhar-hotel', description: '', tips: [], skills: [], whyGood: [] },
+      da: { name: 'Hotelchef', slug: 'hotelchef', description: '', tips: [], skills: [], whyGood: [] },
+      fi: { name: 'Hotellinjohtaja', slug: 'hotellinjohtaja', description: '', tips: [], skills: [], whyGood: [] },
+      sk: { name: 'Manažér Hotela', slug: 'manazer-hotela', description: '', tips: [], skills: [], whyGood: [] },
+      no: { name: 'Hotellsjef', slug: 'hotellsjef', description: '', tips: [], skills: [], whyGood: [] },
+      hr: { name: 'Voditelj Hotela', slug: 'voditelj-hotela', description: '', tips: [], skills: [], whyGood: [] },
+      sr: { name: 'Менаџер Хотела', slug: 'menadzer-hotela', description: '', tips: [], skills: [], whyGood: [] }
+    }
+  },
+  // Hospitality: Restaurant Manager
+  {
+    id: 'restaurant-manager',
+    category: 'hospitality',
+    translations: {
+      en: {
+        name: 'Restaurant Manager',
+        slug: 'restaurant-manager',
+        description: 'Restaurant managers oversee restaurant operations, manage staff, ensure food quality and safety, and deliver exceptional dining experiences. They handle inventory, budgeting, and customer satisfaction.',
+        tips: [
+          'Highlight your restaurant management and leadership experience',
+          'Emphasize customer satisfaction and service excellence',
+          'Showcase staff training and team development',
+          'Include food safety and health regulations knowledge',
+          'Demonstrate inventory and cost control skills'
+        ],
+        skills: [
+          'Restaurant operations and management',
+          'Staff recruitment and training',
+          'Food safety and health regulations',
+          'Inventory and cost control',
+          'Customer service excellence',
+          'POS systems and restaurant software',
+          'Menu planning and coordination'
+        ],
+        whyGood: [
+          'Clear structure highlighting restaurant management expertise',
+          'Emphasizes customer satisfaction and service quality',
+          'Shows operational efficiency and profitability',
+          'Demonstrates team leadership and development',
+          'ATS-friendly format with hospitality keywords'
+        ]
+      },
+      nl: { name: 'Restaurantmanager', slug: 'restaurantmanager', description: '', tips: [], skills: [], whyGood: [] },
+      fr: { name: 'Directeur de Restaurant', slug: 'directeur-restaurant', description: '', tips: [], skills: [], whyGood: [] },
+      es: { name: 'Gerente de Restaurante', slug: 'gerente-restaurante', description: '', tips: [], skills: [], whyGood: [] },
+      de: { name: 'Restaurantleiter', slug: 'restaurantleiter', description: '', tips: [], skills: [], whyGood: [] },
+      it: { name: 'Direttore di Ristorante', slug: 'direttore-ristorante', description: '', tips: [], skills: [], whyGood: [] },
+      pl: { name: 'Menedżer Restauracji', slug: 'menedzer-restauracji', description: '', tips: [], skills: [], whyGood: [] },
+      ro: { name: 'Manager Restaurant', slug: 'manager-restaurant', description: '', tips: [], skills: [], whyGood: [] },
+      hu: { name: 'Étteremvezető', slug: 'etteremvezeto', description: '', tips: [], skills: [], whyGood: [] },
+      el: { name: 'Διευθυντής Εστιατορίου', slug: 'diefthyntis-estiatoriou', description: '', tips: [], skills: [], whyGood: [] },
+      cs: { name: 'Manažer Restaurace', slug: 'manazer-restaurace', description: '', tips: [], skills: [], whyGood: [] },
+      pt: { name: 'Gerente de Restaurante', slug: 'gerente-restaurante', description: '', tips: [], skills: [], whyGood: [] },
+      sv: { name: 'Restaurangchef', slug: 'restaurangchef', description: '', tips: [], skills: [], whyGood: [] },
+      bg: { name: 'Мениджър Ресторант', slug: 'menidzhar-restorant', description: '', tips: [], skills: [], whyGood: [] },
+      da: { name: 'Restaurantchef', slug: 'restaurantchef', description: '', tips: [], skills: [], whyGood: [] },
+      fi: { name: 'Ravintolap päällikkö', slug: 'ravintolapaalliko', description: '', tips: [], skills: [], whyGood: [] },
+      sk: { name: 'Manažér Reštaurácie', slug: 'manazer-restauracie', description: '', tips: [], skills: [], whyGood: [] },
+      no: { name: 'Restaurantsjef', slug: 'restaurantsjef', description: '', tips: [], skills: [], whyGood: [] },
+      hr: { name: 'Voditelj Restorana', slug: 'voditelj-restorana', description: '', tips: [], skills: [], whyGood: [] },
+      sr: { name: 'Менаџер Ресторана', slug: 'menadzer-restorana', description: '', tips: [], skills: [], whyGood: [] }
+    }
+  },
+  // Legal: Paralegal
+  {
+    id: 'paralegal',
+    category: 'legal',
+    translations: {
+      en: {
+        name: 'Paralegal',
+        slug: 'paralegal',
+        description: 'Paralegals assist lawyers with legal research, document preparation, case management, and client communication. They provide critical support in legal proceedings and administrative tasks.',
+        tips: [
+          'Highlight your paralegal certification and education',
+          'Emphasize legal research and writing skills',
+          'Showcase experience with legal software and databases',
+          'Include case management and organizational abilities',
+          'Demonstrate attention to detail and confidentiality'
+        ],
+        skills: [
+          'Legal research and analysis',
+          'Document preparation and filing',
+          'Case management and organization',
+          'Legal software and databases',
+          'Client communication and support',
+          'Court procedures and regulations',
+          'Confidentiality and ethics'
+        ],
+        whyGood: [
+          'Clear structure highlighting paralegal expertise',
+          'Emphasizes legal research and writing skills',
+          'Shows case management experience',
+          'Demonstrates attention to detail and accuracy',
+          'ATS-friendly format with legal keywords'
+        ]
+      },
+      nl: { name: 'Paralegal', slug: 'paralegal', description: '', tips: [], skills: [], whyGood: [] },
+      fr: { name: 'Assistant Juridique', slug: 'assistant-juridique', description: '', tips: [], skills: [], whyGood: [] },
+      es: { name: 'Asistente Legal', slug: 'asistente-legal', description: '', tips: [], skills: [], whyGood: [] },
+      de: { name: 'Rechtsassistent', slug: 'rechtsassistent', description: '', tips: [], skills: [], whyGood: [] },
+      it: { name: 'Paralegale', slug: 'paralegale', description: '', tips: [], skills: [], whyGood: [] },
+      pl: { name: 'Asystent Prawny', slug: 'asystent-prawny', description: '', tips: [], skills: [], whyGood: [] },
+      ro: { name: 'Asistent Juridic', slug: 'asistent-juridic', description: '', tips: [], skills: [], whyGood: [] },
+      hu: { name: 'Jogi Asszisztens', slug: 'jogi-asszisztens', description: '', tips: [], skills: [], whyGood: [] },
+      el: { name: 'Νομικός Βοηθός', slug: 'nomikos-voithos', description: '', tips: [], skills: [], whyGood: [] },
+      cs: { name: 'Právní Asistent', slug: 'pravni-asistent', description: '', tips: [], skills: [], whyGood: [] },
+      pt: { name: 'Assistente Jurídico', slug: 'assistente-juridico', description: '', tips: [], skills: [], whyGood: [] },
+      sv: { name: 'Juridisk Assistent', slug: 'juridisk-assistent', description: '', tips: [], skills: [], whyGood: [] },
+      bg: { name: 'Юридически Асистент', slug: 'yuridicheski-asistent', description: '', tips: [], skills: [], whyGood: [] },
+      da: { name: 'Juridisk Assistent', slug: 'juridisk-assistent', description: '', tips: [], skills: [], whyGood: [] },
+      fi: { name: 'Oikeudellinen Assistentti', slug: 'oikeudellinen-assistentti', description: '', tips: [], skills: [], whyGood: [] },
+      sk: { name: 'Právny Asistent', slug: 'pravny-asistent', description: '', tips: [], skills: [], whyGood: [] },
+      no: { name: 'Juridisk Assistent', slug: 'juridisk-assistent', description: '', tips: [], skills: [], whyGood: [] },
+      hr: { name: 'Pravni Asistent', slug: 'pravni-asistent', description: '', tips: [], skills: [], whyGood: [] },
+      sr: { name: 'Правни Асистент', slug: 'pravni-asistent', description: '', tips: [], skills: [], whyGood: [] }
+    }
+  },
+  // Legal: Legal Assistant
+  {
+    id: 'legal-assistant',
+    category: 'legal',
+    translations: {
+      en: {
+        name: 'Legal Assistant',
+        slug: 'legal-assistant',
+        description: 'Legal assistants provide administrative support to lawyers and legal teams. They manage schedules, prepare documents, organize files, and assist with client communications and case coordination.',
+        tips: [
+          'Highlight your legal administrative experience',
+          'Emphasize organizational and time management skills',
+          'Showcase proficiency with legal software and databases',
+          'Include document management and filing expertise',
+          'Demonstrate attention to detail and confidentiality'
+        ],
+        skills: [
+          'Legal administrative support',
+          'Document preparation and management',
+          'Calendar and appointment scheduling',
+          'Legal software and databases',
+          'Client communication and support',
+          'Filing and record keeping',
+          'Confidentiality and professionalism'
+        ],
+        whyGood: [
+          'Clear structure highlighting legal administrative expertise',
+          'Emphasizes organizational and support skills',
+          'Shows document management proficiency',
+          'Demonstrates attention to detail and reliability',
+          'ATS-friendly format with legal administrative keywords'
+        ]
+      },
+      nl: { name: 'Juridisch Assistent', slug: 'juridisch-assistent', description: '', tips: [], skills: [], whyGood: [] },
+      fr: { name: 'Secrétaire Juridique', slug: 'secretaire-juridique', description: '', tips: [], skills: [], whyGood: [] },
+      es: { name: 'Asistente Administrativo Legal', slug: 'asistente-administrativo-legal', description: '', tips: [], skills: [], whyGood: [] },
+      de: { name: 'Rechtsfachangestellter', slug: 'rechtsfachangestellter', description: '', tips: [], skills: [], whyGood: [] },
+      it: { name: 'Assistente Legale', slug: 'assistente-legale', description: '', tips: [], skills: [], whyGood: [] },
+      pl: { name: 'Asystent Administracyjny Prawny', slug: 'asystent-administracyjny-prawny', description: '', tips: [], skills: [], whyGood: [] },
+      ro: { name: 'Asistent Administrativ Juridic', slug: 'asistent-administrativ-juridic', description: '', tips: [], skills: [], whyGood: [] },
+      hu: { name: 'Jogi Adminisztratív Asszisztens', slug: 'jogi-adminisztrativ-asszisztens', description: '', tips: [], skills: [], whyGood: [] },
+      el: { name: 'Νομικός Διοικητικός Βοηθός', slug: 'nomikos-dioikitikos-voithos', description: '', tips: [], skills: [], whyGood: [] },
+      cs: { name: 'Právní Administrativní Asistent', slug: 'pravni-administrativni-asistent', description: '', tips: [], skills: [], whyGood: [] },
+      pt: { name: 'Assistente Administrativo Jurídico', slug: 'assistente-administrativo-juridico', description: '', tips: [], skills: [], whyGood: [] },
+      sv: { name: 'Juridisk Administrativ Assistent', slug: 'juridisk-administrativ-assistent', description: '', tips: [], skills: [], whyGood: [] },
+      bg: { name: 'Юридически Административен Асистент', slug: 'yuridicheski-administrativen-asistent', description: '', tips: [], skills: [], whyGood: [] },
+      da: { name: 'Juridisk Administrativ Assistent', slug: 'juridisk-administrativ-assistent', description: '', tips: [], skills: [], whyGood: [] },
+      fi: { name: 'Oikeudellinen Hallinnollinen Assistentti', slug: 'oikeudellinen-hallinnollinen-assistentti', description: '', tips: [], skills: [], whyGood: [] },
+      sk: { name: 'Právny Administratívny Asistent', slug: 'pravny-administrativny-asistent', description: '', tips: [], skills: [], whyGood: [] },
+      no: { name: 'Juridisk Administrativ Assistent', slug: 'juridisk-administrativ-assistent', description: '', tips: [], skills: [], whyGood: [] },
+      hr: { name: 'Pravni Administrativni Asistent', slug: 'pravni-administrativni-asistent', description: '', tips: [], skills: [], whyGood: [] },
+      sr: { name: 'Правни Административни Асистент', slug: 'pravni-administrativni-asistent', description: '', tips: [], skills: [], whyGood: [] }
+    }
   }
   // Note: More professions can be added here with full translations
 ]
