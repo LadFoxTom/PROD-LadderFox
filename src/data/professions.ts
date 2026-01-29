@@ -9438,7 +9438,34 @@ export const PROFESSIONS: Profession[] = [
           'ATS-friendly format with civil engineering keywords'
         ]
       },
-      nl: { name: 'Civiel Ingenieur', slug: 'civiel-ingenieur', description: '', tips: [], skills: [], whyGood: [] },
+      nl: {
+        name: 'Civiel Ingenieur',
+        slug: 'civiel-ingenieur',
+        description: 'Civiel ingenieurs ontwerpen, bouwen en onderhouden infrastructuurprojecten zoals wegen, bruggen, gebouwen, watersystemen en andere grootschalige bouwprojecten. Ze zorgen voor structurele integriteit en openbare veiligheid.',
+        tips: [
+          'Benadruk je civiel ingenieursdiploma en PE licentie',
+          'Leg nadruk op ervaring met infrastructuur- en bouwprojecten',
+          'Toon vaardigheid met ingenieurssoftware (AutoCAD, Civil 3D)',
+          'Vermeld kennis van bouwvoorschriften en regelgeving',
+          'Demonstreer projectmanagement en bouwplaatsbegeleidingsvaardigheden'
+        ],
+        skills: [
+          'Structurele analyse en ontwerp',
+          'AutoCAD en Civil 3D',
+          'Projectmanagement en planning',
+          'Geotechniek en funderingsengineering',
+          'Bouwmaterialen en -methoden',
+          'Bouwvoorschriften en veiligheidsregelgeving',
+          'Bouwplaatsinspectie en kwaliteitscontrole'
+        ],
+        whyGood: [
+          'Duidelijke structuur die civiel ingenieurs expertise benadrukt',
+          'Legt nadruk op licentie en certificeringen',
+          'Toont infrastructuurprojectervaring',
+          'Demonstreert begrip van veiligheid en regelgeving',
+          'ATS-vriendelijk formaat met civiel ingenieurs trefwoorden'
+        ]
+      },
       fr: { name: 'Ingénieur Civil', slug: 'ingenieur-civil', description: '', tips: [], skills: [], whyGood: [] },
       es: { name: 'Ingeniero Civil', slug: 'ingeniero-civil', description: '', tips: [], skills: [], whyGood: [] },
       de: { name: 'Bauingenieur', slug: 'bauingenieur', description: '', tips: [], skills: [], whyGood: [] },
@@ -9492,7 +9519,34 @@ export const PROFESSIONS: Profession[] = [
           'ATS-friendly format with sales keywords'
         ]
       },
-      nl: { name: 'Accountmanager', slug: 'accountmanager', description: '', tips: [], skills: [], whyGood: [] },
+      nl: {
+        name: 'Accountmanager',
+        slug: 'accountmanager',
+        description: 'Accountmanagers onderhouden en groeien relaties met bestaande klanten, zorgen voor klantentevredenheid en identificeren kansen voor upselling en cross-selling van producten of diensten.',
+        tips: [
+          'Benadruk je klantrelatiebeheerervaring',
+          'Leg nadruk op omzetgroei en retentiemetrieken',
+          'Toon CRM-softwarevaardigheid',
+          'Vermeld voorbeelden van klantsuccesverhalen',
+          'Demonstreer communicatie- en onderhandelingsvaardigheden'
+        ],
+        skills: [
+          'Klantrelatiebeheer',
+          'Verkoop en accountgroei',
+          'CRM-software (Salesforce, HubSpot)',
+          'Contractonderhandeling',
+          'Klantenservice en ondersteuning',
+          'Strategische accountplanning',
+          'Presentatie en communicatie'
+        ],
+        whyGood: [
+          'Duidelijke structuur die klantbeheer expertise benadrukt',
+          'Legt nadruk op omzetgroei en retentie',
+          'Toont klantentevredenheidsprestaties',
+          'Demonstreert relatieopbouwende vaardigheden',
+          'ATS-vriendelijk formaat met verkoop trefwoorden'
+        ]
+      },
       fr: { name: 'Responsable de Compte', slug: 'responsable-compte', description: '', tips: [], skills: [], whyGood: [] },
       es: { name: 'Gerente de Cuentas', slug: 'gerente-cuentas', description: '', tips: [], skills: [], whyGood: [] },
       de: { name: 'Kundenbetreuer', slug: 'kundenbetreuer', description: '', tips: [], skills: [], whyGood: [] },
@@ -9546,7 +9600,34 @@ export const PROFESSIONS: Profession[] = [
           'ATS-friendly format with retail keywords'
         ]
       },
-      nl: { name: 'Retail Manager', slug: 'retail-manager', description: '', tips: [], skills: [], whyGood: [] },
+      nl: {
+        name: 'Retail Manager',
+        slug: 'retail-manager',
+        description: 'Retail managers beheren winkeloperaties, leiden personeel, zorgen voor klantentevredenheid en stimuleren verkoopprestaties. Ze beheren voorraad, merchandising en zorgen voor soepele dagelijkse operaties.',
+        tips: [
+          'Benadruk je retailmanagement en leiderschapservaring',
+          'Leg nadruk op verkoopprestaties en omzetgroei',
+          'Toon personeelstraining en teamontwikkeling',
+          'Vermeld voorraadbeheer en merchandisingvaardigheden',
+          'Demonstreer klantenservice excellentie'
+        ],
+        skills: [
+          'Winkeloperaties en -beheer',
+          'Personeelswerving en -training',
+          'Verkoop- en prestatieanalyse',
+          'Voorraad en merchandising',
+          'Klantenservice excellentie',
+          'Kassasystemen en retailsoftware',
+          'Teamleiderschap en motivatie'
+        ],
+        whyGood: [
+          'Duidelijke structuur die retailmanagement expertise benadrukt',
+          'Legt nadruk op verkoopprestaties en teamleiderschap',
+          'Toont operationele efficiëntie prestaties',
+          'Demonstreert focus op klantentevredenheid',
+          'ATS-vriendelijk formaat met retail trefwoorden'
+        ]
+      },
       fr: { name: 'Directeur de Magasin', slug: 'directeur-magasin', description: '', tips: [], skills: [], whyGood: [] },
       es: { name: 'Gerente de Tienda', slug: 'gerente-tienda', description: '', tips: [], skills: [], whyGood: [] },
       de: { name: 'Filialleiter', slug: 'filialleiter', description: '', tips: [], skills: [], whyGood: [] },
