@@ -345,7 +345,7 @@ export default function ExamplesOverviewPage({ type, language }: ExamplesOvervie
           {/* Introduction Section */}
           <section className="rounded-lg p-8 mb-8" style={{ backgroundColor: 'var(--bg-elevated)', border: '1px solid var(--border-subtle)' }}>
             <h2 className="text-2xl font-bold mb-4" style={{ color: 'var(--text-primary)' }}>
-              {t('examples.overview.about_title') || `About ${typeName}s`}
+              {(t('examples.overview.about_title') || `About ${typeName}s`).replace('{typeName}', typeName)}
             </h2>
             <div className="prose max-w-none" style={{ color: 'var(--text-secondary)' }}>
               {type === 'cv' ? (

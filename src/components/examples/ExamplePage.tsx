@@ -391,7 +391,7 @@ export default function ExamplePage({ professionId, type, language }: ExamplePag
           {/* Tips */}
           <section className="rounded-lg p-8 mb-8" style={{ backgroundColor: 'var(--bg-elevated)', border: '1px solid var(--border-subtle)' }}>
             <h2 className="text-2xl font-bold mb-6" style={{ color: 'var(--text-primary)' }}>
-              {t('examples.tips.title') || 'Tips for Creating Your {typeName}'}
+              {(t('examples.tips.title') || 'Tips for Creating Your {typeName}').replace('{typeName}', typeName)}
             </h2>
             <div className="space-y-4">
               {profession.tips.map((tip, index) => (
@@ -421,16 +421,16 @@ export default function ExamplePage({ professionId, type, language }: ExamplePag
           {/* CTA Section */}
           <section className="bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg shadow-lg p-8 text-center">
             <h2 className="text-3xl font-bold mb-4 text-white">
-              {t('examples.cta.title') || 'Ready to Create Your Own {typeName}?'}
+              {(t('examples.cta.title') || 'Ready to Create Your Own {typeName}?').replace('{typeName}', typeName)}
             </h2>
             <p className="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
-              {t('examples.cta.description') || 'Use our AI-powered builder to create a professional {typeName} tailored to your experience and skills.'}
+              {(t('examples.cta.description') || 'Use our AI-powered builder to create a professional {typeName} tailored to your experience and skills.').replace('{typeName}', typeName)}
             </p>
             <Link
               href={ctaUrl}
               className="inline-flex items-center gap-2 bg-white text-blue-600 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-blue-50 transition-colors shadow-lg"
             >
-              {t('examples.cta.button') || 'Create Your {typeName}'}
+              {(t('examples.cta.button') || 'Create Your {typeName}').replace('{typeName}', typeName)}
               <FaArrowRight />
             </Link>
           </section>
@@ -450,7 +450,7 @@ export default function ExamplePage({ professionId, type, language }: ExamplePag
                 }}
               >
                 <h3 className="font-semibold mb-2" style={{ color: 'var(--text-primary)' }}>
-                  {t('examples.related.all') || 'All {typeName} Examples'}
+                  {(t('examples.related.all') || 'All {typeName} Examples').replace('{typeName}', typeName)}
                 </h3>
                 <p className="text-sm" style={{ color: 'var(--text-secondary)' }}>
                   {t('examples.related.browse') || 'Browse all examples for this document type'}
