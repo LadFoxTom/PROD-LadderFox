@@ -1483,5 +1483,81 @@
   "cv_editor.leave_without_saving": "Doorgaan zonder opslaan",
   "cv_editor.leave_cancel": "Blijven",
   
-  "template.selector.ats_info_banner": "ATS-geoptimaliseerde templates zijn ontworpen voor maximale parseerbaarheid door Applicant Tracking Systems. Ze gebruiken enkele-kolom layouts, standaard lettertypen en vermijden complexe opmaak."
+  "template.selector.ats_info_banner": "ATS-geoptimaliseerde templates zijn ontworpen voor maximale parseerbaarheid door Applicant Tracking Systems. Ze gebruiken enkele-kolom layouts, standaard lettertypen en vermijden complexe opmaak.",
+  "nav": {
+    "examples": "Voorbeelden",
+    "cv_examples": "CV Voorbeelden",
+    "letter_examples": "Motivatiebrief Voorbeelden"
+  },
+  "examples": {
+    "cv": "CV",
+    "letter": "Motivatiebrief",
+    "example": "Voorbeeld",
+    "examples": "Voorbeelden",
+    "not_found": {
+      "title": "Voorbeeld niet gevonden",
+      "description": "Het gevraagde voorbeeld kon niet worden gevonden."
+    },
+    "back_to_home": "Terug naar Home",
+    "breadcrumb": {
+      "examples": "Voorbeelden"
+    },
+    "why_good": {
+      "title": "Waarom dit voorbeeld effectief is"
+    },
+    "key_skills": {
+      "title": "Belangrijke vaardigheden voor dit beroep"
+    },
+    "tips": {
+      "title": "Tips voor het maken van je {typeName}"
+    },
+    "preview": {
+      "title": "Voorbeeld Preview",
+      "placeholder": "CV/Motivatiebrief preview afbeelding wordt hier weergegeven",
+      "note": "Dit is een placeholder. In productie zou je een daadwerkelijke template preview tonen."
+    },
+    "cta": {
+      "title": "Klaar om je eigen {typeName} te maken?",
+      "description": "Gebruik onze AI-aangedreven bouwer om een professioneel {typeName} te maken dat is afgestemd op je ervaring en vaardigheden.",
+      "button": "Maak je {typeName}",
+      "ready_title": "Klaar om je eigen te maken?",
+      "ready_description": "Gebruik onze AI-aangedreven bouwer om een professioneel document te maken dat is afgestemd op je ervaring en vaardigheden.",
+      "create_button": "Maak je Document"
+    },
+    "related": {
+      "title": "Ontdek meer voorbeelden",
+      "all": "Alle {typeName} Voorbeelden",
+      "browse": "Bekijk alle voorbeelden voor dit documenttype",
+      "examples": "Alle Voorbeelden",
+      "browse_all": "Bekijk alle CV en motivatiebrief voorbeelden",
+      "builder": "CV Bouwer",
+      "start_building": "Begin nu met het bouwen van je CV"
+    },
+    "overview": {
+      "about_title": "Over {typeName}s"
+    },
+    "cv_overview": {
+      "description": "Bekijk professionele CV voorbeelden per beroep. Leer wat een goed CV maakt en laat je inspireren om je eigen te maken.",
+      "intro_1": "Een goed opgesteld CV (Curriculum Vitae) is essentieel om op te vallen in de huidige competitieve arbeidsmarkt. Het dient als je eerste indruk bij potentiële werkgevers en moet effectief je vaardigheden, ervaring en waarde communiceren.",
+      "intro_2": "Belangrijke elementen van een sterk CV zijn:",
+      "key_1": "Duidelijke, professionele opmaak die gemakkelijk te scannen is",
+      "key_2": "Relevante werkervaring met meetbare prestaties",
+      "key_3": "Vaardigheden die overeenkomen met de functievereisten",
+      "key_4": "ATS-vriendelijke zoekwoorden voor applicant tracking systems",
+      "key_5": "Beknopte, impactvolle beschrijvingen die je waarde benadrukken",
+      "intro_3": "Elk beroep heeft unieke vereisten en verwachtingen. Bekijk de voorbeelden hieronder om te zien hoe professionals in jouw vakgebied hun kwalificaties effectief presenteren."
+    },
+    "letter_overview": {
+      "description": "Bekijk professionele motivatiebrief voorbeelden per beroep. Leer wat een goede motivatiebrief maakt en laat je inspireren om je eigen te maken.",
+      "intro_1": "Een overtuigende motivatiebrief (sollicitatiebrief) vult je CV aan door context te geven voor je sollicitatie en je oprechte interesse in de functie te tonen. Het is je kans om je verhaal te vertellen en contact te maken met de recruiter.",
+      "intro_2": "Belangrijke elementen van een effectieve motivatiebrief zijn:",
+      "key_1": "Gepersonaliseerde begroeting en opening die aandacht trekt",
+      "key_2": "Duidelijke verbinding tussen je vaardigheden en de functievereisten",
+      "key_3": "Specifieke voorbeelden van prestaties en ervaringen",
+      "key_4": "Demonstratie van kennis over het bedrijf en de functie",
+      "key_5": "Professionele afsluiting met een call-to-action",
+      "intro_3": "Verschillende beroepen vereisen verschillende benaderingen. Verken de voorbeelden hieronder om te begrijpen hoe je je brief kunt aanpassen voor jouw specifieke vakgebied."
+    },
+    "view_example": "Bekijk Voorbeeld"
+  }
 }

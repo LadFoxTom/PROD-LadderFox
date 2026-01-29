@@ -1294,5 +1294,81 @@
       "version": "Version",
       "compliant": "Compliant with"
     }
+  },
+  "nav": {
+    "examples": "Examples",
+    "cv_examples": "CV Examples",
+    "letter_examples": "Letter Examples"
+  },
+  "examples": {
+    "cv": "CV",
+    "letter": "Motivational Letter",
+    "example": "Example",
+    "examples": "Examples",
+    "not_found": {
+      "title": "Example Not Found",
+      "description": "The requested example could not be found."
+    },
+    "back_to_home": "Back to Home",
+    "breadcrumb": {
+      "examples": "Examples"
+    },
+    "why_good": {
+      "title": "Why This Example is Effective"
+    },
+    "key_skills": {
+      "title": "Key Skills for This Profession"
+    },
+    "tips": {
+      "title": "Tips for Creating Your {typeName}"
+    },
+    "preview": {
+      "title": "Example Preview",
+      "placeholder": "CV/Letter preview image will be displayed here",
+      "note": "This is a placeholder. In production, you would show an actual template preview."
+    },
+    "cta": {
+      "title": "Ready to Create Your Own {typeName}?",
+      "description": "Use our AI-powered builder to create a professional {typeName} tailored to your experience and skills.",
+      "button": "Create Your {typeName}",
+      "ready_title": "Ready to Create Your Own?",
+      "ready_description": "Use our AI-powered builder to create a professional document tailored to your experience and skills.",
+      "create_button": "Create Your Document"
+    },
+    "related": {
+      "title": "Explore More Examples",
+      "all": "All {typeName} Examples",
+      "browse": "Browse all examples for this document type",
+      "examples": "All Examples",
+      "browse_all": "Browse all CV and letter examples",
+      "builder": "CV Builder",
+      "start_building": "Start building your CV now"
+    },
+    "overview": {
+      "about_title": "About {typeName}s"
+    },
+    "cv_overview": {
+      "description": "Browse professional CV examples by profession. Learn what makes a great CV and get inspired to create your own.",
+      "intro_1": "A well-crafted CV (Curriculum Vitae) is essential for standing out in today's competitive job market. It serves as your first impression to potential employers and should effectively communicate your skills, experience, and value proposition.",
+      "intro_2": "Key elements of a strong CV include:",
+      "key_1": "Clear, professional formatting that is easy to scan",
+      "key_2": "Relevant work experience with quantifiable achievements",
+      "key_3": "Skills that match the job requirements",
+      "key_4": "ATS-friendly keywords for applicant tracking systems",
+      "key_5": "Concise, impactful descriptions that highlight your value",
+      "intro_3": "Each profession has unique requirements and expectations. Browse the examples below to see how professionals in your field present their qualifications effectively."
+    },
+    "letter_overview": {
+      "description": "Browse professional motivational letter examples by profession. Learn what makes a great cover letter and get inspired to create your own.",
+      "intro_1": "A compelling motivational letter (cover letter) complements your CV by providing context for your application and demonstrating your genuine interest in the position. It's your opportunity to tell your story and connect with the hiring manager.",
+      "intro_2": "Key elements of an effective motivational letter include:",
+      "key_1": "Personalized greeting and opening that captures attention",
+      "key_2": "Clear connection between your skills and the job requirements",
+      "key_3": "Specific examples of achievements and experiences",
+      "key_4": "Demonstration of knowledge about the company and role",
+      "key_5": "Professional closing with a call to action",
+      "intro_3": "Different professions require different approaches. Explore the examples below to understand how to tailor your letter for your specific field."
+    },
+    "view_example": "View Example"
   }
 } 

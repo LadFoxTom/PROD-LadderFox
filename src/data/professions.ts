@@ -1,0 +1,4887 @@
+/**
+ * Profession/Sector configuration for SEO examples pages
+ * Each profession has translations for all supported languages
+ */
+
+export type Language = 'en' | 'nl' | 'fr' | 'es' | 'de' | 'it' | 'pl' | 'ro' | 'hu' | 'el' | 'cs' | 'pt' | 'sv' | 'bg' | 'da' | 'fi' | 'sk' | 'no' | 'hr' | 'sr'
+
+export interface ProfessionTranslation {
+  name: string
+  slug: string
+  description: string
+  tips: string[]
+  skills: string[]
+  whyGood: string[]
+}
+
+export interface Profession {
+  id: string
+  translations: Record<Language, ProfessionTranslation>
+  category: 'healthcare' | 'technology' | 'education' | 'business' | 'creative' | 'engineering' | 'sales' | 'administration' | 'hospitality' | 'legal'
+}
+
+// URL path segments per language
+export const URL_SEGMENTS: Record<Language, { examples: string; cv: string; letter: string }> = {
+  en: { examples: 'examples', cv: 'cv', letter: 'letter' },
+  nl: { examples: 'voorbeeld', cv: 'cv', letter: 'motivatiebrief' },
+  fr: { examples: 'exemples', cv: 'cv', letter: 'lettre' },
+  es: { examples: 'ejemplos', cv: 'cv', letter: 'carta' },
+  de: { examples: 'beispiele', cv: 'lebenslauf', letter: 'anschreiben' },
+  it: { examples: 'esempi', cv: 'cv', letter: 'lettera' },
+  pl: { examples: 'przyklady', cv: 'cv', letter: 'list' },
+  ro: { examples: 'exemple', cv: 'cv', letter: 'scrisoare' },
+  hu: { examples: 'peldak', cv: 'cv', letter: 'level' },
+  el: { examples: 'paradeigmata', cv: 'cv', letter: 'epistoli' },
+  cs: { examples: 'priklady', cv: 'cv', letter: 'dopis' },
+  pt: { examples: 'exemplos', cv: 'cv', letter: 'carta' },
+  sv: { examples: 'exempel', cv: 'cv', letter: 'brev' },
+  bg: { examples: 'primery', cv: 'cv', letter: 'pismo' },
+  da: { examples: 'eksempler', cv: 'cv', letter: 'brev' },
+  fi: { examples: 'esimerkit', cv: 'cv', letter: 'kirje' },
+  sk: { examples: 'priklady', cv: 'cv', letter: 'list' },
+  no: { examples: 'eksempler', cv: 'cv', letter: 'brev' },
+  hr: { examples: 'primjeri', cv: 'cv', letter: 'pismo' },
+  sr: { examples: 'primeri', cv: 'cv', letter: 'pismo' }
+}
+
+export const PROFESSIONS: Profession[] = [
+  {
+    id: 'nurse',
+    category: 'healthcare',
+    translations: {
+      en: {
+        name: 'Nurse',
+        slug: 'nurse',
+        description: 'Nursing is a profession focused on patient care, health promotion, and supporting individuals and families through health challenges. Nurses work in various settings including hospitals, clinics, community health centers, and home care.',
+        tips: [
+          'Highlight your clinical experience and patient care skills',
+          'Emphasize certifications and continuing education',
+          'Showcase your ability to work in team environments',
+          'Include any specialized training or areas of expertise',
+          'Demonstrate empathy and communication skills'
+        ],
+        skills: [
+          'Patient assessment and care planning',
+          'Medication administration',
+          'Wound care and dressing changes',
+          'Patient education and health promotion',
+          'Electronic health records (EHR) systems',
+          'Critical thinking and clinical judgment',
+          'Interdisciplinary collaboration'
+        ],
+        whyGood: [
+          'Clear structure that highlights clinical competencies',
+          'Emphasizes patient-centered care approach',
+          'Shows progression of responsibilities and skills',
+          'Demonstrates commitment to professional development',
+          'ATS-friendly format ensures visibility to recruiters'
+        ]
+      },
+      nl: {
+        name: 'Verpleegkundige',
+        slug: 'verpleegkundige',
+        description: 'Verpleegkunde is een beroep gericht op patiëntenzorg, gezondheidsbevordering en het ondersteunen van individuen en gezinnen bij gezondheidsuitdagingen. Verpleegkundigen werken in verschillende settings zoals ziekenhuizen, klinieken, gezondheidscentra en thuiszorg.',
+        tips: [
+          'Benadruk je klinische ervaring en patiëntenzorg vaardigheden',
+          'Leg nadruk op certificeringen en bijscholing',
+          'Toon je vermogen om in teamverband te werken',
+          'Vermeld gespecialiseerde training of expertisegebieden',
+          'Demonstreer empathie en communicatieve vaardigheden'
+        ],
+        skills: [
+          'Patiëntbeoordeling en zorgplanning',
+          'Medicatietoediening',
+          'Wondverzorging en verbandwisselingen',
+          'Patiëntenvoorlichting en gezondheidsbevordering',
+          'Elektronische patiëntendossiers (EPD) systemen',
+          'Kritisch denken en klinisch oordeel',
+          'Interdisciplinaire samenwerking'
+        ],
+        whyGood: [
+          'Duidelijke structuur die klinische competenties benadrukt',
+          'Legt nadruk op patiëntgerichte zorgbenadering',
+          'Toont progressie van verantwoordelijkheden en vaardigheden',
+          'Demonstreert toewijding aan professionele ontwikkeling',
+          'ATS-vriendelijk formaat zorgt voor zichtbaarheid bij recruiters'
+        ]
+      },
+      fr: {
+        name: 'Infirmier/Infirmière',
+        slug: 'infirmier',
+        description: 'Les soins infirmiers sont une profession axée sur les soins aux patients, la promotion de la santé et le soutien aux individus et aux familles face aux défis de santé. Les infirmiers travaillent dans divers contextes, notamment les hôpitaux, les cliniques, les centres de santé communautaires et les soins à domicile.',
+        tips: [
+          'Mettez en avant votre expérience clinique et vos compétences en soins aux patients',
+          'Soulignez les certifications et la formation continue',
+          'Montrez votre capacité à travailler en équipe',
+          'Incluez toute formation spécialisée ou domaines d\'expertise',
+          'Démontrez l\'empathie et les compétences en communication'
+        ],
+        skills: [
+          'Évaluation des patients et planification des soins',
+          'Administration de médicaments',
+          'Soins des plaies et changements de pansements',
+          'Éducation des patients et promotion de la santé',
+          'Systèmes de dossiers de santé électroniques (DSE)',
+          'Pensée critique et jugement clinique',
+          'Collaboration interdisciplinaire'
+        ],
+        whyGood: [
+          'Structure claire qui met en évidence les compétences cliniques',
+          'Met l\'accent sur l\'approche de soins centrés sur le patient',
+          'Montre la progression des responsabilités et des compétences',
+          'Démontre l\'engagement envers le développement professionnel',
+          'Format compatible ATS garantit la visibilité auprès des recruteurs'
+        ]
+      },
+      es: {
+        name: 'Enfermero/Enfermera',
+        slug: 'enfermero',
+        description: 'La enfermería es una profesión centrada en el cuidado del paciente, la promoción de la salud y el apoyo a individuos y familias ante desafíos de salud. Los enfermeros trabajan en diversos entornos, incluyendo hospitales, clínicas, centros de salud comunitarios y atención domiciliaria.',
+        tips: [
+          'Destaca tu experiencia clínica y habilidades de cuidado al paciente',
+          'Enfatiza certificaciones y educación continua',
+          'Muestra tu capacidad para trabajar en entornos de equipo',
+          'Incluye cualquier formación especializada o áreas de experiencia',
+          'Demuestra empatía y habilidades de comunicación'
+        ],
+        skills: [
+          'Evaluación del paciente y planificación de cuidados',
+          'Administración de medicamentos',
+          'Cuidado de heridas y cambios de vendajes',
+          'Educación del paciente y promoción de la salud',
+          'Sistemas de registros de salud electrónicos (EHR)',
+          'Pensamiento crítico y juicio clínico',
+          'Colaboración interdisciplinaria'
+        ],
+        whyGood: [
+          'Estructura clara que destaca las competencias clínicas',
+          'Enfatiza el enfoque de atención centrada en el paciente',
+          'Muestra la progresión de responsabilidades y habilidades',
+          'Demuestra compromiso con el desarrollo profesional',
+          'Formato compatible con ATS asegura visibilidad para reclutadores'
+        ]
+      },
+      de: {
+        name: 'Krankenschwester/Pfleger',
+        slug: 'krankenschwester',
+        description: 'Die Pflege ist ein Beruf, der sich auf Patientenversorgung, Gesundheitsförderung und die Unterstützung von Einzelpersonen und Familien bei gesundheitlichen Herausforderungen konzentriert. Pflegekräfte arbeiten in verschiedenen Einrichtungen, einschließlich Krankenhäusern, Kliniken, Gemeindegesundheitszentren und häuslicher Pflege.',
+        tips: [
+          'Heben Sie Ihre klinische Erfahrung und Patientenversorgungsfähigkeiten hervor',
+          'Betonen Sie Zertifizierungen und Weiterbildung',
+          'Zeigen Sie Ihre Fähigkeit, in Teamumgebungen zu arbeiten',
+          'Fügen Sie spezialisierte Schulungen oder Fachgebiete hinzu',
+          'Demonstrieren Sie Empathie und Kommunikationsfähigkeiten'
+        ],
+        skills: [
+          'Patientenbewertung und Versorgungsplanung',
+          'Medikamentenverabreichung',
+          'Wundversorgung und Verbandswechsel',
+          'Patientenaufklärung und Gesundheitsförderung',
+          'Elektronische Gesundheitsakten (EHR) Systeme',
+          'Kritisches Denken und klinische Urteilsfähigkeit',
+          'Interdisziplinäre Zusammenarbeit'
+        ],
+        whyGood: [
+          'Klare Struktur, die klinische Kompetenzen hervorhebt',
+          'Betont patientenzentrierten Versorgungsansatz',
+          'Zeigt Fortschritt von Verantwortlichkeiten und Fähigkeiten',
+          'Demonstriert Engagement für berufliche Entwicklung',
+          'ATS-freundliches Format gewährleistet Sichtbarkeit für Personalvermittler'
+        ]
+      },
+      it: {
+        name: 'Infermiere',
+        slug: 'infermiere',
+        description: 'L\'infermieristica è una professione focalizzata sulla cura del paziente, la promozione della salute e il sostegno a individui e famiglie attraverso le sfide sanitarie. Gli infermieri lavorano in vari contesti, inclusi ospedali, cliniche, centri sanitari comunitari e assistenza domiciliare.',
+        tips: [
+          'Evidenzia la tua esperienza clinica e le competenze di assistenza al paziente',
+          'Enfatizza certificazioni e formazione continua',
+          'Mostra la tua capacità di lavorare in ambienti di squadra',
+          'Includi qualsiasi formazione specializzata o aree di competenza',
+          'Dimostra empatia e competenze comunicative'
+        ],
+        skills: [
+          'Valutazione del paziente e pianificazione dell\'assistenza',
+          'Somministrazione di farmaci',
+          'Cura delle ferite e cambio delle medicazioni',
+          'Educazione del paziente e promozione della salute',
+          'Sistemi di cartelle cliniche elettroniche (EHR)',
+          'Pensiero critico e giudizio clinico',
+          'Collaborazione interdisciplinare'
+        ],
+        whyGood: [
+          'Struttura chiara che evidenzia le competenze cliniche',
+          'Enfatizza l\'approccio di assistenza centrato sul paziente',
+          'Mostra la progressione di responsabilità e competenze',
+          'Dimostra impegno per lo sviluppo professionale',
+          'Formato compatibile con ATS garantisce visibilità ai reclutatori'
+        ]
+      },
+      pl: {
+        name: 'Pielęgniarka/Pielęgniarz',
+        slug: 'pielegniarka',
+        description: 'Pielęgniarstwo to zawód skupiony na opiece nad pacjentem, promocji zdrowia i wspieraniu osób oraz rodzin w wyzwaniach zdrowotnych. Pielęgniarki pracują w różnych środowiskach, w tym w szpitalach, klinikach, ośrodkach zdrowia społecznego i opiece domowej.',
+        tips: [
+          'Podkreśl swoje doświadczenie kliniczne i umiejętności opieki nad pacjentem',
+          'Podkreśl certyfikaty i kształcenie ustawiczne',
+          'Pokaż swoją zdolność do pracy w środowiskach zespołowych',
+          'Uwzględnij wszelkie specjalistyczne szkolenia lub obszary wiedzy',
+          'Wykazuj empatię i umiejętności komunikacyjne'
+        ],
+        skills: [
+          'Ocena pacjenta i planowanie opieki',
+          'Podawanie leków',
+          'Opieka nad ranami i zmiana opatrunków',
+          'Edukacja pacjenta i promocja zdrowia',
+          'Systemy elektronicznych kart zdrowia (EHR)',
+          'Myślenie krytyczne i osąd kliniczny',
+          'Współpraca interdyscyplinarna'
+        ],
+        whyGood: [
+          'Jasna struktura podkreślająca kompetencje kliniczne',
+          'Kładzie nacisk na podejście skoncentrowane na pacjencie',
+          'Pokazuje postęp odpowiedzialności i umiejętności',
+          'Wykazuje zaangażowanie w rozwój zawodowy',
+          'Format przyjazny dla ATS zapewnia widoczność dla rekruterów'
+        ]
+      },
+      ro: {
+        name: 'Asistent Medical',
+        slug: 'asistent-medical',
+        description: 'Asistența medicală este o profesie axată pe îngrijirea pacienților, promovarea sănătății și sprijinirea persoanelor și familiilor în fața provocărilor de sănătate. Asistenții medicali lucrează în diverse medii, inclusiv spitale, clinici, centre de sănătate comunitară și îngrijire la domiciliu.',
+        tips: [
+          'Evidențiază experiența ta clinică și abilitățile de îngrijire a pacienților',
+          'Subliniază certificările și educația continuă',
+          'Arată capacitatea ta de a lucra în medii de echipă',
+          'Include orice formare specializată sau domenii de expertiză',
+          'Demonstrează empatie și abilități de comunicare'
+        ],
+        skills: [
+          'Evaluarea pacienților și planificarea îngrijirii',
+          'Administrarea medicamentelor',
+          'Îngrijirea rănilor și schimbarea pansamentelor',
+          'Educația pacienților și promovarea sănătății',
+          'Sisteme de înregistrare electronică a sănătății (EHR)',
+          'Gândire critică și judecată clinică',
+          'Colaborare interdisciplinară'
+        ],
+        whyGood: [
+          'Structură clară care evidențiază competențele clinice',
+          'Subliniază abordarea centrată pe pacient',
+          'Arată progresia responsabilităților și abilităților',
+          'Demonstrează angajamentul față de dezvoltarea profesională',
+          'Format compatibil cu ATS asigură vizibilitatea pentru recrutori'
+        ]
+      },
+      hu: {
+        name: 'Ápoló',
+        slug: 'apolo',
+        description: 'Az ápolás egy olyan szakma, amely a betegellátásra, az egészségpromócióra és az egyének és családok támogatására összpontosít az egészségi kihívásokkal szemben. Az ápolók különböző helyszíneken dolgoznak, beleértve a kórházakat, klinikákat, közösségi egészségügyi központokat és a házi ellátást.',
+        tips: [
+          'Hangsúlyozza a klinikai tapasztalatát és a betegellátási készségeit',
+          'Kiemeli a tanúsítványokat és a folyamatos képzést',
+          'Mutassa be csapatmunkában való képességét',
+          'Tartalmazza a szakértői képzéseket vagy szakértelmi területeket',
+          'Mutassa be az empátiát és a kommunikációs készségeket'
+        ],
+        skills: [
+          'Betegértékelés és ellátási tervezés',
+          'Gyógyszeradagolás',
+          'Sebápolás és kötéscsere',
+          'Betegoktatás és egészségpromóció',
+          'Elektronikus egészségügyi nyilvántartások (EHR) rendszerek',
+          'Kritikus gondolkodás és klinikai ítélet',
+          'Interdiszciplináris együttműködés'
+        ],
+        whyGood: [
+          'Világos struktúra, amely kiemeli a klinikai kompetenciákat',
+          'Hangsúlyozza a betegközpontú ellátási megközelítést',
+          'Mutatja a felelősségek és készségek fejlődését',
+          'Bebizonyítja a szakmai fejlesztésre való elkötelezettséget',
+          'ATS-barát formátum biztosítja a láthatóságot a toborzók számára'
+        ]
+      },
+      el: {
+        name: 'Νοσηλευτής/Νοσηλεύτρια',
+        slug: 'nosileutis',
+        description: 'Η νοσηλεία είναι ένα επάγγελμα που επικεντρώνεται στη φροντίδα ασθενών, την προώθηση της υγείας και την υποστήριξη ατόμων και οικογενειών μέσα από προκλήσεις υγείας. Οι νοσηλευτές εργάζονται σε διάφορες ρυθμίσεις, συμπεριλαμβανομένων νοσοκομείων, κλινικών, κέντρων κοινωνικής υγείας και οικιακής φροντίδας.',
+        tips: [
+          'Επισημάνετε την κλινική σας εμπειρία και τις δεξιότητες φροντίδας ασθενών',
+          'Τονίστε τις πιστοποιήσεις και τη συνεχή εκπαίδευση',
+          'Δείξτε την ικανότητά σας να εργάζεστε σε ομαδικά περιβάλλοντα',
+          'Συμπεριλάβετε οποιαδήποτε εξειδικευμένη εκπαίδευση ή τομείς εμπειρίας',
+          'Αποδείξτε την ενσυναίσθηση και τις δεξιότητες επικοινωνίας'
+        ],
+        skills: [
+          'Αξιολόγηση ασθενών και σχεδιασμός φροντίδας',
+          'Χορήγηση φαρμάκων',
+          'Φροντίδα πληγών και αλλαγή επιδέσμων',
+          'Εκπαίδευση ασθενών και προώθηση υγείας',
+          'Συστήματα ηλεκτρονικών ιατρικών φακέλων (EHR)',
+          'Κριτική σκέψη και κλινική κρίση',
+          'Διαθεματική συνεργασία'
+        ],
+        whyGood: [
+          'Σαφής δομή που επισημαίνει τις κλινικές ικανότητες',
+          'Τονίζει την προσέγγιση φροντίδας με επίκεντρο τον ασθενή',
+          'Δείχνει την πρόοδο των ευθυνών και των δεξιοτήτων',
+          'Αποδεικνύει την αφοσίωση στην επαγγελματική ανάπτυξη',
+          'Μορφή συμβατή με ATS εξασφαλίζει ορατότητα στους recruiters'
+        ]
+      },
+      cs: {
+        name: 'Zdravotní Sestra/Bratr',
+        slug: 'zdravotni-sestra',
+        description: 'Ošetřovatelství je profese zaměřená na péči o pacienty, podporu zdraví a podporu jednotlivců a rodin při zdravotních výzvách. Zdravotní sestry pracují v různých prostředích, včetně nemocnic, klinik, komunitních zdravotních center a domácí péče.',
+        tips: [
+          'Zdůrazněte svou klinickou zkušenost a dovednosti v péči o pacienty',
+          'Zdůrazněte certifikace a další vzdělávání',
+          'Ukažte svou schopnost pracovat v týmovém prostředí',
+          'Zahrňte jakékoli specializované školení nebo oblasti odbornosti',
+          'Prokažte empatii a komunikační dovednosti'
+        ],
+        skills: [
+          'Hodnocení pacientů a plánování péče',
+          'Podávání léků',
+          'Péče o rány a výměna obvazů',
+          'Vzdělávání pacientů a podpora zdraví',
+          'Systémy elektronických zdravotních záznamů (EHR)',
+          'Kritické myšlení a klinický úsudek',
+          'Mezioborová spolupráce'
+        ],
+        whyGood: [
+          'Jasná struktura, která zdůrazňuje klinické kompetence',
+          'Zdůrazňuje přístup zaměřený na pacienta',
+          'Ukazuje pokrok odpovědností a dovedností',
+          'Prokazuje závazek k profesnímu rozvoji',
+          'Formát kompatibilní s ATS zajišťuje viditelnost pro náboráře'
+        ]
+      },
+      pt: {
+        name: 'Enfermeiro/Enfermeira',
+        slug: 'enfermeiro',
+        description: 'A enfermagem é uma profissão focada no cuidado ao paciente, promoção da saúde e apoio a indivíduos e famílias diante de desafios de saúde. Os enfermeiros trabalham em diversos ambientes, incluindo hospitais, clínicas, centros de saúde comunitários e cuidados domiciliares.',
+        tips: [
+          'Destaque sua experiência clínica e habilidades de cuidado ao paciente',
+          'Enfatize certificações e educação continuada',
+          'Mostre sua capacidade de trabalhar em ambientes de equipe',
+          'Inclua qualquer treinamento especializado ou áreas de expertise',
+          'Demonstre empatia e habilidades de comunicação'
+        ],
+        skills: [
+          'Avaliação do paciente e planejamento de cuidados',
+          'Administração de medicamentos',
+          'Cuidado de feridas e troca de curativos',
+          'Educação do paciente e promoção da saúde',
+          'Sistemas de prontuário eletrônico (EHR)',
+          'Pensamento crítico e julgamento clínico',
+          'Colaboração interdisciplinar'
+        ],
+        whyGood: [
+          'Estrutura clara que destaca competências clínicas',
+          'Enfatiza abordagem de cuidado centrada no paciente',
+          'Mostra progressão de responsabilidades e habilidades',
+          'Demonstra compromisso com desenvolvimento profissional',
+          'Formato compatível com ATS garante visibilidade para recrutadores'
+        ]
+      },
+      sv: {
+        name: 'Sjuksköterska',
+        slug: 'sjukvardskare',
+        description: 'Omvårdnad är ett yrke som fokuserar på patientsvård, hälsofrämjande och stöd till individer och familjer genom hälsoförändringar. Sjuksköterskor arbetar i olika miljöer, inklusive sjukhus, kliniker, samhällshälsocentraler och hemsjukvård.',
+        tips: [
+          'Framhäv din kliniska erfarenhet och patientsvårdsfärdigheter',
+          'Betona certifieringar och fortbildning',
+          'Visa din förmåga att arbeta i teammiljöer',
+          'Inkludera eventuell specialiserad utbildning eller expertområden',
+          'Visa empati och kommunikationsfärdigheter'
+        ],
+        skills: [
+          'Patientbedömning och vårdplanering',
+          'Läkemedelsadministration',
+          'Sårvård och förbandsbyten',
+          'Patientutbildning och hälsofrämjande',
+          'Elektroniska journaler (EHR) system',
+          'Kritiskt tänkande och kliniskt omdöme',
+          'Tvärvetenskapligt samarbete'
+        ],
+        whyGood: [
+          'Tydlig struktur som framhäver kliniska kompetenser',
+          'Betonar patientcentrerad vårdansats',
+          'Visar progression av ansvar och färdigheter',
+          'Visar engagemang för professionell utveckling',
+          'ATS-vänligt format säkerställer synlighet för rekryterare'
+        ]
+      },
+      bg: {
+        name: 'Медицинска Сестра',
+        slug: 'medicinska-sestra',
+        description: 'Сестринството е професия, фокусирана върху грижите за пациенти, насърчаване на здравето и подкрепа на индивиди и семейства при здравни предизвикателства. Медицинските сестри работят в различни среди, включително болници, клиники, обществени здравни центрове и домашни грижи.',
+        tips: [
+          'Подчертайте клиничния си опит и уменията за грижа за пациенти',
+          'Акцентирайте върху сертификати и непрекъснато обучение',
+          'Покажете способността си да работите в екипни среди',
+          'Включете всяка специализирана подготовка или области на експертиза',
+          'Демонстрирайте емпатия и комуникативни умения'
+        ],
+        skills: [
+          'Оценка на пациенти и планиране на грижи',
+          'Администриране на лекарства',
+          'Грижа за рани и смяна на превръзки',
+          'Образование на пациенти и насърчаване на здравето',
+          'Системи за електронни здравни записи (EHR)',
+          'Критично мислене и клинична преценка',
+          'Междисциплинарно сътрудничество'
+        ],
+        whyGood: [
+          'Ясна структура, която подчертава клиничните компетенции',
+          'Акцентира върху подхода, центриран върху пациента',
+          'Показва прогресия на отговорности и умения',
+          'Демонстрира ангажираност към професионално развитие',
+          'Формат, съвместим с ATS, осигурява видимост за набиращите персонал'
+        ]
+      },
+      da: {
+        name: 'Sygeplejerske',
+        slug: 'sygeplejerske',
+        description: 'Sygepleje er et fag, der fokuserer på patientomsorg, sundhedsfremme og støtte til enkeltpersoner og familier gennem sundhedsudfordringer. Sygeplejersker arbejder i forskellige miljøer, herunder hospitaler, klinikker, samfundssundhedscentre og hjemmepleje.',
+        tips: [
+          'Fremhæv din kliniske erfaring og patientomsorgsfærdigheder',
+          'Fremhæv certificeringer og videreuddannelse',
+          'Vis din evne til at arbejde i teammiljøer',
+          'Inkluder eventuel specialiseret træning eller ekspertområder',
+          'Demonstrer empati og kommunikationsfærdigheder'
+        ],
+        skills: [
+          'Patientvurdering og omsorgsplanlægning',
+          'Medicinadministration',
+          'Sårpleje og forbindinger',
+          'Patientuddannelse og sundhedsfremme',
+          'Elektroniske sundhedsjournaler (EHR) systemer',
+          'Kritisk tænkning og klinisk dømmekraft',
+          'Tværfagligt samarbejde'
+        ],
+        whyGood: [
+          'Tydelig struktur, der fremhæver kliniske kompetencer',
+          'Fremhæver patientcentreret omsorgstilgang',
+          'Viser progression af ansvar og færdigheder',
+          'Demonstrerer engagement i professionel udvikling',
+          'ATS-venligt format sikrer synlighed for rekruttere'
+        ]
+      },
+      fi: {
+        name: 'Sairaanhoitaja',
+        slug: 'sairaanhoitaja',
+        description: 'Sairaanhoito on ammatti, joka keskittyy potilashoitoon, terveyden edistämiseen ja yksilöiden ja perheiden tukemiseen terveyshaasteiden kautta. Sairaanhoitajat työskentelevät eri ympäristöissä, mukaan lukien sairaalat, klinikat, yhteisöterveyskeskukset ja kotisairaanhoito.',
+        tips: [
+          'Korosta kliinistä kokemustasi ja potilashoidon taitoja',
+          'Korosta sertifikaatteja ja täydennyskoulutusta',
+          'Näytä kykyäsi työskennellä tiimiyhteisöissä',
+          'Sisällytä erikoistuneita koulutuksia tai asiantuntemuksen alueita',
+          'Näytä empatiaa ja viestintätaitoja'
+        ],
+        skills: [
+          'Potilasarviointi ja hoidon suunnittelu',
+          'Lääkkeiden antaminen',
+          'Haavahoito ja siteiden vaihto',
+          'Potilaskoulutus ja terveyden edistäminen',
+          'Sähköiset terveysrekisterit (EHR) järjestelmät',
+          'Kriittinen ajattelu ja kliininen arvostelukyky',
+          'Tieteidenvälinen yhteistyö'
+        ],
+        whyGood: [
+          'Selkeä rakenne, joka korostaa kliinisiä kompetensseja',
+          'Korostaa potilaslähtöistä hoitoa',
+          'Näyttää vastuiden ja taitojen kehityksen',
+          'Näyttää sitoutumisen ammatilliseen kehitykseen',
+          'ATS-yhteensopiva muoto varmistaa näkyvyyden rekrytoijille'
+        ]
+      },
+      sk: {
+        name: 'Zdravotná Sestra/Brat',
+        slug: 'zdravotna-sestra',
+        description: 'Ošetrovateľstvo je profesia zameraná na starostlivosť o pacientov, podporu zdravia a podporu jednotlivcov a rodín pri zdravotných výzvach. Zdravotné sestry pracujú v rôznych prostrediach, vrátane nemocníc, kliník, komunitných zdravotných centier a domácej starostlivosti.',
+        tips: [
+          'Zdôraznite svoju klinickú skúsenosť a zručnosti v starostlivosti o pacientov',
+          'Zdôraznite certifikáty a ďalšie vzdelávanie',
+          'Ukážte svoju schopnosť pracovať v tímovom prostredí',
+          'Zahrňte akékoľvek špecializované školenie alebo oblasti odbornosti',
+          'Preukážte empatiu a komunikačné zručnosti'
+        ],
+        skills: [
+          'Hodnotenie pacientov a plánovanie starostlivosti',
+          'Podávanie liekov',
+          'Starostlivosť o rany a výmena obväzov',
+          'Vzdelávanie pacientov a podpora zdravia',
+          'Systémy elektronických zdravotných záznamov (EHR)',
+          'Kritické myslenie a klinický úsudok',
+          'Medziodborová spolupráca'
+        ],
+        whyGood: [
+          'Jasná štruktúra, ktorá zdôrazňuje klinické kompetencie',
+          'Zdôrazňuje prístup zameraný na pacienta',
+          'Ukazuje pokrok zodpovedností a zručností',
+          'Preukazuje záväzok k profesionálnemu rozvoju',
+          'Formát kompatibilný s ATS zabezpečuje viditeľnosť pre náborárov'
+        ]
+      },
+      no: {
+        name: 'Sykepleier',
+        slug: 'sykepleier',
+        description: 'Sykepleie er et yrke som fokuserer på pasientomsorg, helsefremming og støtte til enkeltpersoner og familier gjennom helseutfordringer. Sykepleiere arbeider i ulike miljøer, inkludert sykehus, klinikker, samfunnshelsesentre og hjemmesykepleie.',
+        tips: [
+          'Fremhev din kliniske erfaring og pasientomsorgsferdigheter',
+          'Fremhev sertifiseringer og videreutdanning',
+          'Vis din evne til å arbeide i teammiljøer',
+          'Inkluder eventuell spesialisert opplæring eller ekspertområder',
+          'Demonstrer empati og kommunikasjonsferdigheter'
+        ],
+        skills: [
+          'Pasientvurdering og omsorgsplanlegging',
+          'Medisinadministrasjon',
+          'Sårpleie og forbindinger',
+          'Pasientutdanning og helsefremming',
+          'Elektroniske helsejournaler (EHR) systemer',
+          'Kritisk tenkning og klinisk dømmekraft',
+          'Tverrfaglig samarbeid'
+        ],
+        whyGood: [
+          'Tydelig struktur som fremhever kliniske kompetanser',
+          'Fremhever pasientorientert omsorgstilnærming',
+          'Viser progresjon av ansvar og ferdigheter',
+          'Demonstrerer engasjement for profesjonell utvikling',
+          'ATS-vennlig format sikrer synlighet for rekruttere'
+        ]
+      },
+      hr: {
+        name: 'Medicinska Sestra/Brat',
+        slug: 'medicinska-sestra',
+        description: 'Medicinska njega je profesija usmjerena na skrb o pacijentima, promicanje zdravlja i podršku pojedincima i obiteljima kroz zdravstvene izazove. Medicinske sestre rade u različitim okruženjima, uključujući bolnice, klinike, centra za zdravlje zajednice i kućnu njegu.',
+        tips: [
+          'Istaknite svoje kliničko iskustvo i vještine skrbi o pacijentima',
+          'Naglasite certifikate i kontinuirano obrazovanje',
+          'Pokažite svoju sposobnost rada u timskim okruženjima',
+          'Uključite bilo koju specijaliziranu obuku ili područja stručnosti',
+          'Pokažite empatiju i komunikacijske vještine'
+        ],
+        skills: [
+          'Procjena pacijenata i planiranje skrbi',
+          'Primjena lijekova',
+          'Njega rana i zamjena zavoja',
+          'Edukacija pacijenata i promicanje zdravlja',
+          'Sustavi elektroničkih zdravstvenih zapisa (EHR)',
+          'Kritičko razmišljanje i klinička prosudba',
+          'Interdisciplinarna suradnja'
+        ],
+        whyGood: [
+          'Jasna struktura koja ističe kliničke kompetencije',
+          'Naglašava pristup usmjeren na pacijenta',
+          'Prikazuje napredak odgovornosti i vještina',
+          'Pokazuje predanost profesionalnom razvoju',
+          'Format kompatibilan s ATS osigurava vidljivost za regrutere'
+        ]
+      },
+      sr: {
+        name: 'Медицинска Сестра',
+        slug: 'medicinska-sestra',
+        description: 'Медицинска нега је професија усмерена на бригу о пацијентима, промоцију здравља и подршку појединцима и породицама кроз здравствене изазове. Медицинске сестре раде у различитим окружењима, укључујући болнице, клинике, центре за здравље заједнице и кућну негу.',
+        tips: [
+          'Истакните своје клиничко искуство и вештине бриге о пацијентима',
+          'Нагласите сертификате и континуирано образовање',
+          'Покажите своју способност рада у тимским окружењима',
+          'Укључите било коју специјализовану обуку или области стручности',
+          'Покажите емпатију и комуникационе вештине'
+        ],
+        skills: [
+          'Процена пацијената и планирање бриге',
+          'Примена лекова',
+          'Нега рана и замена завоја',
+          'Едукација пацијената и промоција здравља',
+          'Системи електронских здравствених записа (EHR)',
+          'Критичко размишљање и клиничка просуда',
+          'Интердисциплинарна сарадња'
+        ],
+        whyGood: [
+          'Јасна структура која истиче клиничке компетенције',
+          'Наглашава приступ усмерен на пацијента',
+          'Приказује напредак одговорности и вештина',
+          'Показује посвећеност професионалном развоју',
+          'Формат компатибилан са ATS осигурава видљивост за регрутере'
+        ]
+      }
+    }
+  },
+  // Add more professions here - I'll add a few key ones
+  {
+    id: 'software-developer',
+    category: 'technology',
+    translations: {
+      en: {
+        name: 'Software Developer',
+        slug: 'software-developer',
+        description: 'Software developers design, build, and maintain applications and systems. They work with programming languages, frameworks, and tools to create solutions that meet business and user needs.',
+        tips: [
+          'Highlight your technical skills and programming languages',
+          'Showcase projects and their impact',
+          'Emphasize problem-solving abilities',
+          'Include relevant certifications and education',
+          'Demonstrate collaboration and teamwork'
+        ],
+        skills: [
+          'Programming languages (JavaScript, Python, Java, etc.)',
+          'Software development methodologies (Agile, Scrum)',
+          'Version control systems (Git)',
+          'Database design and management',
+          'API development and integration',
+          'Testing and debugging',
+          'Code review and collaboration'
+        ],
+        whyGood: [
+          'Clear technical skills section',
+          'Project portfolio demonstrates practical experience',
+          'Shows continuous learning and adaptation',
+          'ATS-friendly keywords for technical roles',
+          'Highlights both technical and soft skills'
+        ]
+      },
+      nl: {
+        name: 'Software Ontwikkelaar',
+        slug: 'software-ontwikkelaar',
+        description: 'Software ontwikkelaars ontwerpen, bouwen en onderhouden applicaties en systemen. Ze werken met programmeertalen, frameworks en tools om oplossingen te creëren die voldoen aan bedrijfs- en gebruikersbehoeften.',
+        tips: [
+          'Benadruk je technische vaardigheden en programmeertalen',
+          'Toon projecten en hun impact',
+          'Leg nadruk op probleemoplossend vermogen',
+          'Vermeld relevante certificeringen en opleiding',
+          'Demonstreer samenwerking en teamwork'
+        ],
+        skills: [
+          'Programmeertalen (JavaScript, Python, Java, etc.)',
+          'Software ontwikkelingsmethodologieën (Agile, Scrum)',
+          'Versiebeheersystemen (Git)',
+          'Database ontwerp en beheer',
+          'API ontwikkeling en integratie',
+          'Testen en debuggen',
+          'Code review en samenwerking'
+        ],
+        whyGood: [
+          'Duidelijke technische vaardigheden sectie',
+          'Projectportfolio toont praktische ervaring',
+          'Toont continu leren en aanpassing',
+          'ATS-vriendelijke zoekwoorden voor technische rollen',
+          'Benadrukt zowel technische als zachte vaardigheden'
+        ]
+      },
+      // Add other languages for software developer...
+      fr: {
+        name: 'Développeur Logiciel',
+        slug: 'developpeur-logiciel',
+        description: 'Les développeurs logiciels conçoivent, construisent et maintiennent des applications et systèmes. Ils travaillent avec des langages de programmation, frameworks et outils pour créer des solutions qui répondent aux besoins des entreprises et des utilisateurs.',
+        tips: [
+          'Mettez en avant vos compétences techniques et langages de programmation',
+          'Présentez des projets et leur impact',
+          'Soulignez vos capacités de résolution de problèmes',
+          'Incluez les certifications et formations pertinentes',
+          'Démontrez la collaboration et le travail d\'équipe'
+        ],
+        skills: [
+          'Langages de programmation (JavaScript, Python, Java, etc.)',
+          'Méthodologies de développement logiciel (Agile, Scrum)',
+          'Systèmes de contrôle de version (Git)',
+          'Conception et gestion de bases de données',
+          'Développement et intégration d\'API',
+          'Tests et débogage',
+          'Revue de code et collaboration'
+        ],
+        whyGood: [
+          'Section claire des compétences techniques',
+          'Portfolio de projets démontre une expérience pratique',
+          'Montre un apprentissage et une adaptation continus',
+          'Mots-clés compatibles ATS pour les rôles techniques',
+          'Met en évidence les compétences techniques et relationnelles'
+        ]
+      },
+      es: {
+        name: 'Desarrollador de Software',
+        slug: 'desarrollador-software',
+        description: 'Los desarrolladores de software diseñan, construyen y mantienen aplicaciones y sistemas. Trabajan con lenguajes de programación, frameworks y herramientas para crear soluciones que satisfagan las necesidades empresariales y de usuarios.',
+        tips: [
+          'Destaca tus habilidades técnicas y lenguajes de programación',
+          'Muestra proyectos y su impacto',
+          'Enfatiza habilidades de resolución de problemas',
+          'Incluye certificaciones y educación relevantes',
+          'Demuestra colaboración y trabajo en equipo'
+        ],
+        skills: [
+          'Lenguajes de programación (JavaScript, Python, Java, etc.)',
+          'Metodologías de desarrollo de software (Agile, Scrum)',
+          'Sistemas de control de versiones (Git)',
+          'Diseño y gestión de bases de datos',
+          'Desarrollo e integración de API',
+          'Pruebas y depuración',
+          'Revisión de código y colaboración'
+        ],
+        whyGood: [
+          'Sección clara de habilidades técnicas',
+          'Portafolio de proyectos demuestra experiencia práctica',
+          'Muestra aprendizaje y adaptación continuos',
+          'Palabras clave compatibles con ATS para roles técnicos',
+          'Destaca habilidades técnicas y blandas'
+        ]
+      },
+      de: {
+        name: 'Softwareentwickler',
+        slug: 'softwareentwickler',
+        description: 'Softwareentwickler entwerfen, bauen und warten Anwendungen und Systeme. Sie arbeiten mit Programmiersprachen, Frameworks und Tools, um Lösungen zu erstellen, die Geschäfts- und Benutzeranforderungen erfüllen.',
+        tips: [
+          'Heben Sie Ihre technischen Fähigkeiten und Programmiersprachen hervor',
+          'Zeigen Sie Projekte und deren Auswirkungen',
+          'Betonen Sie Problemlösungsfähigkeiten',
+          'Fügen Sie relevante Zertifizierungen und Ausbildung hinzu',
+          'Demonstrieren Sie Zusammenarbeit und Teamarbeit'
+        ],
+        skills: [
+          'Programmiersprachen (JavaScript, Python, Java, etc.)',
+          'Softwareentwicklungsmethodologien (Agile, Scrum)',
+          'Versionskontrollsysteme (Git)',
+          'Datenbankdesign und -verwaltung',
+          'API-Entwicklung und Integration',
+          'Tests und Debugging',
+          'Code-Review und Zusammenarbeit'
+        ],
+        whyGood: [
+          'Klare Sektion für technische Fähigkeiten',
+          'Projektportfolio zeigt praktische Erfahrung',
+          'Zeigt kontinuierliches Lernen und Anpassung',
+          'ATS-freundliche Schlüsselwörter für technische Rollen',
+          'Hebt sowohl technische als auch soziale Fähigkeiten hervor'
+        ]
+      },
+      // For brevity, I'll add minimal translations for remaining languages
+      it: {
+        name: 'Sviluppatore Software',
+        slug: 'sviluppatore-software',
+        description: 'Gli sviluppatori software progettano, costruiscono e mantengono applicazioni e sistemi. Lavorano con linguaggi di programmazione, framework e strumenti per creare soluzioni che soddisfano le esigenze aziendali e degli utenti.',
+        tips: [
+          'Evidenzia le tue competenze tecniche e linguaggi di programmazione',
+          'Mostra progetti e il loro impatto',
+          'Enfatizza capacità di problem solving',
+          'Includi certificazioni e formazione rilevanti',
+          'Dimostra collaborazione e lavoro di squadra'
+        ],
+        skills: [
+          'Linguaggi di programmazione (JavaScript, Python, Java, etc.)',
+          'Metodologie di sviluppo software (Agile, Scrum)',
+          'Sistemi di controllo versione (Git)',
+          'Progettazione e gestione database',
+          'Sviluppo e integrazione API',
+          'Test e debug',
+          'Code review e collaborazione'
+        ],
+        whyGood: [
+          'Sezione chiara delle competenze tecniche',
+          'Portfolio di progetti dimostra esperienza pratica',
+          'Mostra apprendimento e adattamento continui',
+          'Parole chiave compatibili con ATS per ruoli tecnici',
+          'Evidenzia sia competenze tecniche che soft skills'
+        ]
+      },
+      pl: {
+        name: 'Programista',
+        slug: 'programista',
+        description: 'Programiści projektują, budują i utrzymują aplikacje i systemy. Pracują z językami programowania, frameworkami i narzędziami, aby tworzyć rozwiązania spełniające potrzeby biznesowe i użytkowników.',
+        tips: [
+          'Podkreśl swoje umiejętności techniczne i języki programowania',
+          'Pokaż projekty i ich wpływ',
+          'Podkreśl zdolności rozwiązywania problemów',
+          'Uwzględnij odpowiednie certyfikaty i wykształcenie',
+          'Wykazuj współpracę i pracę zespołową'
+        ],
+        skills: [
+          'Języki programowania (JavaScript, Python, Java, etc.)',
+          'Metodologie rozwoju oprogramowania (Agile, Scrum)',
+          'Systemy kontroli wersji (Git)',
+          'Projektowanie i zarządzanie bazami danych',
+          'Rozwój i integracja API',
+          'Testowanie i debugowanie',
+          'Przegląd kodu i współpraca'
+        ],
+        whyGood: [
+          'Jasna sekcja umiejętności technicznych',
+          'Portfolio projektów pokazuje praktyczne doświadczenie',
+          'Pokazuje ciągłe uczenie się i adaptację',
+          'Przyjazne dla ATS słowa kluczowe dla ról technicznych',
+          'Podkreśla zarówno umiejętności techniczne, jak i miękkie'
+        ]
+      },
+      ro: {
+        name: 'Dezvoltator Software',
+        slug: 'dezvoltator-software',
+        description: 'Dezvoltatorii de software proiectează, construiesc și mențin aplicații și sisteme. Ei lucrează cu limbaje de programare, framework-uri și instrumente pentru a crea soluții care îndeplinesc nevoile de afaceri și ale utilizatorilor.',
+        tips: [
+          'Evidențiază abilitățile tale tehnice și limbajele de programare',
+          'Prezintă proiecte și impactul lor',
+          'Subliniază abilitățile de rezolvare a problemelor',
+          'Include certificări și educație relevante',
+          'Demonstrează colaborare și lucru în echipă'
+        ],
+        skills: [
+          'Limbaje de programare (JavaScript, Python, Java, etc.)',
+          'Metodologii de dezvoltare software (Agile, Scrum)',
+          'Sisteme de control al versiunilor (Git)',
+          'Proiectare și gestionare baze de date',
+          'Dezvoltare și integrare API',
+          'Testare și depanare',
+          'Revizuire cod și colaborare'
+        ],
+        whyGood: [
+          'Secțiune clară a abilităților tehnice',
+          'Portofoliul de proiecte demonstrează experiență practică',
+          'Arată învățare continuă și adaptare',
+          'Cuvinte cheie compatibile cu ATS pentru roluri tehnice',
+          'Evidențiază atât abilități tehnice, cât și soft skills'
+        ]
+      },
+      hu: {
+        name: 'Szoftverfejlesztő',
+        slug: 'szoftverfejleszto',
+        description: 'A szoftverfejlesztők terveznek, építenek és karbantartanak alkalmazásokat és rendszereket. Programozási nyelvekkel, keretrendszerekkel és eszközökkel dolgoznak, hogy megoldásokat hozzanak létre, amelyek megfelelnek az üzleti és felhasználói igényeknek.',
+        tips: [
+          'Hangsúlyozza műszaki készségeit és programozási nyelveit',
+          'Mutatja be projekteit és azok hatását',
+          'Kiemeli a problémamegoldó képességeit',
+          'Tartalmazza a releváns tanúsítványokat és képzést',
+          'Mutassa be az együttműködést és csapatmunkát'
+        ],
+        skills: [
+          'Programozási nyelvek (JavaScript, Python, Java, etc.)',
+          'Szoftverfejlesztési módszertanok (Agile, Scrum)',
+          'Verziókezelő rendszerek (Git)',
+          'Adatbázis tervezés és kezelés',
+          'API fejlesztés és integráció',
+          'Tesztelés és hibakeresés',
+          'Kód áttekintés és együttműködés'
+        ],
+        whyGood: [
+          'Világos műszaki készségek szekció',
+          'Projektportfólió mutatja a gyakorlati tapasztalatot',
+          'Mutassa a folyamatos tanulást és alkalmazkodást',
+          'ATS-barát kulcsszavak technikai szerepkörökhöz',
+          'Kiemeli mind a műszaki, mind a soft skill készségeket'
+        ]
+      },
+      el: {
+        name: 'Προγραμματιστής',
+        slug: 'programmatistis',
+        description: 'Οι προγραμματιστές λογισμικού σχεδιάζουν, χτίζουν και συντηρούν εφαρμογές και συστήματα. Εργάζονται με γλώσσες προγραμματισμού, frameworks και εργαλεία για να δημιουργήσουν λύσεις που πληρούν τις επιχειρηματικές και χρήστες ανάγκες.',
+        tips: [
+          'Επισημάνετε τις τεχνικές σας δεξιότητες και γλώσσες προγραμματισμού',
+          'Παρουσιάστε έργα και τον αντίκτυπό τους',
+          'Τονίστε ικανότητες επίλυσης προβλημάτων',
+          'Συμπεριλάβετε σχετικές πιστοποιήσεις και εκπαίδευση',
+          'Αποδείξτε συνεργασία και ομαδική εργασία'
+        ],
+        skills: [
+          'Γλώσσες προγραμματισμού (JavaScript, Python, Java, etc.)',
+          'Μεθοδολογίες ανάπτυξης λογισμικού (Agile, Scrum)',
+          'Συστήματα ελέγχου εκδόσεων (Git)',
+          'Σχεδιασμός και διαχείριση βάσεων δεδομένων',
+          'Ανάπτυξη και ενσωμάτωση API',
+          'Δοκιμή και αποσφαλμάτωση',
+          'Ανασκόπηση κώδικα και συνεργασία'
+        ],
+        whyGood: [
+          'Σαφής ενότητα τεχνικών δεξιοτήτων',
+          'Το portfolio έργων αποδεικνύει πρακτική εμπειρία',
+          'Δείχνει συνεχή μάθηση και προσαρμογή',
+          'Συμβατές με ATS λέξεις-κλειδιά για τεχνικούς ρόλους',
+          'Επισημαίνει τόσο τεχνικές όσο και soft skills'
+        ]
+      },
+      cs: {
+        name: 'Vývojář Software',
+        slug: 'vyvojář-software',
+        description: 'Vývojáři softwaru navrhují, stavějí a udržují aplikace a systémy. Pracují s programovacími jazyky, frameworky a nástroji k vytváření řešení, která splňují obchodní a uživatelské potřeby.',
+        tips: [
+          'Zdůrazněte své technické dovednosti a programovací jazyky',
+          'Ukažte projekty a jejich dopad',
+          'Zdůrazněte schopnosti řešení problémů',
+          'Zahrňte relevantní certifikace a vzdělání',
+          'Prokažte spolupráci a týmovou práci'
+        ],
+        skills: [
+          'Programovací jazyky (JavaScript, Python, Java, etc.)',
+          'Metodologie vývoje softwaru (Agile, Scrum)',
+          'Systémy pro správu verzí (Git)',
+          'Návrh a správa databází',
+          'Vývoj a integrace API',
+          'Testování a ladění',
+          'Kontrola kódu a spolupráce'
+        ],
+        whyGood: [
+          'Jasná sekce technických dovedností',
+          'Portfolio projektů prokazuje praktické zkušenosti',
+          'Ukazuje kontinuální učení a adaptaci',
+          'Klíčová slova kompatibilní s ATS pro technické role',
+          'Zdůrazňuje jak technické, tak i soft skills'
+        ]
+      },
+      pt: {
+        name: 'Desenvolvedor de Software',
+        slug: 'desenvolvedor-software',
+        description: 'Desenvolvedores de software projetam, constroem e mantêm aplicações e sistemas. Eles trabalham com linguagens de programação, frameworks e ferramentas para criar soluções que atendem às necessidades de negócios e usuários.',
+        tips: [
+          'Destaque suas habilidades técnicas e linguagens de programação',
+          'Mostre projetos e seu impacto',
+          'Enfatize habilidades de resolução de problemas',
+          'Inclua certificações e educação relevantes',
+          'Demonstre colaboração e trabalho em equipe'
+        ],
+        skills: [
+          'Linguagens de programação (JavaScript, Python, Java, etc.)',
+          'Metodologias de desenvolvimento de software (Agile, Scrum)',
+          'Sistemas de controle de versão (Git)',
+          'Design e gerenciamento de banco de dados',
+          'Desenvolvimento e integração de API',
+          'Testes e depuração',
+          'Revisão de código e colaboração'
+        ],
+        whyGood: [
+          'Seção clara de habilidades técnicas',
+          'Portfólio de projetos demonstra experiência prática',
+          'Mostra aprendizado e adaptação contínuos',
+          'Palavras-chave compatíveis com ATS para funções técnicas',
+          'Destaca habilidades técnicas e interpessoais'
+        ]
+      },
+      sv: {
+        name: 'Mjukvaruutvecklare',
+        slug: 'mjukvaruutvecklare',
+        description: 'Mjukvaruutvecklare designar, bygger och underhåller applikationer och system. De arbetar med programmeringsspråk, ramverk och verktyg för att skapa lösningar som uppfyller affärs- och användarbehov.',
+        tips: [
+          'Framhäv dina tekniska färdigheter och programmeringsspråk',
+          'Visa projekt och deras inverkan',
+          'Betona problemlösningsförmågor',
+          'Inkludera relevanta certifieringar och utbildning',
+          'Visa samarbete och teamwork'
+        ],
+        skills: [
+          'Programmeringsspråk (JavaScript, Python, Java, etc.)',
+          'Mjukvaruutvecklingsmetodologier (Agile, Scrum)',
+          'Versionskontrollsystem (Git)',
+          'Databasadesign och -hantering',
+          'API-utveckling och integration',
+          'Testning och felsökning',
+          'Kodgranskning och samarbete'
+        ],
+        whyGood: [
+          'Tydelig sektion för tekniska färdigheter',
+          'Projektportfolio visar praktisk erfarenhet',
+          'Visar kontinuerligt lärande och anpassning',
+          'ATS-vänliga nyckelord för tekniska roller',
+          'Framhäver både tekniska och mjuka färdigheter'
+        ]
+      },
+      bg: {
+        name: 'Софтуерен Разработчик',
+        slug: 'softueren-razrabotchik',
+        description: 'Софтуерните разработчици проектират, изграждат и поддържат приложения и системи. Те работят с програмни езици, frameworks и инструменти, за да създадат решения, които отговарят на бизнес и потребителски нужди.',
+        tips: [
+          'Подчертайте техническите си умения и програмни езици',
+          'Покажете проекти и тяхното въздействие',
+          'Акцентирайте върху способности за решаване на проблеми',
+          'Включете съответни сертификати и образование',
+          'Демонстрирайте сътрудничество и работа в екип'
+        ],
+        skills: [
+          'Програмни езици (JavaScript, Python, Java, etc.)',
+          'Методологии за разработка на софтуер (Agile, Scrum)',
+          'Системи за контрол на версии (Git)',
+          'Дизайн и управление на бази данни',
+          'Разработка и интеграция на API',
+          'Тестване и отстраняване на грешки',
+          'Преглед на код и сътрудничество'
+        ],
+        whyGood: [
+          'Ясна секция за технически умения',
+          'Портфолио от проекти показва практически опит',
+          'Показва непрекъснато учене и адаптация',
+          'Съвместими с ATS ключови думи за технически роли',
+          'Подчертава както технически, така и софт умения'
+        ]
+      },
+      da: {
+        name: 'Softwareudvikler',
+        slug: 'softwareudvikler',
+        description: 'Softwareudviklere designer, bygger og vedligeholder applikationer og systemer. De arbejder med programmeringssprog, frameworks og værktøjer til at skabe løsninger, der opfylder forretnings- og brugerbehov.',
+        tips: [
+          'Fremhæv dine tekniske færdigheder og programmeringssprog',
+          'Vis projekter og deres indvirkning',
+          'Fremhæv problemløsningsevner',
+          'Inkluder relevante certificeringer og uddannelse',
+          'Demonstrer samarbejde og teamwork'
+        ],
+        skills: [
+          'Programmeringssprog (JavaScript, Python, Java, etc.)',
+          'Softwareudviklingsmetodologier (Agile, Scrum)',
+          'Versionskontrolsystemer (Git)',
+          'Databasedesign og -forvaltning',
+          'API-udvikling og integration',
+          'Testning og fejlfinding',
+          'Kodegennemgang og samarbejde'
+        ],
+        whyGood: [
+          'Tydelig sektion for tekniske færdigheder',
+          'Projektportfolio viser praktisk erfaring',
+          'Visar kontinuerligt læring og tilpasning',
+          'ATS-venlige nøgleord til tekniske roller',
+          'Fremhæver både tekniske og bløde færdigheder'
+        ]
+      },
+      fi: {
+        name: 'Ohjelmistokehittäjä',
+        slug: 'ohjelmistokehittaja',
+        description: 'Ohjelmistokehittäjät suunnittelevat, rakentavat ja ylläpitävät sovelluksia ja järjestelmiä. He työskentelevät ohjelmointikielten, kehysten ja työkalujen kanssa luodakseen ratkaisuja, jotka täyttävät liiketoiminta- ja käyttäjätarpeet.',
+        tips: [
+          'Korosta tekniset taitosi ja ohjelmointikielet',
+          'Näytä projektit ja niiden vaikutus',
+          'Korosta ongelmanratkaisukykyjä',
+          'Sisällytä asiaankuuluvat sertifikaatit ja koulutus',
+          'Näytä yhteistyötä ja tiimityötä'
+        ],
+        skills: [
+          'Ohjelmointikielet (JavaScript, Python, Java, etc.)',
+          'Ohjelmistokehitysmetodologiat (Agile, Scrum)',
+          'Versiohallintajärjestelmät (Git)',
+          'Tietokantasuunnittelu ja -hallinta',
+          'API-kehitys ja integraatio',
+          'Testaus ja virheenkorjaus',
+          'Koodikatselmu ja yhteistyö'
+        ],
+        whyGood: [
+          'Selkeä osio teknisistä taidoista',
+          'Projektisalkku näyttää käytännön kokemusta',
+          'Näyttää jatkuvaa oppimista ja sopeutumista',
+          'ATS-yhteensopivat avainsanat teknisille rooleille',
+          'Korostaa sekä tekniset että pehmeät taidot'
+        ]
+      },
+      sk: {
+        name: 'Vývojár Softvéru',
+        slug: 'vyvojár-softvéru',
+        description: 'Vývojári softvéru navrhujú, stavajú a udržiavajú aplikácie a systémy. Pracujú s programovacími jazykmi, frameworkmi a nástrojmi na vytváranie riešení, ktoré spĺňajú obchodné a používateľské potreby.',
+        tips: [
+          'Zdôraznite svoje technické zručnosti a programovacie jazyky',
+          'Ukážte projekty a ich dopad',
+          'Zdôraznite schopnosti riešenia problémov',
+          'Zahrňte relevantné certifikáty a vzdelanie',
+          'Preukážte spoluprácu a tímovú prácu'
+        ],
+        skills: [
+          'Programovacie jazyky (JavaScript, Python, Java, etc.)',
+          'Metodológie vývoja softvéru (Agile, Scrum)',
+          'Systémy na správu verzií (Git)',
+          'Návrh a správa databáz',
+          'Vývoj a integrácia API',
+          'Testovanie a ladenie',
+          'Kontrola kódu a spolupráca'
+        ],
+        whyGood: [
+          'Jasná sekcia technických zručností',
+          'Portfólio projektov preukazuje praktické skúsenosti',
+          'Ukazuje kontinuálne učenie a adaptáciu',
+          'Kľúčové slová kompatibilné s ATS pre technické role',
+          'Zdôrazňuje ako technické, tak aj soft skills'
+        ]
+      },
+      no: {
+        name: 'Programvareutvikler',
+        slug: 'programvareutvikler',
+        description: 'Programvareutviklere designer, bygger og vedlikeholder applikasjoner og systemer. De arbeider med programmeringsspråk, rammeverk og verktøy for å skape løsninger som oppfyller forretnings- og brukerbehov.',
+        tips: [
+          'Fremhev dine tekniske ferdigheter og programmeringsspråk',
+          'Vis prosjekter og deres innvirkning',
+          'Fremhev problemløsningsevner',
+          'Inkluder relevante sertifiseringer og utdanning',
+          'Demonstrer samarbeid og teamwork'
+        ],
+        skills: [
+          'Programmeringsspråk (JavaScript, Python, Java, etc.)',
+          'Programvareutviklingsmetodologier (Agile, Scrum)',
+          'Versjonskontrollsystemer (Git)',
+          'Databasedesign og -forvaltning',
+          'API-utvikling og integrasjon',
+          'Testning og feilsøking',
+          'Kodegjennomgang og samarbeid'
+        ],
+        whyGood: [
+          'Tydelig seksjon for tekniske ferdigheter',
+          'Prosjektportefølje viser praktisk erfaring',
+          'Visar kontinuerlig læring og tilpasning',
+          'ATS-vennlige nøkkelord for tekniske roller',
+          'Fremhever både tekniske og myke ferdigheter'
+        ]
+      },
+      hr: {
+        name: 'Razvojni Programer',
+        slug: 'razvojni-programer',
+        description: 'Razvojni programeri dizajniraju, grade i održavaju aplikacije i sustave. Rade s programskim jezicima, okvirima i alatima za stvaranje rješenja koja zadovoljavaju poslovne i korisničke potrebe.',
+        tips: [
+          'Istaknite svoje tehničke vještine i programske jezike',
+          'Pokažite projekte i njihov utjecaj',
+          'Naglasite sposobnosti rješavanja problema',
+          'Uključite relevantne certifikate i obrazovanje',
+          'Pokažite suradnju i timski rad'
+        ],
+        skills: [
+          'Programski jezici (JavaScript, Python, Java, etc.)',
+          'Metodologije razvoja softvera (Agile, Scrum)',
+          'Sustavi za kontrolu verzija (Git)',
+          'Dizajn i upravljanje bazama podataka',
+          'Razvoj i integracija API',
+          'Testiranje i otklanjanje grešaka',
+          'Pregled koda i suradnja'
+        ],
+        whyGood: [
+          'Jasna sekcija tehničkih vještina',
+          'Portfelj projekata pokazuje praktično iskustvo',
+          'Prikazuje kontinuirano učenje i prilagodbu',
+          'Kompatibilne s ATS ključne riječi za tehničke uloge',
+          'Naglašava i tehničke i meke vještine'
+        ]
+      },
+      sr: {
+        name: 'Развојни Програмер',
+        slug: 'razvojni-programer',
+        description: 'Развојни програмери дизајнирају, граде и одржавају апликације и системе. Раде са програмским језицима, оквирима и алатима за стварање решења која задовољавају пословне и корисничке потребе.',
+        tips: [
+          'Истакните своје техничке вештине и програмске језике',
+          'Покажите пројекте и њихов утицај',
+          'Нагласите способности решавања проблема',
+          'Укључите релевантне сертификате и образовање',
+          'Покажите сарадњу и тимски рад'
+        ],
+        skills: [
+          'Програмски језици (JavaScript, Python, Java, etc.)',
+          'Методологије развоја софтвера (Agile, Scrum)',
+          'Системи за контролу верзија (Git)',
+          'Дизајн и управљање базама података',
+          'Развој и интеграција API',
+          'Тестирање и отклањање грешака',
+          'Преглед кода и сарадња'
+        ],
+        whyGood: [
+          'Јасна секција техничких вештина',
+          'Портфељ пројеката показује практично искуство',
+          'Приказује континуирано учење и прилагођавање',
+          'Компатибилне са ATS кључне речи за техничке улоге',
+          'Наглашава и техничке и меке вештине'
+        ]
+      }
+    }
+  },
+  {
+    id: 'teacher',
+    category: 'education',
+    translations: {
+      en: {
+        name: 'Teacher',
+        slug: 'teacher',
+        description: 'Teachers educate and inspire students across various subjects and age groups. They develop lesson plans, assess student progress, and create engaging learning environments that foster academic and personal growth.',
+        tips: [
+          'Highlight your teaching certifications and qualifications',
+          'Emphasize classroom management and student engagement strategies',
+          'Showcase innovative teaching methods and curriculum development',
+          'Include professional development and continuing education',
+          'Demonstrate impact through student outcomes and achievements'
+        ],
+        skills: [
+          'Curriculum development and lesson planning',
+          'Classroom management and discipline',
+          'Student assessment and evaluation',
+          'Differentiated instruction techniques',
+          'Educational technology integration',
+          'Parent and community communication',
+          'Special education and inclusive practices'
+        ],
+        whyGood: [
+          'Clear structure highlighting educational qualifications',
+          'Emphasizes teaching experience and student outcomes',
+          'Shows commitment to professional development',
+          'Demonstrates ability to adapt to diverse learning needs',
+          'ATS-friendly format with relevant educational keywords'
+        ]
+      },
+      nl: {
+        name: 'Leraar',
+        slug: 'leraar',
+        description: 'Leraren onderwijzen en inspireren studenten in verschillende vakken en leeftijdsgroepen. Ze ontwikkelen lesplannen, beoordelen de voortgang van studenten en creëren boeiende leeromgevingen die academische en persoonlijke groei bevorderen.',
+        tips: [
+          'Benadruk je onderwijsbevoegdheden en kwalificaties',
+          'Leg nadruk op klasmanagement en strategieën voor betrokkenheid van studenten',
+          'Toon innovatieve lesmethoden en curriculumontwikkeling',
+          'Vermeld professionele ontwikkeling en bijscholing',
+          'Demonstreer impact door studentresultaten en prestaties'
+        ],
+        skills: [
+          'Curriculumontwikkeling en lesplanning',
+          'Klasmanagement en discipline',
+          'Studentbeoordeling en evaluatie',
+          'Gedifferentieerde instructietechnieken',
+          'Integratie van onderwijstechnologie',
+          'Communicatie met ouders en gemeenschap',
+          'Speciaal onderwijs en inclusieve praktijken'
+        ],
+        whyGood: [
+          'Duidelijke structuur die onderwijsbevoegdheden benadrukt',
+          'Legt nadruk op onderwijservaring en studentresultaten',
+          'Toont toewijding aan professionele ontwikkeling',
+          'Demonstreert vermogen om zich aan te passen aan diverse leerbehoeften',
+          'ATS-vriendelijk formaat met relevante onderwijszoekwoorden'
+        ]
+      },
+      fr: {
+        name: 'Enseignant',
+        slug: 'enseignant',
+        description: 'Les enseignants éduquent et inspirent les élèves dans diverses matières et groupes d\'âge. Ils développent des plans de cours, évaluent les progrès des élèves et créent des environnements d\'apprentissage engageants qui favorisent la croissance académique et personnelle.',
+        tips: [
+          'Mettez en avant vos certifications et qualifications d\'enseignement',
+          'Soulignez les stratégies de gestion de classe et d\'engagement des élèves',
+          'Présentez des méthodes d\'enseignement innovantes et le développement de programmes',
+          'Incluez le développement professionnel et la formation continue',
+          'Démontrez l\'impact grâce aux résultats et réalisations des élèves'
+        ],
+        skills: [
+          'Développement de programmes et planification de cours',
+          'Gestion de classe et discipline',
+          'Évaluation et notation des élèves',
+          'Techniques d\'instruction différenciée',
+          'Intégration de la technologie éducative',
+          'Communication avec les parents et la communauté',
+          'Éducation spécialisée et pratiques inclusives'
+        ],
+        whyGood: [
+          'Structure claire mettant en évidence les qualifications éducatives',
+          'Met l\'accent sur l\'expérience d\'enseignement et les résultats des élèves',
+          'Montre l\'engagement envers le développement professionnel',
+          'Démontre la capacité à s\'adapter aux divers besoins d\'apprentissage',
+          'Format compatible ATS avec mots-clés éducatifs pertinents'
+        ]
+      },
+      es: {
+        name: 'Profesor',
+        slug: 'profesor',
+        description: 'Los profesores educan e inspiran a estudiantes en diversas materias y grupos de edad. Desarrollan planes de lección, evalúan el progreso de los estudiantes y crean entornos de aprendizaje atractivos que fomentan el crecimiento académico y personal.',
+        tips: [
+          'Destaca tus certificaciones y calificaciones de enseñanza',
+          'Enfatiza estrategias de gestión del aula y participación estudiantil',
+          'Muestra métodos de enseñanza innovadores y desarrollo curricular',
+          'Incluye desarrollo profesional y educación continua',
+          'Demuestra impacto a través de resultados y logros estudiantiles'
+        ],
+        skills: [
+          'Desarrollo curricular y planificación de lecciones',
+          'Gestión del aula y disciplina',
+          'Evaluación y calificación de estudiantes',
+          'Técnicas de instrucción diferenciada',
+          'Integración de tecnología educativa',
+          'Comunicación con padres y comunidad',
+          'Educación especial y prácticas inclusivas'
+        ],
+        whyGood: [
+          'Estructura clara que destaca calificaciones educativas',
+          'Enfatiza experiencia docente y resultados estudiantiles',
+          'Muestra compromiso con el desarrollo profesional',
+          'Demuestra capacidad para adaptarse a diversas necesidades de aprendizaje',
+          'Formato compatible con ATS con palabras clave educativas relevantes'
+        ]
+      },
+      de: {
+        name: 'Lehrer',
+        slug: 'lehrer',
+        description: 'Lehrer erziehen und inspirieren Schüler in verschiedenen Fächern und Altersgruppen. Sie entwickeln Unterrichtspläne, bewerten den Fortschritt der Schüler und schaffen ansprechende Lernumgebungen, die akademisches und persönliches Wachstum fördern.',
+        tips: [
+          'Heben Sie Ihre Lehrzertifizierungen und Qualifikationen hervor',
+          'Betonen Sie Strategien für Klassenmanagement und Schülerengagement',
+          'Zeigen Sie innovative Lehrmethoden und Lehrplanentwicklung',
+          'Fügen Sie berufliche Entwicklung und Weiterbildung hinzu',
+          'Demonstrieren Sie Wirkung durch Schülerergebnisse und Leistungen'
+        ],
+        skills: [
+          'Lehrplanentwicklung und Unterrichtsplanung',
+          'Klassenmanagement und Disziplin',
+          'Schülerbewertung und -evaluierung',
+          'Differenzierte Unterrichtstechniken',
+          'Integration von Bildungstechnologie',
+          'Kommunikation mit Eltern und Gemeinschaft',
+          'Sonderpädagogik und inklusive Praktiken'
+        ],
+        whyGood: [
+          'Klare Struktur, die pädagogische Qualifikationen hervorhebt',
+          'Betont Unterrichtserfahrung und Schülerergebnisse',
+          'Zeigt Engagement für berufliche Entwicklung',
+          'Demonstriert Fähigkeit, sich an vielfältige Lernbedürfnisse anzupassen',
+          'ATS-freundliches Format mit relevanten Bildungsschlüsselwörtern'
+        ]
+      },
+      it: { name: 'Insegnante', slug: 'insegnante', description: 'Gli insegnanti educano e ispirano gli studenti in varie materie e fasce d\'età. Sviluppano piani di lezione, valutano i progressi degli studenti e creano ambienti di apprendimento coinvolgenti che favoriscono la crescita accademica e personale.', tips: ['Evidenzia le tue certificazioni e qualifiche di insegnamento', 'Enfatizza strategie di gestione della classe e coinvolgimento degli studenti', 'Mostra metodi di insegnamento innovativi e sviluppo del curriculum', 'Includi sviluppo professionale e formazione continua', 'Dimostra l\'impatto attraverso risultati e risultati degli studenti'], skills: ['Sviluppo del curriculum e pianificazione delle lezioni', 'Gestione della classe e disciplina', 'Valutazione e valutazione degli studenti', 'Tecniche di istruzione differenziata', 'Integrazione della tecnologia educativa', 'Comunicazione con genitori e comunità', 'Educazione speciale e pratiche inclusive'], whyGood: ['Struttura chiara che evidenzia le qualifiche educative', 'Enfatizza l\'esperienza di insegnamento e i risultati degli studenti', 'Mostra impegno per lo sviluppo professionale', 'Dimostra la capacità di adattarsi a diverse esigenze di apprendimento', 'Formato compatibile con ATS con parole chiave educative rilevanti'] },
+      pl: { name: 'Nauczyciel', slug: 'nauczyciel', description: 'Nauczyciele edukują i inspirują uczniów w różnych przedmiotach i grupach wiekowych. Opracowują plany lekcji, oceniają postępy uczniów i tworzą angażujące środowiska uczenia się, które wspierają rozwój akademicki i osobisty.', tips: ['Podkreśl swoje certyfikaty i kwalifikacje nauczycielskie', 'Podkreśl strategie zarządzania klasą i zaangażowania uczniów', 'Pokaż innowacyjne metody nauczania i rozwój programu nauczania', 'Uwzględnij rozwój zawodowy i kształcenie ustawiczne', 'Wykazuj wpływ poprzez wyniki i osiągnięcia uczniów'], skills: ['Rozwój programu nauczania i planowanie lekcji', 'Zarządzanie klasą i dyscyplina', 'Ocena i ewaluacja uczniów', 'Techniki zróżnicowanej instrukcji', 'Integracja technologii edukacyjnej', 'Komunikacja z rodzicami i społecznością', 'Edukacja specjalna i praktyki włączające'], whyGood: ['Jasna struktura podkreślająca kwalifikacje edukacyjne', 'Kładzie nacisk na doświadczenie w nauczaniu i wyniki uczniów', 'Pokazuje zaangażowanie w rozwój zawodowy', 'Wykazuje zdolność dostosowania się do różnych potrzeb uczenia się', 'Format przyjazny dla ATS z odpowiednimi słowami kluczowymi edukacyjnymi'] },
+      ro: { name: 'Profesor', slug: 'profesor', description: 'Profesorii educă și inspiră elevii în diverse materii și grupuri de vârstă. Ei dezvoltă planuri de lecție, evaluează progresul elevilor și creează medii de învățare captivante care favorizează creșterea academică și personală.', tips: ['Evidențiază certificările și calificările tale de predare', 'Subliniază strategiile de management al clasei și implicarea elevilor', 'Prezintă metode inovatoare de predare și dezvoltarea curriculumului', 'Include dezvoltare profesională și educație continuă', 'Demonstrează impactul prin rezultatele și realizările elevilor'], skills: ['Dezvoltarea curriculumului și planificarea lecțiilor', 'Managementul clasei și disciplina', 'Evaluarea și evaluarea elevilor', 'Tehnici de instruire diferențiată', 'Integrarea tehnologiei educaționale', 'Comunicarea cu părinții și comunitatea', 'Educația specială și practicile incluzive'], whyGood: ['Structură clară care evidențiază calificările educaționale', 'Subliniază experiența de predare și rezultatele elevilor', 'Arată angajamentul față de dezvoltarea profesională', 'Demonstrează capacitatea de a se adapta la diverse nevoi de învățare', 'Format compatibil cu ATS cu cuvinte cheie educaționale relevante'] },
+      hu: { name: 'Tanár', slug: 'tanar', description: '', tips: [], skills: [], whyGood: [] },
+      el: { name: 'Δάσκαλος', slug: 'daskalos', description: '', tips: [], skills: [], whyGood: [] },
+      cs: { name: 'Učitel', slug: 'ucitel', description: '', tips: [], skills: [], whyGood: [] },
+      pt: { name: 'Professor', slug: 'professor', description: '', tips: [], skills: [], whyGood: [] },
+      sv: { name: 'Lärare', slug: 'larare', description: '', tips: [], skills: [], whyGood: [] },
+      bg: { name: 'Учител', slug: 'uchitel', description: '', tips: [], skills: [], whyGood: [] },
+      da: { name: 'Lærer', slug: 'laerer', description: '', tips: [], skills: [], whyGood: [] },
+      fi: { name: 'Opettaja', slug: 'opettaja', description: '', tips: [], skills: [], whyGood: [] },
+      sk: { name: 'Učiteľ', slug: 'ucitel', description: '', tips: [], skills: [], whyGood: [] },
+      no: { name: 'Lærer', slug: 'laerer', description: '', tips: [], skills: [], whyGood: [] },
+      hr: { name: 'Učitelj', slug: 'ucitelj', description: '', tips: [], skills: [], whyGood: [] },
+      sr: { name: 'Учитељ', slug: 'ucitelj', description: '', tips: [], skills: [], whyGood: [] }
+    }
+  },
+  {
+    id: 'accountant',
+    category: 'business',
+    translations: {
+      en: {
+        name: 'Accountant',
+        slug: 'accountant',
+        description: 'Accountants manage financial records, prepare tax returns, and ensure compliance with financial regulations. They analyze financial data to help businesses make informed decisions and maintain accurate financial reporting.',
+        tips: [
+          'Highlight your accounting certifications (CPA, ACCA, etc.)',
+          'Emphasize experience with accounting software and systems',
+          'Showcase knowledge of tax regulations and compliance',
+          'Include experience with financial analysis and reporting',
+          'Demonstrate attention to detail and accuracy'
+        ],
+        skills: [
+          'Financial accounting and bookkeeping',
+          'Tax preparation and planning',
+          'Financial statement analysis',
+          'Accounting software (QuickBooks, SAP, etc.)',
+          'Audit and compliance procedures',
+          'Budgeting and forecasting',
+          'Regulatory compliance and reporting'
+        ],
+        whyGood: [
+          'Clear structure highlighting accounting qualifications',
+          'Emphasizes technical skills and certifications',
+          'Shows experience with relevant accounting software',
+          'Demonstrates knowledge of financial regulations',
+          'ATS-friendly format with industry-specific keywords'
+        ]
+      },
+      nl: {
+        name: 'Accountant',
+        slug: 'accountant',
+        description: 'Accountants beheren financiële administraties, bereiden belastingaangiften voor en zorgen voor naleving van financiële regelgeving. Ze analyseren financiële gegevens om bedrijven te helpen weloverwogen beslissingen te nemen en nauwkeurige financiële rapportage te behouden.',
+        tips: [
+          'Benadruk je accountancycertificeringen (CPA, ACCA, etc.)',
+          'Leg nadruk op ervaring met boekhoudsoftware en systemen',
+          'Toon kennis van belastingregelgeving en naleving',
+          'Vermeld ervaring met financiële analyse en rapportage',
+          'Demonstreer aandacht voor detail en nauwkeurigheid'
+        ],
+        skills: [
+          'Financiële boekhouding en administratie',
+          'Belastingvoorbereiding en -planning',
+          'Financiële overzichtsanalyse',
+          'Boekhoudsoftware (QuickBooks, SAP, etc.)',
+          'Audit- en nalevingsprocedures',
+          'Begroting en prognose',
+          'Regelgevingsnaleving en rapportage'
+        ],
+        whyGood: [
+          'Duidelijke structuur die accountancykwalificaties benadrukt',
+          'Legt nadruk op technische vaardigheden en certificeringen',
+          'Toont ervaring met relevante boekhoudsoftware',
+          'Demonstreert kennis van financiële regelgeving',
+          'ATS-vriendelijk formaat met branchespecifieke zoekwoorden'
+        ]
+      },
+      fr: {
+        name: 'Comptable',
+        slug: 'comptable',
+        description: 'Les comptables gèrent les registres financiers, préparent les déclarations fiscales et assurent la conformité aux réglementations financières. Ils analysent les données financières pour aider les entreprises à prendre des décisions éclairées et maintenir une comptabilité financière précise.',
+        tips: [
+          'Mettez en avant vos certifications comptables (CPA, ACCA, etc.)',
+          'Soulignez l\'expérience avec les logiciels et systèmes comptables',
+          'Présentez la connaissance des réglementations fiscales et de la conformité',
+          'Incluez l\'expérience en analyse et reporting financier',
+          'Démontrez l\'attention aux détails et la précision'
+        ],
+        skills: [
+          'Comptabilité financière et tenue de livres',
+          'Préparation et planification fiscale',
+          'Analyse des états financiers',
+          'Logiciels comptables (QuickBooks, SAP, etc.)',
+          'Procédures d\'audit et de conformité',
+          'Budgétisation et prévisions',
+          'Conformité réglementaire et reporting'
+        ],
+        whyGood: [
+          'Structure claire mettant en évidence les qualifications comptables',
+          'Met l\'accent sur les compétences techniques et les certifications',
+          'Montre l\'expérience avec les logiciels comptables pertinents',
+          'Démontre la connaissance des réglementations financières',
+          'Format compatible ATS avec mots-clés spécifiques à l\'industrie'
+        ]
+      },
+      es: {
+        name: 'Contador',
+        slug: 'contador',
+        description: 'Los contadores gestionan registros financieros, preparan declaraciones de impuestos y aseguran el cumplimiento de las regulaciones financieras. Analizan datos financieros para ayudar a las empresas a tomar decisiones informadas y mantener informes financieros precisos.',
+        tips: [
+          'Destaca tus certificaciones contables (CPA, ACCA, etc.)',
+          'Enfatiza experiencia con software y sistemas contables',
+          'Muestra conocimiento de regulaciones fiscales y cumplimiento',
+          'Incluye experiencia con análisis y reportes financieros',
+          'Demuestra atención al detalle y precisión'
+        ],
+        skills: [
+          'Contabilidad financiera y teneduría de libros',
+          'Preparación y planificación fiscal',
+          'Análisis de estados financieros',
+          'Software contable (QuickBooks, SAP, etc.)',
+          'Procedimientos de auditoría y cumplimiento',
+          'Presupuestación y pronósticos',
+          'Cumplimiento regulatorio y reportes'
+        ],
+        whyGood: [
+          'Estructura clara que destaca calificaciones contables',
+          'Enfatiza habilidades técnicas y certificaciones',
+          'Muestra experiencia con software contable relevante',
+          'Demuestra conocimiento de regulaciones financieras',
+          'Formato compatible con ATS con palabras clave específicas de la industria'
+        ]
+      },
+      de: {
+        name: 'Buchhalter',
+        slug: 'buchhalter',
+        description: 'Buchhalter verwalten Finanzunterlagen, erstellen Steuererklärungen und stellen die Einhaltung der Finanzvorschriften sicher. Sie analysieren Finanzdaten, um Unternehmen bei fundierten Entscheidungen zu helfen und genaue Finanzberichterstattung aufrechtzuerhalten.',
+        tips: [
+          'Heben Sie Ihre Buchhaltungszertifizierungen hervor (CPA, ACCA, etc.)',
+          'Betonen Sie Erfahrung mit Buchhaltungssoftware und -systemen',
+          'Zeigen Sie Kenntnisse der Steuervorschriften und Compliance',
+          'Fügen Sie Erfahrung mit Finanzanalyse und Berichterstattung hinzu',
+          'Demonstrieren Sie Aufmerksamkeit für Details und Genauigkeit'
+        ],
+        skills: [
+          'Finanzbuchhaltung und Buchführung',
+          'Steuervorbereitung und -planung',
+          'Analyse von Jahresabschlüssen',
+          'Buchhaltungssoftware (QuickBooks, SAP, etc.)',
+          'Audit- und Compliance-Verfahren',
+          'Budgetierung und Prognose',
+          'Regulatorische Compliance und Berichterstattung'
+        ],
+        whyGood: [
+          'Klare Struktur, die Buchhaltungsqualifikationen hervorhebt',
+          'Betont technische Fähigkeiten und Zertifizierungen',
+          'Zeigt Erfahrung mit relevanter Buchhaltungssoftware',
+          'Demonstriert Kenntnisse der Finanzvorschriften',
+          'ATS-freundliches Format mit branchenspezifischen Schlüsselwörtern'
+        ]
+      },
+      it: { name: 'Contabile', slug: 'contabile', description: '', tips: [], skills: [], whyGood: [] },
+      pl: { name: 'Księgowy', slug: 'ksiegowy', description: '', tips: [], skills: [], whyGood: [] },
+      ro: { name: 'Contabil', slug: 'contabil', description: '', tips: [], skills: [], whyGood: [] },
+      hu: { name: 'Könyvelő', slug: 'konyvelo', description: '', tips: [], skills: [], whyGood: [] },
+      el: { name: 'Λογιστής', slug: 'logistis', description: '', tips: [], skills: [], whyGood: [] },
+      cs: { name: 'Účetní', slug: 'ucetni', description: '', tips: [], skills: [], whyGood: [] },
+      pt: { name: 'Contador', slug: 'contador', description: '', tips: [], skills: [], whyGood: [] },
+      sv: { name: 'Revisor', slug: 'revisor', description: '', tips: [], skills: [], whyGood: [] },
+      bg: { name: 'Счетоводител', slug: 'schetovoditel', description: '', tips: [], skills: [], whyGood: [] },
+      da: { name: 'Revisor', slug: 'revisor', description: '', tips: [], skills: [], whyGood: [] },
+      fi: { name: 'Kirjanpitäjä', slug: 'kirjanpitaja', description: '', tips: [], skills: [], whyGood: [] },
+      sk: { name: 'Účtovník', slug: 'uctovnik', description: '', tips: [], skills: [], whyGood: [] },
+      no: { name: 'Regnskapsfører', slug: 'regnskapsforer', description: '', tips: [], skills: [], whyGood: [] },
+      hr: { name: 'Računovođa', slug: 'racunovoda', description: '', tips: [], skills: [], whyGood: [] },
+      sr: { name: 'Рачуновођа', slug: 'racunovoda', description: '', tips: [], skills: [], whyGood: [] }
+    }
+  },
+  {
+    id: 'marketing-manager',
+    category: 'business',
+    translations: {
+      en: {
+        name: 'Marketing Manager',
+        slug: 'marketing-manager',
+        description: 'Marketing managers develop and execute marketing strategies to promote products and services. They oversee campaigns, analyze market trends, manage budgets, and coordinate with various teams to achieve business objectives.',
+        tips: [
+          'Highlight your marketing campaigns and their results',
+          'Emphasize experience with digital marketing tools and platforms',
+          'Showcase data analysis and ROI measurement skills',
+          'Include experience with brand management and positioning',
+          'Demonstrate leadership and team management abilities'
+        ],
+        skills: [
+          'Strategic marketing planning',
+          'Digital marketing (SEO, SEM, social media)',
+          'Campaign management and execution',
+          'Market research and analysis',
+          'Budget management and ROI optimization',
+          'Brand development and positioning',
+          'Team leadership and collaboration'
+        ],
+        whyGood: [
+          'Clear structure highlighting marketing achievements',
+          'Emphasizes measurable results and campaign performance',
+          'Shows expertise in digital marketing channels',
+          'Demonstrates strategic thinking and leadership',
+          'ATS-friendly format with marketing-specific keywords'
+        ]
+      },
+      nl: {
+        name: 'Marketing Manager',
+        slug: 'marketing-manager',
+        description: 'Marketing managers ontwikkelen en voeren marketingstrategieën uit om producten en diensten te promoten. Ze beheren campagnes, analyseren markttrends, beheren budgetten en coördineren met verschillende teams om bedrijfsdoelstellingen te bereiken.',
+        tips: [
+          'Benadruk je marketingcampagnes en hun resultaten',
+          'Leg nadruk op ervaring met digitale marketingtools en platforms',
+          'Toon data-analyse en ROI-meetvaardigheden',
+          'Vermeld ervaring met merkmanagement en positionering',
+          'Demonstreer leiderschaps- en teammanagementvaardigheden'
+        ],
+        skills: [
+          'Strategische marketingplanning',
+          'Digitale marketing (SEO, SEM, social media)',
+          'Campagnemanagement en -uitvoering',
+          'Marktonderzoek en -analyse',
+          'Budgetbeheer en ROI-optimalisatie',
+          'Merkenontwikkeling en positionering',
+          'Teamleiderschap en samenwerking'
+        ],
+        whyGood: [
+          'Duidelijke structuur die marketingprestaties benadrukt',
+          'Legt nadruk op meetbare resultaten en campagneprestaties',
+          'Toont expertise in digitale marketingkanalen',
+          'Demonstreert strategisch denken en leiderschap',
+          'ATS-vriendelijk formaat met marketingspecifieke zoekwoorden'
+        ]
+      },
+      fr: {
+        name: 'Responsable Marketing',
+        slug: 'responsable-marketing',
+        description: 'Les responsables marketing développent et exécutent des stratégies marketing pour promouvoir des produits et services. Ils supervisent les campagnes, analysent les tendances du marché, gèrent les budgets et coordonnent avec diverses équipes pour atteindre les objectifs commerciaux.',
+        tips: [
+          'Mettez en avant vos campagnes marketing et leurs résultats',
+          'Soulignez l\'expérience avec les outils et plateformes de marketing numérique',
+          'Présentez les compétences en analyse de données et mesure du ROI',
+          'Incluez l\'expérience en gestion de marque et positionnement',
+          'Démontrez les capacités de leadership et de gestion d\'équipe'
+        ],
+        skills: [
+          'Planification marketing stratégique',
+          'Marketing numérique (SEO, SEM, réseaux sociaux)',
+          'Gestion et exécution de campagnes',
+          'Recherche et analyse de marché',
+          'Gestion budgétaire et optimisation du ROI',
+          'Développement et positionnement de marque',
+          'Leadership d\'équipe et collaboration'
+        ],
+        whyGood: [
+          'Structure claire mettant en évidence les réalisations marketing',
+          'Met l\'accent sur les résultats mesurables et la performance des campagnes',
+          'Montre l\'expertise dans les canaux de marketing numérique',
+          'Démontre la pensée stratégique et le leadership',
+          'Format compatible ATS avec mots-clés spécifiques au marketing'
+        ]
+      },
+      es: {
+        name: 'Gerente de Marketing',
+        slug: 'gerente-marketing',
+        description: 'Los gerentes de marketing desarrollan y ejecutan estrategias de marketing para promover productos y servicios. Supervisan campañas, analizan tendencias del mercado, gestionan presupuestos y coordinan con varios equipos para lograr objetivos comerciales.',
+        tips: [
+          'Destaca tus campañas de marketing y sus resultados',
+          'Enfatiza experiencia con herramientas y plataformas de marketing digital',
+          'Muestra habilidades de análisis de datos y medición de ROI',
+          'Incluye experiencia con gestión de marca y posicionamiento',
+          'Demuestra habilidades de liderazgo y gestión de equipos'
+        ],
+        skills: [
+          'Planificación estratégica de marketing',
+          'Marketing digital (SEO, SEM, redes sociales)',
+          'Gestión y ejecución de campañas',
+          'Investigación y análisis de mercado',
+          'Gestión presupuestaria y optimización de ROI',
+          'Desarrollo y posicionamiento de marca',
+          'Liderazgo de equipo y colaboración'
+        ],
+        whyGood: [
+          'Estructura clara que destaca logros de marketing',
+          'Enfatiza resultados medibles y rendimiento de campañas',
+          'Muestra experiencia en canales de marketing digital',
+          'Demuestra pensamiento estratégico y liderazgo',
+          'Formato compatible con ATS con palabras clave específicas de marketing'
+        ]
+      },
+      de: {
+        name: 'Marketing Manager',
+        slug: 'marketing-manager',
+        description: 'Marketingmanager entwickeln und setzen Marketingstrategien um, um Produkte und Dienstleistungen zu fördern. Sie überwachen Kampagnen, analysieren Markttrends, verwalten Budgets und koordinieren mit verschiedenen Teams, um Geschäftsziele zu erreichen.',
+        tips: [
+          'Heben Sie Ihre Marketingkampagnen und deren Ergebnisse hervor',
+          'Betonen Sie Erfahrung mit digitalen Marketingtools und -plattformen',
+          'Zeigen Sie Datenanalyse- und ROI-Messfähigkeiten',
+          'Fügen Sie Erfahrung mit Markenmanagement und Positionierung hinzu',
+          'Demonstrieren Sie Führungs- und Teammanagementfähigkeiten'
+        ],
+        skills: [
+          'Strategische Marketingplanung',
+          'Digitales Marketing (SEO, SEM, soziale Medien)',
+          'Kampagnenmanagement und -durchführung',
+          'Marktforschung und -analyse',
+          'Budgetverwaltung und ROI-Optimierung',
+          'Markenentwicklung und Positionierung',
+          'Teamführung und Zusammenarbeit'
+        ],
+        whyGood: [
+          'Klare Struktur, die Marketingleistungen hervorhebt',
+          'Betont messbare Ergebnisse und Kampagnenleistung',
+          'Zeigt Expertise in digitalen Marketingkanälen',
+          'Demonstriert strategisches Denken und Führung',
+          'ATS-freundliches Format mit marketingspezifischen Schlüsselwörtern'
+        ]
+      },
+      it: { name: 'Responsabile Marketing', slug: 'responsabile-marketing', description: '', tips: [], skills: [], whyGood: [] },
+      pl: { name: 'Menedżer Marketingu', slug: 'menedzer-marketingu', description: '', tips: [], skills: [], whyGood: [] },
+      ro: { name: 'Manager Marketing', slug: 'manager-marketing', description: '', tips: [], skills: [], whyGood: [] },
+      hu: { name: 'Marketing Menedzser', slug: 'marketing-menedzser', description: '', tips: [], skills: [], whyGood: [] },
+      el: { name: 'Διευθυντής Μάρκετινγκ', slug: 'diefthintis-marketing', description: '', tips: [], skills: [], whyGood: [] },
+      cs: { name: 'Marketingový Manažer', slug: 'marketingovy-manazer', description: '', tips: [], skills: [], whyGood: [] },
+      pt: { name: 'Gerente de Marketing', slug: 'gerente-marketing', description: '', tips: [], skills: [], whyGood: [] },
+      sv: { name: 'Marknadschef', slug: 'marknadschef', description: '', tips: [], skills: [], whyGood: [] },
+      bg: { name: 'Маркетинг Мениджър', slug: 'marketing-menidzhar', description: '', tips: [], skills: [], whyGood: [] },
+      da: { name: 'Marketingchef', slug: 'marketingchef', description: '', tips: [], skills: [], whyGood: [] },
+      fi: { name: 'Markkinointipäällikkö', slug: 'markkinointipaallikko', description: '', tips: [], skills: [], whyGood: [] },
+      sk: { name: 'Manažér Marketingu', slug: 'manazer-marketingu', description: '', tips: [], skills: [], whyGood: [] },
+      no: { name: 'Markedsføringssjef', slug: 'markedsforingssjef', description: '', tips: [], skills: [], whyGood: [] },
+      hr: { name: 'Marketing Menadžer', slug: 'marketing-menadzer', description: '', tips: [], skills: [], whyGood: [] },
+      sr: { name: 'Маркетинг Менаџер', slug: 'marketing-menadzer', description: '', tips: [], skills: [], whyGood: [] }
+    }
+  },
+  {
+    id: 'graphic-designer',
+    category: 'creative',
+    translations: {
+      en: {
+        name: 'Graphic Designer',
+        slug: 'graphic-designer',
+        description: 'Graphic designers create visual concepts to communicate ideas that inspire, inform, and captivate consumers. They develop layouts, logos, and marketing materials using design software and artistic skills.',
+        tips: [
+          'Showcase your portfolio and design projects',
+          'Highlight proficiency with design software (Adobe Creative Suite, etc.)',
+          'Emphasize creativity and ability to meet client needs',
+          'Include experience with different design styles and mediums',
+          'Demonstrate understanding of branding and visual identity'
+        ],
+        skills: [
+          'Adobe Creative Suite (Photoshop, Illustrator, InDesign)',
+          'UI/UX design principles',
+          'Typography and layout design',
+          'Brand identity development',
+          'Print and digital design',
+          'Color theory and visual communication',
+          'Client collaboration and project management'
+        ],
+        whyGood: [
+          'Clear structure highlighting design portfolio',
+          'Emphasizes technical skills with design software',
+          'Shows creative problem-solving abilities',
+          'Demonstrates versatility across design mediums',
+          'ATS-friendly format with design-specific keywords'
+        ]
+      },
+      nl: {
+        name: 'Grafisch Ontwerper',
+        slug: 'grafisch-ontwerper',
+        description: 'Grafisch ontwerpers creëren visuele concepten om ideeën te communiceren die consumenten inspireren, informeren en boeien. Ze ontwikkelen layouts, logo\'s en marketingmaterialen met behulp van ontwerpsoftware en artistieke vaardigheden.',
+        tips: [
+          'Toon je portfolio en ontwerpprojecten',
+          'Benadruk vaardigheid met ontwerpsoftware (Adobe Creative Suite, etc.)',
+          'Leg nadruk op creativiteit en vermogen om aan klantbehoeften te voldoen',
+          'Vermeld ervaring met verschillende ontwerpstijlen en media',
+          'Demonstreer begrip van branding en visuele identiteit'
+        ],
+        skills: [
+          'Adobe Creative Suite (Photoshop, Illustrator, InDesign)',
+          'UI/UX ontwerpprincipes',
+          'Typografie en layoutontwerp',
+          'Merkenidentiteitsontwikkeling',
+          'Print- en digitaal ontwerp',
+          'Kleurtheorie en visuele communicatie',
+          'Klantensamenwerking en projectmanagement'
+        ],
+        whyGood: [
+          'Duidelijke structuur die ontwerpportfolio benadrukt',
+          'Legt nadruk op technische vaardigheden met ontwerpsoftware',
+          'Toont creatieve probleemoplossende vaardigheden',
+          'Demonstreert veelzijdigheid in ontwerpmedia',
+          'ATS-vriendelijk formaat met ontwerpspecifieke zoekwoorden'
+        ]
+      },
+      fr: {
+        name: 'Graphiste',
+        slug: 'graphiste',
+        description: 'Les graphistes créent des concepts visuels pour communiquer des idées qui inspirent, informent et captivent les consommateurs. Ils développent des mises en page, logos et matériaux marketing en utilisant des logiciels de design et des compétences artistiques.',
+        tips: [
+          'Présentez votre portfolio et projets de design',
+          'Mettez en avant la maîtrise des logiciels de design (Adobe Creative Suite, etc.)',
+          'Soulignez la créativité et la capacité à répondre aux besoins des clients',
+          'Incluez l\'expérience avec différents styles et médiums de design',
+          'Démontrez la compréhension du branding et de l\'identité visuelle'
+        ],
+        skills: [
+          'Adobe Creative Suite (Photoshop, Illustrator, InDesign)',
+          'Principes de design UI/UX',
+          'Typographie et conception de mise en page',
+          'Développement d\'identité de marque',
+          'Design print et numérique',
+          'Théorie des couleurs et communication visuelle',
+          'Collaboration client et gestion de projet'
+        ],
+        whyGood: [
+          'Structure claire mettant en évidence le portfolio de design',
+          'Met l\'accent sur les compétences techniques avec les logiciels de design',
+          'Montre les capacités de résolution créative de problèmes',
+          'Démontre la polyvalence à travers les médiums de design',
+          'Format compatible ATS avec mots-clés spécifiques au design'
+        ]
+      },
+      es: {
+        name: 'Diseñador Gráfico',
+        slug: 'disenador-grafico',
+        description: 'Los diseñadores gráficos crean conceptos visuales para comunicar ideas que inspiran, informan y cautivan a los consumidores. Desarrollan diseños, logotipos y materiales de marketing utilizando software de diseño y habilidades artísticas.',
+        tips: [
+          'Muestra tu portafolio y proyectos de diseño',
+          'Destaca competencia con software de diseño (Adobe Creative Suite, etc.)',
+          'Enfatiza creatividad y capacidad para satisfacer necesidades del cliente',
+          'Incluye experiencia con diferentes estilos y medios de diseño',
+          'Demuestra comprensión de branding e identidad visual'
+        ],
+        skills: [
+          'Adobe Creative Suite (Photoshop, Illustrator, InDesign)',
+          'Principios de diseño UI/UX',
+          'Tipografía y diseño de layout',
+          'Desarrollo de identidad de marca',
+          'Diseño impreso y digital',
+          'Teoría del color y comunicación visual',
+          'Colaboración con clientes y gestión de proyectos'
+        ],
+        whyGood: [
+          'Estructura clara que destaca portafolio de diseño',
+          'Enfatiza habilidades técnicas con software de diseño',
+          'Muestra habilidades creativas de resolución de problemas',
+          'Demuestra versatilidad en medios de diseño',
+          'Formato compatible con ATS con palabras clave específicas de diseño'
+        ]
+      },
+      de: {
+        name: 'Grafikdesigner',
+        slug: 'grafikdesigner',
+        description: 'Grafikdesigner erstellen visuelle Konzepte, um Ideen zu kommunizieren, die Verbraucher inspirieren, informieren und fesseln. Sie entwickeln Layouts, Logos und Marketingmaterialien mit Designsoftware und künstlerischen Fähigkeiten.',
+        tips: [
+          'Zeigen Sie Ihr Portfolio und Designprojekte',
+          'Heben Sie die Beherrschung von Designsoftware hervor (Adobe Creative Suite, etc.)',
+          'Betonen Sie Kreativität und Fähigkeit, Kundenbedürfnisse zu erfüllen',
+          'Fügen Sie Erfahrung mit verschiedenen Designstilen und -medien hinzu',
+          'Demonstrieren Sie Verständnis für Branding und visuelle Identität'
+        ],
+        skills: [
+          'Adobe Creative Suite (Photoshop, Illustrator, InDesign)',
+          'UI/UX Design-Prinzipien',
+          'Typografie und Layout-Design',
+          'Markenidentitätsentwicklung',
+          'Print- und Digitaldesign',
+          'Farbtheorie und visuelle Kommunikation',
+          'Kundenkollaboration und Projektmanagement'
+        ],
+        whyGood: [
+          'Klare Struktur, die Designportfolio hervorhebt',
+          'Betont technische Fähigkeiten mit Designsoftware',
+          'Zeigt kreative Problemlösungsfähigkeiten',
+          'Demonstriert Vielseitigkeit in Designmedien',
+          'ATS-freundliches Format mit designspezifischen Schlüsselwörtern'
+        ]
+      },
+      it: { name: 'Grafico', slug: 'grafico', description: '', tips: [], skills: [], whyGood: [] },
+      pl: { name: 'Grafik', slug: 'grafik', description: '', tips: [], skills: [], whyGood: [] },
+      ro: { name: 'Designer Grafic', slug: 'designer-grafic', description: '', tips: [], skills: [], whyGood: [] },
+      hu: { name: 'Grafikus', slug: 'grafikus', description: '', tips: [], skills: [], whyGood: [] },
+      el: { name: 'Γραφίστας', slug: 'grafistas', description: '', tips: [], skills: [], whyGood: [] },
+      cs: { name: 'Grafický Designér', slug: 'graficky-designer', description: '', tips: [], skills: [], whyGood: [] },
+      pt: { name: 'Designer Gráfico', slug: 'designer-grafico', description: '', tips: [], skills: [], whyGood: [] },
+      sv: { name: 'Grafisk Formgivare', slug: 'grafisk-formgivare', description: '', tips: [], skills: [], whyGood: [] },
+      bg: { name: 'Графичен Дизайнер', slug: 'grafichen-dizayner', description: '', tips: [], skills: [], whyGood: [] },
+      da: { name: 'Grafisk Designer', slug: 'grafisk-designer', description: '', tips: [], skills: [], whyGood: [] },
+      fi: { name: 'Graafinen Suunnittelija', slug: 'graafinen-suunnittelija', description: '', tips: [], skills: [], whyGood: [] },
+      sk: { name: 'Grafický Dizajnér', slug: 'graficky-dizajner', description: '', tips: [], skills: [], whyGood: [] },
+      no: { name: 'Grafisk Designer', slug: 'grafisk-designer', description: '', tips: [], skills: [], whyGood: [] },
+      hr: { name: 'Grafički Dizajner', slug: 'graficki-dizajner', description: '', tips: [], skills: [], whyGood: [] },
+      sr: { name: 'Графички Дизајнер', slug: 'graficki-dizajner', description: '', tips: [], skills: [], whyGood: [] }
+    }
+  },
+  {
+    id: 'administrative-assistant',
+    category: 'administration',
+    translations: {
+      en: {
+        name: 'Administrative Assistant',
+        slug: 'administrative-assistant',
+        description: 'Administrative assistants provide clerical and organizational support to ensure efficient office operations. They handle scheduling, correspondence, data entry, and assist with various administrative tasks.',
+        tips: [
+          'Highlight your organizational and multitasking abilities',
+          'Emphasize proficiency with office software (Microsoft Office, etc.)',
+          'Showcase experience with scheduling and calendar management',
+          'Include experience with customer service and communication',
+          'Demonstrate attention to detail and accuracy'
+        ],
+        skills: [
+          'Office administration and management',
+          'Microsoft Office Suite (Word, Excel, PowerPoint, Outlook)',
+          'Data entry and record keeping',
+          'Scheduling and calendar management',
+          'Customer service and communication',
+          'Document preparation and filing',
+          'Multi-tasking and time management'
+        ],
+        whyGood: [
+          'Clear structure highlighting administrative skills',
+          'Emphasizes proficiency with essential office software',
+          'Shows ability to handle multiple responsibilities',
+          'Demonstrates organizational and communication skills',
+          'ATS-friendly format with administrative keywords'
+        ]
+      },
+      nl: {
+        name: 'Administratief Medewerker',
+        slug: 'administratief-medewerker',
+        description: 'Administratief medewerkers bieden administratieve en organisatorische ondersteuning om efficiënte kantooroperaties te waarborgen. Ze behandelen planning, correspondentie, gegevensinvoer en assisteren bij verschillende administratieve taken.',
+        tips: [
+          'Benadruk je organisatorische en multitaskingvaardigheden',
+          'Leg nadruk op vaardigheid met kantoorsoftware (Microsoft Office, etc.)',
+          'Toon ervaring met planning en kalenderbeheer',
+          'Vermeld ervaring met klantenservice en communicatie',
+          'Demonstreer aandacht voor detail en nauwkeurigheid'
+        ],
+        skills: [
+          'Kantooradministratie en -beheer',
+          'Microsoft Office Suite (Word, Excel, PowerPoint, Outlook)',
+          'Gegevensinvoer en archiefbeheer',
+          'Planning en kalenderbeheer',
+          'Klantenservice en communicatie',
+          'Documentvoorbereiding en archivering',
+          'Multitasking en tijdbeheer'
+        ],
+        whyGood: [
+          'Duidelijke structuur die administratieve vaardigheden benadrukt',
+          'Legt nadruk op vaardigheid met essentiële kantoorsoftware',
+          'Toont vermogen om meerdere verantwoordelijkheden te hanteren',
+          'Demonstreert organisatorische en communicatieve vaardigheden',
+          'ATS-vriendelijk formaat met administratieve zoekwoorden'
+        ]
+      },
+      fr: {
+        name: 'Assistant Administratif',
+        slug: 'assistant-administratif',
+        description: 'Les assistants administratifs fournissent un soutien administratif et organisationnel pour assurer des opérations de bureau efficaces. Ils gèrent la planification, la correspondance, la saisie de données et aident avec diverses tâches administratives.',
+        tips: [
+          'Mettez en avant vos capacités organisationnelles et de multitâche',
+          'Soulignez la maîtrise des logiciels de bureau (Microsoft Office, etc.)',
+          'Présentez l\'expérience en planification et gestion de calendrier',
+          'Incluez l\'expérience en service client et communication',
+          'Démontrez l\'attention aux détails et la précision'
+        ],
+        skills: [
+          'Administration et gestion de bureau',
+          'Suite Microsoft Office (Word, Excel, PowerPoint, Outlook)',
+          'Saisie de données et tenue de dossiers',
+          'Planification et gestion de calendrier',
+          'Service client et communication',
+          'Préparation et classement de documents',
+          'Multitâche et gestion du temps'
+        ],
+        whyGood: [
+          'Structure claire mettant en évidence les compétences administratives',
+          'Met l\'accent sur la maîtrise des logiciels de bureau essentiels',
+          'Montre la capacité à gérer plusieurs responsabilités',
+          'Démontre les compétences organisationnelles et de communication',
+          'Format compatible ATS avec mots-clés administratifs'
+        ]
+      },
+      es: {
+        name: 'Asistente Administrativo',
+        slug: 'asistente-administrativo',
+        description: 'Los asistentes administrativos brindan apoyo administrativo y organizacional para garantizar operaciones de oficina eficientes. Manejan programación, correspondencia, entrada de datos y ayudan con diversas tareas administrativas.',
+        tips: [
+          'Destaca tus habilidades organizativas y de multitarea',
+          'Enfatiza competencia con software de oficina (Microsoft Office, etc.)',
+          'Muestra experiencia con programación y gestión de calendario',
+          'Incluye experiencia con servicio al cliente y comunicación',
+          'Demuestra atención al detalle y precisión'
+        ],
+        skills: [
+          'Administración y gestión de oficina',
+          'Suite Microsoft Office (Word, Excel, PowerPoint, Outlook)',
+          'Entrada de datos y mantenimiento de registros',
+          'Programación y gestión de calendario',
+          'Servicio al cliente y comunicación',
+          'Preparación y archivo de documentos',
+          'Multitarea y gestión del tiempo'
+        ],
+        whyGood: [
+          'Estructura clara que destaca habilidades administrativas',
+          'Enfatiza competencia con software de oficina esencial',
+          'Muestra capacidad para manejar múltiples responsabilidades',
+          'Demuestra habilidades organizativas y de comunicación',
+          'Formato compatible con ATS con palabras clave administrativas'
+        ]
+      },
+      de: {
+        name: 'Verwaltungsassistent',
+        slug: 'verwaltungsassistent',
+        description: 'Verwaltungsassistenten bieten bürotechnische und organisatorische Unterstützung, um effiziente Büroabläufe sicherzustellen. Sie handhaben Terminplanung, Korrespondenz, Dateneingabe und unterstützen bei verschiedenen Verwaltungsaufgaben.',
+        tips: [
+          'Heben Sie Ihre organisatorischen und Multitasking-Fähigkeiten hervor',
+          'Betonen Sie die Beherrschung von Bürosoftware (Microsoft Office, etc.)',
+          'Zeigen Sie Erfahrung mit Terminplanung und Kalenderverwaltung',
+          'Fügen Sie Erfahrung mit Kundenservice und Kommunikation hinzu',
+          'Demonstrieren Sie Aufmerksamkeit für Details und Genauigkeit'
+        ],
+        skills: [
+          'Büroverwaltung und -management',
+          'Microsoft Office Suite (Word, Excel, PowerPoint, Outlook)',
+          'Dateneingabe und Aktenführung',
+          'Terminplanung und Kalenderverwaltung',
+          'Kundenservice und Kommunikation',
+          'Dokumentenvorbereitung und Ablage',
+          'Multitasking und Zeitmanagement'
+        ],
+        whyGood: [
+          'Klare Struktur, die Verwaltungsfähigkeiten hervorhebt',
+          'Betont die Beherrschung wesentlicher Bürosoftware',
+          'Zeigt Fähigkeit, mehrere Verantwortlichkeiten zu handhaben',
+          'Demonstriert organisatorische und Kommunikationsfähigkeiten',
+          'ATS-freundliches Format mit Verwaltungsschlüsselwörtern'
+        ]
+      },
+      it: { name: 'Assistente Amministrativo', slug: 'assistente-amministrativo', description: '', tips: [], skills: [], whyGood: [] },
+      pl: { name: 'Asystent Administracyjny', slug: 'asystent-administracyjny', description: '', tips: [], skills: [], whyGood: [] },
+      ro: { name: 'Asistent Administrativ', slug: 'asistent-administrativ', description: '', tips: [], skills: [], whyGood: [] },
+      hu: { name: 'Adminisztratív Asszisztens', slug: 'administrativ-asszisztens', description: '', tips: [], skills: [], whyGood: [] },
+      el: { name: 'Διοικητικός Βοηθός', slug: 'dioikitikos-voithos', description: '', tips: [], skills: [], whyGood: [] },
+      cs: { name: 'Administrativní Asistent', slug: 'administrativni-asistent', description: '', tips: [], skills: [], whyGood: [] },
+      pt: { name: 'Assistente Administrativo', slug: 'assistente-administrativo', description: '', tips: [], skills: [], whyGood: [] },
+      sv: { name: 'Administrativ Assistent', slug: 'administrativ-assistent', description: '', tips: [], skills: [], whyGood: [] },
+      bg: { name: 'Административен Асистент', slug: 'administrativen-asistent', description: '', tips: [], skills: [], whyGood: [] },
+      da: { name: 'Administrativ Assistent', slug: 'administrativ-assistent', description: '', tips: [], skills: [], whyGood: [] },
+      fi: { name: 'Hallintoavustaja', slug: 'hallintoavustaja', description: '', tips: [], skills: [], whyGood: [] },
+      sk: { name: 'Administratívny Asistent', slug: 'administrativny-asistent', description: '', tips: [], skills: [], whyGood: [] },
+      no: { name: 'Administrativ Assistent', slug: 'administrativ-assistent', description: '', tips: [], skills: [], whyGood: [] },
+      hr: { name: 'Administrativni Asistent', slug: 'administrativni-asistent', description: '', tips: [], skills: [], whyGood: [] },
+      sr: { name: 'Административни Асистент', slug: 'administrativni-asistent', description: '', tips: [], skills: [], whyGood: [] }
+    }
+  },
+  {
+    id: 'engineer',
+    category: 'engineering',
+    translations: {
+      en: {
+        name: 'Engineer',
+        slug: 'engineer',
+        description: 'Engineers apply scientific and mathematical principles to design, develop, and maintain systems, structures, and processes. They solve complex problems and create innovative solutions across various engineering disciplines.',
+        tips: [
+          'Highlight your engineering degree and certifications',
+          'Emphasize technical skills and software proficiency',
+          'Showcase projects and their impact',
+          'Include experience with engineering standards and regulations',
+          'Demonstrate problem-solving and analytical abilities'
+        ],
+        skills: [
+          'Engineering design and analysis',
+          'CAD software (AutoCAD, SolidWorks, etc.)',
+          'Project management and planning',
+          'Technical documentation and reporting',
+          'Quality assurance and testing',
+          'Regulatory compliance',
+          'Collaboration with cross-functional teams'
+        ],
+        whyGood: [
+          'Clear structure highlighting engineering qualifications',
+          'Emphasizes technical expertise and certifications',
+          'Shows practical project experience',
+          'Demonstrates problem-solving capabilities',
+          'ATS-friendly format with engineering-specific keywords'
+        ]
+      },
+      nl: {
+        name: 'Ingenieur',
+        slug: 'ingenieur',
+        description: 'Ingenieurs passen wetenschappelijke en wiskundige principes toe om systemen, structuren en processen te ontwerpen, ontwikkelen en onderhouden. Ze lossen complexe problemen op en creëren innovatieve oplossingen in verschillende ingenieursdisciplines.',
+        tips: [
+          'Benadruk je ingenieursdiploma en certificeringen',
+          'Leg nadruk op technische vaardigheden en softwarevaardigheid',
+          'Toon projecten en hun impact',
+          'Vermeld ervaring met ingenieursnormen en -regelgeving',
+          'Demonstreer probleemoplossende en analytische vaardigheden'
+        ],
+        skills: [
+          'Ingenieursontwerp en -analyse',
+          'CAD-software (AutoCAD, SolidWorks, etc.)',
+          'Projectmanagement en -planning',
+          'Technische documentatie en rapportage',
+          'Kwaliteitsborging en testen',
+          'Regelgevingsnaleving',
+          'Samenwerking met multidisciplinaire teams'
+        ],
+        whyGood: [
+          'Duidelijke structuur die ingenieurskwalificaties benadrukt',
+          'Legt nadruk op technische expertise en certificeringen',
+          'Toont praktische projectervaring',
+          'Demonstreert probleemoplossende capaciteiten',
+          'ATS-vriendelijk formaat met ingenieurspecifieke zoekwoorden'
+        ]
+      },
+      fr: {
+        name: 'Ingénieur',
+        slug: 'ingenieur',
+        description: 'Les ingénieurs appliquent des principes scientifiques et mathématiques pour concevoir, développer et maintenir des systèmes, structures et processus. Ils résolvent des problèmes complexes et créent des solutions innovantes dans diverses disciplines d\'ingénierie.',
+        tips: [
+          'Mettez en avant votre diplôme d\'ingénieur et certifications',
+          'Soulignez les compétences techniques et la maîtrise des logiciels',
+          'Présentez des projets et leur impact',
+          'Incluez l\'expérience avec les normes et réglementations d\'ingénierie',
+          'Démontrez les capacités de résolution de problèmes et d\'analyse'
+        ],
+        skills: [
+          'Conception et analyse d\'ingénierie',
+          'Logiciels CAO (AutoCAD, SolidWorks, etc.)',
+          'Gestion et planification de projets',
+          'Documentation et rapports techniques',
+          'Assurance qualité et tests',
+          'Conformité réglementaire',
+          'Collaboration avec des équipes interdisciplinaires'
+        ],
+        whyGood: [
+          'Structure claire mettant en évidence les qualifications d\'ingénierie',
+          'Met l\'accent sur l\'expertise technique et les certifications',
+          'Montre l\'expérience pratique des projets',
+          'Démontre les capacités de résolution de problèmes',
+          'Format compatible ATS avec mots-clés spécifiques à l\'ingénierie'
+        ]
+      },
+      es: {
+        name: 'Ingeniero',
+        slug: 'ingeniero',
+        description: 'Los ingenieros aplican principios científicos y matemáticos para diseñar, desarrollar y mantener sistemas, estructuras y procesos. Resuelven problemas complejos y crean soluciones innovadoras en diversas disciplinas de ingeniería.',
+        tips: [
+          'Destaca tu título de ingeniería y certificaciones',
+          'Enfatiza habilidades técnicas y competencia con software',
+          'Muestra proyectos y su impacto',
+          'Incluye experiencia con estándares y regulaciones de ingeniería',
+          'Demuestra habilidades de resolución de problemas y análisis'
+        ],
+        skills: [
+          'Diseño y análisis de ingeniería',
+          'Software CAD (AutoCAD, SolidWorks, etc.)',
+          'Gestión y planificación de proyectos',
+          'Documentación y reportes técnicos',
+          'Aseguramiento de calidad y pruebas',
+          'Cumplimiento regulatorio',
+          'Colaboración con equipos multifuncionales'
+        ],
+        whyGood: [
+          'Estructura clara que destaca calificaciones de ingeniería',
+          'Enfatiza experiencia técnica y certificaciones',
+          'Muestra experiencia práctica en proyectos',
+          'Demuestra capacidades de resolución de problemas',
+          'Formato compatible con ATS con palabras clave específicas de ingeniería'
+        ]
+      },
+      de: {
+        name: 'Ingenieur',
+        slug: 'ingenieur',
+        description: 'Ingenieure wenden wissenschaftliche und mathematische Prinzipien an, um Systeme, Strukturen und Prozesse zu entwerfen, zu entwickeln und zu warten. Sie lösen komplexe Probleme und schaffen innovative Lösungen in verschiedenen Ingenieursdisziplinen.',
+        tips: [
+          'Heben Sie Ihren Ingenieursabschluss und Zertifizierungen hervor',
+          'Betonen Sie technische Fähigkeiten und Softwarekenntnisse',
+          'Zeigen Sie Projekte und deren Auswirkungen',
+          'Fügen Sie Erfahrung mit Ingenieursstandards und -vorschriften hinzu',
+          'Demonstrieren Sie Problemlösungs- und Analysefähigkeiten'
+        ],
+        skills: [
+          'Ingenieurdesign und -analyse',
+          'CAD-Software (AutoCAD, SolidWorks, etc.)',
+          'Projektmanagement und -planung',
+          'Technische Dokumentation und Berichterstattung',
+          'Qualitätssicherung und Tests',
+          'Regulatorische Compliance',
+          'Zusammenarbeit mit funktionsübergreifenden Teams'
+        ],
+        whyGood: [
+          'Klare Struktur, die Ingenieursqualifikationen hervorhebt',
+          'Betont technische Expertise und Zertifizierungen',
+          'Zeigt praktische Projekterfahrung',
+          'Demonstriert Problemlösungsfähigkeiten',
+          'ATS-freundliches Format mit ingenieursspezifischen Schlüsselwörtern'
+        ]
+      },
+      it: {
+        name: 'Ingegnere',
+        slug: 'ingegnere',
+        description: 'Gli ingegneri applicano principi scientifici e matematici per progettare, sviluppare e mantenere sistemi, strutture e processi. Risolvono problemi complessi e creano soluzioni innovative in varie discipline ingegneristiche.',
+        tips: [
+          'Evidenzia la tua laurea in ingegneria e certificazioni',
+          'Enfatizza competenze tecniche e padronanza del software',
+          'Mostra progetti e il loro impatto',
+          'Includi esperienza con standard e normative ingegneristiche',
+          'Dimostra capacità di problem solving e analisi'
+        ],
+        skills: [
+          'Progettazione e analisi ingegneristica',
+          'Software CAD (AutoCAD, SolidWorks, etc.)',
+          'Gestione e pianificazione progetti',
+          'Documentazione e reporting tecnico',
+          'Assicurazione qualità e test',
+          'Conformità normativa',
+          'Collaborazione con team multifunzionali'
+        ],
+        whyGood: [
+          'Struttura chiara che evidenzia qualifiche ingegneristiche',
+          'Enfatizza competenza tecnica e certificazioni',
+          'Mostra esperienza pratica nei progetti',
+          'Dimostra capacità di problem solving',
+          'Formato compatibile con ATS con parole chiave specifiche per l\'ingegneria'
+        ]
+      },
+      pl: {
+        name: 'Inżynier',
+        slug: 'inzynier',
+        description: 'Inżynierowie stosują zasady naukowe i matematyczne do projektowania, rozwijania i utrzymywania systemów, struktur i procesów. Rozwiązują złożone problemy i tworzą innowacyjne rozwiązania w różnych dyscyplinach inżynierskich.',
+        tips: [
+          'Podkreśl swoje wykształcenie inżynierskie i certyfikaty',
+          'Podkreśl umiejętności techniczne i znajomość oprogramowania',
+          'Pokaż projekty i ich wpływ',
+          'Uwzględnij doświadczenie ze standardami i przepisami inżynierskimi',
+          'Wykazuj zdolności rozwiązywania problemów i analityczne'
+        ],
+        skills: [
+          'Projektowanie i analiza inżynierska',
+          'Oprogramowanie CAD (AutoCAD, SolidWorks, etc.)',
+          'Zarządzanie i planowanie projektów',
+          'Dokumentacja techniczna i raportowanie',
+          'Zapewnienie jakości i testy',
+          'Zgodność z przepisami',
+          'Współpraca z zespołami międzyfunkcyjnymi'
+        ],
+        whyGood: [
+          'Jasna struktura podkreślająca kwalifikacje inżynierskie',
+          'Kładzie nacisk na kompetencje techniczne i certyfikaty',
+          'Pokazuje praktyczne doświadczenie w projektach',
+          'Wykazuje zdolności rozwiązywania problemów',
+          'Format przyjazny dla ATS z słowami kluczowymi specyficznymi dla inżynierii'
+        ]
+      },
+      ro: {
+        name: 'Inginer',
+        slug: 'inginer',
+        description: 'Inginerii aplică principii științifice și matematice pentru a proiecta, dezvolta și menține sisteme, structuri și procese. Ei rezolvă probleme complexe și creează soluții inovatoare în diverse discipline de inginerie.',
+        tips: [
+          'Evidențiază diploma ta de inginerie și certificările',
+          'Subliniază abilitățile tehnice și competența cu software-ul',
+          'Prezintă proiecte și impactul lor',
+          'Include experiența cu standarde și reglementări de inginerie',
+          'Demonstrează abilități de rezolvare a problemelor și analitice'
+        ],
+        skills: [
+          'Proiectare și analiză inginerească',
+          'Software CAD (AutoCAD, SolidWorks, etc.)',
+          'Management și planificare proiecte',
+          'Documentație și raportare tehnică',
+          'Asigurarea calității și testare',
+          'Conformitate reglementară',
+          'Colaborare cu echipe multifuncționale'
+        ],
+        whyGood: [
+          'Structură clară care evidențiază calificările de inginerie',
+          'Subliniază expertiza tehnică și certificările',
+          'Arată experiența practică în proiecte',
+          'Demonstrează capacități de rezolvare a problemelor',
+          'Format compatibil cu ATS cu cuvinte cheie specifice ingineriei'
+        ]
+      },
+      hu: {
+        name: 'Mérnök',
+        slug: 'mernok',
+        description: 'A mérnökök tudományos és matematikai elveket alkalmaznak rendszerek, szerkezetek és folyamatok tervezésére, fejlesztésére és karbantartására. Összetett problémákat oldanak meg és innovatív megoldásokat hoznak létre különböző mérnöki területeken.',
+        tips: [
+          'Hangsúlyozza mérnöki diplomáját és tanúsítványait',
+          'Kiemeli műszaki készségeit és szoftverismeretét',
+          'Bemutatja projekteit és azok hatását',
+          'Tartalmazza mérnöki szabványokkal és előírásokkal való tapasztalatát',
+          'Bebizonyítja problémamegoldó és elemző képességeit'
+        ],
+        skills: [
+          'Mérnöki tervezés és elemzés',
+          'CAD szoftver (AutoCAD, SolidWorks, etc.)',
+          'Projektmenedzsment és tervezés',
+          'Műszaki dokumentáció és jelentéskészítés',
+          'Minőségbiztosítás és tesztelés',
+          'Szabályozási megfelelőség',
+          'Együttműködés többfunkciós csapatokkal'
+        ],
+        whyGood: [
+          'Világos struktúra, amely kiemeli a mérnöki kvalifikációkat',
+          'Hangsúlyozza a műszaki szakértelem és tanúsítványokat',
+          'Mutatja a gyakorlati projekttapasztalatot',
+          'Bebizonyítja a problémamegoldó képességeket',
+          'ATS-barát formátum mérnökspecifikus kulcsszavakkal'
+        ]
+      },
+      el: {
+        name: 'Μηχανικός',
+        slug: 'michanikos',
+        description: 'Οι μηχανικοί εφαρμόζουν επιστημονικές και μαθηματικές αρχές για να σχεδιάσουν, να αναπτύξουν και να συντηρήσουν συστήματα, δομές και διαδικασίες. Επιλύουν σύνθετα προβλήματα και δημιουργούν καινοτόμες λύσεις σε διάφορες μηχανικές ειδικότητες.',
+        tips: [
+          'Επισημάνετε το πτυχίο μηχανικής και τις πιστοποιήσεις σας',
+          'Τονίστε τις τεχνικές δεξιότητες και την ικανότητα λογισμικού',
+          'Παρουσιάστε έργα και τον αντίκτυπό τους',
+          'Συμπεριλάβετε εμπειρία με πρότυπα και κανονισμούς μηχανικής',
+          'Αποδείξτε ικανότητες επίλυσης προβλημάτων και ανάλυσης'
+        ],
+        skills: [
+          'Σχεδιασμός και ανάλυση μηχανικής',
+          'Λογισμικό CAD (AutoCAD, SolidWorks, etc.)',
+          'Διαχείριση και σχεδιασμός έργων',
+          'Τεχνική τεκμηρίωση και αναφορά',
+          'Διασφάλιση ποιότητας και δοκιμές',
+          'Συμμόρφωση με κανονισμούς',
+          'Συνεργασία με διεπιστημονικές ομάδες'
+        ],
+        whyGood: [
+          'Σαφής δομή που επισημαίνει τις μηχανικές προσόντα',
+          'Τονίζει την τεχνική εμπειρογνωμοσύνη και τις πιστοποιήσεις',
+          'Δείχνει πρακτική εμπειρία έργων',
+          'Αποδεικνύει ικανότητες επίλυσης προβλημάτων',
+          'Μορφή συμβατή με ATS με λέξεις-κλειδιά ειδικές για τη μηχανική'
+        ]
+      },
+      cs: {
+        name: 'Inženýr',
+        slug: 'inzenyr',
+        description: 'Inženýři aplikují vědecké a matematické principy k navrhování, vývoji a údržbě systémů, struktur a procesů. Řeší složité problémy a vytvářejí inovativní řešení v různých inženýrských oborech.',
+        tips: [
+          'Zdůrazněte své inženýrské vzdělání a certifikace',
+          'Zdůrazněte technické dovednosti a znalosti softwaru',
+          'Ukažte projekty a jejich dopad',
+          'Zahrňte zkušenosti s inženýrskými standardy a předpisy',
+          'Prokažte schopnosti řešení problémů a analýzy'
+        ],
+        skills: [
+          'Inženýrský design a analýza',
+          'CAD software (AutoCAD, SolidWorks, etc.)',
+          'Řízení a plánování projektů',
+          'Technická dokumentace a reporting',
+          'Zajištění kvality a testování',
+          'Regulační shoda',
+          'Spolupráce s mezifunkčními týmy'
+        ],
+        whyGood: [
+          'Jasná struktura zdůrazňující inženýrské kvalifikace',
+          'Zdůrazňuje technickou odbornost a certifikace',
+          'Ukazuje praktické zkušenosti s projekty',
+          'Prokazuje schopnosti řešení problémů',
+          'Formát kompatibilní s ATS s inženýrskými klíčovými slovy'
+        ]
+      },
+      pt: {
+        name: 'Engenheiro',
+        slug: 'engenheiro',
+        description: 'Engenheiros aplicam princípios científicos e matemáticos para projetar, desenvolver e manter sistemas, estruturas e processos. Eles resolvem problemas complexos e criam soluções inovadoras em várias disciplinas de engenharia.',
+        tips: [
+          'Destaque seu diploma de engenharia e certificações',
+          'Enfatize habilidades técnicas e proficiência em software',
+          'Mostre projetos e seu impacto',
+          'Inclua experiência com padrões e regulamentos de engenharia',
+          'Demonstre habilidades de resolução de problemas e análise'
+        ],
+        skills: [
+          'Design e análise de engenharia',
+          'Software CAD (AutoCAD, SolidWorks, etc.)',
+          'Gerenciamento e planejamento de projetos',
+          'Documentação técnica e relatórios',
+          'Garantia de qualidade e testes',
+          'Conformidade regulatória',
+          'Colaboração com equipes multifuncionais'
+        ],
+        whyGood: [
+          'Estrutura clara destacando qualificações de engenharia',
+          'Enfatiza expertise técnica e certificações',
+          'Mostra experiência prática em projetos',
+          'Demonstra capacidades de resolução de problemas',
+          'Formato compatível com ATS com palavras-chave específicas de engenharia'
+        ]
+      },
+      sv: {
+        name: 'Ingenjör',
+        slug: 'ingenjor',
+        description: 'Ingenjörer tillämpar vetenskapliga och matematiska principer för att designa, utveckla och underhålla system, strukturer och processer. De löser komplexa problem och skapar innovativa lösningar inom olika ingenjörsdiscipliner.',
+        tips: [
+          'Framhäv din ingenjörsexamen och certifieringar',
+          'Betona tekniska färdigheter och programvarukompetens',
+          'Visa projekt och deras inverkan',
+          'Inkludera erfarenhet av ingenjörsstandarder och förordningar',
+          'Visa problemlösnings- och analytiska förmågor'
+        ],
+        skills: [
+          'Ingenjörsdesign och analys',
+          'CAD-programvara (AutoCAD, SolidWorks, etc.)',
+          'Projekthantering och planering',
+          'Teknisk dokumentation och rapportering',
+          'Kvalitetssäkring och testning',
+          'Regulatorisk efterlevnad',
+          'Samarbete med tvärfunktionella team'
+        ],
+        whyGood: [
+          'Tydlig struktur som framhäver ingenjörskvalifikationer',
+          'Betona teknisk expertis och certifieringar',
+          'Visar praktisk projekterfarenhet',
+          'Demonstrerar problemlösningsförmågor',
+          'ATS-vänligt format med ingenjörsspecifika nyckelord'
+        ]
+      },
+      bg: {
+        name: 'Инженер',
+        slug: 'inzhener',
+        description: 'Инженерите прилагат научни и математически принципи за проектиране, разработване и поддържане на системи, структури и процеси. Те решават сложни проблеми и създават иновативни решения в различни инженерни дисциплини.',
+        tips: [
+          'Подчертайте инженерното си образование и сертификати',
+          'Акцентирайте върху техническите умения и компетентността с софтуер',
+          'Покажете проекти и тяхното въздействие',
+          'Включете опит с инженерни стандарти и разпоредби',
+          'Демонстрирайте способности за решаване на проблеми и анализ'
+        ],
+        skills: [
+          'Инженерен дизайн и анализ',
+          'CAD софтуер (AutoCAD, SolidWorks, etc.)',
+          'Управление и планиране на проекти',
+          'Техническа документация и отчетност',
+          'Осигуряване на качество и тестване',
+          'Регулаторно съответствие',
+          'Сътрудничество с междуфункционални екипи'
+        ],
+        whyGood: [
+          'Ясна структура, която подчертава инженерните квалификации',
+          'Акцентира върху техническата експертиза и сертификатите',
+          'Показва практически опит с проекти',
+          'Демонстрира способности за решаване на проблеми',
+          'Формат, съвместим с ATS, с инженерни ключови думи'
+        ]
+      },
+      da: {
+        name: 'Ingeniør',
+        slug: 'ingenior',
+        description: 'Ingeniører anvender videnskabelige og matematiske principper til at designe, udvikle og vedligeholde systemer, strukturer og processer. De løser komplekse problemer og skaber innovative løsninger på tværs af forskellige ingeniørdiscipliner.',
+        tips: [
+          'Fremhæv din ingeniøreksamen og certificeringer',
+          'Fremhæv tekniske færdigheder og softwarekompetence',
+          'Vis projekter og deres indvirkning',
+          'Inkluder erfaring med ingeniørstandarder og -forskrifter',
+          'Demonstrer problemløsnings- og analytiske evner'
+        ],
+        skills: [
+          'Ingeniørdesign og -analyse',
+          'CAD-software (AutoCAD, SolidWorks, etc.)',
+          'Projektledelse og planlægning',
+          'Teknisk dokumentation og rapportering',
+          'Kvalitetssikring og testning',
+          'Regulatorisk overholdelse',
+          'Samarbejde med tværfaglige teams'
+        ],
+        whyGood: [
+          'Tydelig struktur, der fremhæver ingeniørkvalifikationer',
+          'Fremhæver teknisk ekspertise og certificeringer',
+          'Viser praktisk projekterfaring',
+          'Demonstrerer problemløsningsevner',
+          'ATS-venligt format med ingeniørsspecifikke nøgleord'
+        ]
+      },
+      fi: {
+        name: 'Insinööri',
+        slug: 'insinoori',
+        description: 'Insinöörit soveltavat tieteellisiä ja matemaattisia periaatteita suunnitellakseen, kehittääkseen ja ylläpitääkseen järjestelmiä, rakenteita ja prosesseja. He ratkaisevat monimutkaisia ongelmia ja luovat innovatiivisia ratkaisuja eri insinööritieteiden aloilla.',
+        tips: [
+          'Korosta insinöörin tutkintosi ja sertifikaatit',
+          'Korosta tekniset taidot ja ohjelmistotaito',
+          'Näytä projektit ja niiden vaikutus',
+          'Sisällytä kokemus insinööristandardeista ja -määräyksistä',
+          'Näytä ongelmanratkaisu- ja analyyttiset kyvyt'
+        ],
+        skills: [
+          'Insinöörisuunnittelu ja -analyysi',
+          'CAD-ohjelmistot (AutoCAD, SolidWorks, etc.)',
+          'Projektinhallinta ja suunnittelu',
+          'Tekninen dokumentointi ja raportointi',
+          'Laadunvarmistus ja testaus',
+          'Sääntelyn noudattaminen',
+          'Yhteistyö monialaisissa tiimeissä'
+        ],
+        whyGood: [
+          'Selkeä rakenne, joka korostaa insinöörikvalifikaatioita',
+          'Korostaa teknistä asiantuntemusta ja sertifikaatteja',
+          'Näyttää käytännön projektikokemusta',
+          'Näyttää ongelmanratkaisukykyjä',
+          'ATS-yhteensopiva muoto insinöörispesifisillä avainsanoilla'
+        ]
+      },
+      sk: {
+        name: 'Inžinier',
+        slug: 'inziner',
+        description: 'Inžinieri aplikujú vedecké a matematické princípy na navrhovanie, vývoj a údržbu systémov, štruktúr a procesov. Riešia zložité problémy a vytvárajú inovatívne riešenia v rôznych inžinierskych disciplínach.',
+        tips: [
+          'Zdôraznite svoje inžinierske vzdelanie a certifikáty',
+          'Zdôraznite technické zručnosti a znalosti softvéru',
+          'Ukážte projekty a ich dopad',
+          'Zahrňte skúsenosti s inžinierskymi normami a predpismi',
+          'Preukážte schopnosti riešenia problémov a analýzy'
+        ],
+        skills: [
+          'Inžiniersky dizajn a analýza',
+          'CAD softvér (AutoCAD, SolidWorks, etc.)',
+          'Riadenie a plánovanie projektov',
+          'Technická dokumentácia a reportovanie',
+          'Zabezpečenie kvality a testovanie',
+          'Regulačná súlad',
+          'Spolupráca s medzifunkčnými tímami'
+        ],
+        whyGood: [
+          'Jasná štruktúra zdôrazňujúca inžinierske kvalifikácie',
+          'Zdôrazňuje technickú odbornosť a certifikáty',
+          'Ukazuje praktické skúsenosti s projektmi',
+          'Preukazuje schopnosti riešenia problémov',
+          'Formát kompatibilný s ATS s inžinierskymi kľúčovými slovami'
+        ]
+      },
+      no: {
+        name: 'Ingeniør',
+        slug: 'ingenior',
+        description: 'Ingeniører bruker vitenskapelige og matematiske prinsipper for å designe, utvikle og vedlikeholde systemer, strukturer og prosesser. De løser komplekse problemer og skaper innovative løsninger på tvers av ulike ingeniørdisipliner.',
+        tips: [
+          'Fremhev din ingeniøreksamen og sertifiseringer',
+          'Fremhev tekniske ferdigheter og programvarekompetanse',
+          'Vis prosjekter og deres innvirkning',
+          'Inkluder erfaring med ingeniørstandarder og -forskrifter',
+          'Demonstrer problemløsnings- og analytiske evner'
+        ],
+        skills: [
+          'Ingeniørdesign og -analyse',
+          'CAD-programvare (AutoCAD, SolidWorks, etc.)',
+          'Prosjektledelse og planlegging',
+          'Teknisk dokumentasjon og rapportering',
+          'Kvalitetssikring og testing',
+          'Regulatorisk overholdelse',
+          'Samarbeid med tverrfaglige team'
+        ],
+        whyGood: [
+          'Tydelig struktur som fremhever ingeniørkvalifikasjoner',
+          'Fremhever teknisk ekspertise og sertifiseringer',
+          'Viser praktisk prosjekterfaring',
+          'Demonstrerer problemløsningsevner',
+          'ATS-vennlig format med ingeniørsspesifikke nøkkelord'
+        ]
+      },
+      hr: {
+        name: 'Inženjer',
+        slug: 'inzenjer',
+        description: 'Inženjeri primjenjuju znanstvene i matematičke principe za projektiranje, razvoj i održavanje sustava, struktura i procesa. Rješavaju složene probleme i stvaraju inovativna rješenja u različitim inženjerskim disciplinama.',
+        tips: [
+          'Istaknite svoju inženjersku diplomu i certifikate',
+          'Naglasite tehničke vještine i kompetenciju s programskim paketima',
+          'Pokažite projekte i njihov utjecaj',
+          'Uključite iskustvo s inženjerskim standardima i propisima',
+          'Pokažite sposobnosti rješavanja problema i analize'
+        ],
+        skills: [
+          'Inženjerski dizajn i analiza',
+          'CAD softver (AutoCAD, SolidWorks, etc.)',
+          'Upravljanje i planiranje projekata',
+          'Tehnička dokumentacija i izvještavanje',
+          'Osiguravanje kvalitete i testiranje',
+          'Regulatorna usklađenost',
+          'Suradnja s međufunkcionalnim timovima'
+        ],
+        whyGood: [
+          'Jasna struktura koja ističe inženjerske kvalifikacije',
+          'Naglašava tehničku stručnost i certifikate',
+          'Prikazuje praktično iskustvo s projektima',
+          'Pokazuje sposobnosti rješavanja problema',
+          'Format kompatibilan s ATS s inženjerskim ključnim riječima'
+        ]
+      },
+      sr: {
+        name: 'Инжењер',
+        slug: 'inzhenjer',
+        description: 'Инжењери примењују научне и математичке принципе за пројектовање, развој и одржавање система, структура и процеса. Решавају сложене проблеме и стварају иновативна решења у различитим инжењерским дисциплинама.',
+        tips: [
+          'Истакните своју инжењерску диплому и сертификате',
+          'Нагласите техничке вештине и компетенцију са програмским пакетима',
+          'Покажите пројекте и њихов утицај',
+          'Укључите искуство са инжењерским стандардима и прописима',
+          'Покажите способности решавања проблема и анализе'
+        ],
+        skills: [
+          'Инжењерски дизајн и анализа',
+          'CAD софтвер (AutoCAD, SolidWorks, etc.)',
+          'Управљање и планирање пројеката',
+          'Техничка документација и извештавање',
+          'Осигуравање квалитета и тестирање',
+          'Регулаторна усклађеност',
+          'Сарадња са међуфункционалним тимовима'
+        ],
+        whyGood: [
+          'Јасна структура која истиче инжењерске квалификације',
+          'Наглашава техничку стручност и сертификате',
+          'Приказује практично искуство са пројектима',
+          'Показује способности решавања проблема',
+          'Формат компатибилан са ATS са инжењерским кључним речима'
+        ]
+      }
+    }
+  },
+  {
+    id: 'sales-representative',
+    category: 'sales',
+    translations: {
+      en: {
+        name: 'Sales Representative',
+        slug: 'sales-representative',
+        description: 'Sales representatives build relationships with customers, identify their needs, and promote products or services. They achieve sales targets, maintain customer relationships, and contribute to business growth through effective communication and negotiation.',
+        tips: [
+          'Highlight your sales achievements and targets met',
+          'Emphasize customer relationship management skills',
+          'Showcase experience with CRM systems',
+          'Include examples of successful sales strategies',
+          'Demonstrate communication and negotiation abilities'
+        ],
+        skills: [
+          'Sales and business development',
+          'Customer relationship management (CRM)',
+          'Lead generation and prospecting',
+          'Negotiation and closing techniques',
+          'Product knowledge and presentation',
+          'Market analysis and territory management',
+          'Communication and interpersonal skills'
+        ],
+        whyGood: [
+          'Clear structure highlighting sales achievements',
+          'Emphasizes quantifiable results and targets',
+          'Shows customer relationship expertise',
+          'Demonstrates sales process knowledge',
+          'ATS-friendly format with sales-specific keywords'
+        ]
+      },
+      nl: {
+        name: 'Verkoopmedewerker',
+        slug: 'verkoopmedewerker',
+        description: 'Verkoopmedewerkers bouwen relaties op met klanten, identificeren hun behoeften en promoten producten of diensten. Ze behalen verkoopdoelstellingen, onderhouden klantrelaties en dragen bij aan bedrijfsgroei door effectieve communicatie en onderhandeling.',
+        tips: [
+          'Benadruk je verkoopprestaties en behaalde doelstellingen',
+          'Leg nadruk op klantrelatiebeheer vaardigheden',
+          'Toon ervaring met CRM-systemen',
+          'Vermeld voorbeelden van succesvolle verkoopstrategieën',
+          'Demonstreer communicatieve en onderhandelingsvaardigheden'
+        ],
+        skills: [
+          'Verkoop en business development',
+          'Klantrelatiebeheer (CRM)',
+          'Leadgeneratie en prospectie',
+          'Onderhandeling en sluitingstechnieken',
+          'Productkennis en presentatie',
+          'Marktanalyse en territoriumbeheer',
+          'Communicatie en interpersoonlijke vaardigheden'
+        ],
+        whyGood: [
+          'Duidelijke structuur die verkoopprestaties benadrukt',
+          'Legt nadruk op meetbare resultaten en doelstellingen',
+          'Toont expertise in klantrelaties',
+          'Demonstreert kennis van verkoopprocessen',
+          'ATS-vriendelijk formaat met verkoopspecifieke zoekwoorden'
+        ]
+      },
+      fr: {
+        name: 'Représentant Commercial',
+        slug: 'representant-commercial',
+        description: 'Les représentants commerciaux établissent des relations avec les clients, identifient leurs besoins et promeuvent des produits ou services. Ils atteignent les objectifs de vente, maintiennent les relations clients et contribuent à la croissance de l\'entreprise grâce à une communication et une négociation efficaces.',
+        tips: [
+          'Mettez en avant vos réalisations commerciales et objectifs atteints',
+          'Soulignez les compétences en gestion de la relation client',
+          'Présentez l\'expérience avec les systèmes CRM',
+          'Incluez des exemples de stratégies commerciales réussies',
+          'Démontrez les capacités de communication et de négociation'
+        ],
+        skills: [
+          'Ventes et développement commercial',
+          'Gestion de la relation client (CRM)',
+          'Génération de leads et prospection',
+          'Techniques de négociation et de clôture',
+          'Connaissance des produits et présentation',
+          'Analyse de marché et gestion de territoire',
+          'Communication et compétences interpersonnelles'
+        ],
+        whyGood: [
+          'Structure claire mettant en évidence les réalisations commerciales',
+          'Met l\'accent sur les résultats quantifiables et les objectifs',
+          'Montre l\'expertise en relations clients',
+          'Démontre la connaissance des processus de vente',
+          'Format compatible ATS avec mots-clés spécifiques aux ventes'
+        ]
+      },
+      es: {
+        name: 'Representante de Ventas',
+        slug: 'representante-ventas',
+        description: 'Los representantes de ventas construyen relaciones con clientes, identifican sus necesidades y promueven productos o servicios. Alcanzan objetivos de ventas, mantienen relaciones con clientes y contribuyen al crecimiento del negocio mediante comunicación y negociación efectivas.',
+        tips: [
+          'Destaca tus logros de ventas y objetivos alcanzados',
+          'Enfatiza habilidades de gestión de relaciones con clientes',
+          'Muestra experiencia con sistemas CRM',
+          'Incluye ejemplos de estrategias de ventas exitosas',
+          'Demuestra habilidades de comunicación y negociación'
+        ],
+        skills: [
+          'Ventas y desarrollo de negocios',
+          'Gestión de relaciones con clientes (CRM)',
+          'Generación de leads y prospección',
+          'Técnicas de negociación y cierre',
+          'Conocimiento de productos y presentación',
+          'Análisis de mercado y gestión de territorio',
+          'Comunicación y habilidades interpersonales'
+        ],
+        whyGood: [
+          'Estructura clara que destaca logros de ventas',
+          'Enfatiza resultados cuantificables y objetivos',
+          'Muestra experiencia en relaciones con clientes',
+          'Demuestra conocimiento de procesos de ventas',
+          'Formato compatible con ATS con palabras clave específicas de ventas'
+        ]
+      },
+      de: {
+        name: 'Verkaufsmitarbeiter',
+        slug: 'verkaufsmitarbeiter',
+        description: 'Verkaufsmitarbeiter bauen Beziehungen zu Kunden auf, identifizieren deren Bedürfnisse und fördern Produkte oder Dienstleistungen. Sie erreichen Verkaufsziele, pflegen Kundenbeziehungen und tragen zum Geschäftswachstum durch effektive Kommunikation und Verhandlung bei.',
+        tips: [
+          'Heben Sie Ihre Verkaufserfolge und erreichten Ziele hervor',
+          'Betonen Sie Fähigkeiten im Kundenbeziehungsmanagement',
+          'Zeigen Sie Erfahrung mit CRM-Systemen',
+          'Fügen Sie Beispiele erfolgreicher Verkaufsstrategien hinzu',
+          'Demonstrieren Sie Kommunikations- und Verhandlungsfähigkeiten'
+        ],
+        skills: [
+          'Verkauf und Geschäftsentwicklung',
+          'Kundenbeziehungsmanagement (CRM)',
+          'Lead-Generierung und Akquise',
+          'Verhandlungs- und Abschlusstechniken',
+          'Produktwissen und Präsentation',
+          'Marktanalyse und Gebietsverwaltung',
+          'Kommunikation und zwischenmenschliche Fähigkeiten'
+        ],
+        whyGood: [
+          'Klare Struktur, die Verkaufserfolge hervorhebt',
+          'Betont quantifizierbare Ergebnisse und Ziele',
+          'Zeigt Expertise in Kundenbeziehungen',
+          'Demonstriert Wissen über Verkaufsprozesse',
+          'ATS-freundliches Format mit verkaufsspezifischen Schlüsselwörtern'
+        ]
+      },
+      it: {
+        name: 'Rappresentante Vendite',
+        slug: 'rappresentante-vendite',
+        description: 'I rappresentanti di vendita costruiscono relazioni con i clienti, identificano le loro esigenze e promuovono prodotti o servizi. Raggiungono obiettivi di vendita, mantengono relazioni con i clienti e contribuiscono alla crescita aziendale attraverso comunicazione e negoziazione efficaci.',
+        tips: [
+          'Evidenzia i tuoi risultati di vendita e obiettivi raggiunti',
+          'Enfatizza le competenze di gestione delle relazioni con i clienti',
+          'Mostra esperienza con sistemi CRM',
+          'Includi esempi di strategie di vendita di successo',
+          'Dimostra capacità di comunicazione e negoziazione'
+        ],
+        skills: [
+          'Vendite e sviluppo commerciale',
+          'Gestione delle relazioni con i clienti (CRM)',
+          'Generazione di lead e prospezione',
+          'Tecniche di negoziazione e chiusura',
+          'Conoscenza del prodotto e presentazione',
+          'Analisi di mercato e gestione del territorio',
+          'Comunicazione e abilità interpersonali'
+        ],
+        whyGood: [
+          'Struttura chiara che evidenzia i risultati di vendita',
+          'Enfatizza risultati quantificabili e obiettivi',
+          'Mostra esperienza nelle relazioni con i clienti',
+          'Dimostra conoscenza dei processi di vendita',
+          'Formato compatibile con ATS con parole chiave specifiche per le vendite'
+        ]
+      },
+      pl: {
+        name: 'Przedstawiciel Handlowy',
+        slug: 'przedstawiciel-handlowy',
+        description: 'Przedstawiciele handlowi budują relacje z klientami, identyfikują ich potrzeby i promują produkty lub usługi. Osiągają cele sprzedażowe, utrzymują relacje z klientami i przyczyniają się do wzrostu biznesu poprzez skuteczną komunikację i negocjacje.',
+        tips: [
+          'Podkreśl swoje osiągnięcia sprzedażowe i osiągnięte cele',
+          'Podkreśl umiejętności zarządzania relacjami z klientami',
+          'Pokaż doświadczenie z systemami CRM',
+          'Uwzględnij przykłady udanych strategii sprzedażowych',
+          'Wykazuj umiejętności komunikacyjne i negocjacyjne'
+        ],
+        skills: [
+          'Sprzedaż i rozwój biznesu',
+          'Zarządzanie relacjami z klientami (CRM)',
+          'Generowanie leadów i pozyskiwanie klientów',
+          'Techniki negocjacji i zamykania',
+          'Znajomość produktu i prezentacja',
+          'Analiza rynku i zarządzanie terytorium',
+          'Komunikacja i umiejętności interpersonalne'
+        ],
+        whyGood: [
+          'Jasna struktura podkreślająca osiągnięcia sprzedażowe',
+          'Kładzie nacisk na mierzalne wyniki i cele',
+          'Pokazuje doświadczenie w relacjach z klientami',
+          'Wykazuje znajomość procesów sprzedażowych',
+          'Format przyjazny dla ATS z słowami kluczowymi specyficznymi dla sprzedaży'
+        ]
+      },
+      ro: {
+        name: 'Reprezentant Vânzări',
+        slug: 'reprezentant-vanzari',
+        description: 'Reprezentanții de vânzări construiesc relații cu clienții, identifică nevoile acestora și promovează produse sau servicii. Ei ating obiectivele de vânzări, mențin relațiile cu clienții și contribuie la creșterea afacerii prin comunicare și negociere eficiente.',
+        tips: [
+          'Evidențiază realizările tale de vânzări și obiectivele atinse',
+          'Subliniază abilitățile de gestionare a relațiilor cu clienții',
+          'Prezintă experiența cu sistemele CRM',
+          'Include exemple de strategii de vânzări de succes',
+          'Demonstrează abilități de comunicare și negociere'
+        ],
+        skills: [
+          'Vânzări și dezvoltare comercială',
+          'Gestionarea relațiilor cu clienții (CRM)',
+          'Generarea de lead-uri și prospectare',
+          'Tehnici de negociere și închidere',
+          'Cunoașterea produsului și prezentare',
+          'Analiza pieței și gestionarea teritoriului',
+          'Comunicare și abilități interpersonale'
+        ],
+        whyGood: [
+          'Structură clară care evidențiază realizările de vânzări',
+          'Subliniază rezultatele măsurabile și obiectivele',
+          'Arată experiența în relațiile cu clienții',
+          'Demonstrează cunoașterea proceselor de vânzări',
+          'Format compatibil cu ATS cu cuvinte cheie specifice vânzărilor'
+        ]
+      },
+      hu: {
+        name: 'Értékesítési Képviselő',
+        slug: 'ertekesitesi-kepviselo',
+        description: 'Az értékesítési képviselők kapcsolatokat építenek ki az ügyfelekkel, azonosítják azok igényeit és termékeket vagy szolgáltatásokat promóznak. Elérik az értékesítési célokat, fenntartják az ügyfélkapcsolatokat és hozzájárulnak az üzleti növekedéshez hatékony kommunikáción és tárgyaláson keresztül.',
+        tips: [
+          'Hangsúlyozza értékesítési eredményeit és elért céljait',
+          'Kiemeli ügyfélkapcsolat-kezelési készségeit',
+          'Mutassa be CRM rendszerekkel való tapasztalatát',
+          'Tartalmazza sikeres értékesítési stratégiák példáit',
+          'Mutassa be kommunikációs és tárgyalási képességeit'
+        ],
+        skills: [
+          'Értékesítés és üzletfejlesztés',
+          'Ügyfélkapcsolat-kezelés (CRM)',
+          'Lead generálás és leadgenerálás',
+          'Tárgyalási és zárási technikák',
+          'Terméktudás és bemutatás',
+          'Piaci elemzés és területi menedzsment',
+          'Kommunikáció és interperszonális készségek'
+        ],
+        whyGood: [
+          'Világos struktúra, amely kiemeli az értékesítési eredményeket',
+          'Hangsúlyozza a mérhető eredményeket és célokat',
+          'Mutatja az ügyfélkapcsolatokban szerzett szakértelmet',
+          'Bebizonyítja az értékesítési folyamatok ismeretét',
+          'ATS-barát formátum értékesítésspecifikus kulcsszavakkal'
+        ]
+      },
+      el: {
+        name: 'Εκπρόσωπος Πωλήσεων',
+        slug: 'ekprosopos-poliseon',
+        description: 'Οι εκπρόσωποι πωλήσεων χτίζουν σχέσεις με πελάτες, αναγνωρίζουν τις ανάγκες τους και προωθούν προϊόντα ή υπηρεσίες. Επιτυγχάνουν στόχους πωλήσεων, διατηρούν σχέσεις με πελάτες και συμβάλλουν στην επιχειρηματική ανάπτυξη μέσω αποτελεσματικής επικοινωνίας και διαπραγμάτευσης.',
+        tips: [
+          'Επισημάνετε τα επιτεύγματά σας στις πωλήσεις και τους επιτευχθέντες στόχους',
+          'Τονίστε τις δεξιότητες διαχείρισης σχέσεων πελατών',
+          'Παρουσιάστε εμπειρία με συστήματα CRM',
+          'Συμπεριλάβετε παραδείγματα επιτυχημένων στρατηγικών πωλήσεων',
+          'Αποδείξτε δεξιότητες επικοινωνίας και διαπραγμάτευσης'
+        ],
+        skills: [
+          'Πωλήσεις και επιχειρηματική ανάπτυξη',
+          'Διαχείριση σχέσεων πελατών (CRM)',
+          'Δημιουργία prospects και αναζήτηση πελατών',
+          'Τεχνικές διαπραγμάτευσης και κλεισίματος',
+          'Γνώση προϊόντος και παρουσίαση',
+          'Ανάλυση αγοράς και διαχείριση περιοχής',
+          'Επικοινωνία και διαπροσωπικές δεξιότητες'
+        ],
+        whyGood: [
+          'Σαφής δομή που επισημαίνει τα επιτεύγματα πωλήσεων',
+          'Τονίζει μετρήσιμα αποτελέσματα και στόχους',
+          'Δείχνει εμπειρία στις σχέσεις πελατών',
+          'Αποδεικνύει γνώση των διαδικασιών πωλήσεων',
+          'Μορφή συμβατή με ATS με λέξεις-κλειδιά ειδικές για τις πωλήσεις'
+        ]
+      },
+      cs: {
+        name: 'Obchodní Zástupce',
+        slug: 'obchodni-zastupce',
+        description: 'Obchodní zástupci budují vztahy se zákazníky, identifikují jejich potřeby a propagují produkty nebo služby. Dosahují prodejních cílů, udržují vztahy se zákazníky a přispívají k růstu podniku prostřednictvím efektivní komunikace a vyjednávání.',
+        tips: [
+          'Zdůrazněte své prodejní úspěchy a dosažené cíle',
+          'Zdůrazněte dovednosti v řízení vztahů se zákazníky',
+          'Ukažte zkušenosti se systémy CRM',
+          'Zahrňte příklady úspěšných prodejních strategií',
+          'Prokažte komunikační a vyjednávací schopnosti'
+        ],
+        skills: [
+          'Prodej a obchodní rozvoj',
+          'Řízení vztahů se zákazníky (CRM)',
+          'Generování leadů a prospekce',
+          'Vyjednávací a uzavírací techniky',
+          'Znalost produktu a prezentace',
+          'Analýza trhu a řízení teritoria',
+          'Komunikace a interpersonální dovednosti'
+        ],
+        whyGood: [
+          'Jasná struktura zdůrazňující prodejní úspěchy',
+          'Zdůrazňuje měřitelné výsledky a cíle',
+          'Ukazuje odbornost ve vztazích se zákazníky',
+          'Prokazuje znalost prodejních procesů',
+          'Formát kompatibilní s ATS s prodejními klíčovými slovy'
+        ]
+      },
+      pt: {
+        name: 'Representante de Vendas',
+        slug: 'representante-vendas',
+        description: 'Representantes de vendas constroem relacionamentos com clientes, identificam suas necessidades e promovem produtos ou serviços. Eles atingem metas de vendas, mantêm relacionamentos com clientes e contribuem para o crescimento do negócio através de comunicação e negociação eficazes.',
+        tips: [
+          'Destaque suas conquistas de vendas e metas atingidas',
+          'Enfatize habilidades de gestão de relacionamento com clientes',
+          'Mostre experiência com sistemas CRM',
+          'Inclua exemplos de estratégias de vendas bem-sucedidas',
+          'Demonstre habilidades de comunicação e negociação'
+        ],
+        skills: [
+          'Vendas e desenvolvimento de negócios',
+          'Gestão de relacionamento com clientes (CRM)',
+          'Geração de leads e prospecção',
+          'Técnicas de negociação e fechamento',
+          'Conhecimento de produtos e apresentação',
+          'Análise de mercado e gestão de território',
+          'Comunicação e habilidades interpessoais'
+        ],
+        whyGood: [
+          'Estrutura clara destacando conquistas de vendas',
+          'Enfatiza resultados mensuráveis e metas',
+          'Mostra experiência em relacionamentos com clientes',
+          'Demonstra conhecimento de processos de vendas',
+          'Formato compatível com ATS com palavras-chave específicas de vendas'
+        ]
+      },
+      sv: {
+        name: 'Säljare',
+        slug: 'saljare',
+        description: 'Säljare bygger relationer med kunder, identifierar deras behov och främjar produkter eller tjänster. De uppnår försäljningsmål, upprätthåller kundrelationer och bidrar till affärstillväxt genom effektiv kommunikation och förhandling.',
+        tips: [
+          'Framhäv dina försäljningsframgångar och uppnådda mål',
+          'Betona färdigheter i kundrelationshantering',
+          'Visa erfarenhet av CRM-system',
+          'Inkludera exempel på framgångsrika försäljningsstrategier',
+          'Visa kommunikations- och förhandlingsförmågor'
+        ],
+        skills: [
+          'Försäljning och affärsutveckling',
+          'Kundrelationshantering (CRM)',
+          'Leadgenerering och prospektering',
+          'Förhandlingstekniker och avslutning',
+          'Produktkunskap och presentation',
+          'Marknadsanalys och territorieförvaltning',
+          'Kommunikation och interpersonella färdigheter'
+        ],
+        whyGood: [
+          'Tydlig struktur som framhäver försäljningsframgångar',
+          'Betona mätbara resultat och mål',
+          'Visar expertis inom kundrelationer',
+          'Demonstrerar kunskap om försäljningsprocesser',
+          'ATS-vänligt format med försäljningsspecifika nyckelord'
+        ]
+      },
+      bg: {
+        name: 'Търговски Представител',
+        slug: 'targovski-predstavitel',
+        description: 'Търговските представители изграждат взаимоотношения с клиенти, идентифицират техните нужди и популяризират продукти или услуги. Те постигат продажбени цели, поддържат клиентски взаимоотношения и допринасят за бизнес растеж чрез ефективна комуникация и преговори.',
+        tips: [
+          'Подчертайте вашите продажбени постижения и постигнати цели',
+          'Акцентирайте върху уменията за управление на клиентски взаимоотношения',
+          'Покажете опит със системи CRM',
+          'Включете примери за успешни продажбени стратегии',
+          'Демонстрирайте комуникативни и преговорни умения'
+        ],
+        skills: [
+          'Продажби и бизнес развитие',
+          'Управление на клиентски взаимоотношения (CRM)',
+          'Генериране на потенциални клиенти и проучване',
+          'Техники за преговори и приключване',
+          'Познаване на продукта и представяне',
+          'Анализ на пазара и управление на територия',
+          'Комуникация и междуличностни умения'
+        ],
+        whyGood: [
+          'Ясна структура, която подчертава продажбените постижения',
+          'Акцентира върху измерими резултати и цели',
+          'Показва опит в клиентски взаимоотношения',
+          'Демонстрира познаване на продажбените процеси',
+          'Формат, съвместим с ATS, с продажбени ключови думи'
+        ]
+      },
+      da: {
+        name: 'Salgsrepræsentant',
+        slug: 'salgsrepresentant',
+        description: 'Salgsrepræsentanter bygger relationer med kunder, identificerer deres behov og promoverer produkter eller tjenester. De opnår salgsmål, opretholder kunderelationer og bidrager til forretningsvækst gennem effektiv kommunikation og forhandling.',
+        tips: [
+          'Fremhæv dine salgsresultater og opnåede mål',
+          'Fremhæv færdigheder i kunderelationsstyring',
+          'Vis erfaring med CRM-systemer',
+          'Inkluder eksempler på succesfulde salgsstrategier',
+          'Demonstrer kommunikations- og forhandlingsfærdigheder'
+        ],
+        skills: [
+          'Salg og forretningsudvikling',
+          'Kunderelationsstyring (CRM)',
+          'Leadgenerering og prospektering',
+          'Forhandlingsteknikker og afslutning',
+          'Produktviden og præsentation',
+          'Markedsanalyse og territorieforvaltning',
+          'Kommunikation og interpersonelle færdigheder'
+        ],
+        whyGood: [
+          'Tydelig struktur, der fremhæver salgsresultater',
+          'Fremhæver målbare resultater og mål',
+          'Viser ekspertise inden for kunderelationer',
+          'Demonstrerer viden om salgsprocesser',
+          'ATS-venligt format med salgsspecifikke nøgleord'
+        ]
+      },
+      fi: {
+        name: 'Myyntiedustaja',
+        slug: 'myyntiedustaja',
+        description: 'Myyntiedustajat rakentavat suhteita asiakkaille, tunnistavat heidän tarpeensa ja edistävät tuotteita tai palveluita. He saavuttavat myyntitavoitteet, ylläpitävät asiakassuhteita ja edistävät liiketoiminnan kasvua tehokkaan viestinnän ja neuvottelun kautta.',
+        tips: [
+          'Korosta myyntisaavutuksiasi ja saavutettuja tavoitteita',
+          'Korosta asiakassuhteiden hallintataitoja',
+          'Näytä kokemus CRM-järjestelmillä',
+          'Sisällytä esimerkkejä menestyksekkäistä myyntistrategioista',
+          'Näytä viestintä- ja neuvottelutaitoja'
+        ],
+        skills: [
+          'Myynti ja liiketoiminnan kehitys',
+          'Asiakassuhteiden hallinta (CRM)',
+          'Liidien generointi ja etsintä',
+          'Neuvottelutekniikat ja sulkeminen',
+          'Tuotetietous ja esittely',
+          'Markkina-analyysi ja aluehallinta',
+          'Viestintä ja vuorovaikutustaidot'
+        ],
+        whyGood: [
+          'Selkeä rakenne, joka korostaa myyntisaavutuksia',
+          'Korostaa mitattavia tuloksia ja tavoitteita',
+          'Näyttää asiantuntemusta asiakassuhteissa',
+          'Näyttää tietämystä myyntiprosesseista',
+          'ATS-yhteensopiva muoto myyntispesifisillä avainsanoilla'
+        ]
+      },
+      sk: {
+        name: 'Obchodný Zástupca',
+        slug: 'obchodny-zastupca',
+        description: 'Obchodní zástupcovia budujú vzťahy so zákazníkmi, identifikujú ich potreby a propagujú produkty alebo služby. Dosahujú predajné ciele, udržiavajú vzťahy so zákazníkmi a prispievajú k rastu podniku prostredníctvom efektívnej komunikácie a vyjednávania.',
+        tips: [
+          'Zdôraznite svoje predajné úspechy a dosiahnuté ciele',
+          'Zdôraznite zručnosti v riadení vzťahov so zákazníkmi',
+          'Ukážte skúsenosti so systémami CRM',
+          'Zahrňte príklady úspešných predajných stratégií',
+          'Preukážte komunikačné a vyjednávacie schopnosti'
+        ],
+        skills: [
+          'Predaj a obchodný rozvoj',
+          'Riadenie vzťahov so zákazníkmi (CRM)',
+          'Generovanie leadov a prospekcia',
+          'Vyjednávacie a uzatváracie techniky',
+          'Znalosť produktu a prezentácia',
+          'Analýza trhu a riadenie územia',
+          'Komunikácia a interpersonálne zručnosti'
+        ],
+        whyGood: [
+          'Jasná štruktúra zdôrazňujúca predajné úspechy',
+          'Zdôrazňuje merateľné výsledky a ciele',
+          'Ukazuje odbornosť vo vzťahoch so zákazníkmi',
+          'Preukazuje znalosť predajných procesov',
+          'Formát kompatibilný s ATS s predajnými kľúčovými slovami'
+        ]
+      },
+      no: {
+        name: 'Salgsrepresentant',
+        slug: 'salgsrepresentant',
+        description: 'Salgsrepresentanter bygger relasjoner med kunder, identifiserer deres behov og fremmer produkter eller tjenester. De oppnår salgsmål, opprettholder kunderelasjoner og bidrar til forretningsvekst gjennom effektiv kommunikasjon og forhandling.',
+        tips: [
+          'Fremhev dine salgsresultater og oppnådde mål',
+          'Fremhev ferdigheter i kunderelasjonsstyring',
+          'Vis erfaring med CRM-systemer',
+          'Inkluder eksempler på vellykkede salgsstrategier',
+          'Demonstrer kommunikasjons- og forhandlingsferdigheter'
+        ],
+        skills: [
+          'Salg og forretningsutvikling',
+          'Kunderelasjonsstyring (CRM)',
+          'Leadgenerering og prospektering',
+          'Forhandlingsteknikker og avslutning',
+          'Produktkunnskap og presentasjon',
+          'Markedsanalyse og territorieforvaltning',
+          'Kommunikasjon og interpersonelle ferdigheter'
+        ],
+        whyGood: [
+          'Tydelig struktur som fremhever salgsresultater',
+          'Fremhever målbare resultater og mål',
+          'Viser ekspertise innen kunderelasjoner',
+          'Demonstrerer kunnskap om salgsprosesser',
+          'ATS-vennlig format med salgsspesifikke nøkkelord'
+        ]
+      },
+      hr: {
+        name: 'Prodajni Predstavnik',
+        slug: 'prodajni-predstavnik',
+        description: 'Prodajni predstavnici grade odnose s klijentima, identificiraju njihove potrebe i promoviraju proizvode ili usluge. Postižu prodajne ciljeve, održavaju odnose s klijentima i pridonose rastu poslovanja kroz učinkovitu komunikaciju i pregovaranje.',
+        tips: [
+          'Istaknite svoje prodajne uspjehe i postignute ciljeve',
+          'Naglasite vještine upravljanja odnosima s klijentima',
+          'Pokažite iskustvo s CRM sustavima',
+          'Uključite primjere uspješnih prodajnih strategija',
+          'Pokažite komunikacijske i pregovaračke vještine'
+        ],
+        skills: [
+          'Prodaja i razvoj poslovanja',
+          'Upravljanje odnosima s klijentima (CRM)',
+          'Generiranje potencijalnih klijenata i istraživanje',
+          'Pregovaračke tehnike i zatvaranje',
+          'Poznavanje proizvoda i prezentacija',
+          'Analiza tržišta i upravljanje teritorijem',
+          'Komunikacija i međuljudske vještine'
+        ],
+        whyGood: [
+          'Jasna struktura koja ističe prodajne uspjehe',
+          'Naglašava mjerljive rezultate i ciljeve',
+          'Prikazuje stručnost u odnosima s klijentima',
+          'Pokazuje znanje o prodajnim procesima',
+          'Format kompatibilan s ATS s prodajnim ključnim riječima'
+        ]
+      },
+      sr: {
+        name: 'Продајни Представник',
+        slug: 'prodajni-predstavnik',
+        description: 'Продајни представници граде односе са клијентима, идентификују њихове потребе и промовишу производе или услуге. Постижу продајне циљеве, одржавају односе са клијентима и доприносе расту пословања кроз ефикасну комуникацију и преговарање.',
+        tips: [
+          'Истакните своје продајне успехе и постигнуте циљеве',
+          'Нагласите вештине управљања односима са клијентима',
+          'Покажите искуство са CRM системима',
+          'Укључите примере успешних продајних стратегија',
+          'Покажите комуникационе и преговарачке вештине'
+        ],
+        skills: [
+          'Продаја и развој пословања',
+          'Управљање односима са клијентима (CRM)',
+          'Генерисање потенцијалних клијената и истраживање',
+          'Преговарачке технике и затварање',
+          'Познавање производа и презентација',
+          'Анализа тржишта и управљање територијом',
+          'Комуникација и међуљудске вештине'
+        ],
+        whyGood: [
+          'Јасна структура која истиче продајне успехе',
+          'Наглашава мерљиве резултате и циљеве',
+          'Приказује стручност у односима са клијентима',
+          'Показује знање о продајним процесима',
+          'Формат компатибилан са ATS са продајним кључним речима'
+        ]
+      }
+    }
+  },
+  {
+    id: 'chef',
+    category: 'hospitality',
+    translations: {
+      en: {
+        name: 'Chef',
+        slug: 'chef',
+        description: 'Chefs create and prepare meals, manage kitchen operations, and ensure food quality and safety. They develop menus, train kitchen staff, and maintain high standards of culinary excellence while managing costs and inventory.',
+        tips: [
+          'Highlight your culinary training and certifications',
+          'Emphasize experience with different cuisines and cooking techniques',
+          'Showcase menu development and food cost management',
+          'Include experience with kitchen management and staff training',
+          'Demonstrate knowledge of food safety and hygiene standards'
+        ],
+        skills: [
+          'Culinary arts and cooking techniques',
+          'Menu planning and development',
+          'Kitchen management and operations',
+          'Food safety and hygiene (HACCP)',
+          'Cost control and inventory management',
+          'Staff training and supervision',
+          'Quality assurance and presentation'
+        ],
+        whyGood: [
+          'Clear structure highlighting culinary qualifications',
+          'Emphasizes experience with diverse cuisines',
+          'Shows kitchen management and leadership skills',
+          'Demonstrates food safety knowledge',
+          'ATS-friendly format with hospitality-specific keywords'
+        ]
+      },
+      nl: {
+        name: 'Chef-kok',
+        slug: 'chef-kok',
+        description: 'Chef-koks creëren en bereiden maaltijden, beheren keukenoperaties en zorgen voor voedselkwaliteit en -veiligheid. Ze ontwikkelen menu\'s, trainen keukenpersoneel en handhaven hoge normen van culinaire excellentie terwijl ze kosten en voorraad beheren.',
+        tips: [
+          'Benadruk je culinaire opleiding en certificeringen',
+          'Leg nadruk op ervaring met verschillende keukens en kooktechnieken',
+          'Toon menuontwikkeling en voedselkostenbeheer',
+          'Vermeld ervaring met keukenbeheer en personeelstraining',
+          'Demonstreer kennis van voedselveiligheid en hygiënestandaarden'
+        ],
+        skills: [
+          'Culinaire kunsten en kooktechnieken',
+          'Menuplanning en -ontwikkeling',
+          'Keukenbeheer en -operaties',
+          'Voedselveiligheid en hygiëne (HACCP)',
+          'Kostenbeheer en voorraadbeheer',
+          'Personeelstraining en toezicht',
+          'Kwaliteitsborging en presentatie'
+        ],
+        whyGood: [
+          'Duidelijke structuur die culinaire kwalificaties benadrukt',
+          'Legt nadruk op ervaring met diverse keukens',
+          'Toont keukenbeheer en leiderschapsvaardigheden',
+          'Demonstreert kennis van voedselveiligheid',
+          'ATS-vriendelijk formaat met horecaspecifieke zoekwoorden'
+        ]
+      },
+      fr: {
+        name: 'Chef Cuisinier',
+        slug: 'chef-cuisinier',
+        description: 'Les chefs créent et préparent des repas, gèrent les opérations de cuisine et assurent la qualité et la sécurité alimentaires. Ils développent des menus, forment le personnel de cuisine et maintiennent des normes élevées d\'excellence culinaire tout en gérant les coûts et les stocks.',
+        tips: [
+          'Mettez en avant votre formation culinaire et certifications',
+          'Soulignez l\'expérience avec différentes cuisines et techniques de cuisson',
+          'Présentez le développement de menus et la gestion des coûts alimentaires',
+          'Incluez l\'expérience en gestion de cuisine et formation du personnel',
+          'Démontrez la connaissance des normes de sécurité et d\'hygiène alimentaires'
+        ],
+        skills: [
+          'Arts culinaires et techniques de cuisson',
+          'Planification et développement de menus',
+          'Gestion et opérations de cuisine',
+          'Sécurité et hygiène alimentaires (HACCP)',
+          'Contrôle des coûts et gestion des stocks',
+          'Formation et supervision du personnel',
+          'Assurance qualité et présentation'
+        ],
+        whyGood: [
+          'Structure claire mettant en évidence les qualifications culinaires',
+          'Met l\'accent sur l\'expérience avec diverses cuisines',
+          'Montre les compétences en gestion de cuisine et leadership',
+          'Démontre la connaissance de la sécurité alimentaire',
+          'Format compatible ATS avec mots-clés spécifiques à l\'hôtellerie'
+        ]
+      },
+      es: {
+        name: 'Chef',
+        slug: 'chef',
+        description: 'Los chefs crean y preparan comidas, gestionan operaciones de cocina y aseguran la calidad y seguridad de los alimentos. Desarrollan menús, capacitan al personal de cocina y mantienen altos estándares de excelencia culinaria mientras gestionan costos e inventario.',
+        tips: [
+          'Destaca tu formación culinaria y certificaciones',
+          'Enfatiza experiencia con diferentes cocinas y técnicas culinarias',
+          'Muestra desarrollo de menús y gestión de costos de alimentos',
+          'Incluye experiencia con gestión de cocina y capacitación de personal',
+          'Demuestra conocimiento de estándares de seguridad e higiene alimentaria'
+        ],
+        skills: [
+          'Artes culinarias y técnicas de cocina',
+          'Planificación y desarrollo de menús',
+          'Gestión y operaciones de cocina',
+          'Seguridad e higiene alimentaria (HACCP)',
+          'Control de costos y gestión de inventario',
+          'Capacitación y supervisión de personal',
+          'Aseguramiento de calidad y presentación'
+        ],
+        whyGood: [
+          'Estructura clara que destaca calificaciones culinarias',
+          'Enfatiza experiencia con diversas cocinas',
+          'Muestra habilidades de gestión de cocina y liderazgo',
+          'Demuestra conocimiento de seguridad alimentaria',
+          'Formato compatible con ATS con palabras clave específicas de hostelería'
+        ]
+      },
+      de: {
+        name: 'Koch',
+        slug: 'koch',
+        description: 'Köche erstellen und bereiten Mahlzeiten zu, verwalten Küchenbetriebe und gewährleisten Lebensmittelqualität und -sicherheit. Sie entwickeln Menüs, schulen Küchenpersonal und halten hohe Standards kulinarischer Exzellenz aufrecht, während sie Kosten und Inventar verwalten.',
+        tips: [
+          'Heben Sie Ihre kulinarische Ausbildung und Zertifizierungen hervor',
+          'Betonen Sie Erfahrung mit verschiedenen Küchen und Kochtechniken',
+          'Zeigen Sie Menüentwicklung und Lebensmittelkostenmanagement',
+          'Fügen Sie Erfahrung mit Küchenmanagement und Personalschulung hinzu',
+          'Demonstrieren Sie Kenntnisse der Lebensmittelsicherheit und Hygienestandards'
+        ],
+        skills: [
+          'Kulinarische Künste und Kochtechniken',
+          'Menüplanung und -entwicklung',
+          'Küchenmanagement und -betrieb',
+          'Lebensmittelsicherheit und Hygiene (HACCP)',
+          'Kostenkontrolle und Bestandsverwaltung',
+          'Personalschulung und -aufsicht',
+          'Qualitätssicherung und Präsentation'
+        ],
+        whyGood: [
+          'Klare Struktur, die kulinarische Qualifikationen hervorhebt',
+          'Betont Erfahrung mit verschiedenen Küchen',
+          'Zeigt Küchenmanagement- und Führungsfähigkeiten',
+          'Demonstriert Kenntnisse der Lebensmittelsicherheit',
+          'ATS-freundliches Format mit gastgewerbespezifischen Schlüsselwörtern'
+        ]
+      },
+      it: {
+        name: 'Chef',
+        slug: 'chef',
+        description: 'Gli chef creano e preparano pasti, gestiscono le operazioni di cucina e assicurano qualità e sicurezza alimentare. Sviluppano menu, formano il personale di cucina e mantengono elevati standard di eccellenza culinaria gestendo costi e inventario.',
+        tips: [
+          'Evidenzia la tua formazione culinaria e certificazioni',
+          'Enfatizza esperienza con diverse cucine e tecniche di cottura',
+          'Mostra sviluppo del menu e gestione dei costi alimentari',
+          'Includi esperienza con gestione della cucina e formazione del personale',
+          'Dimostra conoscenza degli standard di sicurezza e igiene alimentare'
+        ],
+        skills: [
+          'Arti culinarie e tecniche di cottura',
+          'Pianificazione e sviluppo del menu',
+          'Gestione e operazioni di cucina',
+          'Sicurezza e igiene alimentare (HACCP)',
+          'Controllo dei costi e gestione dell\'inventario',
+          'Formazione e supervisione del personale',
+          'Assicurazione qualità e presentazione'
+        ],
+        whyGood: [
+          'Struttura chiara che evidenzia qualifiche culinarie',
+          'Enfatizza esperienza con diverse cucine',
+          'Mostra competenze di gestione della cucina e leadership',
+          'Dimostra conoscenza della sicurezza alimentare',
+          'Formato compatibile con ATS con parole chiave specifiche per l\'ospitalità'
+        ]
+      },
+      pl: {
+        name: 'Szef Kuchni',
+        slug: 'szef-kuchni',
+        description: 'Szefowie kuchni tworzą i przygotowują posiłki, zarządzają operacjami kuchennymi i zapewniają jakość i bezpieczeństwo żywności. Rozwijają menu, szkolą personel kuchenny i utrzymują wysokie standardy doskonałości kulinarnej, zarządzając kosztami i zapasami.',
+        tips: [
+          'Podkreśl swoje szkolenie kulinarne i certyfikaty',
+          'Podkreśl doświadczenie z różnymi kuchniami i technikami gotowania',
+          'Pokaż rozwój menu i zarządzanie kosztami żywności',
+          'Uwzględnij doświadczenie z zarządzaniem kuchnią i szkoleniem personelu',
+          'Wykazuj znajomość standardów bezpieczeństwa i higieny żywności'
+        ],
+        skills: [
+          'Sztuka kulinarna i techniki gotowania',
+          'Planowanie i rozwój menu',
+          'Zarządzanie i operacje kuchenne',
+          'Bezpieczeństwo i higiena żywności (HACCP)',
+          'Kontrola kosztów i zarządzanie zapasami',
+          'Szkolenie i nadzór personelu',
+          'Zapewnienie jakości i prezentacja'
+        ],
+        whyGood: [
+          'Jasna struktura podkreślająca kwalifikacje kulinarne',
+          'Kładzie nacisk na doświadczenie z różnymi kuchniami',
+          'Pokazuje umiejętności zarządzania kuchnią i przywództwa',
+          'Wykazuje znajomość bezpieczeństwa żywności',
+          'Format przyjazny dla ATS z słowami kluczowymi specyficznymi dla gastronomii'
+        ]
+      },
+      ro: {
+        name: 'Bucătar Șef',
+        slug: 'bucatar-sef',
+        description: 'Bucătarii șefi creează și pregătesc mese, gestionează operațiunile de bucătărie și asigură calitatea și siguranța alimentelor. Ei dezvoltă meniuri, instruiesc personalul de bucătărie și mențin standarde înalte de excelență culinară gestionând costurile și inventarul.',
+        tips: [
+          'Evidențiază formarea ta culinară și certificările',
+          'Subliniază experiența cu diferite bucătării și tehnici de gătit',
+          'Prezintă dezvoltarea meniului și gestionarea costurilor alimentare',
+          'Include experiența cu gestionarea bucătăriei și formarea personalului',
+          'Demonstrează cunoașterea standardelor de siguranță și igienă alimentară'
+        ],
+        skills: [
+          'Arte culinare și tehnici de gătit',
+          'Planificarea și dezvoltarea meniului',
+          'Gestionarea și operațiunile bucătăriei',
+          'Siguranța și igiena alimentară (HACCP)',
+          'Controlul costurilor și gestionarea inventarului',
+          'Formarea și supravegherea personalului',
+          'Asigurarea calității și prezentarea'
+        ],
+        whyGood: [
+          'Structură clară care evidențiază calificările culinare',
+          'Subliniază experiența cu diverse bucătării',
+          'Arată abilități de gestionare a bucătăriei și leadership',
+          'Demonstrează cunoașterea siguranței alimentare',
+          'Format compatibil cu ATS cu cuvinte cheie specifice ospitalității'
+        ]
+      },
+      hu: {
+        name: 'Séf',
+        slug: 'sef',
+        description: 'A séfek ételt készítenek és készítenek elő, kezelik a konyha műveleteit és biztosítják az élelmiszer minőségét és biztonságát. Menüket fejlesztenek, konyhai személyzetet képeznek és magas színvonalú kulináris kiválóságot tartanak fenn, miközben költségeket és készletet kezelnek.',
+        tips: [
+          'Hangsúlyozza kulináris képzését és tanúsítványait',
+          'Kiemeli különböző konyhák és főzési technikák tapasztalatát',
+          'Mutatja be a menüfejlesztést és az élelmiszerköltség-kezelést',
+          'Tartalmazza a konyhakezelés és személyzetképzés tapasztalatát',
+          'Mutassa be az élelmiszerbiztonsági és higiéniai szabványok ismeretét'
+        ],
+        skills: [
+          'Kulináris művészetek és főzési technikák',
+          'Menütervezés és fejlesztés',
+          'Konyhakezelés és műveletek',
+          'Élelmiszerbiztonság és higiénia (HACCP)',
+          'Költségkontroll és készletkezelés',
+          'Személyzetképzés és felügyelet',
+          'Minőségbiztosítás és prezentáció'
+        ],
+        whyGood: [
+          'Világos struktúra, amely kiemeli a kulináris kvalifikációkat',
+          'Hangsúlyozza a különböző konyhákkal szerzett tapasztalatot',
+          'Mutatja a konyhakezelés és vezetői készségeket',
+          'Bebizonyítja az élelmiszerbiztonsági ismereteket',
+          'ATS-barát formátum vendéglátásspecifikus kulcsszavakkal'
+        ]
+      },
+      el: {
+        name: 'Σεφ',
+        slug: 'sef',
+        description: 'Οι σεφ δημιουργούν και προετοιμάζουν γεύματα, διαχειρίζονται τις λειτουργίες της κουζίνας και διασφαλίζουν την ποιότητα και ασφάλεια των τροφίμων. Αναπτύσσουν μενού, εκπαιδεύουν το προσωπικό της κουζίνας και διατηρούν υψηλά πρότυπα γαστρονομικής αριστείας διαχειριζόμενοι το κόστος και το απόθεμα.',
+        tips: [
+          'Επισημάνετε τη γαστρονομική σας εκπαίδευση και πιστοποιήσεις',
+          'Τονίστε εμπειρία με διαφορετικές κουζίνες και τεχνικές μαγειρικής',
+          'Παρουσιάστε την ανάπτυξη μενού και τη διαχείριση κόστους τροφίμων',
+          'Συμπεριλάβετε εμπειρία με τη διαχείριση κουζίνας και την εκπαίδευση προσωπικού',
+          'Αποδείξτε γνώση των προτύπων ασφάλειας και υγιεινής τροφίμων'
+        ],
+        skills: [
+          'Γαστρονομικές τέχνες και τεχνικές μαγειρικής',
+          'Σχεδιασμός και ανάπτυξη μενού',
+          'Διαχείριση και λειτουργίες κουζίνας',
+          'Ασφάλεια και υγιεινή τροφίμων (HACCP)',
+          'Έλεγχος κόστους και διαχείριση αποθέματος',
+          'Εκπαίδευση και επίβλεψη προσωπικού',
+          'Διασφάλιση ποιότητας και παρουσίαση'
+        ],
+        whyGood: [
+          'Σαφής δομή που επισημαίνει τις γαστρονομικές προσόντα',
+          'Τονίζει εμπειρία με διαφορετικές κουζίνες',
+          'Δείχνει δεξιότητες διαχείρισης κουζίνας και ηγεσίας',
+          'Αποδεικνύει γνώση ασφάλειας τροφίμων',
+          'Μορφή συμβατή με ATS με λέξεις-κλειδιά ειδικές για τη φιλοξενία'
+        ]
+      },
+      cs: {
+        name: 'Šéfkuchař',
+        slug: 'sefkuchar',
+        description: 'Šéfkuchaři vytvářejí a připravují jídla, řídí provoz kuchyně a zajišťují kvalitu a bezpečnost potravin. Vyvíjejí menu, školí kuchyňský personál a udržují vysoké standardy kulinářské excelence při řízení nákladů a zásob.',
+        tips: [
+          'Zdůrazněte své kulinářské vzdělání a certifikace',
+          'Zdůrazněte zkušenosti s různými kuchyněmi a technikami vaření',
+          'Ukažte vývoj menu a řízení nákladů na potraviny',
+          'Zahrňte zkušenosti s řízením kuchyně a školením personálu',
+          'Prokažte znalost standardů bezpečnosti a hygieny potravin'
+        ],
+        skills: [
+          'Kulinářské umění a techniky vaření',
+          'Plánování a vývoj menu',
+          'Řízení a provoz kuchyně',
+          'Bezpečnost a hygiena potravin (HACCP)',
+          'Kontrola nákladů a řízení zásob',
+          'Školení a dohled personálu',
+          'Zajištění kvality a prezentace'
+        ],
+        whyGood: [
+          'Jasná struktura zdůrazňující kulinářské kvalifikace',
+          'Zdůrazňuje zkušenosti s různými kuchyněmi',
+          'Ukazuje dovednosti v řízení kuchyně a vedení',
+          'Prokazuje znalost bezpečnosti potravin',
+          'Formát kompatibilní s ATS s klíčovými slovy specifickými pro pohostinství'
+        ]
+      },
+      pt: {
+        name: 'Chef',
+        slug: 'chef',
+        description: 'Chefs criam e preparam refeições, gerenciam operações de cozinha e garantem qualidade e segurança alimentar. Eles desenvolvem cardápios, treinam equipe de cozinha e mantêm altos padrões de excelência culinária enquanto gerenciam custos e inventário.',
+        tips: [
+          'Destaque seu treinamento culinário e certificações',
+          'Enfatize experiência com diferentes cozinhas e técnicas culinárias',
+          'Mostre desenvolvimento de cardápio e gestão de custos alimentares',
+          'Inclua experiência com gestão de cozinha e treinamento de equipe',
+          'Demonstre conhecimento de padrões de segurança e higiene alimentar'
+        ],
+        skills: [
+          'Artes culinárias e técnicas de cozinha',
+          'Planejamento e desenvolvimento de cardápio',
+          'Gestão e operações de cozinha',
+          'Segurança e higiene alimentar (HACCP)',
+          'Controle de custos e gestão de inventário',
+          'Treinamento e supervisão de equipe',
+          'Garantia de qualidade e apresentação'
+        ],
+        whyGood: [
+          'Estrutura clara destacando qualificações culinárias',
+          'Enfatiza experiência com diversas cozinhas',
+          'Mostra habilidades de gestão de cozinha e liderança',
+          'Demonstra conhecimento de segurança alimentar',
+          'Formato compatível com ATS com palavras-chave específicas de hospitalidade'
+        ]
+      },
+      sv: {
+        name: 'Kock',
+        slug: 'kock',
+        description: 'Kockar skapar och förbereder måltider, hanterar köksverksamhet och säkerställer livsmedelskvalitet och säkerhet. De utvecklar menyer, utbildar kökspersonal och upprätthåller höga standarder för kulinarisk excellens samtidigt som de hanterar kostnader och lager.',
+        tips: [
+          'Framhäv din kulinariska utbildning och certifieringar',
+          'Betona erfarenhet med olika kök och matlagningstekniker',
+          'Visa menyutveckling och livsmedelskostnadshantering',
+          'Inkludera erfarenhet av kökshantering och personalutbildning',
+          'Visa kunskap om livsmedelssäkerhets- och hygienstandarder'
+        ],
+        skills: [
+          'Kulinarisk konst och matlagningstekniker',
+          'Menyplanering och utveckling',
+          'Kökshantering och verksamhet',
+          'Livsmedelssäkerhet och hygien (HACCP)',
+          'Kostnadskontroll och lagerhantering',
+          'Personalutbildning och övervakning',
+          'Kvalitetssäkring och presentation'
+        ],
+        whyGood: [
+          'Tydlig struktur som framhäver kulinariska kvalifikationer',
+          'Betona erfarenhet med olika kök',
+          'Visar kökshanterings- och ledarskapsfärdigheter',
+          'Demonstrerar kunskap om livsmedelssäkerhet',
+          'ATS-vänligt format med gästgiverispecifika nyckelord'
+        ]
+      },
+      bg: {
+        name: 'Готвач',
+        slug: 'gotvach',
+        description: 'Готвачите създават и приготвят ястия, управляват операциите в кухнята и осигуряват качеството и безопасността на храните. Те разработват менюта, обучават кухненския персонал и поддържат високи стандарти на кулинарно майсторство, като управляват разходите и инвентара.',
+        tips: [
+          'Подчертайте кулинарното си обучение и сертификати',
+          'Акцентирайте върху опита с различни кухни и техники за готвене',
+          'Покажете разработване на меню и управление на разходите за храна',
+          'Включете опит с управление на кухня и обучение на персонал',
+          'Демонстрирайте познаване на стандартите за безопасност и хигиена на храните'
+        ],
+        skills: [
+          'Кулинарни изкуства и техники за готвене',
+          'Планиране и разработване на меню',
+          'Управление и операции в кухнята',
+          'Безопасност и хигиена на храните (HACCP)',
+          'Контрол на разходите и управление на инвентар',
+          'Обучение и надзор на персонал',
+          'Осигуряване на качество и представяне'
+        ],
+        whyGood: [
+          'Ясна структура, която подчертава кулинарните квалификации',
+          'Акцентира върху опита с различни кухни',
+          'Показва умения за управление на кухня и лидерство',
+          'Демонстрира познаване на безопасността на храните',
+          'Формат, съвместим с ATS, с ключови думи специфични за хотелиерството'
+        ]
+      },
+      da: {
+        name: 'Kok',
+        slug: 'kok',
+        description: 'Kokke skaber og forbereder måltider, administrerer køkkenoperationer og sikrer fødevarekvalitet og -sikkerhed. De udvikler menuer, træner køkkenpersonale og opretholder høje standarder for kulinarisk ekspertise, mens de administrerer omkostninger og lager.',
+        tips: [
+          'Fremhæv din kulinariske uddannelse og certificeringer',
+          'Fremhæv erfaring med forskellige køkkener og madlavningstekniker',
+          'Vis menuudvikling og fødevareomkostningsstyring',
+          'Inkluder erfaring med køkkenledelse og personaleuddannelse',
+          'Demonstrer viden om fødevaresikkerheds- og hygiejnestandarder'
+        ],
+        skills: [
+          'Kulinariske kunster og madlavningstekniker',
+          'Menuplanlægning og -udvikling',
+          'Køkkenledelse og -drift',
+          'Fødevaresikkerhed og hygiejne (HACCP)',
+          'Omkostningskontrol og lagerstyring',
+          'Personaleuddannelse og tilsyn',
+          'Kvalitetssikring og præsentation'
+        ],
+        whyGood: [
+          'Tydelig struktur, der fremhæver kulinariske kvalifikationer',
+          'Fremhæver erfaring med forskellige køkkener',
+          'Viser køkkenledelses- og lederskabsfærdigheder',
+          'Demonstrer viden om fødevaresikkerhed',
+          'ATS-venligt format med gæstgiverispecifikke nøgleord'
+        ]
+      },
+      fi: {
+        name: 'Kokki',
+        slug: 'kokki',
+        description: 'Kokit luovat ja valmistavat aterioita, hallitsevat keittiötoimintoja ja varmistavat ruoan laadun ja turvallisuuden. He kehittävät ruokalistoja, kouluttavat keittiöhenkilöstöä ja ylläpitävät korkeita kulinarisen huippuosaamisen standardeja halliten kustannuksia ja varastoja.',
+        tips: [
+          'Korosta kulinarista koulutustasi ja sertifikaatteja',
+          'Korosta kokemusta eri keittiöistä ja keittotekniikoista',
+          'Näytä ruokalistojen kehitys ja ruokakustannusten hallinta',
+          'Sisällytä kokemus keittiön hallinnasta ja henkilöstön koulutuksesta',
+          'Näytä tietämys ruoanturvallisuus- ja hygieniastandardeista'
+        ],
+        skills: [
+          'Kulinariset taidot ja keittotekniikat',
+          'Ruokalistojen suunnittelu ja kehitys',
+          'Keittiön hallinta ja toiminnot',
+          'Ruanturvallisuus ja hygienia (HACCP)',
+          'Kustannushallinta ja varastonhallinta',
+          'Henkilöstön koulutus ja valvonta',
+          'Laadunvarmistus ja esittely'
+        ],
+        whyGood: [
+          'Selkeä rakenne, joka korostaa kulinarisia kvalifikaatioita',
+          'Korostaa kokemusta eri keittiöistä',
+          'Näyttää keittiön hallinta- ja johtamistaidoista',
+          'Näyttää tietämystä ruoanturvallisuudesta',
+          'ATS-yhteensopiva muoto majoitusalanspesifisillä avainsanoilla'
+        ]
+      },
+      sk: {
+        name: 'Kuchár',
+        slug: 'kuchar',
+        description: 'Kuchári vytvárajú a pripravujú jedlá, spravujú kuchynské operácie a zabezpečujú kvalitu a bezpečnosť potravín. Vyvíjajú jedálne lístky, školia kuchynský personál a udržiavajú vysoké štandardy kulinárskej excelencie pri správe nákladov a zásob.',
+        tips: [
+          'Zdôraznite svoje kulinárske vzdelanie a certifikáty',
+          'Zdôraznite skúsenosti s rôznymi kuchyniami a technikami varenia',
+          'Ukážte vývoj jedálneho lístka a riadenie nákladov na potraviny',
+          'Zahrňte skúsenosti s riadením kuchyne a školením personálu',
+          'Preukážte znalosť štandardov bezpečnosti a hygieny potravín'
+        ],
+        skills: [
+          'Kulinárske umenie a techniky varenia',
+          'Plánovanie a vývoj jedálneho lístka',
+          'Riadenie a prevádzka kuchyne',
+          'Bezpečnosť a hygiena potravín (HACCP)',
+          'Kontrola nákladov a riadenie zásob',
+          'Školenie a dohľad personálu',
+          'Zabezpečenie kvality a prezentácia'
+        ],
+        whyGood: [
+          'Jasná štruktúra zdôrazňujúca kulinárske kvalifikácie',
+          'Zdôrazňuje skúsenosti s rôznymi kuchyniami',
+          'Ukazuje zručnosti v riadení kuchyne a vedení',
+          'Preukazuje znalosť bezpečnosti potravín',
+          'Formát kompatibilný s ATS s kľúčovými slovami špecifickými pre pohostinstvo'
+        ]
+      },
+      no: {
+        name: 'Kokk',
+        slug: 'kokk',
+        description: 'Kokker lager og forbereder måltider, administrerer kjøkkenoperasjoner og sikrer matkvalitet og -sikkerhet. De utvikler menyer, trener kjøkkenpersonale og opprettholder høye standarder for kulinarisk ekspertise mens de administrerer kostnader og lager.',
+        tips: [
+          'Fremhev din kulinariske utdanning og sertifiseringer',
+          'Fremhev erfaring med forskjellige kjøkkener og matlagingsteknikker',
+          'Vis menyutvikling og matkostnadsstyring',
+          'Inkluder erfaring med kjøkkenledelse og personaleutdanning',
+          'Demonstrer kunnskap om mattrygghets- og hygienestandarder'
+        ],
+        skills: [
+          'Kulinariske kunster og matlagingsteknikker',
+          'Menyp lanlegging og utvikling',
+          'Kjøkkenledelse og drift',
+          'Mattrygghet og hygiene (HACCP)',
+          'Kostnadskontroll og lagerstyring',
+          'Personaleutdanning og tilsyn',
+          'Kvalitetssikring og presentasjon'
+        ],
+        whyGood: [
+          'Tydelig struktur som fremhever kulinariske kvalifikasjoner',
+          'Fremhever erfaring med forskjellige kjøkkener',
+          'Viser kjøkkenledelses- og lederskapsferdigheter',
+          'Demonstrer kunnskap om mattrygghet',
+          'ATS-vennlig format med gjestgiverispesifikke nøkkelord'
+        ]
+      },
+      hr: {
+        name: 'Kuhar',
+        slug: 'kuhar',
+        description: 'Kuhari stvaraju i pripremaju jela, upravljaju kuhinjskim operacijama i osiguravaju kvalitetu i sigurnost hrane. Razvijaju jelovnike, obučavaju kuhinjsko osoblje i održavaju visoke standarde kulinarske izvrsnosti upravljajući troškovima i zalihama.',
+        tips: [
+          'Istaknite svoju kulinarsku obuku i certifikate',
+          'Naglasite iskustvo s različitim kuhinjama i tehnikama kuhanja',
+          'Pokažite razvoj jelovnika i upravljanje troškovima hrane',
+          'Uključite iskustvo s upravljanjem kuhinje i obukom osoblja',
+          'Pokažite znanje o standardima sigurnosti i higijene hrane'
+        ],
+        skills: [
+          'Kulinarske umjetnosti i tehnike kuhanja',
+          'Planiranje i razvoj jelovnika',
+          'Upravljanje i operacije kuhinje',
+          'Sigurnost i higijena hrane (HACCP)',
+          'Kontrola troškova i upravljanje zalihama',
+          'Obučavanje i nadzor osoblja',
+          'Osiguravanje kvalitete i prezentacija'
+        ],
+        whyGood: [
+          'Jasna struktura koja ističe kulinarske kvalifikacije',
+          'Naglašava iskustvo s različitim kuhinjama',
+          'Prikazuje vještine upravljanja kuhinjom i vodstva',
+          'Pokazuje znanje o sigurnosti hrane',
+          'Format kompatibilan s ATS s ključnim riječima specifičnim za ugostiteljstvo'
+        ]
+      },
+      sr: {
+        name: 'Кувар',
+        slug: 'kuvar',
+        description: 'Кувари стварају и припремају јела, управљају кухињским операцијама и осигуравају квалитет и безбедност хране. Развијају јеловнике, обучавају кухињско особље и одржавају високе стандарде кулинарске изврсности управљајући трошковима и залихама.',
+        tips: [
+          'Истакните своју кулинарску обуку и сертификате',
+          'Нагласите искуство са различитим кухињама и техникама кувања',
+          'Покажите развој јеловника и управљање трошковима хране',
+          'Укључите искуство са управљањем кухиње и обуком особља',
+          'Покажите знање о стандардима безбедности и хигијене хране'
+        ],
+        skills: [
+          'Кулинарске уметности и технике кувања',
+          'Планирање и развој јеловника',
+          'Управљање и операције кухиње',
+          'Безбедност и хигијена хране (HACCP)',
+          'Контрола трошкова и управљање залихама',
+          'Обучавање и надзор особља',
+          'Осигуравање квалитета и презентација'
+        ],
+        whyGood: [
+          'Јасна структура која истиче кулинарске квалификације',
+          'Наглашава искуство са различитим кухињама',
+          'Приказује вештине управљања кухињом и вођства',
+          'Показује знање о безбедности хране',
+          'Формат компатибилан са ATS са кључним речима специфичним за угоститељство'
+        ]
+      }
+    }
+  },
+  {
+    id: 'lawyer',
+    category: 'legal',
+    translations: {
+      en: {
+        name: 'Lawyer',
+        slug: 'lawyer',
+        description: 'Lawyers provide legal advice, represent clients in court, and help resolve legal disputes. They research laws, prepare legal documents, negotiate settlements, and advocate for their clients\' rights and interests.',
+        tips: [
+          'Highlight your law degree and bar admission',
+          'Emphasize experience in specific areas of law',
+          'Showcase successful cases and outcomes',
+          'Include experience with legal research and writing',
+          'Demonstrate analytical and advocacy skills'
+        ],
+        skills: [
+          'Legal research and analysis',
+          'Case preparation and litigation',
+          'Legal writing and documentation',
+          'Client consultation and counseling',
+          'Negotiation and settlement',
+          'Court representation and advocacy',
+          'Regulatory compliance and risk management'
+        ],
+        whyGood: [
+          'Clear structure highlighting legal qualifications',
+          'Emphasizes bar admission and specializations',
+          'Shows successful case outcomes',
+          'Demonstrates legal expertise and analytical skills',
+          'ATS-friendly format with legal-specific keywords'
+        ]
+      },
+      nl: {
+        name: 'Advocaat',
+        slug: 'advocaat',
+        description: 'Advocaten geven juridisch advies, vertegenwoordigen cliënten in de rechtbank en helpen juridische geschillen op te lossen. Ze onderzoeken wetten, bereiden juridische documenten voor, onderhandelen over schikkingen en pleiten voor de rechten en belangen van hun cliënten.',
+        tips: [
+          'Benadruk je rechtenstudie en toelating tot de balie',
+          'Leg nadruk op ervaring in specifieke rechtsgebieden',
+          'Toon succesvolle zaken en resultaten',
+          'Vermeld ervaring met juridisch onderzoek en schrijven',
+          'Demonstreer analytische en pleitvaardigheden'
+        ],
+        skills: [
+          'Juridisch onderzoek en analyse',
+          'Zaakvoorbereiding en procesvoering',
+          'Juridisch schrijven en documentatie',
+          'Cliëntconsultatie en begeleiding',
+          'Onderhandeling en schikking',
+          'Rechtbankvertegenwoordiging en pleiten',
+          'Regelgevingsnaleving en risicobeheer'
+        ],
+        whyGood: [
+          'Duidelijke structuur die juridische kwalificaties benadrukt',
+          'Legt nadruk op toelating tot de balie en specialisaties',
+          'Toont succesvolle zaakresultaten',
+          'Demonstreert juridische expertise en analytische vaardigheden',
+          'ATS-vriendelijk formaat met juridische zoekwoorden'
+        ]
+      },
+      fr: {
+        name: 'Avocat',
+        slug: 'avocat',
+        description: 'Les avocats fournissent des conseils juridiques, représentent les clients devant les tribunaux et aident à résoudre les litiges juridiques. Ils recherchent les lois, préparent des documents juridiques, négocient des règlements et défendent les droits et intérêts de leurs clients.',
+        tips: [
+          'Mettez en avant votre diplôme de droit et admission au barreau',
+          'Soulignez l\'expérience dans des domaines spécifiques du droit',
+          'Présentez des affaires et résultats réussis',
+          'Incluez l\'expérience en recherche et rédaction juridiques',
+          'Démontrez les compétences analytiques et de plaidoyer'
+        ],
+        skills: [
+          'Recherche et analyse juridiques',
+          'Préparation d\'affaires et contentieux',
+          'Rédaction et documentation juridiques',
+          'Consultation et conseil aux clients',
+          'Négociation et règlement',
+          'Représentation et plaidoyer devant les tribunaux',
+          'Conformité réglementaire et gestion des risques'
+        ],
+        whyGood: [
+          'Structure claire mettant en évidence les qualifications juridiques',
+          'Met l\'accent sur l\'admission au barreau et les spécialisations',
+          'Montre des résultats d\'affaires réussis',
+          'Démontre l\'expertise juridique et les compétences analytiques',
+          'Format compatible ATS avec mots-clés spécifiques au droit'
+        ]
+      },
+      es: {
+        name: 'Abogado',
+        slug: 'abogado',
+        description: 'Los abogados brindan asesoramiento legal, representan a clientes en los tribunales y ayudan a resolver disputas legales. Investigan leyes, preparan documentos legales, negocian acuerdos y defienden los derechos e intereses de sus clientes.',
+        tips: [
+          'Destaca tu título de derecho y admisión al colegio de abogados',
+          'Enfatiza experiencia en áreas específicas del derecho',
+          'Muestra casos exitosos y resultados',
+          'Incluye experiencia con investigación y redacción legal',
+          'Demuestra habilidades analíticas y de defensa'
+        ],
+        skills: [
+          'Investigación y análisis legal',
+          'Preparación de casos y litigios',
+          'Redacción y documentación legal',
+          'Consultoría y asesoramiento a clientes',
+          'Negociación y acuerdo',
+          'Representación y defensa en tribunales',
+          'Cumplimiento regulatorio y gestión de riesgos'
+        ],
+        whyGood: [
+          'Estructura clara que destaca calificaciones legales',
+          'Enfatiza admisión al colegio de abogados y especializaciones',
+          'Muestra resultados exitosos de casos',
+          'Demuestra experiencia legal y habilidades analíticas',
+          'Formato compatible con ATS con palabras clave específicas legales'
+        ]
+      },
+      de: {
+        name: 'Rechtsanwalt',
+        slug: 'rechtsanwalt',
+        description: 'Rechtsanwälte bieten Rechtsberatung, vertreten Mandanten vor Gericht und helfen bei der Lösung von Rechtsstreitigkeiten. Sie recherchieren Gesetze, erstellen Rechtsdokumente, verhandeln Vergleiche und vertreten die Rechte und Interessen ihrer Mandanten.',
+        tips: [
+          'Heben Sie Ihren Jurastudium und Zulassung zur Anwaltskammer hervor',
+          'Betonen Sie Erfahrung in spezifischen Rechtsgebieten',
+          'Zeigen Sie erfolgreiche Fälle und Ergebnisse',
+          'Fügen Sie Erfahrung mit Rechtsforschung und -schreiben hinzu',
+          'Demonstrieren Sie analytische und Anwaltsfähigkeiten'
+        ],
+        skills: [
+          'Rechtsforschung und -analyse',
+          'Fallvorbereitung und Prozessführung',
+          'Rechtsschreiben und Dokumentation',
+          'Mandantenberatung und Beratung',
+          'Verhandlung und Vergleich',
+          'Gerichtsvertretung und Anwaltschaft',
+          'Regulatorische Compliance und Risikomanagement'
+        ],
+        whyGood: [
+          'Klare Struktur, die juristische Qualifikationen hervorhebt',
+          'Betont Zulassung zur Anwaltskammer und Spezialisierungen',
+          'Zeigt erfolgreiche Fallergebnisse',
+          'Demonstriert juristische Expertise und analytische Fähigkeiten',
+          'ATS-freundliches Format mit rechtspezifischen Schlüsselwörtern'
+        ]
+      },
+      it: {
+        name: 'Avvocato',
+        slug: 'avvocato',
+        description: 'Gli avvocati forniscono consulenza legale, rappresentano i clienti in tribunale e aiutano a risolvere controversie legali. Ricercano leggi, preparano documenti legali, negoziano accordi e difendono i diritti e gli interessi dei loro clienti.',
+        tips: [
+          'Evidenzia la tua laurea in giurisprudenza e l\'ammissione all\'albo',
+          'Enfatizza esperienza in aree specifiche del diritto',
+          'Mostra casi di successo e risultati',
+          'Includi esperienza con ricerca e scrittura legale',
+          'Dimostra capacità analitiche e di difesa'
+        ],
+        skills: [
+          'Ricerca e analisi legale',
+          'Preparazione del caso e contenzioso',
+          'Scrittura e documentazione legale',
+          'Consultazione e consulenza clienti',
+          'Negoziazione e accordo',
+          'Rappresentanza in tribunale e difesa',
+          'Conformità normativa e gestione del rischio'
+        ],
+        whyGood: [
+          'Struttura chiara che evidenzia qualifiche legali',
+          'Enfatizza l\'ammissione all\'albo e specializzazioni',
+          'Mostra risultati di casi di successo',
+          'Dimostra competenza legale e capacità analitiche',
+          'Formato compatibile con ATS con parole chiave specifiche per il diritto'
+        ]
+      },
+      pl: {
+        name: 'Prawnik',
+        slug: 'prawnik',
+        description: 'Prawnicy udzielają porad prawnych, reprezentują klientów w sądzie i pomagają rozwiązywać spory prawne. Badają przepisy prawne, przygotowują dokumenty prawne, negocjują ugody i bronią praw i interesów swoich klientów.',
+        tips: [
+          'Podkreśl swoje wykształcenie prawnicze i wpis na listę adwokatów',
+          'Podkreśl doświadczenie w określonych dziedzinach prawa',
+          'Pokaż udane sprawy i wyniki',
+          'Uwzględnij doświadczenie z badaniami prawnymi i pisaniem',
+          'Wykazuj zdolności analityczne i obronne'
+        ],
+        skills: [
+          'Badania i analiza prawna',
+          'Przygotowanie sprawy i postępowanie sądowe',
+          'Pisanie i dokumentacja prawna',
+          'Konsultacje i poradnictwo dla klientów',
+          'Negocjacje i ugoda',
+          'Reprezentacja w sądzie i obrona',
+          'Zgodność z przepisami i zarządzanie ryzykiem'
+        ],
+        whyGood: [
+          'Jasna struktura podkreślająca kwalifikacje prawne',
+          'Kładzie nacisk na wpis na listę adwokatów i specjalizacje',
+          'Pokazuje udane wyniki spraw',
+          'Wykazuje kompetencje prawne i zdolności analityczne',
+          'Format przyjazny dla ATS z słowami kluczowymi specyficznymi dla prawa'
+        ]
+      },
+      ro: {
+        name: 'Avocat',
+        slug: 'avocat',
+        description: 'Avocații oferă consultanță juridică, reprezintă clienții în instanță și ajută la rezolvarea disputelor legale. Ei cercetează legile, pregătesc documente legale, negociază soluții și pledează pentru drepturile și interesele clienților lor.',
+        tips: [
+          'Evidențiază diploma ta de drept și admiterea la barou',
+          'Subliniază experiența în domenii specifice ale dreptului',
+          'Prezintă cazuri de succes și rezultate',
+          'Include experiența cu cercetarea și scrierea juridică',
+          'Demonstrează abilități analitice și de apărare'
+        ],
+        skills: [
+          'Cercetare și analiză juridică',
+          'Pregătirea cazului și litigii',
+          'Scriere și documentare juridică',
+          'Consultare și consiliere clienți',
+          'Negociere și soluționare',
+          'Reprezentare în instanță și apărare',
+          'Conformitate reglementară și gestionarea riscului'
+        ],
+        whyGood: [
+          'Structură clară care evidențiază calificările juridice',
+          'Subliniază admiterea la barou și specializările',
+          'Arată rezultate de succes ale cazurilor',
+          'Demonstrează expertiza juridică și abilități analitice',
+          'Format compatibil cu ATS cu cuvinte cheie specifice dreptului'
+        ]
+      },
+      hu: {
+        name: 'Ügyvéd',
+        slug: 'ugyved',
+        description: 'Az ügyvédek jogi tanácsot nyújtanak, képviselik az ügyfeleket a bíróságon és segítenek jogi viták megoldásában. Kutatják a törvényeket, készítik a jogi dokumentumokat, tárgyalnak megállapodásokat és védik ügyfeleik jogait és érdekeit.',
+        tips: [
+          'Hangsúlyozza jogi diplomáját és ügyvédi kamarai tagságát',
+          'Kiemeli a jog meghatározott területein szerzett tapasztalatát',
+          'Mutatja be sikeres ügyeket és eredményeket',
+          'Tartalmazza a jogi kutatással és írással szerzett tapasztalatát',
+          'Bebizonyítja elemző és védői képességeit'
+        ],
+        skills: [
+          'Jogi kutatás és elemzés',
+          'Ügy előkészítése és pereskedés',
+          'Jogi írás és dokumentáció',
+          'Ügyfélkonzultáció és tanácsadás',
+          'Tárgyalás és megállapodás',
+          'Bírósági képviselet és védés',
+          'Szabályozási megfelelőség és kockázatkezelés'
+        ],
+        whyGood: [
+          'Világos struktúra, amely kiemeli a jogi kvalifikációkat',
+          'Hangsúlyozza az ügyvédi kamarai tagságot és szakosodásokat',
+          'Mutatja a sikeres ügyek eredményeit',
+          'Bebizonyítja a jogi szakértelem és elemző képességeket',
+          'ATS-barát formátum jogspecifikus kulcsszavakkal'
+        ]
+      },
+      el: {
+        name: 'Δικηγόρος',
+        slug: 'dikigoros',
+        description: 'Οι δικηγόροι παρέχουν νομικές συμβουλές, εκπροσωπούν πελάτες στα δικαστήρια και βοηθούν στην επίλυση νομικών διαφορών. Ερευνούν νόμους, προετοιμάζουν νομικά έγγραφα, διαπραγματεύονται συμβιβασμούς και υπερασπίζονται τα δικαιώματα και συμφέροντα των πελατών τους.',
+        tips: [
+          'Επισημάνετε το πτυχίο νομικής σας και την εγγραφή στο δικηγορικό σύλλογο',
+          'Τονίστε εμπειρία σε συγκεκριμένους τομείς του δικαίου',
+          'Παρουσιάστε επιτυχημένες υποθέσεις και αποτελέσματα',
+          'Συμπεριλάβετε εμπειρία με νομική έρευνα και γραφή',
+          'Αποδείξτε αναλυτικές και υπερασπιστικές ικανότητες'
+        ],
+        skills: [
+          'Νομική έρευνα και ανάλυση',
+          'Προετοιμασία υποθέσεων και δικονομία',
+          'Νομική γραφή και τεκμηρίωση',
+          'Σύμβουλος και συμβουλευτική πελατών',
+          'Διαπραγμάτευση και συμβιβασμός',
+          'Εκπροσώπηση σε δικαστήρια και υπεράσπιση',
+          'Ρυθμιστική συμμόρφωση και διαχείριση κινδύνου'
+        ],
+        whyGood: [
+          'Σαφής δομή που επισημαίνει τις νομικές προσόντα',
+          'Τονίζει την εγγραφή στο δικηγορικό σύλλογο και τις εξειδικεύσεις',
+          'Δείχνει επιτυχημένα αποτελέσματα υποθέσεων',
+          'Αποδεικνύει νομική εμπειρογνωμοσύνη και αναλυτικές ικανότητες',
+          'Μορφή συμβατή με ATS με λέξεις-κλειδιά ειδικές για το δίκαιο'
+        ]
+      },
+      cs: {
+        name: 'Advokát',
+        slug: 'advokat',
+        description: 'Advokáti poskytují právní poradenství, zastupují klienty u soudu a pomáhají řešit právní spory. Zkoumají zákony, připravují právní dokumenty, vyjednávají dohody a hájí práva a zájmy svých klientů.',
+        tips: [
+          'Zdůrazněte své právnické vzdělání a přijetí do advokátní komory',
+          'Zdůrazněte zkušenosti v konkrétních oblastech práva',
+          'Ukažte úspěšné případy a výsledky',
+          'Zahrňte zkušenosti s právním výzkumem a psaním',
+          'Prokažte analytické a obhajovací schopnosti'
+        ],
+        skills: [
+          'Právní výzkum a analýza',
+          'Příprava případu a soudní řízení',
+          'Právní psaní a dokumentace',
+          'Konzultace a poradenství klientům',
+          'Vyjednávání a dohoda',
+          'Soudní zastoupení a obhajoba',
+          'Regulační shoda a řízení rizik'
+        ],
+        whyGood: [
+          'Jasná struktura zdůrazňující právní kvalifikace',
+          'Zdůrazňuje přijetí do advokátní komory a specializace',
+          'Ukazuje úspěšné výsledky případů',
+          'Prokazuje právní odbornost a analytické schopnosti',
+          'Formát kompatibilní s ATS s právními klíčovými slovy'
+        ]
+      },
+      pt: {
+        name: 'Advogado',
+        slug: 'advogado',
+        description: 'Advogados fornecem aconselhamento jurídico, representam clientes nos tribunais e ajudam a resolver disputas legais. Eles pesquisam leis, preparam documentos legais, negociam acordos e defendem os direitos e interesses de seus clientes.',
+        tips: [
+          'Destaque seu diploma de direito e admissão na ordem dos advogados',
+          'Enfatize experiência em áreas específicas do direito',
+          'Mostre casos bem-sucedidos e resultados',
+          'Inclua experiência com pesquisa e redação jurídica',
+          'Demonstre habilidades analíticas e de defesa'
+        ],
+        skills: [
+          'Pesquisa e análise jurídica',
+          'Preparação de casos e litígios',
+          'Redação e documentação jurídica',
+          'Consultoria e aconselhamento a clientes',
+          'Negociação e acordo',
+          'Representação em tribunais e defesa',
+          'Conformidade regulatória e gestão de riscos'
+        ],
+        whyGood: [
+          'Estrutura clara destacando qualificações jurídicas',
+          'Enfatiza admissão na ordem dos advogados e especializações',
+          'Mostra resultados bem-sucedidos de casos',
+          'Demonstra expertise jurídica e habilidades analíticas',
+          'Formato compatível com ATS com palavras-chave específicas jurídicas'
+        ]
+      },
+      sv: {
+        name: 'Advokat',
+        slug: 'advokat',
+        description: 'Advokater ger juridisk rådgivning, representerar klienter i domstol och hjälper till att lösa juridiska tvister. De forskar om lagar, förbereder juridiska dokument, förhandlar om uppgörelser och företräder sina klienters rättigheter och intressen.',
+        tips: [
+          'Framhäv din juristexamen och antagning till advokatsamfundet',
+          'Betona erfarenhet inom specifika rättsområden',
+          'Visa framgångsrika fall och resultat',
+          'Inkludera erfarenhet av juridisk forskning och skrivande',
+          'Visa analytiska och försvarsförmågor'
+        ],
+        skills: [
+          'Juridisk forskning och analys',
+          'Förberedelse av fall och rättegång',
+          'Juridisk skrivande och dokumentation',
+          'Klientkonsultation och rådgivning',
+          'Förhandling och uppgörelse',
+          'Domstolsrepresentation och försvar',
+          'Regulatorisk efterlevnad och riskhantering'
+        ],
+        whyGood: [
+          'Tydlig struktur som framhäver juridiska kvalifikationer',
+          'Betona antagning till advokatsamfundet och specialiseringar',
+          'Visar framgångsrika fallresultat',
+          'Demonstrerar juridisk expertis och analytiska färdigheter',
+          'ATS-vänligt format med juridiska nyckelord'
+        ]
+      },
+      bg: {
+        name: 'Адвокат',
+        slug: 'advokat',
+        description: 'Адвокатите предоставят правни съвети, представляват клиенти в съда и помагат за решаване на правни спорове. Те изследват закони, подготвят правни документи, преговарят споразумения и защитават правата и интересите на своите клиенти.',
+        tips: [
+          'Подчертайте правното си образование и приемането в адвокатската колегия',
+          'Акцентирайте върху опита в конкретни области на правото',
+          'Покажете успешни дела и резултати',
+          'Включете опит с правно изследване и писане',
+          'Демонстрирайте аналитични и защитни способности'
+        ],
+        skills: [
+          'Правно изследване и анализ',
+          'Подготовка на дело и съдебни спорове',
+          'Правно писане и документация',
+          'Консултация и съветване на клиенти',
+          'Преговаряне и споразумение',
+          'Представителство в съда и защита',
+          'Регулаторно съответствие и управление на риска'
+        ],
+        whyGood: [
+          'Ясна структура, която подчертава правните квалификации',
+          'Акцентира върху приемането в адвокатската колегия и специализациите',
+          'Показва успешни резултати от дела',
+          'Демонстрира правна експертиза и аналитични способности',
+          'Формат, съвместим с ATS, с правни ключови думи'
+        ]
+      },
+      da: {
+        name: 'Advokat',
+        slug: 'advokat',
+        description: 'Advokater giver juridisk rådgivning, repræsenterer klienter i retten og hjælper med at løse juridiske tvister. De forsker i love, forbereder juridiske dokumenter, forhandler forlig og forsvare deres klienters rettigheder og interesser.',
+        tips: [
+          'Fremhæv din juridiske uddannelse og optagelse i advokatsamfundet',
+          'Fremhæv erfaring inden for specifikke retsområder',
+          'Vis succesfulde sager og resultater',
+          'Inkluder erfaring med juridisk forskning og skrivning',
+          'Demonstrer analytiske og forsvarsfærdigheder'
+        ],
+        skills: [
+          'Juridisk forskning og analyse',
+          'Sagsforberedelse og retssager',
+          'Juridisk skrivning og dokumentation',
+          'Klientkonsultation og rådgivning',
+          'Forhandling og forlig',
+          'Retsrepræsentation og forsvar',
+          'Regulatorisk overholdelse og risikostyring'
+        ],
+        whyGood: [
+          'Tydelig struktur, der fremhæver juridiske kvalifikationer',
+          'Fremhæver optagelse i advokatsamfundet og specialiseringer',
+          'Viser succesfulde sagsresultater',
+          'Demonstrer juridisk ekspertise og analytiske færdigheder',
+          'ATS-venligt format med juridiske nøgleord'
+        ]
+      },
+      fi: {
+        name: 'Asianajaja',
+        slug: 'asianajaja',
+        description: 'Asianajajat antavat oikeudellista neuvontaa, edustavat asiakkaita oikeudessa ja auttavat ratkaisemaan oikeudellisia kiistoja. He tutkivat lakeja, valmistavat oikeudellisia asiakirjoja, neuvottelevat sovintoja ja puolustavat asiakkaidensa oikeuksia ja etuja.',
+        tips: [
+          'Korosta oikeustieteen tutkintosi ja hyväksymistä asianajajakuntaan',
+          'Korosta kokemusta oikeuden tietyillä aloilla',
+          'Näytä menestyksekkäitä tapauksia ja tuloksia',
+          'Sisällytä kokemus oikeudellisesta tutkimuksesta ja kirjoittamisesta',
+          'Näytä analyyttisiä ja puolustuskykyjä'
+        ],
+        skills: [
+          'Oikeudellinen tutkimus ja analyysi',
+          'Tapauksen valmistelu ja oikeudenkäynti',
+          'Oikeudellinen kirjoittaminen ja dokumentointi',
+          'Asiakasneuvonta ja neuvonta',
+          'Neuvottelu ja sovinto',
+          'Oikeuden edustus ja puolustus',
+          'Sääntelyn noudattaminen ja riskinhallinta'
+        ],
+        whyGood: [
+          'Selkeä rakenne, joka korostaa oikeudellisia kvalifikaatioita',
+          'Korostaa hyväksymistä asianajajakuntaan ja erikoistumisia',
+          'Näyttää menestyksekkäitä tapauksien tuloksia',
+          'Näyttää oikeudellista asiantuntemusta ja analyyttisiä kykyjä',
+          'ATS-yhteensopiva muoto oikeudellisilla avainsanoilla'
+        ]
+      },
+      sk: {
+        name: 'Advokát',
+        slug: 'advokat',
+        description: 'Advokáti poskytujú právne poradenstvo, zastupujú klientov na súde a pomáhajú riešiť právne spory. Skúmajú zákony, pripravujú právne dokumenty, vyjednávajú dohody a hájajú práva a záujmy svojich klientov.',
+        tips: [
+          'Zdôraznite svoje právnické vzdelanie a prijatie do advokátskej komory',
+          'Zdôraznite skúsenosti v konkrétnych oblastiach práva',
+          'Ukážte úspešné prípady a výsledky',
+          'Zahrňte skúsenosti s právnym výskumom a písaním',
+          'Preukážte analytické a obhajobné schopnosti'
+        ],
+        skills: [
+          'Právny výskum a analýza',
+          'Príprava prípadu a súdne konanie',
+          'Právne písanie a dokumentácia',
+          'Konzultácia a poradenstvo klientom',
+          'Vyjednávanie a dohoda',
+          'Súdne zastúpenie a obhajoba',
+          'Regulačná súlad a riadenie rizika'
+        ],
+        whyGood: [
+          'Jasná štruktúra zdôrazňujúca právne kvalifikácie',
+          'Zdôrazňuje prijatie do advokátskej komory a špecializácie',
+          'Ukazuje úspešné výsledky prípadov',
+          'Preukazuje právnu odbornosť a analytické schopnosti',
+          'Formát kompatibilný s ATS s právnymi kľúčovými slovami'
+        ]
+      },
+      no: {
+        name: 'Advokat',
+        slug: 'advokat',
+        description: 'Advokater gir juridisk rådgivning, representerer klienter i retten og hjelper til med å løse juridiske tvister. De forsker på lover, forbereder juridiske dokumenter, forhandler forlik og forsvare sine klienters rettigheter og interesser.',
+        tips: [
+          'Fremhev din juridiske utdanning og opptak i advokatsamfunnet',
+          'Fremhev erfaring innen spesifikke rettsområder',
+          'Vis vellykkede saker og resultater',
+          'Inkluder erfaring med juridisk forskning og skriving',
+          'Demonstrer analytiske og forsvarsferdigheter'
+        ],
+        skills: [
+          'Juridisk forskning og analyse',
+          'Saksforberedelse og rettssaker',
+          'Juridisk skriving og dokumentasjon',
+          'Klientkonsultasjon og rådgivning',
+          'Forhandling og forlik',
+          'Rettsrepresentasjon og forsvar',
+          'Regulatorisk overholdelse og risikostyring'
+        ],
+        whyGood: [
+          'Tydelig struktur som fremhever juridiske kvalifikasjoner',
+          'Fremhever opptak i advokatsamfunnet og spesialiseringer',
+          'Viser vellykkede saksresultater',
+          'Demonstrer juridisk ekspertise og analytiske ferdigheter',
+          'ATS-vennlig format med juridiske nøkkelord'
+        ]
+      },
+      hr: {
+        name: 'Odvjetnik',
+        slug: 'odvjetnik',
+        description: 'Odvjetnici pružaju pravne savjete, zastupaju klijente na sudu i pomažu u rješavanju pravnih sporova. Istražuju zakone, pripremaju pravne dokumente, pregovaraju nagodbe i brane prava i interese svojih klijenata.',
+        tips: [
+          'Istaknite svoje pravno obrazovanje i primanje u odvjetničku komoru',
+          'Naglasite iskustvo u određenim područjima prava',
+          'Pokažite uspješne slučajeve i rezultate',
+          'Uključite iskustvo s pravnim istraživanjem i pisanjem',
+          'Pokažite analitičke i obrambene vještine'
+        ],
+        skills: [
+          'Pravno istraživanje i analiza',
+          'Priprema slučaja i parnica',
+          'Pravno pisanje i dokumentacija',
+          'Konzultacije i savjetovanje klijenata',
+          'Pregovaranje i nagodba',
+          'Sudsko zastupanje i obrana',
+          'Regulatorna usklađenost i upravljanje rizikom'
+        ],
+        whyGood: [
+          'Jasna struktura koja ističe pravne kvalifikacije',
+          'Naglašava primanje u odvjetničku komoru i specializacije',
+          'Prikazuje uspješne rezultate slučajeva',
+          'Pokazuje pravnu stručnost i analitičke vještine',
+          'Format kompatibilan s ATS s pravnim ključnim riječima'
+        ]
+      },
+      sr: {
+        name: 'Адвокат',
+        slug: 'advokat',
+        description: 'Адвокати пружају правне савете, заступају клијенте на суду и помажу у решавању правних спорова. Истражују законе, припремају правне документе, преговарају нагодбе и бране права и интересе својих клијената.',
+        tips: [
+          'Истакните своје правно образовање и пријем у адвокатску комору',
+          'Нагласите искуство у одређеним областима права',
+          'Покажите успешне случајеве и резултате',
+          'Укључите искуство са правним истраживањем и писањем',
+          'Покажите аналитичке и одбрамбене вештине'
+        ],
+        skills: [
+          'Правно истраживање и анализа',
+          'Припрема случаја и парница',
+          'Правно писање и документација',
+          'Консултације и саветовање клијената',
+          'Преговарање и нагодба',
+          'Судско заступање и одбрана',
+          'Регулаторна усклађеност и управљање ризиком'
+        ],
+        whyGood: [
+          'Јасна структура која истиче правне квалификације',
+          'Наглашава пријем у адвокатску комору и специјализације',
+          'Приказује успешне резултате случајева',
+          'Показује правну стручност и аналитичке вештине',
+          'Формат компатибилан са ATS са правним кључним речима'
+        ]
+      }
+    }
+  },
+  {
+    id: 'data-scientist',
+    category: 'technology',
+    translations: {
+      en: {
+        name: 'Data Scientist',
+        slug: 'data-scientist',
+        description: 'Data scientists analyze complex data sets to extract insights and inform business decisions. They use statistical methods, machine learning, and programming to solve problems and create predictive models.',
+        tips: [
+          'Highlight your technical skills and programming languages',
+          'Emphasize experience with data analysis and machine learning',
+          'Showcase projects and their business impact',
+          'Include experience with data visualization tools',
+          'Demonstrate statistical and analytical capabilities'
+        ],
+        skills: [
+          'Data analysis and statistical modeling',
+          'Programming (Python, R, SQL)',
+          'Machine learning and AI',
+          'Data visualization (Tableau, Power BI)',
+          'Big data technologies (Hadoop, Spark)',
+          'Database management and querying',
+          'Business intelligence and reporting'
+        ],
+        whyGood: [
+          'Clear structure highlighting technical expertise',
+          'Emphasizes data-driven results and impact',
+          'Shows proficiency with relevant tools and technologies',
+          'Demonstrates analytical and problem-solving skills',
+          'ATS-friendly format with data science keywords'
+        ]
+      },
+      nl: {
+        name: 'Data Scientist',
+        slug: 'data-scientist',
+        description: 'Data scientists analyseren complexe datasets om inzichten te extraheren en bedrijfsbeslissingen te informeren. Ze gebruiken statistische methoden, machine learning en programmeren om problemen op te lossen en voorspellende modellen te creëren.',
+        tips: [
+          'Benadruk je technische vaardigheden en programmeertalen',
+          'Leg nadruk op ervaring met data-analyse en machine learning',
+          'Toon projecten en hun bedrijfsimpact',
+          'Vermeld ervaring met datavisualisatietools',
+          'Demonstreer statistische en analytische capaciteiten'
+        ],
+        skills: [
+          'Data-analyse en statistische modellering',
+          'Programmeren (Python, R, SQL)',
+          'Machine learning en AI',
+          'Datavisualisatie (Tableau, Power BI)',
+          'Big data-technologieën (Hadoop, Spark)',
+          'Databasebeheer en querying',
+          'Business intelligence en rapportage'
+        ],
+        whyGood: [
+          'Duidelijke structuur die technische expertise benadrukt',
+          'Legt nadruk op data-gedreven resultaten en impact',
+          'Toont vaardigheid met relevante tools en technologieën',
+          'Demonstreert analytische en probleemoplossende vaardigheden',
+          'ATS-vriendelijk formaat met data science-zoekwoorden'
+        ]
+      },
+      fr: {
+        name: 'Scientifique des Données',
+        slug: 'scientifique-donnees',
+        description: 'Les scientifiques des données analysent des ensembles de données complexes pour extraire des informations et éclairer les décisions commerciales. Ils utilisent des méthodes statistiques, l\'apprentissage automatique et la programmation pour résoudre des problèmes et créer des modèles prédictifs.',
+        tips: [
+          'Mettez en avant vos compétences techniques et langages de programmation',
+          'Soulignez l\'expérience en analyse de données et apprentissage automatique',
+          'Présentez des projets et leur impact commercial',
+          'Incluez l\'expérience avec les outils de visualisation de données',
+          'Démontrez les capacités statistiques et analytiques'
+        ],
+        skills: [
+          'Analyse de données et modélisation statistique',
+          'Programmation (Python, R, SQL)',
+          'Apprentissage automatique et IA',
+          'Visualisation de données (Tableau, Power BI)',
+          'Technologies big data (Hadoop, Spark)',
+          'Gestion et interrogation de bases de données',
+          'Business intelligence et reporting'
+        ],
+        whyGood: [
+          'Structure claire mettant en évidence l\'expertise technique',
+          'Met l\'accent sur les résultats et l\'impact axés sur les données',
+          'Montre la maîtrise des outils et technologies pertinents',
+          'Démontre les compétences analytiques et de résolution de problèmes',
+          'Format compatible ATS avec mots-clés de science des données'
+        ]
+      },
+      es: {
+        name: 'Científico de Datos',
+        slug: 'cientifico-datos',
+        description: 'Los científicos de datos analizan conjuntos de datos complejos para extraer información e informar decisiones comerciales. Utilizan métodos estadísticos, aprendizaje automático y programación para resolver problemas y crear modelos predictivos.',
+        tips: [
+          'Destaca tus habilidades técnicas y lenguajes de programación',
+          'Enfatiza experiencia con análisis de datos y aprendizaje automático',
+          'Muestra proyectos y su impacto comercial',
+          'Incluye experiencia con herramientas de visualización de datos',
+          'Demuestra capacidades estadísticas y analíticas'
+        ],
+        skills: [
+          'Análisis de datos y modelado estadístico',
+          'Programación (Python, R, SQL)',
+          'Aprendizaje automático e IA',
+          'Visualización de datos (Tableau, Power BI)',
+          'Tecnologías de big data (Hadoop, Spark)',
+          'Gestión y consulta de bases de datos',
+          'Inteligencia empresarial y reportes'
+        ],
+        whyGood: [
+          'Estructura clara que destaca experiencia técnica',
+          'Enfatiza resultados e impacto basados en datos',
+          'Muestra competencia con herramientas y tecnologías relevantes',
+          'Demuestra habilidades analíticas y de resolución de problemas',
+          'Formato compatible con ATS con palabras clave de ciencia de datos'
+        ]
+      },
+      de: {
+        name: 'Datenwissenschaftler',
+        slug: 'datenwissenschaftler',
+        description: 'Datenwissenschaftler analysieren komplexe Datensätze, um Erkenntnisse zu gewinnen und Geschäftsentscheidungen zu informieren. Sie verwenden statistische Methoden, maschinelles Lernen und Programmierung, um Probleme zu lösen und prädiktive Modelle zu erstellen.',
+        tips: [
+          'Heben Sie Ihre technischen Fähigkeiten und Programmiersprachen hervor',
+          'Betonen Sie Erfahrung mit Datenanalyse und maschinellem Lernen',
+          'Zeigen Sie Projekte und deren Geschäftsauswirkungen',
+          'Fügen Sie Erfahrung mit Datenvisualisierungstools hinzu',
+          'Demonstrieren Sie statistische und analytische Fähigkeiten'
+        ],
+        skills: [
+          'Datenanalyse und statistische Modellierung',
+          'Programmierung (Python, R, SQL)',
+          'Maschinelles Lernen und KI',
+          'Datenvisualisierung (Tableau, Power BI)',
+          'Big-Data-Technologien (Hadoop, Spark)',
+          'Datenbankverwaltung und Abfragen',
+          'Business Intelligence und Berichterstattung'
+        ],
+        whyGood: [
+          'Klare Struktur, die technische Expertise hervorhebt',
+          'Betont datengetriebene Ergebnisse und Auswirkungen',
+          'Zeigt Beherrschung relevanter Tools und Technologien',
+          'Demonstriert analytische und Problemlösungsfähigkeiten',
+          'ATS-freundliches Format mit Data-Science-Schlüsselwörtern'
+        ]
+      },
+      it: {
+        name: 'Data Scientist',
+        slug: 'data-scientist',
+        description: 'I data scientist analizzano set di dati complessi per estrarre informazioni e informare le decisioni aziendali. Utilizzano metodi statistici, machine learning e programmazione per risolvere problemi e creare modelli predittivi.',
+        tips: [
+          'Evidenzia le tue competenze tecniche e linguaggi di programmazione',
+          'Enfatizza esperienza con analisi dei dati e machine learning',
+          'Mostra progetti e il loro impatto aziendale',
+          'Includi esperienza con strumenti di visualizzazione dei dati',
+          'Dimostra capacità statistiche e analitiche'
+        ],
+        skills: [
+          'Analisi dei dati e modellazione statistica',
+          'Programmazione (Python, R, SQL)',
+          'Machine learning e AI',
+          'Visualizzazione dei dati (Tableau, Power BI)',
+          'Tecnologie big data (Hadoop, Spark)',
+          'Gestione e interrogazione di database',
+          'Business intelligence e reporting'
+        ],
+        whyGood: [
+          'Struttura chiara che evidenzia competenza tecnica',
+          'Enfatizza risultati basati sui dati e impatto',
+          'Mostra padronanza di strumenti e tecnologie rilevanti',
+          'Dimostra capacità analitiche e di problem solving',
+          'Formato compatibile con ATS con parole chiave di data science'
+        ]
+      },
+      pl: {
+        name: 'Analityk Danych',
+        slug: 'analityk-danych',
+        description: 'Analitycy danych analizują złożone zestawy danych, aby wyodrębnić wnioski i informować decyzje biznesowe. Używają metod statystycznych, uczenia maszynowego i programowania do rozwiązywania problemów i tworzenia modeli predykcyjnych.',
+        tips: [
+          'Podkreśl swoje umiejętności techniczne i języki programowania',
+          'Podkreśl doświadczenie z analizą danych i uczeniem maszynowym',
+          'Pokaż projekty i ich wpływ biznesowy',
+          'Uwzględnij doświadczenie z narzędziami wizualizacji danych',
+          'Wykazuj zdolności statystyczne i analityczne'
+        ],
+        skills: [
+          'Analiza danych i modelowanie statystyczne',
+          'Programowanie (Python, R, SQL)',
+          'Uczenie maszynowe i AI',
+          'Wizualizacja danych (Tableau, Power BI)',
+          'Technologie big data (Hadoop, Spark)',
+          'Zarządzanie i zapytania do baz danych',
+          'Business intelligence i raportowanie'
+        ],
+        whyGood: [
+          'Jasna struktura podkreślająca kompetencje techniczne',
+          'Kładzie nacisk na wyniki oparte na danych i wpływ',
+          'Pokazuje biegłość w odpowiednich narzędziach i technologiach',
+          'Wykazuje zdolności analityczne i rozwiązywania problemów',
+          'Format przyjazny dla ATS z słowami kluczowymi data science'
+        ]
+      },
+      ro: {
+        name: 'Scientist de Date',
+        slug: 'scientist-date',
+        description: 'Scientiștii de date analizează seturi de date complexe pentru a extrage informații și a informa deciziile de afaceri. Ei folosesc metode statistice, machine learning și programare pentru a rezolva probleme și a crea modele predictive.',
+        tips: [
+          'Evidențiază abilitățile tale tehnice și limbajele de programare',
+          'Subliniază experiența cu analiza datelor și machine learning',
+          'Prezintă proiecte și impactul lor de afaceri',
+          'Include experiența cu instrumente de vizualizare a datelor',
+          'Demonstrează capacități statistice și analitice'
+        ],
+        skills: [
+          'Analiza datelor și modelare statistică',
+          'Programare (Python, R, SQL)',
+          'Machine learning și AI',
+          'Vizualizare date (Tableau, Power BI)',
+          'Tehnologii big data (Hadoop, Spark)',
+          'Gestionarea și interogarea bazelor de date',
+          'Business intelligence și raportare'
+        ],
+        whyGood: [
+          'Structură clară care evidențiază competența tehnică',
+          'Subliniază rezultatele bazate pe date și impactul',
+          'Arată competența cu instrumente și tehnologii relevante',
+          'Demonstrează abilități analitice și de rezolvare a problemelor',
+          'Format compatibil cu ATS cu cuvinte cheie de data science'
+        ]
+      },
+      hu: {
+        name: 'Adattudós',
+        slug: 'adattudos',
+        description: 'Az adattudósok összetett adathalmazokat elemeznek, hogy betekintéseket nyerjenek és tájékoztassák az üzleti döntéseket. Statisztikai módszereket, gépi tanulást és programozást használnak problémák megoldására és prediktív modellek létrehozására.',
+        tips: [
+          'Hangsúlyozza műszaki készségeit és programozási nyelveit',
+          'Kiemeli az adatelemzés és gépi tanulás tapasztalatát',
+          'Mutatja be projekteit és üzleti hatásukat',
+          'Tartalmazza az adatvizualizációs eszközökkel szerzett tapasztalatát',
+          'Mutassa be statisztikai és elemző képességeit'
+        ],
+        skills: [
+          'Adatelemzés és statisztikai modellezés',
+          'Programozás (Python, R, SQL)',
+          'Gépi tanulás és AI',
+          'Adatvizualizáció (Tableau, Power BI)',
+          'Big data technológiák (Hadoop, Spark)',
+          'Adatbázis-kezelés és lekérdezés',
+          'Üzleti intelligencia és jelentéskészítés'
+        ],
+        whyGood: [
+          'Világos struktúra, amely kiemeli a műszaki szakértelem',
+          'Hangsúlyozza az adatalapú eredményeket és hatást',
+          'Mutatja a releváns eszközök és technológiák ismeretét',
+          'Bebizonyítja az elemző és problémamegoldó képességeket',
+          'ATS-barát formátum adattudományi kulcsszavakkal'
+        ]
+      },
+      el: {
+        name: 'Επιστήμονας Δεδομένων',
+        slug: 'epistimonas-dedomenon',
+        description: 'Οι επιστήμονες δεδομένων αναλύουν πολύπλοκα σύνολα δεδομένων για να εξάγουν πληροφορίες και να ενημερώσουν τις επιχειρηματικές αποφάσεις. Χρησιμοποιούν στατιστικές μεθόδους, μηχανική μάθηση και προγραμματισμό για να λύσουν προβλήματα και να δημιουργήσουν προγνωστικά μοντέλα.',
+        tips: [
+          'Επισημάνετε τις τεχνικές σας δεξιότητες και γλώσσες προγραμματισμού',
+          'Τονίστε εμπειρία με ανάλυση δεδομένων και μηχανική μάθηση',
+          'Παρουσιάστε έργα και την επιχειρηματική τους επίπτωση',
+          'Συμπεριλάβετε εμπειρία με εργαλεία οπτικοποίησης δεδομένων',
+          'Αποδείξτε στατιστικές και αναλυτικές ικανότητες'
+        ],
+        skills: [
+          'Ανάλυση δεδομένων και στατιστική μοντελοποίηση',
+          'Προγραμματισμός (Python, R, SQL)',
+          'Μηχανική μάθηση και AI',
+          'Οπτικοποίηση δεδομένων (Tableau, Power BI)',
+          'Τεχνολογίες big data (Hadoop, Spark)',
+          'Διαχείριση και ερώτηση βάσεων δεδομένων',
+          'Επιχειρηματική νοημοσύνη και αναφορά'
+        ],
+        whyGood: [
+          'Σαφής δομή που επισημαίνει την τεχνική εμπειρογνωμοσύνη',
+          'Τονίζει τα αποτελέσματα που βασίζονται σε δεδομένα και την επίπτωση',
+          'Δείχνει ικανότητα με σχετικά εργαλεία και τεχνολογίες',
+          'Αποδεικνύει αναλυτικές και ικανότητες επίλυσης προβλημάτων',
+          'Μορφή συμβατή με ATS με λέξεις-κλειδιά επιστήμης δεδομένων'
+        ]
+      },
+      cs: {
+        name: 'Datový Vědec',
+        slug: 'datovy-vedec',
+        description: 'Datoví vědci analyzují složité datové sady, aby získali poznatky a informovali obchodní rozhodnutí. Používají statistické metody, strojové učení a programování k řešení problémů a vytváření prediktivních modelů.',
+        tips: [
+          'Zdůrazněte své technické dovednosti a programovací jazyky',
+          'Zdůrazněte zkušenosti s analýzou dat a strojovým učením',
+          'Ukažte projekty a jejich obchodní dopad',
+          'Zahrňte zkušenosti s nástroji pro vizualizaci dat',
+          'Prokažte statistické a analytické schopnosti'
+        ],
+        skills: [
+          'Analýza dat a statistické modelování',
+          'Programování (Python, R, SQL)',
+          'Strojové učení a AI',
+          'Vizualizace dat (Tableau, Power BI)',
+          'Big data technologie (Hadoop, Spark)',
+          'Správa a dotazování databází',
+          'Business intelligence a reportování'
+        ],
+        whyGood: [
+          'Jasná struktura zdůrazňující technickou odbornost',
+          'Zdůrazňuje výsledky založené na datech a dopad',
+          'Ukazuje znalost relevantních nástrojů a technologií',
+          'Prokazuje analytické a problémové schopnosti',
+          'Formát kompatibilní s ATS s klíčovými slovy data science'
+        ]
+      },
+      pt: {
+        name: 'Cientista de Dados',
+        slug: 'cientista-dados',
+        description: 'Cientistas de dados analisam conjuntos de dados complexos para extrair insights e informar decisões de negócios. Eles usam métodos estatísticos, aprendizado de máquina e programação para resolver problemas e criar modelos preditivos.',
+        tips: [
+          'Destaque suas habilidades técnicas e linguagens de programação',
+          'Enfatize experiência com análise de dados e aprendizado de máquina',
+          'Mostre projetos e seu impacto nos negócios',
+          'Inclua experiência com ferramentas de visualização de dados',
+          'Demonstre capacidades estatísticas e analíticas'
+        ],
+        skills: [
+          'Análise de dados e modelagem estatística',
+          'Programação (Python, R, SQL)',
+          'Aprendizado de máquina e IA',
+          'Visualização de dados (Tableau, Power BI)',
+          'Tecnologias de big data (Hadoop, Spark)',
+          'Gerenciamento e consulta de bancos de dados',
+          'Business intelligence e relatórios'
+        ],
+        whyGood: [
+          'Estrutura clara destacando expertise técnica',
+          'Enfatiza resultados baseados em dados e impacto',
+          'Mostra proficiência com ferramentas e tecnologias relevantes',
+          'Demonstra habilidades analíticas e de resolução de problemas',
+          'Formato compatível com ATS com palavras-chave de ciência de dados'
+        ]
+      },
+      sv: {
+        name: 'Dataanalytiker',
+        slug: 'dataanalytiker',
+        description: 'Dataanalytiker analyserar komplexa dataset för att extrahera insikter och informera affärsbeslut. De använder statistiska metoder, maskininlärning och programmering för att lösa problem och skapa prediktiva modeller.',
+        tips: [
+          'Framhäv dina tekniska färdigheter och programmeringsspråk',
+          'Betona erfarenhet av dataanalys och maskininlärning',
+          'Visa projekt och deras affärspåverkan',
+          'Inkludera erfarenhet av datavisualiseringsverktyg',
+          'Visa statistiska och analytiska förmågor'
+        ],
+        skills: [
+          'Dataanalys och statistisk modellering',
+          'Programmering (Python, R, SQL)',
+          'Maskininlärning och AI',
+          'Datavisualisering (Tableau, Power BI)',
+          'Big data-tekniker (Hadoop, Spark)',
+          'Databashantering och frågor',
+          'Business intelligence och rapportering'
+        ],
+        whyGood: [
+          'Tydelig struktur som framhäver teknisk expertis',
+          'Betona datadrivna resultat och påverkan',
+          'Visar kompetens med relevanta verktyg och tekniker',
+          'Demonstrerar analytiska och problemlösningsförmågor',
+          'ATS-vänligt format med data science-nyckelord'
+        ]
+      },
+      bg: {
+        name: 'Специалист по Данни',
+        slug: 'spetsialist-po-danni',
+        description: 'Специалистите по данни анализират сложни набори от данни, за да извлекат прозрения и информират бизнес решенията. Те използват статистически методи, машинно обучение и програмиране за решаване на проблеми и създаване на предсказващи модели.',
+        tips: [
+          'Подчертайте техническите си умения и програмни езици',
+          'Акцентирайте върху опита с анализ на данни и машинно обучение',
+          'Покажете проекти и тяхното бизнес въздействие',
+          'Включете опит с инструменти за визуализация на данни',
+          'Демонстрирайте статистически и аналитични способности'
+        ],
+        skills: [
+          'Анализ на данни и статистическо моделиране',
+          'Програмиране (Python, R, SQL)',
+          'Машинно обучение и AI',
+          'Визуализация на данни (Tableau, Power BI)',
+          'Big data технологии (Hadoop, Spark)',
+          'Управление и заявки към бази данни',
+          'Бизнес интелект и отчети'
+        ],
+        whyGood: [
+          'Ясна структура, която подчертава техническата експертиза',
+          'Акцентира върху резултатите, базирани на данни, и въздействието',
+          'Показва компетентност с релевантни инструменти и технологии',
+          'Демонстрира аналитични и способности за решаване на проблеми',
+          'Формат, съвместим с ATS, с ключови думи за наука за данни'
+        ]
+      },
+      da: {
+        name: 'Datavidenskabsmand',
+        slug: 'datavidenskabsmand',
+        description: 'Datavidenskabsmænd analyserer komplekse datasæt for at udtrække indsigt og informere forretningsbeslutninger. De bruger statistiske metoder, maskinlæring og programmering til at løse problemer og oprette prædiktive modeller.',
+        tips: [
+          'Fremhæv dine tekniske færdigheder og programmeringssprog',
+          'Fremhæv erfaring med dataanalyse og maskinlæring',
+          'Vis projekter og deres forretningspåvirkning',
+          'Inkluder erfaring med datavisualiseringsværktøjer',
+          'Demonstrer statistiske og analytiske evner'
+        ],
+        skills: [
+          'Dataanalyse og statistisk modellering',
+          'Programmering (Python, R, SQL)',
+          'Maskinlæring og AI',
+          'Datavisualisering (Tableau, Power BI)',
+          'Big data-teknologier (Hadoop, Spark)',
+          'Databaseforvaltning og forespørgsler',
+          'Business intelligence og rapportering'
+        ],
+        whyGood: [
+          'Tydelig struktur, der fremhæver teknisk ekspertise',
+          'Fremhæver datadrevne resultater og påvirkning',
+          'Viser kompetence med relevante værktøjer og teknologier',
+          'Demonstrer analytiske og problemløsningsevner',
+          'ATS-venligt format med data science-nøgleord'
+        ]
+      },
+      fi: {
+        name: 'Tietotieteilijä',
+        slug: 'tietotieteilija',
+        description: 'Tietotieteilijät analysoivat monimutkaisia tietoaineistoja saadakseen oivalluksia ja informoidakseen liiketoimintapäätöksiä. He käyttävät tilastollisia menetelmiä, koneoppimista ja ohjelmointia ongelmien ratkaisemiseen ja ennustavien mallien luomiseen.',
+        tips: [
+          'Korosta tekniset taitosi ja ohjelmointikielet',
+          'Korosta kokemusta tietoanalyysistä ja koneoppimisesta',
+          'Näytä projektit ja niiden liiketoimintavaikutus',
+          'Sisällytä kokemus tietojen visualisointityökaluista',
+          'Näytä tilastolliset ja analyyttiset kyvyt'
+        ],
+        skills: [
+          'Tietoanalyysi ja tilastollinen mallintaminen',
+          'Ohjelmointi (Python, R, SQL)',
+          'Koneoppiminen ja AI',
+          'Tietojen visualisointi (Tableau, Power BI)',
+          'Big data -teknologiat (Hadoop, Spark)',
+          'Tietokantojen hallinta ja kyselyt',
+          'Liiketoimintatiedon hallinta ja raportointi'
+        ],
+        whyGood: [
+          'Selkeä rakenne, joka korostaa teknistä asiantuntemusta',
+          'Korostaa datapohjaisia tuloksia ja vaikutusta',
+          'Näyttää pätevyyden relevanttien työkalujen ja teknologioiden kanssa',
+          'Näyttää analyyttisiä ja ongelmanratkaisukykyjä',
+          'ATS-yhteensopiva muoto datatieteen avainsanoilla'
+        ]
+      },
+      sk: {
+        name: 'Dátový Vedec',
+        slug: 'datovy-vedec',
+        description: 'Dátoví vedci analyzujú zložité súbory dát, aby získali poznatky a informovali obchodné rozhodnutia. Používajú štatistické metódy, strojové učenie a programovanie na riešenie problémov a vytváranie prediktívnych modelov.',
+        tips: [
+          'Zdôraznite svoje technické zručnosti a programovacie jazyky',
+          'Zdôraznite skúsenosti s analýzou dát a strojovým učením',
+          'Ukážte projekty a ich obchodný dopad',
+          'Zahrňte skúsenosti s nástrojmi na vizualizáciu dát',
+          'Preukážte štatistické a analytické schopnosti'
+        ],
+        skills: [
+          'Analýza dát a štatistické modelovanie',
+          'Programovanie (Python, R, SQL)',
+          'Strojové učenie a AI',
+          'Vizualizácia dát (Tableau, Power BI)',
+          'Big data technológie (Hadoop, Spark)',
+          'Správa a dotazovanie databáz',
+          'Business intelligence a reportovanie'
+        ],
+        whyGood: [
+          'Jasná štruktúra zdôrazňujúca technickú odbornosť',
+          'Zdôrazňuje výsledky založené na dátach a dopad',
+          'Ukazuje znalosť relevantných nástrojov a technológií',
+          'Preukazuje analytické a problémové schopnosti',
+          'Formát kompatibilný s ATS s kľúčovými slovami data science'
+        ]
+      },
+      no: {
+        name: 'Dataanalytiker',
+        slug: 'dataanalytiker',
+        description: 'Dataanalytikere analyserer komplekse datasett for å utvinne innsikt og informere forretningsbeslutninger. De bruker statistiske metoder, maskinlæring og programmering for å løse problemer og opprette prediktive modeller.',
+        tips: [
+          'Fremhev dine tekniske ferdigheter og programmeringsspråk',
+          'Fremhev erfaring med dataanalyse og maskinlæring',
+          'Vis prosjekter og deres forretningspåvirkning',
+          'Inkluder erfaring med datavisualiseringsverktøy',
+          'Demonstrer statistiske og analytiske evner'
+        ],
+        skills: [
+          'Dataanalyse og statistisk modellering',
+          'Programmering (Python, R, SQL)',
+          'Maskinlæring og AI',
+          'Datavisualisering (Tableau, Power BI)',
+          'Big data-teknologier (Hadoop, Spark)',
+          'Databaseforvaltning og spørringer',
+          'Business intelligence og rapportering'
+        ],
+        whyGood: [
+          'Tydelig struktur som fremhever teknisk ekspertise',
+          'Fremhever datadrevne resultater og påvirkning',
+          'Viser kompetanse med relevante verktøy og teknologier',
+          'Demonstrer analytiske og problemløsningsevner',
+          'ATS-vennlig format med data science-nøkkelord'
+        ]
+      },
+      hr: {
+        name: 'Znanstvenik Podataka',
+        slug: 'znanstvenik-podataka',
+        description: 'Znanstvenici podataka analiziraju složene skupove podataka kako bi izvukli uvide i informirali poslovne odluke. Koriste statističke metode, strojno učenje i programiranje za rješavanje problema i stvaranje prediktivnih modela.',
+        tips: [
+          'Istaknite svoje tehničke vještine i programskе jezike',
+          'Naglasite iskustvo s analizom podataka i strojnim učenjem',
+          'Pokažite projekte i njihov poslovni utjecaj',
+          'Uključite iskustvo s alatima za vizualizaciju podataka',
+          'Pokažite statističke i analitičke sposobnosti'
+        ],
+        skills: [
+          'Analiza podataka i statističko modeliranje',
+          'Programiranje (Python, R, SQL)',
+          'Strojno učenje i AI',
+          'Vizualizacija podataka (Tableau, Power BI)',
+          'Big data tehnologije (Hadoop, Spark)',
+          'Upravljanje i upiti baza podataka',
+          'Poslovna inteligencija i izvještavanje'
+        ],
+        whyGood: [
+          'Jasna struktura koja ističe tehničku stručnost',
+          'Naglašava rezultate temeljene na podacima i utjecaj',
+          'Prikazuje kompetenciju s relevantnim alatima i tehnologijama',
+          'Pokazuje analitičke i sposobnosti rješavanja problema',
+          'Format kompatibilan s ATS s ključnim riječima znanosti o podacima'
+        ]
+      },
+      sr: {
+        name: 'Научник Података',
+        slug: 'naucnik-podataka',
+        description: 'Научници података анализирају сложене скупове података како би извукли увиде и информисали пословне одлуке. Користе статистичке методе, машинско учење и програмирање за решавање проблема и стварање предиктивних модела.',
+        tips: [
+          'Истакните своје техничке вештине и програмске језике',
+          'Нагласите искуство са анализом података и машинским учењем',
+          'Покажите пројекте и њихов пословни утицај',
+          'Укључите искуство са алатима за визуелизацију података',
+          'Покажите статистичке и аналитичке способности'
+        ],
+        skills: [
+          'Анализа података и статистичко моделовање',
+          'Програмирање (Python, R, SQL)',
+          'Машинско учење и AI',
+          'Визуелизација података (Tableau, Power BI)',
+          'Big data технологије (Hadoop, Spark)',
+          'Управљање и упити база података',
+          'Пословна интелигенција и извештавање'
+        ],
+        whyGood: [
+          'Јасна структура која истиче техничку стручност',
+          'Наглашава резултате засноване на подацима и утицај',
+          'Приказује компетенцију са релевантним алатима и технологијама',
+          'Показује аналитичке и способности решавања проблема',
+          'Формат компатибилан са ATS са кључним речима науке о подацима'
+        ]
+      }
+    }
+  }
+  // Note: More professions can be added here with full translations
+]
+
+/**
+ * Get profession by ID and language
+ */
+export function getProfession(id: string, language: Language = 'en'): ProfessionTranslation | null {
+  const profession = PROFESSIONS.find(p => p.id === id)
+  if (!profession) return null
+  return profession.translations[language] || profession.translations.en
+}
+
+/**
+ * Get all professions for a language
+ */
+export function getProfessions(language: Language = 'en'): Array<{ id: string; translation: ProfessionTranslation }> {
+  return PROFESSIONS.map(p => ({
+    id: p.id,
+    translation: p.translations[language] || p.translations.en
+  }))
+}
+
+/**
+ * Get profession ID from slug for a given language
+ */
+export function getProfessionIdFromSlug(slug: string, language: Language = 'en'): string | null {
+  const profession = PROFESSIONS.find(p => {
+    const translation = p.translations[language] || p.translations.en
+    return translation.slug === slug
+  })
+  return profession?.id || null
+}
+
+/**
+ * Get URL path for a profession example page
+ */
+export function getExampleUrl(
+  type: 'cv' | 'letter',
+  professionId: string,
+  language: Language = 'en'
+): string {
+  const segments = URL_SEGMENTS[language]
+  const profession = PROFESSIONS.find(p => p.id === professionId)
+  if (!profession) return ''
+  
+  const translation = profession.translations[language] || profession.translations.en
+  const typeSegment = type === 'cv' ? segments.cv : segments.letter
+  
+  return `/${segments.examples}/${typeSegment}/${translation.slug}`
+}
+
+/**
+ * Get professions grouped by category for a given language
+ */
+export function getProfessionsByCategory(language: Language = 'en'): Record<string, Array<{ id: string; translation: ProfessionTranslation }>> {
+  const grouped: Record<string, Array<{ id: string; translation: ProfessionTranslation }>> = {}
+  
+  PROFESSIONS.forEach(profession => {
+    const category = profession.category
+    if (!grouped[category]) {
+      grouped[category] = []
+    }
+    grouped[category].push({
+      id: profession.id,
+      translation: profession.translations[language] || profession.translations.en
+    })
+  })
+  
+  return grouped
+}
