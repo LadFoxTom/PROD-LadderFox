@@ -2997,7 +2997,14 @@ export default function HomePage() {
                   <h3 className="text-xs font-medium uppercase tracking-wider mb-3 px-2" style={{ color: 'var(--text-tertiary)' }}>
                     {t('nav.my_cvs')}
                   </h3>
-                  <div className="space-y-1">
+                  <div 
+                    className="space-y-1 overflow-y-auto"
+                    style={{ 
+                      maxHeight: 'calc(100vh - 400px)',
+                      scrollbarWidth: 'thin',
+                      scrollbarColor: 'var(--border-subtle) transparent',
+                    }}
+                  >
                     {savedCVs.length > 0 ? (
                       savedCVs.map((cv) => (
                         <button
