@@ -1130,8 +1130,15 @@ export default function DashboardPage() {
                   </div>
                 </div>
 
-                {/* Items */}
-                <div className="p-4">
+                {/* Items - Scrollable container */}
+                <div 
+                  className="p-4 overflow-y-auto" 
+                  style={{ 
+                    maxHeight: 'calc(100vh - 300px)',
+                    scrollbarWidth: 'thin',
+                    scrollbarColor: 'var(--border-subtle) transparent',
+                  }}
+                >
                   {loading ? (
                     <div className="flex items-center justify-center py-16">
                       <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
