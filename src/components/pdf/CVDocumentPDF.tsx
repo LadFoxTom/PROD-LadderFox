@@ -13,6 +13,7 @@ import {
 } from '@react-pdf/renderer'
 import { CVData } from '@/types/cv'
 import { optimizeLayout, LayoutSettings } from '@/lib/pdf/layout-optimizer'
+import { getSafePhotoUrl } from '@/lib/image-utils'
 import { cropImageForPDF } from '@/utils/imageCropper'
 
 // ============================================
@@ -534,8 +535,8 @@ export const CVDocumentPDF: React.FC<CVDocumentPDFProps> = ({ data, processedPho
   // Get optimized layout settings based on content
   const layout = optimizeLayout(data)
   
-  // Use processed photo URL if provided, otherwise fall back to original
-  const photoUrl = processedPhotoUrl || data.photoUrl
+  // Use processed photo URL if provided, otherwise fall back to original with safe URL handling
+  const photoUrl = processedPhotoUrl || getSafePhotoUrl(data.photoUrl)
   
   // Get photo size from layout (with defaults based on position)
   const isCenter = data.layout?.photoPosition === 'center'
