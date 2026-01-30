@@ -1087,12 +1087,23 @@ export default function HomePage() {
           const response = await fetch('/api/user/question-count');
           if (response.ok) {
             const data = await response.json();
-            setQuestionCount(data.count);
-            setQuestionLimit(data.limit);
-            setQuestionRemaining(data.remaining);
+            setQuestionCount(data.count ?? 0);
+            setQuestionLimit(data.limit ?? (isPro ? Infinity : 5));
+            // Handle Infinity and null values safely
+            const remaining = data.remaining ?? (isPro ? Infinity : 5);
+            setQuestionRemaining(remaining === Infinity ? Infinity : (remaining ?? 5));
+          } else {
+            // Fallback if API fails
+            setQuestionCount(0);
+            setQuestionLimit(isPro ? Infinity : 5);
+            setQuestionRemaining(isPro ? Infinity : 5);
           }
         } catch (error) {
           console.error('Failed to load question count:', error);
+          // Fallback on error
+          setQuestionCount(0);
+          setQuestionLimit(isPro ? Infinity : 5);
+          setQuestionRemaining(isPro ? Infinity : 5);
         }
       } else {
         // For guests, check localStorage
@@ -1105,12 +1116,16 @@ export default function HomePage() {
           setQuestionRemaining(Math.max(0, 2 - count));
         } catch (error) {
           console.error('Failed to load guest question count:', error);
+          // Fallback on error
+          setQuestionCount(0);
+          setQuestionLimit(2);
+          setQuestionRemaining(2);
         }
       }
     };
     
     loadQuestionCount();
-  }, [isAuthenticated, user?.id]);
+  }, [isAuthenticated, user?.id, isPro]);
 
   const [savedCVs, setSavedCVs] = useState<SavedCV[]>([]);
   const [currentCVId, setCurrentCVId] = useState<string | null>(null);
@@ -1570,7 +1585,7 @@ export default function HomePage() {
     if ((!inputValue.trim() && !attachedFile) || isProcessing) return;
 
     // Check question limit before sending
-    if (questionRemaining <= 0 && !isPro) {
+    if ((questionRemaining ?? 0) <= 0 && !isPro) {
       if (!isAuthenticated) {
         toast.error(t('toast.question_limit_guest_reached'));
         // Optionally redirect to login
@@ -4061,27 +4076,29 @@ export default function HomePage() {
                     {/* Question Limit Indicator */}
                     {!isPro && (
                       <div className="mb-2 px-3 py-1.5 rounded-lg text-xs flex items-center justify-between" style={{ 
-                        backgroundColor: questionRemaining <= 1 ? 'rgba(239, 68, 68, 0.1)' : 'var(--bg-tertiary)',
-                        border: `1px solid ${questionRemaining <= 1 ? 'rgba(239, 68, 68, 0.3)' : 'var(--border-subtle)'}`
+                        backgroundColor: (questionRemaining ?? 0) <= 1 ? 'rgba(239, 68, 68, 0.1)' : 'var(--bg-tertiary)',
+                        border: `1px solid ${(questionRemaining ?? 0) <= 1 ? 'rgba(239, 68, 68, 0.3)' : 'var(--border-subtle)'}`
                       }}>
                         <span style={{ color: 'var(--text-secondary)' }}>
                           {(() => {
+                            const remaining = questionRemaining ?? 0;
                             const baseText = isAuthenticated 
                               ? t('chat.questions_remaining_free')
                               : t('chat.questions_remaining_guest');
-                            const withCount = baseText.replace('{count}', questionRemaining.toString());
+                            const remainingStr = remaining === Infinity ? '∞' : remaining.toString();
+                            const withCount = baseText.replace('{count}', remainingStr);
                             // Handle pluralization for Dutch
                             if (language === 'nl') {
-                              return withCount.replace('vragen', questionRemaining === 1 ? 'vraag' : 'vragen');
+                              return withCount.replace('vragen', remaining === 1 ? 'vraag' : 'vragen');
                             }
                             // Handle pluralization for English
                             if (language === 'en') {
-                              return withCount.replace('questions', questionRemaining === 1 ? 'question' : 'questions');
+                              return withCount.replace('questions', remaining === 1 ? 'question' : 'questions');
                             }
                             return withCount;
                           })()}
                         </span>
-                        {questionRemaining <= 1 && (
+                        {(questionRemaining ?? 0) <= 1 && (
                           <button
                             onClick={() => {
                               if (!isAuthenticated) {
