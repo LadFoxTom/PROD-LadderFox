@@ -11,8 +11,9 @@ const nextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
   },
   experimental: {
-    optimizeCss: true,
-    optimizePackageImports: ['react-icons'],
+    // Disabled optimizeCss - causes OOM on Vercel builds
+    // optimizeCss: true,
+    optimizePackageImports: ['react-icons', 'lucide-react', 'framer-motion'],
     serverComponentsExternalPackages: ['puppeteer', '@react-pdf/renderer'],
     instrumentationHook: true,
   },
