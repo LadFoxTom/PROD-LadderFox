@@ -1533,11 +1533,32 @@ export default function HomePage() {
       'work experience', 'education', 'skills', 'summary', 'personal information', 'contact details'
     ];
     
-    // Cover letter keywords
+    // Cover letter keywords (English + Dutch + German + French + Spanish)
     const letterKeywords = [
+      // English
       'cover letter', 'motivation letter', 'application letter', 'write cover letter',
       'create cover letter', 'build cover letter', 'craft cover letter', 'cover letter for',
-      'letter for job', 'application letter', 'motivational letter'
+      'letter for job', 'application letter', 'motivational letter',
+      // Dutch
+      'motivatiebrief', 'sollicitatiebrief', 'maak een motivatiebrief', 
+      'schrijf een motivatiebrief', 'maak motivatiebrief', 'schrijf motivatiebrief',
+      'creëer motivatiebrief', 'genereer motivatiebrief', 'opstellen motivatiebrief',
+      'brief schrijven', 'brief voor', 'brief maken', 'op basis van',
+      // German
+      'anschreiben', 'bewerbungsschreiben', 'motivationsschreiben', 'bewerbungsanschreiben',
+      'schreibe ein anschreiben', 'erstelle ein anschreiben', 'verfasse ein anschreiben',
+      'anschreiben schreiben', 'anschreiben erstellen', 'anschreiben verfassen',
+      'anschreiben für', 'bewerbung schreiben', 'bewerbungsbrief',
+      // French
+      'lettre de motivation', 'lettre de candidature', 'lettre motivation',
+      'écrire une lettre', 'rédiger une lettre', 'créer une lettre',
+      'faire une lettre', 'lettre motivation', 'lettre candidature',
+      'rédiger lettre', 'écrire lettre', 'créer lettre',
+      // Spanish
+      'carta de motivación', 'carta de presentación', 'carta motivación',
+      'escribir una carta', 'redactar una carta', 'crear una carta',
+      'hacer una carta', 'carta motivacional', 'carta presentación',
+      'redactar carta', 'escribir carta', 'crear carta'
     ];
     
     // Job search keywords (disabled for now)
@@ -1547,14 +1568,14 @@ export default function HomePage() {
       'career opportunities', 'job matches', 'recommend jobs'
     ];
     
-    // Check for CV keywords (highest priority if CV-related)
-    if (cvKeywords.some(keyword => lowerInput.includes(keyword))) {
-      return 'cv';
-    }
-    
-    // Check for letter keywords
+    // Check for letter keywords FIRST (higher priority when explicitly mentioned)
     if (letterKeywords.some(keyword => lowerInput.includes(keyword))) {
       return 'letter';
+    }
+    
+    // Check for CV keywords (second priority)
+    if (cvKeywords.some(keyword => lowerInput.includes(keyword))) {
+      return 'cv';
     }
     
     // Check for job keywords

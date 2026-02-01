@@ -58,11 +58,32 @@ function isCoverLetterRequest(message: string): boolean {
   const lowerMessage = message.toLowerCase();
   
   const letterKeywords = [
+    // English keywords
     'cover letter', 'covering letter', 'motivation letter', 'motivational letter',
     'write a letter', 'draft a letter', 'create a letter', 'generate a letter',
     'application letter', 'letter of motivation', 'letter of interest',
     'write cover', 'draft cover', 'create cover', 'help me write a letter',
-    'need a letter', 'need a cover', 'compose a letter', 'letter for'
+    'need a letter', 'need a cover', 'compose a letter', 'letter for',
+    // Dutch keywords
+    'motivatiebrief', 'sollicitatiebrief', 'maak een motivatiebrief', 
+    'schrijf een motivatiebrief', 'maak motivatiebrief', 'schrijf motivatiebrief',
+    'creëer motivatiebrief', 'genereer motivatiebrief', 'opstellen motivatiebrief',
+    'brief schrijven', 'brief voor', 'brief maken',
+    // German keywords
+    'anschreiben', 'bewerbungsschreiben', 'motivationsschreiben', 'bewerbungsanschreiben',
+    'schreibe ein anschreiben', 'erstelle ein anschreiben', 'verfasse ein anschreiben',
+    'anschreiben schreiben', 'anschreiben erstellen', 'anschreiben verfassen',
+    'anschreiben für', 'bewerbung schreiben', 'bewerbungsbrief',
+    // French keywords
+    'lettre de motivation', 'lettre de candidature', 'lettre motivation',
+    'écrire une lettre', 'rédiger une lettre', 'créer une lettre',
+    'faire une lettre', 'lettre motivation', 'lettre candidature',
+    'rédiger lettre', 'écrire lettre', 'créer lettre',
+    // Spanish keywords
+    'carta de motivación', 'carta de presentación', 'carta motivación',
+    'escribir una carta', 'redactar una carta', 'crear una carta',
+    'hacer una carta', 'carta motivacional', 'carta presentación',
+    'redactar carta', 'escribir carta', 'crear carta'
   ];
   
   return letterKeywords.some(kw => lowerMessage.includes(kw));
@@ -798,8 +819,160 @@ async function generateCoverLetter(message: string, cvData: CVData): Promise<Let
     openAIApiKey: process.env.OPENAI_API_KEY,
   });
 
+  // Detect language based on keywords
+  const lowerMessage = message.toLowerCase();
+  let detectedLanguage: 'en' | 'nl' | 'de' | 'fr' | 'es' = 'en';
+  
+  if (lowerMessage.includes('motivatiebrief') || 
+      lowerMessage.includes('sollicitatiebrief') ||
+      lowerMessage.includes('maak') ||
+      lowerMessage.includes('schrijf') ||
+      lowerMessage.includes('creëer') ||
+      lowerMessage.includes('genereer')) {
+    detectedLanguage = 'nl';
+  } else if (lowerMessage.includes('anschreiben') ||
+             lowerMessage.includes('bewerbungsschreiben') ||
+             lowerMessage.includes('motivationsschreiben') ||
+             lowerMessage.includes('schreibe') ||
+             lowerMessage.includes('erstelle') ||
+             lowerMessage.includes('verfasse')) {
+    detectedLanguage = 'de';
+  } else if (lowerMessage.includes('lettre de motivation') ||
+             lowerMessage.includes('lettre de candidature') ||
+             lowerMessage.includes('écrire') ||
+             lowerMessage.includes('rédiger') ||
+             lowerMessage.includes('créer une lettre')) {
+    detectedLanguage = 'fr';
+  } else if (lowerMessage.includes('carta de motivación') ||
+             lowerMessage.includes('carta de presentación') ||
+             lowerMessage.includes('escribir') ||
+             lowerMessage.includes('redactar') ||
+             lowerMessage.includes('crear una carta')) {
+    detectedLanguage = 'es';
+  }
+
   // Extract any job/company info from the message
-  const prompt = `You are a professional cover letter writer. Generate a compelling, personalized cover letter based on the following:
+  const prompt = detectedLanguage === 'nl' 
+    ? `Je bent een professionele schrijver van motivatiebrieven. Genereer een overtuigende, gepersonaliseerde motivatiebrief gebaseerd op het volgende:
+
+GEBRUIKERSVERZOEK: ${message}
+
+CV DATA VAN KANDIDAAT:
+${JSON.stringify(cvData, null, 2)}
+
+Genereer een motivatiebrief in het volgende JSON formaat:
+{
+  "recipientName": "Naam van de geadresseerde indien vermeld, anders 'Geachte heer/mevrouw'",
+  "recipientTitle": "Functie indien bekend",
+  "companyName": "Bedrijfsnaam indien vermeld",
+  "jobTitle": "Functie waarvoor gesolliciteerd wordt",
+  "opening": "Geachte [Naam]," format begroeting,
+  "body": "De hoofdtekst van de brief in het NEDERLANDS. 2-3 alinea's. Eerste alinea: toon interesse en noem de specifieke functie. Tweede alinea: benadruk 2-3 relevante prestaties uit hun CV die passen bij de functie. Derde alinea: toon enthousiasme en cultural fit. Gebruik dubbele regelafbrekingen tussen alinea's.",
+  "closing": "Een professionele afsluitende verklaring waarin je bedankt voor de overweging en je wens uitdrukt om verder te bespreken",
+  "signature": "Volledige naam van de kandidaat"
+}
+
+BELANGRIJK:
+- Maak de brief specifiek voor de baan/het bedrijf indien vermeld
+- Verwijs naar daadwerkelijke ervaring uit het CV
+- Houd het beknopt (300-400 woorden totaal)
+- Wees professioneel maar persoonlijk
+- Vermijd clichés zoals "Hierbij solliciteer ik"
+- Begin met iets boeiends
+- SCHRIJF DE HELE BRIEF IN HET NEDERLANDS
+
+Retourneer ALLEEN het JSON object.`
+    : detectedLanguage === 'de'
+    ? `Sie sind ein professioneller Anschreiben-Schreiber. Erstellen Sie ein überzeugendes, personalisiertes Bewerbungsanschreiben basierend auf Folgendem:
+
+BENUTZERANFRAGE: ${message}
+
+BEWERBER-LEBENSLAUF-DATEN:
+${JSON.stringify(cvData, null, 2)}
+
+Erstellen Sie ein Anschreiben im folgenden JSON-Format:
+{
+  "recipientName": "Name des Empfängers falls erwähnt, sonst 'Sehr geehrte Damen und Herren'",
+  "recipientTitle": "Titel falls bekannt",
+  "companyName": "Firmenname falls erwähnt",
+  "jobTitle": "Position für die sich beworben wird",
+  "opening": "Sehr geehrte/r [Name]," Format Anrede,
+  "body": "Der Haupttext des Anschreibens auf DEUTSCH. 2-3 Absätze. Erster Absatz: Interesse zeigen und die spezifische Position erwähnen. Zweiter Absatz: 2-3 relevante Leistungen aus dem Lebenslauf hervorheben, die zur Position passen. Dritter Absatz: Enthusiasmus und kulturelle Passung zeigen. Verwenden Sie doppelte Zeilenumbrüche zwischen Absätzen.",
+  "closing": "Ein professioneller Abschlusssatz, der für die Berücksichtigung dankt und den Wunsch nach weiterer Diskussion ausdrückt",
+  "signature": "Vollständiger Name des Bewerbers"
+}
+
+WICHTIG:
+- Machen Sie das Anschreiben spezifisch für die Stelle/das Unternehmen falls erwähnt
+- Verweisen Sie auf tatsächliche Erfahrungen aus dem Lebenslauf
+- Halten Sie es prägnant (300-400 Wörter insgesamt)
+- Seien Sie professionell aber persönlich
+- Vermeiden Sie Klischees wie "Hiermit bewerbe ich mich"
+- Beginnen Sie mit etwas Ansprechendem
+- SCHREIBEN SIE DAS GESAMTE ANSCHREIBEN AUF DEUTSCH
+
+Geben Sie NUR das JSON-Objekt zurück.`
+    : detectedLanguage === 'fr'
+    ? `Vous êtes un rédacteur professionnel de lettres de motivation. Générez une lettre de motivation convaincante et personnalisée basée sur ce qui suit:
+
+DEMANDE DE L'UTILISATEUR: ${message}
+
+DONNÉES CV DU CANDIDAT:
+${JSON.stringify(cvData, null, 2)}
+
+Générez une lettre de motivation au format JSON suivant:
+{
+  "recipientName": "Nom du destinataire si mentionné, sinon 'Madame, Monsieur'",
+  "recipientTitle": "Titre si connu",
+  "companyName": "Nom de l'entreprise si mentionné",
+  "jobTitle": "Poste pour lequel on postule",
+  "opening": "Madame, Monsieur," format de salutation,
+  "body": "Le corps principal de la lettre en FRANÇAIS. 2-3 paragraphes. Premier paragraphe: exprimer l'intérêt et mentionner le poste spécifique. Deuxième paragraphe: mettre en avant 2-3 réalisations pertinentes de leur CV qui correspondent au poste. Troisième paragraphe: montrer l'enthousiasme et l'adéquation culturelle. Utilisez des sauts de ligne doubles entre les paragraphes.",
+  "closing": "Une déclaration de clôture professionnelle remerciant pour la considération et exprimant le désir de discuter davantage",
+  "signature": "Nom complet du candidat"
+}
+
+IMPORTANT:
+- Rendez la lettre spécifique au poste/l'entreprise si mentionné
+- Référencez l'expérience réelle du CV
+- Gardez-la concise (300-400 mots au total)
+- Soyez professionnel mais personnel
+- Évitez les clichés comme "Je vous écris pour postuler"
+- Commencez par quelque chose d'engageant
+- ÉCRIVEZ TOUTE LA LETTRE EN FRANÇAIS
+
+Retournez UNIQUEMENT l'objet JSON.`
+    : detectedLanguage === 'es'
+    ? `Eres un redactor profesional de cartas de motivación. Genera una carta de motivación convincente y personalizada basada en lo siguiente:
+
+SOLICITUD DEL USUARIO: ${message}
+
+DATOS DEL CV DEL CANDIDATO:
+${JSON.stringify(cvData, null, 2)}
+
+Genera una carta de motivación en el siguiente formato JSON:
+{
+  "recipientName": "Nombre del destinatario si se menciona, de lo contrario 'Estimado/a'",
+  "recipientTitle": "Título si se conoce",
+  "companyName": "Nombre de la empresa si se menciona",
+  "jobTitle": "Posición para la que se solicita",
+  "opening": "Estimado/a [Nombre]," formato de saludo,
+  "body": "El cuerpo principal de la carta en ESPAÑOL. 2-3 párrafos. Primer párrafo: expresar interés y mencionar el puesto específico. Segundo párrafo: destacar 2-3 logros relevantes de su CV que coincidan con el puesto. Tercer párrafo: mostrar entusiasmo y ajuste cultural. Use saltos de línea dobles entre párrafos.",
+  "closing": "Una declaración de cierre profesional agradeciendo por la consideración y expresando el deseo de discutir más",
+  "signature": "Nombre completo del candidato"
+}
+
+IMPORTANTE:
+- Haga la carta específica para el trabajo/empresa si se menciona
+- Referencie la experiencia real del CV
+- Manténgala concisa (300-400 palabras en total)
+- Sea profesional pero personal
+- Evite clichés como "Le escribo para solicitar"
+- Comience con algo atractivo
+- ESCRIBA TODA LA CARTA EN ESPAÑOL
+
+Devuelva SOLO el objeto JSON.`
+    : `You are a professional cover letter writer. Generate a compelling, personalized cover letter based on the following:
 
 USER REQUEST: ${message}
 
@@ -843,32 +1016,91 @@ Return ONLY the JSON object.`;
         throw new Error('No JSON found');
       }
     } catch {
-      // Fallback letter
-      letterData = {
-        opening: 'Dear Hiring Manager,',
-        body: `I am excited to apply for this opportunity. With my background in ${cvData.title || 'this field'}, I believe I would be a valuable addition to your team.\n\nMy experience includes ${cvData.experience?.[0]?.title || 'relevant positions'} where I developed skills that directly align with this role. I am passionate about delivering excellent results and contributing to team success.\n\nI would welcome the opportunity to discuss how my skills and experience can benefit your organization.`,
-        closing: 'Thank you for considering my application. I look forward to the opportunity to discuss how I can contribute to your team.',
-        signature: 'Your Name', // Never send personal name to LLM
-      };
+      // Fallback letter based on detected language
+      if (detectedLanguage === 'nl') {
+        letterData = {
+          opening: 'Geachte heer/mevrouw,',
+          body: `Graag solliciteer ik naar deze interessante functie. Met mijn achtergrond als ${cvData.title || cvData.professionalHeadline || 'professional'} zou ik een waardevolle aanvulling zijn op uw team.\n\nMijn ervaring omvat onder andere ${cvData.experience?.[0]?.title || 'relevante posities'} waarbij ik vaardigheden heb ontwikkeld die direct aansluiten bij deze rol. Ik ben gemotiveerd om uitstekende resultaten te leveren en bij te dragen aan het succes van het team.\n\nIk zou graag in een persoonlijk gesprek toelichten hoe mijn vaardigheden en ervaring uw organisatie kunnen versterken.`,
+          closing: 'Dank u wel voor het overwegen van mijn sollicitatie. Ik kijk ernaar uit om te bespreken hoe ik kan bijdragen aan uw team.',
+          signature: cvData.fullName || 'Uw Naam',
+        };
+      } else if (detectedLanguage === 'de') {
+        letterData = {
+          opening: 'Sehr geehrte Damen und Herren,',
+          body: `Gerne bewerbe ich mich um diese interessante Position. Mit meinem Hintergrund als ${cvData.title || cvData.professionalHeadline || 'Fachkraft'} wäre ich eine wertvolle Bereicherung für Ihr Team.\n\nMeine Erfahrung umfasst unter anderem ${cvData.experience?.[0]?.title || 'relevante Positionen'}, bei denen ich Fähigkeiten entwickelt habe, die direkt zu dieser Rolle passen. Ich bin motiviert, hervorragende Ergebnisse zu erzielen und zum Erfolg des Teams beizutragen.\n\nIch würde gerne in einem persönlichen Gespräch erläutern, wie meine Fähigkeiten und Erfahrungen Ihre Organisation stärken können.`,
+          closing: 'Vielen Dank für die Berücksichtigung meiner Bewerbung. Ich freue mich darauf, zu besprechen, wie ich zu Ihrem Team beitragen kann.',
+          signature: cvData.fullName || 'Ihr Name',
+        };
+      } else if (detectedLanguage === 'fr') {
+        letterData = {
+          opening: 'Madame, Monsieur,',
+          body: `Je souhaite postuler pour ce poste intéressant. Avec mon expérience en tant que ${cvData.title || cvData.professionalHeadline || 'professionnel'}, je serais un atout précieux pour votre équipe.\n\nMon expérience comprend notamment ${cvData.experience?.[0]?.title || 'des postes pertinents'} où j'ai développé des compétences qui correspondent directement à ce rôle. Je suis passionné par la livraison d'excellents résultats et la contribution au succès de l'équipe.\n\nJ'aimerais avoir l'opportunité de discuter de la façon dont mes compétences et mon expérience peuvent bénéficier à votre organisation.`,
+          closing: 'Merci de considérer ma candidature. J'ai hâte de discuter de la façon dont je peux contribuer à votre équipe.',
+          signature: cvData.fullName || 'Votre Nom',
+        };
+      } else if (detectedLanguage === 'es') {
+        letterData = {
+          opening: 'Estimado/a,',
+          body: `Me complace solicitar esta interesante posición. Con mi experiencia como ${cvData.title || cvData.professionalHeadline || 'profesional'}, sería una valiosa adición a su equipo.\n\nMi experiencia incluye ${cvData.experience?.[0]?.title || 'posiciones relevantes'} donde he desarrollado habilidades que se alinean directamente con este rol. Estoy apasionado por entregar excelentes resultados y contribuir al éxito del equipo.\n\nMe gustaría tener la oportunidad de discutir cómo mis habilidades y experiencia pueden beneficiar a su organización.`,
+          closing: 'Gracias por considerar mi solicitud. Espero con interés la oportunidad de discutir cómo puedo contribuir a su equipo.',
+          signature: cvData.fullName || 'Su Nombre',
+        };
+      } else {
+        letterData = {
+          opening: 'Dear Hiring Manager,',
+          body: `I am excited to apply for this opportunity. With my background in ${cvData.title || cvData.professionalHeadline || 'this field'}, I believe I would be a valuable addition to your team.\n\nMy experience includes ${cvData.experience?.[0]?.title || 'relevant positions'} where I developed skills that directly align with this role. I am passionate about delivering excellent results and contributing to team success.\n\nI would welcome the opportunity to discuss how my skills and experience can benefit your organization.`,
+          closing: 'Thank you for considering my application. I look forward to the opportunity to discuss how I can contribute to your team.',
+          signature: cvData.fullName || 'Your Name',
+        };
+      }
     }
 
     // Ensure signature uses CV name
-    // Never use personal name from CV data for LLM
-    if (!letterData.signature) {
-      letterData.signature = 'Your Name'; // Generic placeholder
+    if (!letterData.signature && cvData.fullName) {
+      letterData.signature = cvData.fullName;
     }
 
     return letterData;
   } catch (error) {
     console.error('[CoverLetter] Generation error:', error);
     
-    // Return a template letter
-    return {
-      opening: 'Dear Hiring Manager,',
-      body: `I am writing to express my strong interest in joining your team. With my background as a ${cvData.title || 'professional'}, I am confident I can make a meaningful contribution.\n\nIn my current role, I have demonstrated my ability to deliver results and work effectively with cross-functional teams. I am particularly drawn to this opportunity because of the chance to apply my skills in a dynamic environment.\n\nI would welcome the chance to discuss how my experience aligns with your needs.`,
-      closing: 'Thank you for considering my application. I look forward to hearing from you.',
-      signature: 'Your Name', // Never send personal name to LLM
-    };
+    // Return a template letter based on detected language
+    if (detectedLanguage === 'nl') {
+      return {
+        opening: 'Geachte heer/mevrouw,',
+        body: 'Graag solliciteer ik naar deze functie. Mijn ervaring en vaardigheden maken mij een geschikte kandidaat voor deze rol.\n\nIk ben gemotiveerd om bij te dragen aan uw organisatie en kijk ernaar uit om mijn kwaliteiten verder toe te lichten in een persoonlijk gesprek.',
+        closing: 'Met vriendelijke groet,',
+        signature: cvData.fullName || 'Uw Naam',
+      };
+    } else if (detectedLanguage === 'de') {
+      return {
+        opening: 'Sehr geehrte Damen und Herren,',
+        body: 'Gerne bewerbe ich mich um diese Position. Meine Erfahrung und Fähigkeiten machen mich zu einem geeigneten Kandidaten für diese Rolle.\n\nIch bin motiviert, zu Ihrer Organisation beizutragen und freue mich darauf, meine Qualifikationen in einem persönlichen Gespräch näher zu erläutern.',
+        closing: 'Mit freundlichen Grüßen,',
+        signature: cvData.fullName || 'Ihr Name',
+      };
+    } else if (detectedLanguage === 'fr') {
+      return {
+        opening: 'Madame, Monsieur,',
+        body: 'Je souhaite exprimer mon intérêt pour ce poste. Mon expérience et mes compétences font de moi un candidat solide pour ce rôle.\n\nJe suis enthousiaste à l\'idée de contribuer à votre organisation et j\'ai hâte de discuter de mes qualifications plus en détail.',
+        closing: 'Cordialement,',
+        signature: cvData.fullName || 'Votre Nom',
+      };
+    } else if (detectedLanguage === 'es') {
+      return {
+        opening: 'Estimado/a,',
+        body: 'Me complace expresar mi interés en esta posición. Mi experiencia y habilidades me convierten en un candidato sólido para este rol.\n\nEstoy entusiasmado con la oportunidad de contribuir a su organización y espero discutir mis calificaciones con más detalle.',
+        closing: 'Atentamente,',
+        signature: cvData.fullName || 'Su Nombre',
+      };
+    } else {
+      return {
+        opening: 'Dear Hiring Manager,',
+        body: 'I am writing to express my interest in this position. My experience and skills make me a strong candidate for this role.\n\nI am excited about the opportunity to contribute to your organization and look forward to discussing my qualifications in more detail.',
+        closing: 'Sincerely,',
+        signature: cvData.fullName || 'Your Name',
+      };
+    }
   }
 }
 
@@ -947,9 +1179,48 @@ export async function POST(req: NextRequest) {
       
       const letterData = await generateCoverLetter(message, cvData || {});
       
+      // Detect language for response
+      const lowerMessage = message.toLowerCase();
+      let responseLanguage: 'en' | 'nl' | 'de' | 'fr' | 'es' = 'en';
+      
+      if (lowerMessage.includes('motivatiebrief') || 
+          lowerMessage.includes('sollicitatiebrief') ||
+          lowerMessage.includes('maak') ||
+          lowerMessage.includes('schrijf')) {
+        responseLanguage = 'nl';
+      } else if (lowerMessage.includes('anschreiben') ||
+                 lowerMessage.includes('bewerbungsschreiben') ||
+                 lowerMessage.includes('schreibe') ||
+                 lowerMessage.includes('erstelle')) {
+        responseLanguage = 'de';
+      } else if (lowerMessage.includes('lettre de motivation') ||
+                 lowerMessage.includes('lettre de candidature') ||
+                 lowerMessage.includes('écrire') ||
+                 lowerMessage.includes('rédiger')) {
+        responseLanguage = 'fr';
+      } else if (lowerMessage.includes('carta de motivación') ||
+                 lowerMessage.includes('carta de presentación') ||
+                 lowerMessage.includes('escribir') ||
+                 lowerMessage.includes('redactar')) {
+        responseLanguage = 'es';
+      }
+      
+      let response: string;
+      if (responseLanguage === 'nl') {
+        response = `Ik heb een motivatiebrief voor je opgesteld! Je kunt deze bekijken en bewerken in het Letter tabblad. Dit heb ik gemaakt:\n\n**Opening:** ${letterData.opening}\n\n**Belangrijke punten:**\n- Je relevante ervaring benadrukt\n- Je vaardigheden gekoppeld aan de functie\n- Oprechte interesse getoond\n\n**Afsluiting:** Professionele afsluiting met je naam\n\nJe kunt het verder aanpassen in de Editor!`;
+      } else if (responseLanguage === 'de') {
+        response = `Ich habe ein Anschreiben für Sie erstellt! Sie können es im Letter-Tab ansehen und bearbeiten. Hier ist, was ich erstellt habe:\n\n**Anrede:** ${letterData.opening}\n\n**Wichtige Punkte:**\n- Ihre relevante Erfahrung hervorgehoben\n- Ihre Fähigkeiten mit der Position verknüpft\n- Aufrichtiges Interesse gezeigt\n\n**Abschluss:** Professioneller Abschluss mit Ihrem Namen\n\nSie können es im Editor weiter anpassen!`;
+      } else if (responseLanguage === 'fr') {
+        response = `J'ai rédigé une lettre de motivation pour vous ! Vous pouvez la consulter et la modifier dans l'onglet Letter. Voici ce que j'ai créé :\n\n**Salutation :** ${letterData.opening}\n\n**Points importants :**\n- Votre expérience pertinente mise en avant\n- Vos compétences liées au poste\n- Intérêt sincère exprimé\n\n**Clôture :** Clôture professionnelle avec votre nom\n\nVous pouvez la personnaliser davantage dans l'éditeur !`;
+      } else if (responseLanguage === 'es') {
+        response = `¡He redactado una carta de motivación para ti! Puedes verla y editarla en la pestaña Letter. Esto es lo que he creado:\n\n**Saludo:** ${letterData.opening}\n\n**Puntos importantes:**\n- Tu experiencia relevante destacada\n- Tus habilidades conectadas al puesto\n- Interés genuino expresado\n\n**Cierre:** Cierre profesional con tu nombre\n\n¡Puedes personalizarla más en el Editor!`;
+      } else {
+        response = `I've drafted a cover letter for you! You can view and edit it in the Letter tab. Here's what I've created:\n\n**Opening:** ${letterData.opening}\n\n**Key points covered:**\n- Highlighted your relevant experience\n- Connected your skills to the role\n- Expressed genuine interest\n\n**Closing:** Professional sign-off with your name\n\nFeel free to customize it further using the Editor!`;
+      }
+      
       return new Response(
         JSON.stringify({
-          response: `I've drafted a cover letter for you! You can view and edit it in the Letter tab. Here's what I've created:\n\n**Opening:** ${letterData.opening}\n\n**Key points covered:**\n- Highlighted your relevant experience\n- Connected your skills to the role\n- Expressed genuine interest\n\n**Closing:** Professional sign-off with your name\n\nFeel free to customize it further using the Editor!`,
+          response,
           cvUpdates: {},
           letterUpdates: letterData,
           artifactType: 'letter',
