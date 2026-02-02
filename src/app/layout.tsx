@@ -115,6 +115,8 @@ export default function RootLayout({
 }) {
   const gaId = process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || 'G-BT59N8YB46'
   const gaEnabled = process.env.NODE_ENV === 'production' || process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ENABLED === 'true'
+  const contentsquareEnabled = process.env.NODE_ENV === 'production' || process.env.NEXT_PUBLIC_CONTENTSQUARE_ENABLED === 'true'
+  const contentsquareScriptUrl = process.env.NEXT_PUBLIC_CONTENTSQUARE_SCRIPT_URL || 'https://t.contentsquare.net/uxa/04f04fecfbf56.js'
 
   return (
     <html lang="en">
@@ -132,6 +134,12 @@ export default function RootLayout({
               }}
             />
           </>
+        )}
+        {contentsquareEnabled && (
+          <script
+            src={contentsquareScriptUrl}
+            async
+          />
         )}
       </head>
       <body className={inter.className}>
