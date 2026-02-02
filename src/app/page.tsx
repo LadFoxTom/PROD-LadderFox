@@ -118,9 +118,27 @@ function LetterPreview({
   cvData: CVData;
   t: (key: string) => string;
 }) {
+  const { language } = useLocale();
   // Get the selected template or default to professional
   const template = LETTER_TEMPLATES.find((t) => t.id === (data.template || 'professional')) || LETTER_TEMPLATES[0];
   const styles = template.styles;
+  
+  // Get salutation based on language
+  const getSalutation = (recipientName?: string) => {
+    const firstName = recipientName ? recipientName.split(' ')[0] : null;
+    switch (language) {
+      case 'nl':
+        return firstName ? `Geachte ${firstName},` : 'Geachte heer/mevrouw,';
+      case 'fr':
+        return firstName ? `Cher/chère ${firstName},` : 'Cher/chère recruteur,';
+      case 'es':
+        return firstName ? `Estimado/a ${firstName},` : 'Estimado/a señor/señora,';
+      case 'de':
+        return firstName ? `Sehr geehrter ${firstName},` : 'Sehr geehrte Damen und Herren,';
+      default:
+        return firstName ? `Dear ${firstName},` : 'Dear Hiring Manager,';
+    }
+  };
   
   // Use layout overrides if provided, otherwise use template styles
   const fontFamily = data.layout?.fontFamily || styles.fontFamily;
@@ -188,14 +206,27 @@ function LetterPreview({
 
           {/* Letter Body */}
           <div className="space-y-4 text-gray-800 leading-relaxed">
-            {/* Salutation - Use recipient name if available, otherwise use opening or default */}
-            {data.opening ? (
-              <p className="font-medium">{data.opening}</p>
-            ) : (
-              <p className="font-medium">
-                Dear {data.recipientName ? data.recipientName.split(' ')[0] : 'Hiring Manager'},
-              </p>
-            )}
+            {/* Salutation - Check if opening already contains a salutation */}
+            {(() => {
+              const opening = data.opening || '';
+              const isSalutation = opening.toLowerCase().trim().match(/^(geachte|dear|beste|lieve|hello|hi|cher|estimado|sehr)\s/i);
+              
+              if (isSalutation) {
+                // Opening already contains salutation, use it directly (only once)
+                return <p className="font-medium">{opening}</p>;
+              } else if (opening) {
+                // Opening exists but is not a salutation, show salutation + opening
+                return (
+                  <>
+                    <p className="font-medium">{getSalutation(data.recipientName)}</p>
+                    <p className="font-medium">{opening}</p>
+                  </>
+                );
+              } else {
+                // No opening, show default salutation
+                return <p className="font-medium">{getSalutation(data.recipientName)}</p>;
+              }
+            })()}
             
             {data.body ? (
               typeof data.body === 'string' ? (

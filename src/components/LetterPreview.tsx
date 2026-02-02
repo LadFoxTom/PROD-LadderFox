@@ -122,17 +122,56 @@ const LetterPreview: React.FC<LetterPreviewProps> = memo(({ data, isPreview = fa
         </div>
       )}
 
-      {/* Salutation */}
-      <div className="mb-6">
-        Dear {data.recipientName ? data.recipientName.split(' ')[0] : 'Hiring Manager'},
-      </div>
-
-      {/* Opening */}
-      {data.opening && (
-        <div className="mb-4 leading-relaxed">
-          {data.opening}
-        </div>
-      )}
+      {/* Salutation and Opening - Check if opening already contains salutation */}
+      {(() => {
+        const opening = data.opening || '';
+        const isSalutation = opening.toLowerCase().trim().match(/^(geachte|dear|beste|lieve|hello|hi|cher|estimado|sehr)\s/i);
+        
+        // Get salutation based on language
+        const getSalutation = (recipientName?: string) => {
+          const firstName = recipientName ? recipientName.split(' ')[0] : null;
+          // Detect language from opening or default to English
+          if (opening.toLowerCase().includes('geachte') || opening.toLowerCase().includes('beste')) {
+            return firstName ? `Geachte ${firstName},` : 'Geachte heer/mevrouw,';
+          } else if (opening.toLowerCase().includes('cher') || opening.toLowerCase().includes('chère')) {
+            return firstName ? `Cher/chère ${firstName},` : 'Cher/chère recruteur,';
+          } else if (opening.toLowerCase().includes('estimado')) {
+            return firstName ? `Estimado/a ${firstName},` : 'Estimado/a señor/señora,';
+          } else if (opening.toLowerCase().includes('sehr')) {
+            return firstName ? `Sehr geehrter ${firstName},` : 'Sehr geehrte Damen und Herren,';
+          } else {
+            return firstName ? `Dear ${firstName},` : 'Dear Hiring Manager,';
+          }
+        };
+        
+        if (isSalutation) {
+          // Opening already contains salutation, use it directly (only once)
+          return (
+            <div className="mb-6">
+              {opening}
+            </div>
+          );
+        } else if (opening) {
+          // Opening exists but is not a salutation, show salutation + opening
+          return (
+            <>
+              <div className="mb-6">
+                {getSalutation(data.recipientName)}
+              </div>
+              <div className="mb-4 leading-relaxed">
+                {opening}
+              </div>
+            </>
+          );
+        } else {
+          // No opening, show default salutation
+          return (
+            <div className="mb-6">
+              {getSalutation(data.recipientName)}
+            </div>
+          );
+        }
+      })()}
 
       {/* Body Content */}
       <div className="mb-6">
