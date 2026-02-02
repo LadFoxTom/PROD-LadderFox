@@ -3771,7 +3771,7 @@ export default function HomePage() {
                         className="p-2.5 flex items-center justify-center rounded-lg transition-all"
                         style={{
                           backgroundColor: (inputValue.trim() || attachedFile) 
-                            ? (document.documentElement.getAttribute('data-theme') === 'day' ? '#2563eb' : '#ffffff')
+                            ? '#2563eb'
                             : 'var(--bg-hover)',
                           color: (inputValue.trim() || attachedFile)
                             ? '#ffffff'
@@ -3779,12 +3779,12 @@ export default function HomePage() {
                         }}
                         onMouseEnter={(e) => {
                           if (inputValue.trim() || attachedFile) {
-                            e.currentTarget.style.backgroundColor = document.documentElement.getAttribute('data-theme') === 'day' ? '#1d4ed8' : '#f3f4f6';
+                            e.currentTarget.style.backgroundColor = '#1d4ed8';
                           }
                         }}
                         onMouseLeave={(e) => {
                           if (inputValue.trim() || attachedFile) {
-                            e.currentTarget.style.backgroundColor = document.documentElement.getAttribute('data-theme') === 'day' ? '#2563eb' : '#ffffff';
+                            e.currentTarget.style.backgroundColor = '#2563eb';
                           }
                         }}
                       >
