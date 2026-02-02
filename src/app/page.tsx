@@ -23,6 +23,7 @@ import { toast, Toaster } from 'react-hot-toast';
 import { useDebouncedCallback } from 'use-debounce';
 import { JobSwiper, JobMatch } from '@/components/JobSwiper';
 import TemplateQuickSelector from '@/components/TemplateQuickSelector';
+import LetterTemplateQuickSelector from '@/components/LetterTemplateQuickSelector';
 import { CVTemplate } from '@/components/pdf/CVDocumentPDF';
 import { sanitizeCVDataForAPI as sanitizeForAPI } from '@/utils/cvDataSanitizer';
 import { ThemeSwitcher } from '@/components/ThemeSwitcher';
@@ -251,6 +252,13 @@ function InlineEditor({
 
   const [editorTab, setEditorTab] = useState<'cv' | 'letter'>(activeEditorTab || 'cv');
 
+  // Sync editorTab with activeEditorTab prop when it changes
+  useEffect(() => {
+    if (activeEditorTab) {
+      setEditorTab(activeEditorTab);
+    }
+  }, [activeEditorTab]);
+
   return (
     <div className="p-4 space-y-3">
       {/* Editor Tab Switcher */}
@@ -267,7 +275,7 @@ function InlineEditor({
             onMouseLeave={(e) => editorTab !== 'cv' && (e.currentTarget.style.color = 'var(--text-tertiary)')}
           >
             <FiFileText size={14} />
-            Editor
+            CV Editor
           </button>
           <button
             onClick={() => setEditorTab('letter')}
@@ -888,6 +896,7 @@ export default function HomePage() {
     }
   }, []);
   const [activeView, setActiveView] = useState<'chat' | 'editor' | 'photos' | 'templates' | 'ats-checker'>('chat');
+  const [templateTab, setTemplateTab] = useState<'cv' | 'letter'>('cv');
   const [photos, setPhotos] = useState<string[]>([]); // Array of photo URLs
   const [selectedPhotoIndex, setSelectedPhotoIndex] = useState<number | null>(null);
   const userMenuRef = useRef<HTMLDivElement>(null);
@@ -3414,7 +3423,7 @@ export default function HomePage() {
                     onClick={() => {
                       setActiveView('editor');
                       setIsConversationActive(true);
-                      setArtifactType('cv');
+                      // Keep current artifactType instead of forcing 'cv'
                       setIsSidebarOpen(false);
                     }}
                     className="w-full flex items-center justify-between px-3 py-2.5 rounded-lg transition-colors text-left group"
@@ -4627,7 +4636,7 @@ export default function HomePage() {
                       <div className="flex items-center justify-between">
                         <h2 className="text-sm font-medium flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
                           <FiGrid size={16} className="text-teal-400" />
-                          CV Templates
+                          Templates
                         </h2>
                         <button
                           onClick={() => setActiveView('chat')}
@@ -4648,19 +4657,65 @@ export default function HomePage() {
                       </div>
                     </div>
                     
+                    {/* Template Tab Switcher */}
+                    <div className="px-4 py-2" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
+                      <div className="flex items-center gap-2 p-1 rounded-lg" style={{ backgroundColor: 'var(--bg-secondary)' }}>
+                        <button
+                          onClick={() => setTemplateTab('cv')}
+                          className="flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm transition-colors"
+                          style={templateTab === 'cv' 
+                            ? { backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-primary)' }
+                            : { color: 'var(--text-tertiary)' }
+                          }
+                          onMouseEnter={(e) => templateTab !== 'cv' && (e.currentTarget.style.color = 'var(--text-primary)')}
+                          onMouseLeave={(e) => templateTab !== 'cv' && (e.currentTarget.style.color = 'var(--text-tertiary)')}
+                        >
+                          <FiFileText size={14} />
+                          CV Templates
+                        </button>
+                        <button
+                          onClick={() => setTemplateTab('letter')}
+                          className="flex-1 flex items-center justify-center gap-2 px-4 py-2 rounded-lg text-sm transition-colors"
+                          style={templateTab === 'letter' 
+                            ? { backgroundColor: 'var(--bg-tertiary)', color: 'var(--text-primary)' }
+                            : { color: 'var(--text-tertiary)' }
+                          }
+                          onMouseEnter={(e) => templateTab !== 'letter' && (e.currentTarget.style.color = 'var(--text-primary)')}
+                          onMouseLeave={(e) => templateTab !== 'letter' && (e.currentTarget.style.color = 'var(--text-tertiary)')}
+                        >
+                          <FiMail size={14} />
+                          Letter Templates
+                        </button>
+                      </div>
+                    </div>
+                    
                     {/* Templates Content */}
                     <div className="flex-1 overflow-y-auto">
-                      <TemplateQuickSelector
-                        currentTemplate={(cvData.template as CVTemplate) || 'modern'}
-                        onTemplateChange={(template) => {
-                          setCvData({
-                            ...cvData,
-                            template,
-                          });
-                          toast.success(`Template changed to ${template.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}`);
-                        }}
-                        className="p-4"
-                      />
+                      {templateTab === 'cv' ? (
+                        <TemplateQuickSelector
+                          currentTemplate={(cvData.template as CVTemplate) || 'modern'}
+                          onTemplateChange={(template) => {
+                            setCvData({
+                              ...cvData,
+                              template,
+                            });
+                            toast.success(`Template changed to ${template.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase())}`);
+                          }}
+                          className="p-4"
+                        />
+                      ) : (
+                        <LetterTemplateQuickSelector
+                          currentTemplate={letterData.template || 'professional'}
+                          onTemplateChange={(template) => {
+                            setLetterData({
+                              ...letterData,
+                              template,
+                            });
+                            toast.success(`Letter template changed to ${template.charAt(0).toUpperCase() + template.slice(1)}`);
+                          }}
+                          className="p-4"
+                        />
+                      )}
                     </div>
                   </div>
                 ) : activeView === 'editor' ? (
@@ -4671,7 +4726,7 @@ export default function HomePage() {
                       <div className="flex items-center justify-between">
                         <h2 className="text-sm font-medium flex items-center gap-2" style={{ color: 'var(--text-primary)' }}>
                           <FiAward size={16} className="text-purple-400" />
-                          CV Editor
+                          Editor
                         </h2>
                         <button
                           onClick={() => setActiveView('chat')}
@@ -4706,6 +4761,7 @@ export default function HomePage() {
                           setLetterData(updated);
                           debouncedLetterToast();
                         }}
+                        activeEditorTab={artifactType === 'letter' && letterData ? 'letter' : 'cv'}
                         t={t}
                       />
                     </div>
