@@ -143,28 +143,59 @@ function LetterPreview({
         >
           {/* Letter Header */}
           <div className="mb-8">
-            <div className="text-right text-sm text-gray-600 mb-6">
-              <p>{cvData.fullName || 'Your Name'}</p>
-              <p>{cvData.contact?.email || 'email@example.com'}</p>
-              <p>{cvData.contact?.phone || '(123) 456-7890'}</p>
-              <p>{cvData.contact?.location || 'City, Country'}</p>
-              <p className="mt-2">{new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
-            </div>
+            {/* Sender Information */}
+            {(data.senderName || data.senderEmail || data.senderPhone) && (
+              <div className="text-right text-sm text-gray-600 mb-6">
+                {data.senderName && <p className="font-semibold">{data.senderName}</p>}
+                {data.senderTitle && <p className="text-gray-500">{data.senderTitle}</p>}
+                {data.senderAddress && (
+                  <div>
+                    {data.senderAddress.split('\n').map((line, idx) => (
+                      <p key={idx}>{line}</p>
+                    ))}
+                  </div>
+                )}
+                {data.senderEmail && <p>{data.senderEmail}</p>}
+                {data.senderPhone && <p>{data.senderPhone}</p>}
+                {!data.senderName && !data.senderEmail && !data.senderPhone && (
+                  <>
+                    <p>{cvData.fullName || 'Your Name'}</p>
+                    <p>{cvData.contact?.email || 'email@example.com'}</p>
+                    <p>{cvData.contact?.phone || '(123) 456-7890'}</p>
+                    <p>{cvData.contact?.location || 'City, Country'}</p>
+                  </>
+                )}
+                <p className="mt-2">{new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+              </div>
+            )}
             
             {/* Recipient Information */}
             {(data.companyName || data.recipientName) && (
               <div className="text-sm text-gray-600 mb-6">
-                <p>{data.recipientName || 'Hiring Manager'}</p>
+                {data.recipientName && <p className="font-semibold">{data.recipientName}</p>}
                 {data.recipientTitle && <p>{data.recipientTitle}</p>}
-                {data.companyName && <p>{data.companyName}</p>}
-                {data.companyAddress && <p>{data.companyAddress}</p>}
+                {data.companyName && <p className="font-semibold">{data.companyName}</p>}
+                {data.companyAddress && (
+                  <div>
+                    {data.companyAddress.split('\n').map((line, idx) => (
+                      <p key={idx}>{line}</p>
+                    ))}
+                  </div>
+                )}
               </div>
             )}
           </div>
 
           {/* Letter Body */}
           <div className="space-y-4 text-gray-800 leading-relaxed">
-            <p className="font-medium">{data.opening || 'Dear Hiring Manager,'}</p>
+            {/* Salutation - Use recipient name if available, otherwise use opening or default */}
+            {data.opening ? (
+              <p className="font-medium">{data.opening}</p>
+            ) : (
+              <p className="font-medium">
+                Dear {data.recipientName ? data.recipientName.split(' ')[0] : 'Hiring Manager'},
+              </p>
+            )}
             
             {data.body ? (
               typeof data.body === 'string' ? (
@@ -188,7 +219,7 @@ function LetterPreview({
             
             <div className="mt-8">
               <p>{t('letter.signature.sincerely')}</p>
-              <p className="mt-4 font-medium">{data.signature || cvData.fullName || 'Your Name'}</p>
+              <p className="mt-4 font-medium">{data.signature || data.senderName || cvData.fullName || 'Your Name'}</p>
             </div>
           </div>
         </div>
@@ -291,7 +322,15 @@ function InlineEditor({
   // Letter field handlers
   const handleLetterChange = (field: keyof LetterData, value: string) => {
     if (letterData && onLetterSave) {
-      onLetterSave({ ...letterData, [field]: value });
+      const updated = { ...letterData, [field]: value };
+      
+      // Auto-update opening when recipient name changes (if opening is empty or default)
+      if (field === 'recipientName' && value && (!updated.opening || updated.opening === 'Dear Hiring Manager,' || updated.opening.startsWith('Dear '))) {
+        const firstName = value.split(' ')[0];
+        updated.opening = `Dear ${firstName},`;
+      }
+      
+      onLetterSave(updated);
     }
   };
 
