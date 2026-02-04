@@ -707,15 +707,18 @@ export const PDFPreviewViewer: React.FC<PDFPreviewViewerProps> = ({
                 <div
                   className="overflow-auto"
                   style={{
-                    maxHeight: '70vh',
-                    maxWidth: '100%',
-                    width: '100%',
-                    overflowX: 'auto',
+                    maxHeight: '60vh',
+                    overflow: 'auto',
                     WebkitOverflowScrolling: 'touch'
                   }}
                 >
-                  {/* Scale down the CV preview to fit mobile screens */}
-                  <div style={{ transform: 'scale(0.65)', transformOrigin: 'top left', width: '154%' }}>
+                  {/* Scale down the CV preview to fit mobile screens using zoom for proper layout */}
+                  <div style={{
+                    zoom: 0.45,
+                    WebkitTextSizeAdjust: 'none',
+                    maxWidth: '595px',
+                    margin: '0 auto'
+                  }}>
                     <CVPreview data={data} isPreview={true} />
                   </div>
                 </div>

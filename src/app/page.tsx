@@ -5017,8 +5017,8 @@ export default function HomePage() {
               >
                 {/* Artifact Header */}
                 <div className="h-12 flex items-center justify-between px-4" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
-                  <div className="flex items-center gap-3">
-                    {/* Tab Switcher */}
+                  {/* Tab Switcher - hidden on mobile since bottom nav handles switching */}
+                  <div className="hidden lg:flex items-center gap-3">
                     <button
                       onClick={() => setArtifactType('cv')}
                       className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm transition-colors"
