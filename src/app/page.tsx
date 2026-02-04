@@ -3885,128 +3885,132 @@ export default function HomePage() {
                     ? 'hidden lg:flex lg:w-[45%]'
                     : 'w-full lg:w-[45%]'
               }`} style={{ borderRight: '1px solid var(--border-subtle)' }}>
-                {/* View Toggle (Chat/Editor/Photos) */}
-                <div className="flex items-center gap-2 px-4 py-3" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
-                  <button
-                    onClick={() => setActiveView('chat')}
-                    className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-colors"
-                    style={{
-                      backgroundColor: activeView === 'chat' ? 'var(--bg-hover)' : 'transparent',
-                      color: activeView === 'chat' ? 'var(--text-primary)' : 'var(--text-tertiary)',
-                    }}
-                    onMouseEnter={(e) => {
-                      if (activeView !== 'chat') {
-                        e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
-                        e.currentTarget.style.color = 'var(--text-primary)';
-                      }
-                    }}
-                    onMouseLeave={(e) => {
-                      if (activeView !== 'chat') {
-                        e.currentTarget.style.backgroundColor = 'transparent';
-                        e.currentTarget.style.color = 'var(--text-tertiary)';
-                      }
-                    }}
-                  >
-                    <FiSend size={14} />
-                    Chat
-                  </button>
-                  <button
-                    onClick={() => setActiveView('editor')}
-                    className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-colors"
-                    style={{
-                      backgroundColor: activeView === 'editor' ? 'var(--bg-hover)' : 'transparent',
-                      color: activeView === 'editor' ? 'var(--text-primary)' : 'var(--text-tertiary)',
-                    }}
-                    onMouseEnter={(e) => {
-                      if (activeView !== 'editor') {
-                        e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
-                        e.currentTarget.style.color = 'var(--text-primary)';
-                      }
-                    }}
-                    onMouseLeave={(e) => {
-                      if (activeView !== 'editor') {
-                        e.currentTarget.style.backgroundColor = 'transparent';
-                        e.currentTarget.style.color = 'var(--text-tertiary)';
-                      }
-                    }}
-                  >
-                    <FiAward size={14} className="text-purple-400" />
-                    Editor
-                  </button>
-                  <button
-                    onClick={() => setActiveView('photos')}
-                    className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-colors"
-                    style={{
-                      backgroundColor: activeView === 'photos' ? 'var(--bg-hover)' : 'transparent',
-                      color: activeView === 'photos' ? 'var(--text-primary)' : 'var(--text-tertiary)',
-                    }}
-                    onMouseEnter={(e) => {
-                      if (activeView !== 'photos') {
-                        e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
-                        e.currentTarget.style.color = 'var(--text-primary)';
-                      }
-                    }}
-                    onMouseLeave={(e) => {
-                      if (activeView !== 'photos') {
-                        e.currentTarget.style.backgroundColor = 'transparent';
-                        e.currentTarget.style.color = 'var(--text-tertiary)';
-                      }
-                    }}
-                  >
-                    <FiImage size={14} className="text-blue-400" />
-                    {t('common.photos')}
-                    {photos.length > 0 && (
-                      <span className="ml-1 px-1.5 py-0.5 bg-blue-500/20 text-blue-400 text-xs rounded-full">
-                        {photos.length}
-                      </span>
-                    )}
-                  </button>
-                  <button
-                    onClick={() => setActiveView('templates')}
-                    className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-colors"
-                    style={{
-                      backgroundColor: activeView === 'templates' ? 'var(--bg-hover)' : 'transparent',
-                      color: activeView === 'templates' ? 'var(--text-primary)' : 'var(--text-tertiary)',
-                    }}
-                    onMouseEnter={(e) => {
-                      if (activeView !== 'templates') {
-                        e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
-                        e.currentTarget.style.color = 'var(--text-primary)';
-                      }
-                    }}
-                    onMouseLeave={(e) => {
-                      if (activeView !== 'templates') {
-                        e.currentTarget.style.backgroundColor = 'transparent';
-                        e.currentTarget.style.color = 'var(--text-tertiary)';
-                      }
-                    }}
-                  >
-                    <FiGrid size={14} className="text-teal-400" />
-                    Templates
-                  </button>
-                  <button
-                    onClick={() => setActiveView('ats-checker')}
-                    className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-colors"
-                    style={{
-                      backgroundColor: activeView === 'ats-checker' ? 'var(--bg-hover)' : 'transparent',
-                      color: activeView === 'ats-checker' ? 'var(--text-primary)' : 'var(--text-tertiary)',
-                    }}
-                    onMouseEnter={(e) => {
-                      if (activeView !== 'ats-checker') {
-                        e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
-                        e.currentTarget.style.color = 'var(--text-primary)';
-                      }
-                    }}
-                    onMouseLeave={(e) => {
-                      if (activeView !== 'ats-checker') {
-                        e.currentTarget.style.backgroundColor = 'transparent';
-                        e.currentTarget.style.color = 'var(--text-tertiary)';
-                      }
-                    }}
-                  >
-                    <FiCheckCircle size={14} className="text-indigo-400" />
-                    ATS Check
-                  </button>
+                {/* View Toggle (Chat/Editor/Photos) - Mobile responsive */}
+                <div className="px-2 py-2 lg:px-4 lg:py-3 overflow-x-auto" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
+                  <div className="flex items-center gap-1 lg:gap-2 min-w-max lg:min-w-0">
+                    <button
+                      onClick={() => setActiveView('chat')}
+                      className="flex items-center justify-center gap-1 lg:gap-2 px-2 lg:px-3 py-1.5 rounded-lg text-xs lg:text-sm transition-colors whitespace-nowrap flex-shrink-0"
+                      style={{
+                        backgroundColor: activeView === 'chat' ? 'var(--bg-hover)' : 'transparent',
+                        color: activeView === 'chat' ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                      }}
+                      onMouseEnter={(e) => {
+                        if (activeView !== 'chat') {
+                          e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                          e.currentTarget.style.color = 'var(--text-primary)';
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (activeView !== 'chat') {
+                          e.currentTarget.style.backgroundColor = 'transparent';
+                          e.currentTarget.style.color = 'var(--text-tertiary)';
+                        }
+                      }}
+                    >
+                      <FiSend size={14} />
+                      <span>Chat</span>
+                    </button>
+                    <button
+                      onClick={() => setActiveView('editor')}
+                      className="flex items-center justify-center gap-1 lg:gap-2 px-2 lg:px-3 py-1.5 rounded-lg text-xs lg:text-sm transition-colors whitespace-nowrap flex-shrink-0"
+                      style={{
+                        backgroundColor: activeView === 'editor' ? 'var(--bg-hover)' : 'transparent',
+                        color: activeView === 'editor' ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                      }}
+                      onMouseEnter={(e) => {
+                        if (activeView !== 'editor') {
+                          e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                          e.currentTarget.style.color = 'var(--text-primary)';
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (activeView !== 'editor') {
+                          e.currentTarget.style.backgroundColor = 'transparent';
+                          e.currentTarget.style.color = 'var(--text-tertiary)';
+                        }
+                      }}
+                    >
+                      <FiAward size={14} className="text-purple-400" />
+                      <span>Editor</span>
+                    </button>
+                    <button
+                      onClick={() => setActiveView('photos')}
+                      className="flex items-center justify-center gap-1 lg:gap-2 px-2 lg:px-3 py-1.5 rounded-lg text-xs lg:text-sm transition-colors whitespace-nowrap flex-shrink-0"
+                      style={{
+                        backgroundColor: activeView === 'photos' ? 'var(--bg-hover)' : 'transparent',
+                        color: activeView === 'photos' ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                      }}
+                      onMouseEnter={(e) => {
+                        if (activeView !== 'photos') {
+                          e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                          e.currentTarget.style.color = 'var(--text-primary)';
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (activeView !== 'photos') {
+                          e.currentTarget.style.backgroundColor = 'transparent';
+                          e.currentTarget.style.color = 'var(--text-tertiary)';
+                        }
+                      }}
+                    >
+                      <FiImage size={14} className="text-blue-400" />
+                      <span className="hidden sm:inline">{t('common.photos')}</span>
+                      <span className="sm:hidden">Foto</span>
+                      {photos.length > 0 && (
+                        <span className="ml-0.5 lg:ml-1 px-1 lg:px-1.5 py-0.5 bg-blue-500/20 text-blue-400 text-[10px] lg:text-xs rounded-full">
+                          {photos.length}
+                        </span>
+                      )}
+                    </button>
+                    <button
+                      onClick={() => setActiveView('templates')}
+                      className="flex items-center justify-center gap-1 lg:gap-2 px-2 lg:px-3 py-1.5 rounded-lg text-xs lg:text-sm transition-colors whitespace-nowrap flex-shrink-0"
+                      style={{
+                        backgroundColor: activeView === 'templates' ? 'var(--bg-hover)' : 'transparent',
+                        color: activeView === 'templates' ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                      }}
+                      onMouseEnter={(e) => {
+                        if (activeView !== 'templates') {
+                          e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                          e.currentTarget.style.color = 'var(--text-primary)';
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (activeView !== 'templates') {
+                          e.currentTarget.style.backgroundColor = 'transparent';
+                          e.currentTarget.style.color = 'var(--text-tertiary)';
+                        }
+                      }}
+                    >
+                      <FiGrid size={14} className="text-teal-400" />
+                      <span>Templates</span>
+                    </button>
+                    <button
+                      onClick={() => setActiveView('ats-checker')}
+                      className="flex items-center justify-center gap-1 lg:gap-2 px-2 lg:px-3 py-1.5 rounded-lg text-xs lg:text-sm transition-colors whitespace-nowrap flex-shrink-0"
+                      style={{
+                        backgroundColor: activeView === 'ats-checker' ? 'var(--bg-hover)' : 'transparent',
+                        color: activeView === 'ats-checker' ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                      }}
+                      onMouseEnter={(e) => {
+                        if (activeView !== 'ats-checker') {
+                          e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                          e.currentTarget.style.color = 'var(--text-primary)';
+                        }
+                      }}
+                      onMouseLeave={(e) => {
+                        if (activeView !== 'ats-checker') {
+                          e.currentTarget.style.backgroundColor = 'transparent';
+                          e.currentTarget.style.color = 'var(--text-tertiary)';
+                        }
+                      }}
+                    >
+                      <FiCheckCircle size={14} className="text-indigo-400" />
+                      <span className="hidden sm:inline">ATS Check</span>
+                      <span className="sm:hidden">ATS</span>
+                    </button>
+                  </div>
                 </div>
                 
                 {activeView === 'photos' ? (
