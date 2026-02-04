@@ -3903,32 +3903,29 @@ export default function HomePage() {
                     <FiSend size={14} />
                     Chat
                   </button>
-                  {isPro && (
-                    <button
-                      onClick={() => setActiveView('editor')}
-                      className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-colors"
-                      style={{
-                        backgroundColor: activeView === 'editor' ? 'var(--bg-hover)' : 'transparent',
-                        color: activeView === 'editor' ? 'var(--text-primary)' : 'var(--text-tertiary)',
-                      }}
-                      onMouseEnter={(e) => {
-                        if (activeView !== 'editor') {
-                          e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
-                          e.currentTarget.style.color = 'var(--text-primary)';
-                        }
-                      }}
-                      onMouseLeave={(e) => {
-                        if (activeView !== 'editor') {
-                          e.currentTarget.style.backgroundColor = 'transparent';
-                          e.currentTarget.style.color = 'var(--text-tertiary)';
-                        }
-                      }}
-                    >
-                      <FiAward size={14} className="text-purple-400" />
-                      Editor
-                      <span className="text-[10px] px-1.5 py-0.5 bg-purple-500/20 text-purple-400 rounded font-medium">PRO</span>
-                    </button>
-                  )}
+                  <button
+                    onClick={() => setActiveView('editor')}
+                    className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-colors"
+                    style={{
+                      backgroundColor: activeView === 'editor' ? 'var(--bg-hover)' : 'transparent',
+                      color: activeView === 'editor' ? 'var(--text-primary)' : 'var(--text-tertiary)',
+                    }}
+                    onMouseEnter={(e) => {
+                      if (activeView !== 'editor') {
+                        e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                        e.currentTarget.style.color = 'var(--text-primary)';
+                      }
+                    }}
+                    onMouseLeave={(e) => {
+                      if (activeView !== 'editor') {
+                        e.currentTarget.style.backgroundColor = 'transparent';
+                        e.currentTarget.style.color = 'var(--text-tertiary)';
+                      }
+                    }}
+                  >
+                    <FiAward size={14} className="text-purple-400" />
+                    Editor
+                  </button>
                   <button
                     onClick={() => setActiveView('photos')}
                     className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm transition-colors"
