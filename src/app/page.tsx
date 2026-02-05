@@ -1189,7 +1189,13 @@ export default function HomePage() {
   const [inputValue, setInputValue] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
   const [isListening, setIsListening] = useState(false);
-  
+
+  // Voice recording state
+  const [isRecording, setIsRecording] = useState(false);
+  const [isTranscribing, setIsTranscribing] = useState(false);
+  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
+  const audioChunksRef = useRef<Blob[]>([]);
+
   // Question count state
   const [questionCount, setQuestionCount] = useState(0);
   const [questionLimit, setQuestionLimit] = useState(2); // Default for guests
@@ -2795,6 +2801,189 @@ export default function HomePage() {
     fileInputRef.current?.click();
   };
 
+  // Voice recording handlers (WhatsApp-style press and hold)
+  const startRecording = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+      const mediaRecorder = new MediaRecorder(stream, {
+        mimeType: MediaRecorder.isTypeSupported('audio/webm') ? 'audio/webm' : 'audio/mp4'
+      });
+
+      mediaRecorderRef.current = mediaRecorder;
+      audioChunksRef.current = [];
+
+      mediaRecorder.ondataavailable = (event) => {
+        if (event.data.size > 0) {
+          audioChunksRef.current.push(event.data);
+        }
+      };
+
+      mediaRecorder.onstop = async () => {
+        // Stop all tracks to release microphone
+        stream.getTracks().forEach(track => track.stop());
+
+        if (audioChunksRef.current.length > 0) {
+          const audioBlob = new Blob(audioChunksRef.current, {
+            type: mediaRecorder.mimeType || 'audio/webm'
+          });
+          await handleVoiceSubmit(audioBlob);
+        }
+      };
+
+      mediaRecorder.start();
+      setIsRecording(true);
+      toast(t('voice.recording') || 'Recording... Release to send', { icon: '🎤' });
+    } catch (error) {
+      console.error('Failed to start recording:', error);
+      toast.error(t('voice.microphone_error') || 'Could not access microphone. Please check permissions.');
+    }
+  };
+
+  const stopRecording = () => {
+    if (mediaRecorderRef.current && isRecording) {
+      mediaRecorderRef.current.stop();
+      setIsRecording(false);
+    }
+  };
+
+  const handleVoiceSubmit = async (audioBlob: Blob) => {
+    if (isProcessing) return;
+
+    // Check question limit before sending
+    if ((questionRemaining ?? 0) <= 0 && !isPro) {
+      if (!isAuthenticated) {
+        toast.error(t('toast.question_limit_guest_reached'));
+        setTimeout(() => guardedRouterPush('/auth/login'), 2000);
+      } else {
+        toast.error(t('toast.question_limit_free_reached'));
+        guardedRouterPush('/pricing');
+      }
+      return;
+    }
+
+    setIsTranscribing(true);
+    setIsProcessing(true);
+    setIsConversationActive(true);
+
+    // Add a placeholder message for the voice input
+    const userMessageId = `user-voice-${Date.now()}`;
+    setMessages(prev => [...prev, {
+      id: userMessageId,
+      role: 'user',
+      content: '🎤 ' + (t('voice.processing') || 'Processing voice message...'),
+      timestamp: new Date(),
+    }]);
+
+    // Add streaming placeholder for assistant
+    const streamingId = `assistant-${Date.now()}`;
+    setMessages(prev => [...prev, {
+      id: streamingId,
+      role: 'assistant',
+      content: '',
+      timestamp: new Date(),
+      isStreaming: true,
+    }]);
+
+    try {
+      const formData = new FormData();
+      formData.append('audio', audioBlob, 'recording.webm');
+      formData.append('cvData', JSON.stringify(sanitizeCVDataForAPI(cvData)));
+      formData.append('conversationHistory', JSON.stringify(
+        messages.map(m => ({ role: m.role, content: m.content }))
+      ));
+      formData.append('language', language); // Pass user's language for Whisper
+
+      const response = await fetch('/api/transcribe-audio', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || `Transcription failed: ${response.status}`);
+      }
+
+      const result = await response.json();
+
+      // Update the user message with the transcribed text
+      setMessages(prev => prev.map(m =>
+        m.id === userMessageId
+          ? { ...m, content: '🎤 ' + result.transcription }
+          : m
+      ));
+
+      // Handle different artifact types
+      if (result.artifactType === 'jobs' && result.jobs && !jobsDisabled) {
+        setJobs(result.jobs);
+        setArtifactType('jobs');
+      } else if (result.artifactType === 'letter' && result.letterUpdates) {
+        setLetterData(prev => ({ ...prev, ...result.letterUpdates }));
+        setArtifactType('letter');
+      } else if (result.cvUpdates && Object.keys(result.cvUpdates).length > 0) {
+        setCvData(prev => deepMerge(prev, result.cvUpdates));
+        setArtifactType('cv');
+      }
+
+      // Update assistant response
+      setMessages(prev => prev.map(m =>
+        m.id === streamingId
+          ? { ...m, content: result.response || t('voice.processed') || 'Voice message processed', isStreaming: false }
+          : m
+      ));
+
+      // Increment question count
+      if (isAuthenticated && user?.id) {
+        try {
+          const countResponse = await fetch('/api/user/question-count', { method: 'POST' });
+          if (countResponse.ok) {
+            const data = await countResponse.json();
+            setQuestionCount(data.count);
+            setQuestionRemaining(data.remaining);
+          }
+        } catch (error) {
+          console.error('Failed to increment question count:', error);
+        }
+      } else {
+        const guestKey = 'guest_question_count';
+        const currentCount = parseInt(localStorage.getItem(guestKey) || '0', 10);
+        const newCount = currentCount + 1;
+        localStorage.setItem(guestKey, newCount.toString());
+        setQuestionCount(newCount);
+        setQuestionRemaining(Math.max(0, 2 - newCount));
+      }
+
+    } catch (error) {
+      console.error('Voice processing error:', error);
+      toast.error(error instanceof Error ? error.message : (t('voice.error') || 'Failed to process voice message'));
+
+      // Remove the placeholder messages on error
+      setMessages(prev => prev.filter(m => m.id !== userMessageId && m.id !== streamingId));
+    } finally {
+      setIsTranscribing(false);
+      setIsProcessing(false);
+    }
+  };
+
+  // Handle touch events for mobile voice recording
+  const handleVoiceTouchStart = (e: React.TouchEvent) => {
+    e.preventDefault();
+    startRecording();
+  };
+
+  const handleVoiceTouchEnd = (e: React.TouchEvent) => {
+    e.preventDefault();
+    stopRecording();
+  };
+
+  // Handle mouse events for desktop voice recording
+  const handleVoiceMouseDown = () => {
+    startRecording();
+  };
+
+  const handleVoiceMouseUp = () => {
+    stopRecording();
+  };
+
   return (
     <div className="min-h-screen text-white" style={{ maxWidth: '100vw', overflowX: 'hidden', width: '100%', backgroundColor: 'var(--bg-primary)', color: 'var(--text-primary)' }}>
       <Toaster position="top-center" toastOptions={{ style: { background: 'var(--bg-tertiary)', color: 'var(--text-primary)' } }} />
@@ -3931,7 +4120,7 @@ export default function HomePage() {
                           : t('landing.main.prompt.placeholder')
                       }
                       rows={1}
-                      className="flex-1 bg-transparent px-4 sm:px-6 pr-20 sm:pr-24 text-base sm:text-lg resize-none focus:outline-none [&::-webkit-scrollbar]:hidden"
+                      className="flex-1 bg-transparent px-4 sm:px-6 pr-28 sm:pr-32 text-base sm:text-lg resize-none focus:outline-none [&::-webkit-scrollbar]:hidden"
                       style={{ 
                         height: '64px',
                         minHeight: '64px', 
@@ -3949,8 +4138,8 @@ export default function HomePage() {
                     />
                     
                     {/* Input Actions - positioned in the textarea row */}
-                    <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-2">
-                      <button 
+                    <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center gap-1.5">
+                      <button
                         onClick={handleAttachmentClick}
                         disabled={isUploading}
                         className={`p-2.5 flex items-center justify-center rounded-lg transition-colors ${
@@ -3975,12 +4164,47 @@ export default function HomePage() {
                       >
                         <FiPaperclip size={18} />
                       </button>
+                      {/* Voice Recording Button - Press and hold to record */}
+                      <button
+                        onMouseDown={handleVoiceMouseDown}
+                        onMouseUp={handleVoiceMouseUp}
+                        onTouchStart={handleVoiceTouchStart}
+                        onTouchEnd={handleVoiceTouchEnd}
+                        disabled={isProcessing || isTranscribing}
+                        className={`p-2.5 flex items-center justify-center rounded-full transition-all touch-manipulation select-none ${
+                          isRecording ? 'scale-110 animate-pulse' : ''
+                        } ${isTranscribing ? 'animate-pulse' : ''}`}
+                        style={{
+                          backgroundColor: isRecording ? '#ef4444' : (isTranscribing ? '#f59e0b' : 'transparent'),
+                          color: isRecording || isTranscribing ? '#ffffff' : 'var(--text-tertiary)',
+                        }}
+                        onMouseEnter={(e) => {
+                          if (!isRecording && !isTranscribing) {
+                            e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                            e.currentTarget.style.color = 'var(--text-secondary)';
+                          }
+                        }}
+                        onMouseLeave={(e) => {
+                          // Reset styles when not recording
+                          if (!isRecording && !isTranscribing) {
+                            e.currentTarget.style.backgroundColor = 'transparent';
+                            e.currentTarget.style.color = 'var(--text-tertiary)';
+                          }
+                          // Stop recording if mouse leaves while recording
+                          if (isRecording) {
+                            handleVoiceMouseUp();
+                          }
+                        }}
+                        title={t('voice.hold_to_record') || 'Hold to record voice message'}
+                      >
+                        {isRecording ? <FiMicOff size={18} /> : <FiMic size={18} />}
+                      </button>
                       <button
                         onClick={() => handleSubmit()}
                         disabled={!inputValue.trim() && !attachedFile}
                         className="p-2.5 flex items-center justify-center rounded-lg transition-all"
                         style={{
-                          backgroundColor: (inputValue.trim() || attachedFile) 
+                          backgroundColor: (inputValue.trim() || attachedFile)
                             ? '#2563eb'
                             : 'var(--bg-hover)',
                           color: (inputValue.trim() || attachedFile)
@@ -4892,7 +5116,7 @@ export default function HomePage() {
                               : t('chat.continue_conversation')
                           }
                           rows={1}
-                          className="flex-1 bg-transparent px-4 py-3 pr-24 resize-none focus:outline-none text-sm"
+                          className="flex-1 bg-transparent px-4 py-3 pr-32 resize-none focus:outline-none text-sm"
                           style={{ 
                             minHeight: '48px', 
                             maxHeight: '120px',
@@ -4934,6 +5158,31 @@ export default function HomePage() {
                             title="Upload CV/Resume"
                           >
                             <FiPaperclip size={14} />
+                          </button>
+                          {/* Voice Recording Button */}
+                          <button
+                            onMouseDown={handleVoiceMouseDown}
+                            onMouseUp={handleVoiceMouseUp}
+                            onMouseLeave={isRecording ? handleVoiceMouseUp : undefined}
+                            onTouchStart={handleVoiceTouchStart}
+                            onTouchEnd={handleVoiceTouchEnd}
+                            disabled={isProcessing || isTranscribing}
+                            className={`p-2 flex items-center justify-center rounded-full transition-all touch-manipulation select-none ${
+                              isRecording ? 'scale-110 animate-pulse' : ''
+                            } ${isTranscribing ? 'animate-pulse' : ''}`}
+                            style={{
+                              backgroundColor: isRecording ? '#ef4444' : (isTranscribing ? '#f59e0b' : 'transparent'),
+                              color: isRecording || isTranscribing ? '#ffffff' : 'var(--text-tertiary)',
+                            }}
+                            onMouseEnter={(e) => {
+                              if (!isRecording && !isTranscribing && !isProcessing) {
+                                e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                                e.currentTarget.style.color = 'var(--text-secondary)';
+                              }
+                            }}
+                            title={t('voice.hold_to_record') || 'Hold to record voice message'}
+                          >
+                            {isRecording ? <FiMicOff size={14} /> : <FiMic size={14} />}
                           </button>
                           <button
                             ref={sendButtonRef}

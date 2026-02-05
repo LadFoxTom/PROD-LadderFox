@@ -31,6 +31,7 @@ export async function POST(request: NextRequest) {
     }
     const cvDataJson = formData.get('cvData') as string | null;
     const conversationHistoryJson = formData.get('conversationHistory') as string | null;
+    const languageParam = formData.get('language') as string | null;
 
     if (!audioFile) {
       return NextResponse.json(
@@ -82,13 +83,25 @@ export async function POST(request: NextRequest) {
 
     console.log('[Transcribe Audio] Calling OpenAI Whisper API...');
 
+    // Map language codes for Whisper API (ISO-639-1)
+    const whisperLanguageMap: Record<string, string> = {
+      'en': 'en',
+      'nl': 'nl',
+      'es': 'es',
+      'de': 'de',
+      'fr': 'fr',
+    };
+    const whisperLanguage = languageParam && whisperLanguageMap[languageParam]
+      ? whisperLanguageMap[languageParam]
+      : undefined; // Let Whisper auto-detect if no valid language
+
     // Transcribe audio using Whisper API
     // The SDK accepts File objects directly
     // When response_format is 'text', it returns a string
     const transcription = await openai.audio.transcriptions.create({
       file: fileToTranscribe as any, // OpenAI SDK type compatibility
       model: 'whisper-1',
-      language: 'en', // Can be made configurable
+      ...(whisperLanguage && { language: whisperLanguage }), // Use language if provided, otherwise auto-detect
       response_format: 'text',
     });
 

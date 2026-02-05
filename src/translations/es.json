@@ -179,6 +179,14 @@
   "toast.photo_selected": "Foto seleccionada",
   "toast.photo_removed": "Foto eliminada",
   "toast.copy_letter_pro_feature": "Copiar cartas es una función Pro. Actualiza para copiar o descargar tu carta.",
+
+  "voice.recording": "Grabando... Suelta para enviar",
+  "voice.processing": "Procesando mensaje de voz...",
+  "voice.processed": "Mensaje de voz procesado",
+  "voice.error": "Error al procesar mensaje de voz",
+  "voice.microphone_error": "No se pudo acceder al micrófono. Verifica los permisos.",
+  "voice.hold_to_record": "Mantén presionado para grabar mensaje de voz",
+
   "common.faq": "Preguntas Frecuentes",
   "common.photos": "Fotos",
   "common.upload_photos": "Subir Fotos",

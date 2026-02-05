@@ -229,6 +229,14 @@
   "toast.photo_selected": "Foto geselecteerd",
   "toast.photo_removed": "Foto verwijderd",
   "toast.copy_letter_pro_feature": "Brieven kopiëren is een pro functie. Upgrade om je brief te kopiëren of te downloaden.",
+
+  "voice.recording": "Opnemen... Laat los om te verzenden",
+  "voice.processing": "Spraakbericht verwerken...",
+  "voice.processed": "Spraakbericht verwerkt",
+  "voice.error": "Spraakbericht verwerken mislukt",
+  "voice.microphone_error": "Geen toegang tot microfoon. Controleer de machtigingen.",
+  "voice.hold_to_record": "Houd ingedrukt om spraakbericht op te nemen",
+
   "intro.welcome": "Welkom bij de CV Bouwer! Ik help je stap voor stap een professioneel CV te maken. Laten we beginnen met het verzamelen van je basisinformatie.",
   "question.fullName": "Wat is je volledige naam?",
   "question.phone": "Wat is je telefoonnummer? (optioneel)",
