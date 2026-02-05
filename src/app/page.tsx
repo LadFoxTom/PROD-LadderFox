@@ -1374,9 +1374,14 @@ export default function HomePage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cvData.photoUrl]);
 
-  // Auto-set photoPosition to 'left' if photo exists but position is 'none' or undefined
+  // Auto-set photoPosition to 'left' only when a NEW photo is added (not when toggling visibility)
+  const prevPhotoUrlRef = useRef<string | undefined>(undefined);
   useEffect(() => {
-    if (cvData.photoUrl && (!cvData.layout?.photoPosition || cvData.layout?.photoPosition === 'none')) {
+    // Only auto-set position when photo URL changes from nothing to something (new photo added)
+    const hadNoPhoto = !prevPhotoUrlRef.current;
+    const hasPhotoNow = !!cvData.photoUrl;
+
+    if (hadNoPhoto && hasPhotoNow && (!cvData.layout?.photoPosition || cvData.layout?.photoPosition === 'none')) {
       setCvData(prev => ({
         ...prev,
         layout: {
@@ -1385,7 +1390,9 @@ export default function HomePage() {
         }
       }));
     }
-  }, [cvData.photoUrl, cvData.layout?.photoPosition]);
+
+    prevPhotoUrlRef.current = cvData.photoUrl;
+  }, [cvData.photoUrl]);
 
   // Load question count on mount and when auth state changes
   useEffect(() => {
@@ -3189,12 +3196,12 @@ export default function HomePage() {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="px-4 sm:px-6 py-4 flex flex-col sm:flex-row items-stretch gap-2 sm:gap-3 sm:justify-end" style={{ backgroundColor: 'var(--bg-tertiary)', borderTop: '1px solid var(--border-subtle)' }}>
+                <div className="px-4 sm:px-6 py-4 flex flex-col sm:flex-row items-stretch gap-2 sm:gap-3" style={{ backgroundColor: 'var(--bg-tertiary)', borderTop: '1px solid var(--border-subtle)' }}>
                   {/* On mobile: Save button first (most important action) */}
                   <button
                     onClick={handleLeaveSave}
                     disabled={isSavingBeforeLeave}
-                    className="order-1 sm:order-3 w-full sm:w-auto px-5 py-3 sm:py-2.5 text-sm font-medium rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
+                    className="order-1 sm:order-3 flex-1 px-5 py-3 sm:py-2.5 text-sm font-medium rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center"
                     style={{
                       backgroundColor: 'var(--color-ladderfox-blue)',
                       color: '#ffffff',
@@ -3218,7 +3225,7 @@ export default function HomePage() {
                   </button>
                   <button
                     onClick={handleLeaveWithoutSaving}
-                    className="order-2 w-full sm:w-auto px-5 py-3 sm:py-2.5 text-sm font-medium rounded-lg transition-all duration-200 flex items-center justify-center"
+                    className="order-2 flex-1 px-5 py-3 sm:py-2.5 text-sm font-medium rounded-lg transition-all duration-200 flex items-center justify-center"
                     style={{
                       color: '#ef4444',
                       backgroundColor: 'var(--bg-elevated)',
@@ -3238,7 +3245,7 @@ export default function HomePage() {
                   </button>
                   <button
                     onClick={handleLeaveCancel}
-                    className="order-3 sm:order-1 w-full sm:w-auto px-5 py-3 sm:py-2.5 text-sm font-medium rounded-lg transition-all duration-200 flex items-center justify-center"
+                    className="order-3 sm:order-1 flex-1 px-5 py-3 sm:py-2.5 text-sm font-medium rounded-lg transition-all duration-200 flex items-center justify-center"
                     style={{
                       color: 'var(--text-primary)',
                       backgroundColor: 'var(--bg-elevated)',
@@ -3886,11 +3893,11 @@ export default function HomePage() {
                     : 'w-full lg:w-[45%]'
               }`} style={{ borderRight: '1px solid var(--border-subtle)' }}>
                 {/* View Toggle (Chat/Editor/Photos) - Mobile responsive */}
-                <div className="px-2 py-2 lg:px-4 lg:py-3 overflow-x-auto" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
-                  <div className="flex items-center gap-1 lg:gap-2 min-w-max lg:min-w-0">
+                <div className="px-2 py-2 lg:px-4 lg:py-3" style={{ borderBottom: '1px solid var(--border-subtle)' }}>
+                  <div className="flex items-center gap-1 lg:gap-2">
                     <button
                       onClick={() => setActiveView('chat')}
-                      className="flex items-center justify-center gap-1 lg:gap-2 px-2 lg:px-3 py-1.5 rounded-lg text-xs lg:text-sm transition-colors whitespace-nowrap flex-shrink-0"
+                      className="flex-1 lg:flex-none flex items-center justify-center gap-1 lg:gap-2 px-2 lg:px-3 py-1.5 rounded-lg text-xs lg:text-sm transition-colors whitespace-nowrap"
                       style={{
                         backgroundColor: activeView === 'chat' ? 'var(--bg-hover)' : 'transparent',
                         color: activeView === 'chat' ? 'var(--text-primary)' : 'var(--text-tertiary)',
@@ -3913,7 +3920,7 @@ export default function HomePage() {
                     </button>
                     <button
                       onClick={() => setActiveView('editor')}
-                      className="flex items-center justify-center gap-1 lg:gap-2 px-2 lg:px-3 py-1.5 rounded-lg text-xs lg:text-sm transition-colors whitespace-nowrap flex-shrink-0"
+                      className="flex-1 lg:flex-none flex items-center justify-center gap-1 lg:gap-2 px-2 lg:px-3 py-1.5 rounded-lg text-xs lg:text-sm transition-colors whitespace-nowrap"
                       style={{
                         backgroundColor: activeView === 'editor' ? 'var(--bg-hover)' : 'transparent',
                         color: activeView === 'editor' ? 'var(--text-primary)' : 'var(--text-tertiary)',
@@ -3936,7 +3943,7 @@ export default function HomePage() {
                     </button>
                     <button
                       onClick={() => setActiveView('photos')}
-                      className="flex items-center justify-center gap-1 lg:gap-2 px-2 lg:px-3 py-1.5 rounded-lg text-xs lg:text-sm transition-colors whitespace-nowrap flex-shrink-0"
+                      className="flex-1 lg:flex-none flex items-center justify-center gap-1 lg:gap-2 px-2 lg:px-3 py-1.5 rounded-lg text-xs lg:text-sm transition-colors whitespace-nowrap"
                       style={{
                         backgroundColor: activeView === 'photos' ? 'var(--bg-hover)' : 'transparent',
                         color: activeView === 'photos' ? 'var(--text-primary)' : 'var(--text-tertiary)',
@@ -3965,7 +3972,7 @@ export default function HomePage() {
                     </button>
                     <button
                       onClick={() => setActiveView('templates')}
-                      className="flex items-center justify-center gap-1 lg:gap-2 px-2 lg:px-3 py-1.5 rounded-lg text-xs lg:text-sm transition-colors whitespace-nowrap flex-shrink-0"
+                      className="flex-1 lg:flex-none flex items-center justify-center gap-1 lg:gap-2 px-2 lg:px-3 py-1.5 rounded-lg text-xs lg:text-sm transition-colors whitespace-nowrap"
                       style={{
                         backgroundColor: activeView === 'templates' ? 'var(--bg-hover)' : 'transparent',
                         color: activeView === 'templates' ? 'var(--text-primary)' : 'var(--text-tertiary)',
@@ -3988,7 +3995,7 @@ export default function HomePage() {
                     </button>
                     <button
                       onClick={() => setActiveView('ats-checker')}
-                      className="flex items-center justify-center gap-1 lg:gap-2 px-2 lg:px-3 py-1.5 rounded-lg text-xs lg:text-sm transition-colors whitespace-nowrap flex-shrink-0"
+                      className="flex-1 lg:flex-none flex items-center justify-center gap-1 lg:gap-2 px-2 lg:px-3 py-1.5 rounded-lg text-xs lg:text-sm transition-colors whitespace-nowrap"
                       style={{
                         backgroundColor: activeView === 'ats-checker' ? 'var(--bg-hover)' : 'transparent',
                         color: activeView === 'ats-checker' ? 'var(--text-primary)' : 'var(--text-tertiary)',
