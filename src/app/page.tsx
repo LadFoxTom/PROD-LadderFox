@@ -36,13 +36,29 @@ import { hotjarStateChange } from '@/components/Hotjar';
 // Dynamically import PDF preview viewer (React-PDF based for guaranteed preview=export consistency)
 const PDFPreviewViewer = dynamic(
   () => import('@/components/pdf/PDFPreviewViewer').then(mod => mod.PDFPreviewViewer),
-  { 
+  {
     ssr: false,
     loading: () => (
       <div className="w-full h-full flex items-center justify-center bg-[#0d0d0d]">
         <div className="text-center">
           <div className="w-10 h-10 border-2 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
           <div className="text-gray-400">Preparing document preview...</div>
+        </div>
+      </div>
+    )
+  }
+);
+
+// Dynamically import Letter preview viewer (React-PDF based for PDF preview)
+const LetterPreviewViewer = dynamic(
+  () => import('@/components/pdf/LetterPreviewViewer').then(mod => mod.LetterPreviewViewer),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="w-full h-full flex items-center justify-center bg-[#0d0d0d]">
+        <div className="text-center">
+          <div className="w-10 h-10 border-2 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <div className="text-gray-400">Preparing letter preview...</div>
         </div>
       </div>
     )
@@ -134,171 +150,6 @@ interface SavedCV {
   id: string;
   title: string;
   updatedAt: string;
-}
-
-// Letter Preview Component
-function LetterPreview({ 
-  data, 
-  onDataChange, 
-  cvData,
-  t
-}: { 
-  data: LetterData; 
-  onDataChange: (data: LetterData) => void;
-  cvData: CVData;
-  t: (key: string) => string;
-}) {
-  const { language } = useLocale();
-  // Get the selected template or default to professional
-  const template = LETTER_TEMPLATES.find((t) => t.id === (data.template || 'professional')) || LETTER_TEMPLATES[0];
-  const styles = template.styles;
-  
-  // Get salutation based on language
-  const getSalutation = (recipientName?: string) => {
-    const firstName = recipientName ? recipientName.split(' ')[0] : null;
-    switch (language) {
-      case 'nl':
-        return firstName ? `Geachte ${firstName},` : 'Geachte heer/mevrouw,';
-      case 'fr':
-        return firstName ? `Cher/chère ${firstName},` : 'Cher/chère recruteur,';
-      case 'es':
-        return firstName ? `Estimado/a ${firstName},` : 'Estimado/a señor/señora,';
-      case 'de':
-        return firstName ? `Sehr geehrter ${firstName},` : 'Sehr geehrte Damen und Herren,';
-      default:
-        return firstName ? `Dear ${firstName},` : 'Dear Hiring Manager,';
-    }
-  };
-  
-  // Use layout overrides if provided, otherwise use template styles
-  const fontFamily = data.layout?.fontFamily || styles.fontFamily;
-  const fontSize = data.layout?.fontSize || styles.fontSize;
-  const lineHeight = data.layout?.lineSpacing || styles.lineSpacing;
-  const textAlign = (data.layout?.alignment || styles.alignment) as 'left' | 'center' | 'justify';
-  
-  return (
-    <div className="h-full flex flex-col bg-[#0d0d0d]">
-      {/* Letter Document */}
-      <div className="flex-1 overflow-auto p-6">
-        <div 
-          className="max-w-2xl mx-auto bg-white text-gray-900 rounded-lg shadow-2xl p-8 min-h-[600px]"
-          style={{
-            fontFamily,
-            fontSize,
-            lineHeight,
-            textAlign,
-          }}
-        >
-          {/* Letter Header */}
-          <div className="mb-8">
-            {/* Sender Information */}
-            {(data.senderName || data.senderEmail || data.senderPhone) && (
-              <div className="text-right text-sm text-gray-600 mb-6">
-                {data.senderName && <p className="font-semibold">{data.senderName}</p>}
-                {data.senderTitle && <p className="text-gray-500">{data.senderTitle}</p>}
-                {data.senderAddress && (
-                  <div>
-                    {data.senderAddress.split('\n').map((line, idx) => (
-                      <p key={idx}>{line}</p>
-                    ))}
-                  </div>
-                )}
-                {data.senderEmail && <p>{data.senderEmail}</p>}
-                {data.senderPhone && <p>{data.senderPhone}</p>}
-                {!data.senderName && !data.senderEmail && !data.senderPhone && (
-                  <>
-                    <p>{cvData.fullName || 'Your Name'}</p>
-                    <p>{cvData.contact?.email || 'email@example.com'}</p>
-                    <p>{cvData.contact?.phone || '(123) 456-7890'}</p>
-                    <p>{cvData.contact?.location || 'City, Country'}</p>
-                  </>
-                )}
-                <p className="mt-2">{new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
-              </div>
-            )}
-            
-            {/* Recipient Information */}
-            {(data.companyName || data.recipientName) && (
-              <div className="text-sm text-gray-600 mb-6">
-                {data.recipientName && <p className="font-semibold">{data.recipientName}</p>}
-                {data.recipientTitle && <p>{data.recipientTitle}</p>}
-                {data.companyName && <p className="font-semibold">{data.companyName}</p>}
-                {data.companyAddress && (
-                  <div>
-                    {data.companyAddress.split('\n').map((line, idx) => (
-                      <p key={idx}>{line}</p>
-                    ))}
-                  </div>
-                )}
-              </div>
-            )}
-          </div>
-
-          {/* Letter Body */}
-          <div className="space-y-4 text-gray-800 leading-relaxed">
-            {/* Salutation - Check if opening already contains a salutation */}
-            {(() => {
-              const opening = data.opening || '';
-              const isSalutation = opening.toLowerCase().trim().match(/^(geachte|dear|beste|lieve|hello|hi|cher|estimado|sehr)\s/i);
-              
-              if (isSalutation) {
-                // Opening already contains salutation, use it directly (only once)
-                return <p className="font-medium">{opening}</p>;
-              } else if (opening) {
-                // Opening exists but is not a salutation, show salutation + opening
-                return (
-                  <>
-                    <p className="font-medium">{getSalutation(data.recipientName)}</p>
-                    <p className="font-medium">{opening}</p>
-                  </>
-                );
-              } else {
-                // No opening, show default salutation
-                return <p className="font-medium">{getSalutation(data.recipientName)}</p>;
-              }
-            })()}
-            
-            {data.body ? (
-              typeof data.body === 'string' ? (
-                data.body.split('\n\n').map((paragraph, idx) => (
-                  <p key={idx}>{paragraph}</p>
-                ))
-              ) : (
-                data.body.map((paragraph, idx) => (
-                  <p key={idx}>{paragraph}</p>
-                ))
-              )
-            ) : (
-              <div className="text-gray-400 italic py-8 text-center border-2 border-dashed border-gray-200 rounded-lg">
-                <FiMail size={32} className="mx-auto mb-2 opacity-50" />
-                <p>Your cover letter content will appear here.</p>
-                <p className="text-sm mt-2">Ask the AI to write a cover letter, or use the Editor to compose one.</p>
-              </div>
-            )}
-            
-            <p className="mt-6">{data.closing || 'Thank you for considering my application. I look forward to the opportunity to discuss how I can contribute to your team.'}</p>
-            
-            <div className="mt-8">
-              <p>{t('letter.signature.sincerely')}</p>
-              <p className="mt-4 font-medium">{data.signature || data.senderName || cvData.fullName || 'Your Name'}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Quick Edit Bar */}
-      <div className="border-t border-white/5 p-3 bg-[#111111]">
-        <div className="flex items-center justify-between max-w-2xl mx-auto">
-          <span className="text-xs text-gray-500">
-            {data.body ? (typeof data.body === 'string' ? data.body.length : data.body.join('').length) : 0} characters
-          </span>
-          <div className="flex items-center gap-2">
-            <span className="text-xs text-gray-500">Template: {template.name}</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  );
 }
 
 // Inline Editor Component (Pro Feature)
@@ -5864,11 +5715,10 @@ export default function HomePage() {
                         exit={{ opacity: 0, x: 20 }}
                         className={`h-full ${isFree ? 'select-none' : ''}`}
                       >
-                        <LetterPreview 
+                        <LetterPreviewViewer
                           data={letterData}
                           onDataChange={setLetterData}
-                          cvData={cvData}
-                          t={t}
+                          showControls={true}
                         />
                       </motion.div>
                     )}
