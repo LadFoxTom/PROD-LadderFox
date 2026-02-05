@@ -3075,13 +3075,16 @@ export default function HomePage() {
               <div className="flex items-center gap-1 sm:gap-2">
                   <button
                     onClick={() => guardedRouterPush('/auth/login')}
-                    className="px-3 sm:px-4 py-2 text-sm text-gray-300 hover:text-white transition-colors whitespace-nowrap"
+                    className="px-3 sm:px-4 py-2 text-sm font-medium transition-colors whitespace-nowrap"
+                    style={{ color: 'var(--text-secondary)' }}
+                    onMouseEnter={(e) => { e.currentTarget.style.color = 'var(--text-primary)'; }}
+                    onMouseLeave={(e) => { e.currentTarget.style.color = 'var(--text-secondary)'; }}
                   >
                     {t('nav.sign_in')}
                   </button>
                   <button
                     onClick={() => guardedRouterPush('/auth/signup')}
-                    className="hidden md:block px-4 py-2 bg-white text-black text-sm font-medium rounded-lg hover:bg-gray-100 transition-colors whitespace-nowrap"
+                    className="hidden md:block px-4 py-2 text-sm font-medium rounded-lg transition-colors whitespace-nowrap bg-gradient-to-r from-blue-500 to-purple-500 text-white hover:from-blue-600 hover:to-purple-600"
                   >
                     {t('nav.get_started')}
                   </button>
