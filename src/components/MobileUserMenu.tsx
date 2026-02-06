@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useRef, useEffect } from 'react'
+import React from 'react'
 import { motion } from 'framer-motion'
 import { useRouter, usePathname } from 'next/navigation'
 import { useLocale } from '@/context/LocaleContext'
@@ -35,31 +35,19 @@ export default function MobileUserMenu({
   const router = useRouter()
   const pathname = usePathname()
   const { language, t } = useLocale()
-  const menuRef = useRef<HTMLDivElement>(null)
 
-  // Handle outside clicks
-  useEffect(() => {
-    if (!isOpen) return
-
-    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
-      const target = event.target as Node
-      if (menuRef.current && !menuRef.current.contains(target)) {
-        onClose()
-      }
-    }
-
-    document.addEventListener('mousedown', handleClickOutside)
-    document.addEventListener('touchstart', handleClickOutside)
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-      document.removeEventListener('touchstart', handleClickOutside)
-    }
-  }, [isOpen, onClose])
+  // Note: Outside clicks are handled by the overlay's onClick handler
+  // We removed document-level mousedown/touchstart listeners as they caused
+  // race conditions with menu item clicks (menu would close before navigation)
 
   const handleNavigation = (path: string) => {
-    onClose()
+    // Navigate first, then close menu with a small delay to prevent race condition
+    // with document-level event listeners
     router.push(path)
+    // Use setTimeout to ensure navigation starts before menu closes
+    setTimeout(() => {
+      onClose()
+    }, 50)
   }
 
   const handleSignOut = () => {
@@ -112,7 +100,6 @@ export default function MobileUserMenu({
 
       {/* User Menu - Slide in from right */}
       <motion.aside
-        ref={menuRef}
         initial={{ x: 280 }}
         animate={{ x: 0 }}
         exit={{ x: 280 }}

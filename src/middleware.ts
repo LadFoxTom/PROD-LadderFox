@@ -13,7 +13,7 @@ const baseSecurityHeaders: Record<string, string> = {
   'X-XSS-Protection': '1; mode=block',
   'Content-Security-Policy': [
     "default-src 'self'",
-    "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://js.stripe.com https://www.googletagmanager.com https://vercel.live https://*.vercel.app https://*.vercel.live blob:",
+    "script-src 'self' 'unsafe-eval' 'unsafe-inline' https://js.stripe.com https://www.googletagmanager.com https://vercel.live https://*.vercel.app https://*.vercel.live https://unpkg.com blob:",
     "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://vercel.live https://*.vercel.app",
     "font-src 'self' https://fonts.gstatic.com data: https:",
     "img-src 'self' data: https: blob:",

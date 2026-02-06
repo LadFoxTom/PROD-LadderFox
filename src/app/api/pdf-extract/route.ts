@@ -125,10 +125,10 @@ Extract all available information and return it as a JSON object with the follow
     }
   ],
   "skills": {
-    "technical": ["Programming languages, frameworks, tools"],
-    "soft": ["Communication, leadership, etc."],
-    "languages": ["Programming or human languages if listed separately"],
-    "tools": ["Specific software or tools"]
+    "technical": ["Programming languages, frameworks, databases, technologies - extract ALL mentioned skills"],
+    "soft": ["Communication, leadership, teamwork, problem-solving, etc."],
+    "languages": ["Programming languages if listed in skills section"],
+    "tools": ["Software, applications, platforms, methodologies (e.g., Agile, Scrum, Git, Docker)"]
   },
   "certifications": [
     {
