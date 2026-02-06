@@ -1047,6 +1047,27 @@ export default function HomePage() {
         }
         localStorage.removeItem('instantAction'); // Clear after use
       }
+
+      // Handle FAQ assistant welcome message
+      const faqAssistantMessage = localStorage.getItem('faqAssistantMessage');
+      if (faqAssistantMessage === 'true') {
+        const now = Date.now();
+
+        // Create welcome message from AI assistant
+        const welcomeMessage: Message = {
+          id: `assistant-${now}`,
+          role: 'assistant',
+          content: t('faq.assistant_welcome'),
+          timestamp: new Date(),
+        };
+
+        // Set message and activate conversation
+        setMessages([welcomeMessage]);
+        setIsConversationActive(true);
+        setActiveView('chat');
+
+        localStorage.removeItem('faqAssistantMessage'); // Clear after use
+      }
     }
   }, [t, language]);
   const [activeView, setActiveView] = useState<'chat' | 'editor' | 'photos' | 'templates' | 'ats-checker'>('chat');

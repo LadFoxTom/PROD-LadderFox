@@ -626,9 +626,9 @@ export default function FAQPage() {
         {/* Contact Section */}
         <div className="max-w-6xl mx-auto px-4 pb-20">
           <div className="rounded-2xl p-8 text-center" style={{ background: 'linear-gradient(to bottom right, rgba(59, 130, 246, 0.1), rgba(168, 85, 247, 0.1))', border: '1px solid var(--border-medium)' }}>
-            <h2 className="text-2xl font-bold mb-3" style={{ color: 'var(--text-heading)' }}>Still have questions?</h2>
+            <h2 className="text-2xl font-bold mb-3" style={{ color: 'var(--text-heading)' }}>{t('faq.page.contact.title')}</h2>
             <p className="mb-6" style={{ color: 'var(--text-secondary)' }}>
-              Can't find what you're looking for? Our support team is here to help.
+              {t('faq.page.contact.subtitle')}
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
               <a
@@ -646,10 +646,15 @@ export default function FAQPage() {
                 }}
               >
                 <FiMail size={18} />
-                Email Support
+                {t('faq.page.contact.email')}
               </a>
-              <a
-                href="/"
+              <button
+                onClick={() => {
+                  // Set a special opening message for the AI assistant
+                  localStorage.setItem('activateSplitscreen', 'true')
+                  localStorage.setItem('faqAssistantMessage', 'true')
+                  router.push('/')
+                }}
                 className="inline-flex items-center justify-center gap-2 px-6 py-3 font-medium rounded-xl transition-colors"
                 style={{
                   backgroundColor: 'var(--bg-tertiary)',
@@ -666,8 +671,8 @@ export default function FAQPage() {
                 }}
               >
                 <FiMessageCircle size={18} />
-                Ask AI Assistant
-              </a>
+                {t('faq.page.contact.ai')}
+              </button>
             </div>
           </div>
         </div>

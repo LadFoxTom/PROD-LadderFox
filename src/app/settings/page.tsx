@@ -11,7 +11,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import {
   FiArrowLeft, FiUser, FiCreditCard, FiSettings, FiLogOut,
   FiChevronDown, FiGrid, FiHelpCircle, FiCheck, FiStar,
-  FiSave, FiPlus, FiExternalLink, FiFolder, FiBriefcase, FiX, FiClipboard, FiEye
+  FiSave, FiPlus, FiExternalLink, FiFolder, FiBriefcase, FiX, FiClipboard, FiEye, FiTrash2, FiMail
 } from 'react-icons/fi'
 import MobileUserMenu from '@/components/MobileUserMenu'
 
@@ -258,6 +258,27 @@ export default function SettingsPage() {
       toast.error(t('settings.portal_failed'))
     } finally {
       setIsManagingSubscription(false)
+    }
+  }
+
+  const handleDeleteAccount = async () => {
+    try {
+      const response = await fetch('/api/user', {
+        method: 'DELETE',
+      })
+      if (!response.ok) {
+        const data = await response.json()
+        throw new Error(data.error || 'Failed to delete account')
+      }
+      // Clear local storage
+      if (typeof window !== 'undefined') {
+        localStorage.clear()
+      }
+      toast.success(t('settings.account_deleted'))
+      // Sign out and redirect to home
+      signOut({ callbackUrl: '/' })
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : t('settings.delete_account_failed'))
     }
   }
 
@@ -648,8 +669,13 @@ export default function SettingsPage() {
               <div className="rounded-xl p-4 mt-4" style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-subtle)' }}>
                 <h3 className="text-sm font-medium mb-3" style={{ color: 'var(--text-tertiary)' }}>{t('settings.quick_actions')}</h3>
                 <div className="space-y-2">
-                  <button 
-                    onClick={() => router.push('/')} 
+                  <button
+                    onClick={() => {
+                      localStorage.setItem('activateSplitscreen', 'true')
+                      localStorage.setItem('preferredArtifactType', 'cv')
+                      localStorage.setItem('instantAction', 'instant-cv')
+                      router.push('/')
+                    }}
                     className="w-full flex items-center gap-2 px-3 py-2 text-sm rounded-lg transition-colors"
                     style={{ color: 'var(--text-secondary)' }}
                     onMouseEnter={(e) => {
@@ -663,8 +689,28 @@ export default function SettingsPage() {
                   >
                     <FiPlus size={14} /> {t('settings.create_new_cv')}
                   </button>
-                  <button 
-                    onClick={() => router.push('/dashboard')} 
+                  <button
+                    onClick={() => {
+                      localStorage.setItem('activateSplitscreen', 'true')
+                      localStorage.setItem('preferredArtifactType', 'letter')
+                      localStorage.setItem('instantAction', 'instant-letter')
+                      router.push('/')
+                    }}
+                    className="w-full flex items-center gap-2 px-3 py-2 text-sm rounded-lg transition-colors"
+                    style={{ color: 'var(--text-secondary)' }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.backgroundColor = 'var(--bg-hover)';
+                      e.currentTarget.style.color = 'var(--text-primary)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.backgroundColor = 'transparent';
+                      e.currentTarget.style.color = 'var(--text-secondary)';
+                    }}
+                  >
+                    <FiMail size={14} /> {t('settings.create_new_letter')}
+                  </button>
+                  <button
+                    onClick={() => router.push('/dashboard')}
                     className="w-full flex items-center gap-2 px-3 py-2 text-sm rounded-lg transition-colors"
                     style={{ color: 'var(--text-secondary)' }}
                     onMouseEnter={(e) => {
@@ -1057,18 +1103,39 @@ export default function SettingsPage() {
                   </div>
 
                   {/* Danger Zone */}
-                  <div className="bg-[#111111] border border-red-500/20 rounded-xl p-6">
+                  <div
+                    className="rounded-xl p-6"
+                    style={{
+                      backgroundColor: 'var(--bg-card)',
+                      border: '1px solid rgba(239, 68, 68, 0.2)'
+                    }}
+                  >
                     <h3 className="text-lg font-semibold text-red-400 mb-2">{t('settings.danger_zone')}</h3>
-                    <p className="text-sm text-gray-400 mb-4">
-                      {t('settings.delete_account_warning')}
+                    <p className="text-sm mb-4" style={{ color: 'var(--text-secondary)' }}>
+                      {t('settings.danger_zone_description')}
                     </p>
-                    <button
-                      onClick={() => signOut({ callbackUrl: '/' })}
-                      className="flex items-center gap-2 px-4 py-2.5 bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 text-red-400 rounded-xl text-sm font-medium transition-colors"
-                    >
-                      <FiLogOut size={16} />
-                      {t('settings.sign_out')}
-                    </button>
+                    <div className="flex flex-col sm:flex-row gap-3">
+                      <button
+                        onClick={() => signOut({ callbackUrl: '/' })}
+                        className="flex items-center gap-2 px-4 py-2.5 bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 text-red-400 rounded-xl text-sm font-medium transition-colors"
+                      >
+                        <FiLogOut size={16} />
+                        {t('settings.sign_out')}
+                      </button>
+                      <button
+                        onClick={() => {
+                          if (window.confirm(t('settings.delete_account_confirm'))) {
+                            if (window.confirm(t('settings.delete_account_confirm_final'))) {
+                              handleDeleteAccount()
+                            }
+                          }
+                        }}
+                        className="flex items-center gap-2 px-4 py-2.5 bg-red-500/10 hover:bg-red-500/20 border border-red-500/20 text-red-400 rounded-xl text-sm font-medium transition-colors"
+                      >
+                        <FiTrash2 size={16} />
+                        {t('settings.delete_account')}
+                      </button>
+                    </div>
                   </div>
                 </div>
               )}

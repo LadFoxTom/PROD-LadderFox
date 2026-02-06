@@ -273,16 +273,18 @@ export default function DashboardPage() {
   }, [isAuthenticated, router, fetchSavedItems])
 
   const handleCreateNewCV = () => {
-    // Activate splitscreen view with CV and Letter both visible
+    // Activate splitscreen view with instant action like home page quick actions
     localStorage.setItem('activateSplitscreen', 'true')
     localStorage.setItem('preferredArtifactType', 'cv')
+    localStorage.setItem('instantAction', 'instant-cv')
     router.push('/')
   }
-  
+
   const handleCreateNewLetter = () => {
-    // Activate splitscreen view with CV and Letter both visible
+    // Activate splitscreen view with instant action like home page quick actions
     localStorage.setItem('activateSplitscreen', 'true')
     localStorage.setItem('preferredArtifactType', 'letter')
+    localStorage.setItem('instantAction', 'instant-letter')
     router.push('/')
   }
 

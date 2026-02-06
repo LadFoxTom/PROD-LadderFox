@@ -1230,6 +1230,15 @@
   "settings.profile_update_failed": "Failed to update profile",
   "settings.no_subscription": "No active subscription to manage",
   "settings.portal_failed": "Failed to open customer portal",
+  "settings.danger_zone_description": "Permanent actions that cannot be undone. Please be careful.",
+  "settings.delete_account": "Delete Account",
+  "settings.delete_account_confirm": "Are you sure you want to delete your account? This will permanently delete all your CVs, letters, and data.",
+  "settings.delete_account_confirm_final": "This action is IRREVERSIBLE. Are you absolutely sure?",
+  "settings.account_deleted": "Your account has been deleted successfully",
+  "settings.delete_account_failed": "Failed to delete account. Please try again.",
+  "settings.create_new_letter": "Create New Letter",
+
+  "faq.assistant_welcome": "Hello! I'm the LadderFox AI Assistant. How can I help you today? You can ask me questions about:\n\n- Creating and editing your CV\n- Writing cover letters\n- Using LadderFox features\n- Tips for job applications\n\nWhat would you like to know?",
 
   "data_compliance": {
     "meta": {

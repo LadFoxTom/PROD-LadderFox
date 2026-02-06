@@ -64,7 +64,7 @@ export async function PUT(request: NextRequest) {
 export async function GET(request: NextRequest) {
   try {
     const session = await getServerSession(authOptions)
-    
+
     if (!session?.user?.email) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
@@ -88,7 +88,75 @@ export async function GET(request: NextRequest) {
   } catch (error) {
     console.error('Error fetching user profile:', error)
     return NextResponse.json(
-      { error: 'Failed to fetch profile' }, 
+      { error: 'Failed to fetch profile' },
+      { status: 500 }
+    )
+  }
+}
+
+export async function DELETE(request: NextRequest) {
+  try {
+    const session = await getServerSession(authOptions)
+
+    if (!session?.user?.email) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
+    }
+
+    const userEmail = session.user.email
+
+    // Find the user first to get their ID
+    const user = await prisma.user.findUnique({
+      where: { email: userEmail },
+      select: { id: true }
+    })
+
+    if (!user) {
+      return NextResponse.json({ error: 'User not found' }, { status: 404 })
+    }
+
+    // Delete all user data in order (respecting foreign key constraints)
+    // This will cascade delete all related records
+
+    // Delete all CVs
+    await prisma.cV.deleteMany({
+      where: { userId: user.id }
+    })
+
+    // Delete all Letters
+    await prisma.letter.deleteMany({
+      where: { userId: user.id }
+    })
+
+    // Delete all Subscriptions
+    await prisma.subscription.deleteMany({
+      where: { userId: user.id }
+    })
+
+    // Delete all Sessions
+    await prisma.session.deleteMany({
+      where: { userId: user.id }
+    })
+
+    // Delete all Accounts (OAuth connections)
+    await prisma.account.deleteMany({
+      where: { userId: user.id }
+    })
+
+    // Finally, delete the user
+    await prisma.user.delete({
+      where: { id: user.id }
+    })
+
+    console.log(`[User API] User ${userEmail} and all data deleted successfully`)
+
+    return NextResponse.json({
+      message: 'Account and all data deleted successfully'
+    })
+
+  } catch (error) {
+    console.error('Error deleting user account:', error)
+    return NextResponse.json(
+      { error: 'Failed to delete account' },
       { status: 500 }
     )
   }
