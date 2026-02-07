@@ -4239,7 +4239,7 @@ export default function HomePage() {
                   />
                   
                   {/* Textarea row with buttons */}
-                  <div className="relative flex items-center" style={{ minHeight: '64px' }}>
+                  <div className="relative flex items-center">
                     {/* Recording Overlay */}
                     {isRecording && (
                       <div className="absolute inset-0 flex items-center justify-center bg-red-500/10 backdrop-blur-[1px] rounded-2xl z-10 pointer-events-none">
@@ -4273,18 +4273,17 @@ export default function HomePage() {
                       rows={1}
                       className="flex-1 bg-transparent px-4 sm:px-6 pr-28 sm:pr-32 text-base sm:text-lg resize-none focus:outline-none [&::-webkit-scrollbar]:hidden"
                       style={{
-                        height: 'auto',
-                        minHeight: 'auto',
+                        height: '64px',
+                        minHeight: '64px',
                         maxHeight: '200px',
-                        paddingTop: '8px',
-                        paddingBottom: '8px',
+                        paddingTop: '20px',
+                        paddingBottom: '20px',
                         lineHeight: '24px',
                         overflowY: 'hidden',
                         scrollbarWidth: 'none',
                         textAlign: 'left',
                         boxSizing: 'border-box',
                         color: 'var(--text-primary)',
-                        whiteSpace: 'pre-wrap',
                       } as React.CSSProperties}
                       disabled={isUploading || isRecording}
                     />

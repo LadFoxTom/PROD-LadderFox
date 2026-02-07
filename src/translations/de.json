@@ -589,7 +589,7 @@
   "landing.letter_promo.title": "KI-gestützter Motivationsschreiben-Builder",
   "landing.main.title": "Ihr KI-Karrierepartner",
   "landing.main.subtitle": "Erstellen Sie beeindruckende CVs, erstellen Sie perfekte Anschreiben und prüfen Sie die ATS-Kompatibilität—alles durch Gespräch.",
-  "landing.main.prompt.placeholder": "Was möchten Sie heute erstellen?",
+  "landing.main.prompt.placeholder": "Was möchten Sie erstellen?",
   "landing.main.prompt.placeholder.uploading": "Datei wird verarbeitet...",
   "landing.main.prompt.placeholder.with_file": "Beschreiben Sie, was Sie mit dieser Datei tun möchten...",
   "landing.main.suggestions.create_cv": "Erstellen Sie einen professionellen CV",
