@@ -4239,7 +4239,7 @@ export default function HomePage() {
                   />
                   
                   {/* Textarea row with buttons */}
-                  <div className="relative flex items-center">
+                  <div className="relative flex items-start">
                     {/* Recording Overlay */}
                     {isRecording && (
                       <div className="absolute inset-0 flex items-center justify-center bg-red-500/10 backdrop-blur-[1px] rounded-2xl z-10 pointer-events-none">
@@ -4270,7 +4270,7 @@ export default function HomePage() {
                           ? t('landing.main.prompt.placeholder.with_file')
                           : t('landing.main.prompt.placeholder')
                       }
-                      rows={1}
+                      rows={2}
                       className="flex-1 bg-transparent px-4 sm:px-6 pr-28 sm:pr-32 text-base sm:text-lg resize-none focus:outline-none [&::-webkit-scrollbar]:hidden"
                       style={{
                         height: '64px',
@@ -4285,6 +4285,7 @@ export default function HomePage() {
                         boxSizing: 'border-box',
                         color: 'var(--text-primary)',
                         whiteSpace: 'pre-wrap',
+                        verticalAlign: 'top',
                       } as React.CSSProperties}
                       disabled={isUploading || isRecording}
                     />
