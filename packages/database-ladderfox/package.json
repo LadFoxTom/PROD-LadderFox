@@ -1,0 +1,17 @@
+{
+  "name": "@repo/database-ladderfox",
+  "version": "1.0.0",
+  "private": true,
+  "main": "./src/client.ts",
+  "types": "./src/client.ts",
+  "scripts": {
+    "db:generate": "echo 'Run from apps/ladderfox instead'",
+    "db:studio": "echo 'Run from apps/ladderfox instead'"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.13.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.5"
+  }
+}

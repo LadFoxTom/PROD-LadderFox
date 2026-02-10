@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HireKit Widget Test</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/regular/style.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: #FAFBFC;
+      color: #1E293B;
+      min-height: 100vh;
+    }
+    .career-header {
+      background: white;
+      border-bottom: 1px solid #E2E8F0;
+      padding: 16px 0;
+    }
+    .career-header-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .career-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .career-logo-mark {
+      width: 36px;
+      height: 36px;
+      background: linear-gradient(135deg, #4F46E5, #7C3AED);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 800;
+      font-size: 16px;
+    }
+    .career-logo-text {
+      font-size: 20px;
+      font-weight: 800;
+      color: #1E293B;
+    }
+    .career-nav {
+      display: flex;
+      gap: 24px;
+    }
+    .career-nav a {
+      font-size: 14px;
+      font-weight: 500;
+      color: #64748B;
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .career-nav a:hover { color: #4F46E5; }
+    .career-nav a.active { color: #4F46E5; font-weight: 600; }
+
+    .career-hero {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 48px 24px 32px;
+      text-align: center;
+    }
+    .career-hero h1 {
+      font-size: 32px;
+      font-weight: 800;
+      color: #1E293B;
+      margin-bottom: 12px;
+    }
+    .career-hero p {
+      font-size: 16px;
+      color: #64748B;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    .widget-container {
+      max-width: 1000px;
+      margin: 0 auto 64px;
+      padding: 0 24px;
+    }
+
+    /* Dev badge */
+    .dev-badge {
+      position: fixed;
+      bottom: 16px;
+      right: 16px;
+      background: #1E293B;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      z-index: 9999;
+    }
+    .dev-badge .dot {
+      width: 8px;
+      height: 8px;
+      background: #51CF66;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Simulated career page header -->
+  <header class="career-header">
+    <div class="career-header-inner">
+      <div class="career-logo">
+        <div class="career-logo-mark">L</div>
+        <span class="career-logo-text">LadderFox</span>
+      </div>
+      <nav class="career-nav">
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Products</a>
+        <a href="#" class="active">Careers</a>
+        <a href="#">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero section -->
+  <div class="career-hero">
+    <h1>Join Our Team</h1>
+    <p>We're looking for talented people to help build the future. Submit your CV below and we'll get back to you.</p>
+  </div>
+
+  <!-- Widget embed area -->
+  <div class="widget-container">
+    <div id="hirekit-widget"></div>
+  </div>
+
+  <!-- Dev mode badge -->
+  <div class="dev-badge">
+    <span class="dot"></span>
+    HireKit Widget Dev Mode
+  </div>
+
+  <script type="module" src="/src/main.tsx"></script>
+  <script type="module">
+    const waitForHireKit = setInterval(() => {
+      if (window.HireKit) {
+        clearInterval(waitForHireKit);
+        window.HireKit.init({
+          companyId: 'cmlh07xc70001uc0cbsun2xap'
+        });
+      }
+    }, 100);
+  </script>
+</body>
+</html>
