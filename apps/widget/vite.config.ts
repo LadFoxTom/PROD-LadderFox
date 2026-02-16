@@ -5,7 +5,17 @@ import cssInjectedByJsPlugin from 'vite-plugin-css-injected-by-js';
 export default defineConfig({
   plugins: [
     react(),
-    cssInjectedByJsPlugin(),
+    cssInjectedByJsPlugin({
+      styleId: 'hirekit',
+      injectCodeFunction: function(cssCode: string) {
+        if (typeof document !== 'undefined') {
+          const style = document.createElement('style');
+          style.setAttribute('data-hirekit', '');
+          style.appendChild(document.createTextNode(cssCode));
+          document.head.appendChild(style);
+        }
+      },
+    }),
   ],
   define: {
     'process.env.NODE_ENV': JSON.stringify('production'),
