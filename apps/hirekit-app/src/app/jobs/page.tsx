@@ -46,7 +46,7 @@ export default async function JobsPage({
             href="/jobs/new"
             className="px-5 py-2.5 bg-[#4F46E5] text-white rounded-xl font-semibold text-sm hover:bg-[#4338CA] transition-all duration-300 shadow-md shadow-indigo-500/25 flex items-center gap-2"
           >
-            <i className="ph-plus text-base" />
+            <i className="ph ph-plus text-base" />
             New Job
           </Link>
         </div>
@@ -56,7 +56,7 @@ export default async function JobsPage({
           <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
             <div className="flex items-center justify-between mb-4">
               <div className="w-12 h-12 rounded-[20px] flex items-center justify-center bg-[#DCFCE7]">
-                <i className="ph-check-circle text-xl text-[#16A34A]" />
+                <i className="ph ph-check-circle text-xl text-[#16A34A]" />
               </div>
             </div>
             <p className="text-3xl font-bold text-[#1E293B]">{activeCount}</p>
@@ -65,7 +65,7 @@ export default async function JobsPage({
           <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
             <div className="flex items-center justify-between mb-4">
               <div className="w-12 h-12 rounded-[20px] flex items-center justify-center bg-[#F1F5F9]">
-                <i className="ph-archive text-xl text-[#64748B]" />
+                <i className="ph ph-archive text-xl text-[#64748B]" />
               </div>
             </div>
             <p className="text-3xl font-bold text-[#1E293B]">{inactiveCount}</p>
@@ -102,7 +102,7 @@ export default async function JobsPage({
           {jobs.length === 0 ? (
             <div className="p-16 text-center">
               <div className="w-16 h-16 bg-[#E0E7FF] rounded-full flex items-center justify-center mx-auto mb-4">
-                <i className="ph-briefcase text-[#4F46E5] text-2xl" />
+                <i className="ph ph-briefcase text-[#4F46E5] text-2xl" />
               </div>
               <p className="text-[#64748B] text-[15px]">
                 {showActive
@@ -114,7 +114,7 @@ export default async function JobsPage({
                   href="/jobs/new"
                   className="inline-flex items-center gap-2 mt-4 px-5 py-2.5 bg-[#4F46E5] text-white rounded-xl font-semibold text-sm hover:bg-[#4338CA] transition-all"
                 >
-                  <i className="ph-plus" />
+                  <i className="ph ph-plus" />
                   Create Job
                 </Link>
               )}
@@ -168,7 +168,7 @@ export default async function JobsPage({
                     </td>
                     <td className="px-6 py-4">
                       <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#1E293B]">
-                        <i className="ph-users text-[#94A3B8]" />
+                        <i className="ph ph-users text-[#94A3B8]" />
                         {job._count.applications}
                       </span>
                     </td>

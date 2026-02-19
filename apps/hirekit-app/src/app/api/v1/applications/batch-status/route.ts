@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { db } from '@repo/database-hirekit';
+import { logActivity } from '@/lib/activity';
 
 const VALID_STATUSES = ['new', 'screening', 'interviewing', 'offered', 'hired', 'rejected'];
 
@@ -19,10 +20,17 @@ export async function PATCH(request: NextRequest) {
   }
 
   const body = await request.json();
-  const { applicationId, status } = body;
+  const { applicationId, applicationIds, status } = body;
 
-  if (!applicationId || !status) {
-    return NextResponse.json({ error: 'Missing applicationId or status' }, { status: 400 });
+  // Support both single ID (kanban) and array (bulk actions)
+  const ids: string[] = applicationIds
+    ? applicationIds
+    : applicationId
+      ? [applicationId]
+      : [];
+
+  if (ids.length === 0 || !status) {
+    return NextResponse.json({ error: 'Missing applicationId(s) or status' }, { status: 400 });
   }
 
   if (!VALID_STATUSES.includes(status)) {
@@ -30,7 +38,7 @@ export async function PATCH(request: NextRequest) {
   }
 
   const result = await db.application.updateMany({
-    where: { id: applicationId, companyId: company.id },
+    where: { id: { in: ids }, companyId: company.id },
     data: { status },
   });
 
@@ -38,5 +46,16 @@ export async function PATCH(request: NextRequest) {
     return NextResponse.json({ error: 'Not found' }, { status: 404 });
   }
 
-  return NextResponse.json({ success: true });
+  // Log activity for each updated application
+  for (const id of ids) {
+    logActivity({
+      companyId: company.id,
+      applicationId: id,
+      type: 'status_change',
+      data: { to: status },
+      performedBy: session.user.id,
+    });
+  }
+
+  return NextResponse.json({ success: true, updated: result.count });
 }

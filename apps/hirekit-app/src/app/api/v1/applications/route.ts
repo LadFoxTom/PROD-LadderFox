@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { db } from '@repo/database-hirekit';
+import { logActivity } from '@/lib/activity';
 
 // POST - Widget submits an application (no auth required)
 export async function POST(request: NextRequest) {
@@ -58,6 +59,14 @@ export async function POST(request: NextRequest) {
       phone,
       status: 'new',
     },
+  });
+
+  logActivity({
+    companyId,
+    applicationId: application.id,
+    type: 'application_created',
+    data: { name: application.name, email: application.email, jobId: body.jobId || null },
+    performedBy: null,
   });
 
   return NextResponse.json(

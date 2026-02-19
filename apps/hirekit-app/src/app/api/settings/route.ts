@@ -15,6 +15,7 @@ export async function GET() {
       branding: true,
       cvTemplate: true,
       landingPage: true,
+      jobListingConfig: true,
     },
   });
 
@@ -52,6 +53,27 @@ export async function GET() {
           successMessage: 'Thank you! Your application has been submitted.',
           redirectUrl: null,
           widgetType: 'form',
+        },
+    jobListingConfig: company.jobListingConfig
+      ? {
+          templateId: company.jobListingConfig.templateId,
+          showFilters: company.jobListingConfig.showFilters,
+          showSearch: company.jobListingConfig.showSearch,
+          customTemplateCSS: company.jobListingConfig.customTemplateCSS,
+          customTemplateName: company.jobListingConfig.customTemplateName,
+          customFontUrl: company.jobListingConfig.customFontUrl,
+          customLayout: company.jobListingConfig.customLayout,
+          customSourceUrl: company.jobListingConfig.customSourceUrl,
+        }
+      : {
+          templateId: 'simple',
+          showFilters: true,
+          showSearch: true,
+          customTemplateCSS: null,
+          customTemplateName: null,
+          customFontUrl: null,
+          customLayout: null,
+          customSourceUrl: null,
         },
   });
 }
@@ -127,6 +149,35 @@ export async function PUT(request: NextRequest) {
         successMessage: body.landingPage.successMessage,
         redirectUrl: body.landingPage.redirectUrl,
         ...(body.landingPage.widgetType && { widgetType: body.landingPage.widgetType }),
+      },
+    });
+  }
+
+  if (body.jobListingConfig) {
+    await db.jobListingConfig.upsert({
+      where: { companyId: company.id },
+      create: {
+        companyId: company.id,
+        templateId: body.jobListingConfig.templateId || 'simple',
+        showFilters: body.jobListingConfig.showFilters ?? true,
+        showSearch: body.jobListingConfig.showSearch ?? true,
+        customTemplateCSS: body.jobListingConfig.customTemplateCSS || null,
+        customTemplateName: body.jobListingConfig.customTemplateName || null,
+        customFontUrl: body.jobListingConfig.customFontUrl || null,
+        customLayout: body.jobListingConfig.customLayout || null,
+        customSourceUrl: body.jobListingConfig.customSourceUrl || null,
+        customDesignTokens: body.jobListingConfig.customDesignTokens || null,
+      },
+      update: {
+        ...(body.jobListingConfig.templateId !== undefined && { templateId: body.jobListingConfig.templateId }),
+        ...(body.jobListingConfig.showFilters !== undefined && { showFilters: body.jobListingConfig.showFilters }),
+        ...(body.jobListingConfig.showSearch !== undefined && { showSearch: body.jobListingConfig.showSearch }),
+        ...(body.jobListingConfig.customTemplateCSS !== undefined && { customTemplateCSS: body.jobListingConfig.customTemplateCSS }),
+        ...(body.jobListingConfig.customTemplateName !== undefined && { customTemplateName: body.jobListingConfig.customTemplateName }),
+        ...(body.jobListingConfig.customFontUrl !== undefined && { customFontUrl: body.jobListingConfig.customFontUrl }),
+        ...(body.jobListingConfig.customLayout !== undefined && { customLayout: body.jobListingConfig.customLayout }),
+        ...(body.jobListingConfig.customSourceUrl !== undefined && { customSourceUrl: body.jobListingConfig.customSourceUrl }),
+        ...(body.jobListingConfig.customDesignTokens !== undefined && { customDesignTokens: body.jobListingConfig.customDesignTokens }),
       },
     });
   }

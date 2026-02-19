@@ -5,11 +5,11 @@ import { usePathname } from 'next/navigation';
 import { signOut, useSession } from 'next-auth/react';
 
 const navItems = [
-  { href: '/dashboard', label: 'Dashboard', icon: 'ph-squares-four' },
-  { href: '/jobs', label: 'Jobs', icon: 'ph-briefcase' },
-  { href: '/applications', label: 'Applications', icon: 'ph-users' },
-  { href: '/configuration', label: 'Configuration', icon: 'ph-sliders' },
-  { href: '/embed', label: 'Embed Code', icon: 'ph-code' },
+  { href: '/dashboard', label: 'Dashboard', icon: 'ph ph-squares-four' },
+  { href: '/jobs', label: 'Jobs', icon: 'ph ph-briefcase' },
+  { href: '/applications', label: 'Applications', icon: 'ph ph-users' },
+  { href: '/configuration', label: 'Configuration', icon: 'ph ph-sliders' },
+  { href: '/embed', label: 'Embed Code', icon: 'ph ph-code' },
 ];
 
 export function DashboardLayout({ children }: { children: React.ReactNode }) {

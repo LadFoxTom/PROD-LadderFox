@@ -1,11 +1,21 @@
 export interface JobsWidgetConfig {
   companyId: string;
   containerId?: string;
+  template?: string;
   layout?: 'cards' | 'list';
   theme?: 'light' | 'dark';
   primaryColor?: string;
   showFilters?: boolean;
   showSearch?: boolean;
+}
+
+export interface JobListingConfigResponse {
+  templateId: string;
+  showFilters: boolean;
+  showSearch: boolean;
+  customCSS?: string;
+  customFontUrl?: string;
+  customLayout?: 'cards' | 'list';
 }
 
 export interface Job {
@@ -29,6 +39,7 @@ export interface CompanyInfo {
 
 export interface JobsApiResponse {
   company: CompanyInfo;
+  jobListingConfig?: JobListingConfigResponse;
   jobs: Job[];
 }
 

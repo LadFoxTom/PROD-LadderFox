@@ -72,7 +72,7 @@ export function KanbanCard({ id, name, email, jobTitle, aiScore, createdAt }: Ka
       </div>
       {jobTitle && (
         <p className="text-xs text-[#64748B] mt-2 flex items-center gap-1">
-          <i className="ph-briefcase" />
+          <i className="ph ph-briefcase" />
           {jobTitle}
         </p>
       )}

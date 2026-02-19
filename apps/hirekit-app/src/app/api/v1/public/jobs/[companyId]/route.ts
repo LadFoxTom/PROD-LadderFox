@@ -11,6 +11,7 @@ export async function GET(
     where: { id: companyId },
     include: {
       branding: true,
+      jobListingConfig: true,
       jobs: {
         where: { active: true },
         orderBy: { createdAt: 'desc' },
@@ -34,18 +35,33 @@ export async function GET(
     return NextResponse.json({ error: 'Company not found' }, { status: 404 });
   }
 
+  const jobListingConfig: Record<string, any> = {
+    templateId: company.jobListingConfig?.templateId || 'simple',
+    showFilters: company.jobListingConfig?.showFilters ?? true,
+    showSearch: company.jobListingConfig?.showSearch ?? true,
+  };
+
+  // Include custom template fields only when using custom template
+  if (jobListingConfig.templateId === 'custom' && company.jobListingConfig) {
+    jobListingConfig.customCSS = company.jobListingConfig.customTemplateCSS || null;
+    jobListingConfig.customFontUrl = company.jobListingConfig.customFontUrl || null;
+    jobListingConfig.customLayout = company.jobListingConfig.customLayout || null;
+  }
+
   const response = NextResponse.json({
     company: {
       name: company.name,
       logo: company.branding?.logoUrl || null,
       primaryColor: company.branding?.primaryColor || '#4F46E5',
     },
+    jobListingConfig,
     jobs: company.jobs,
   });
 
-  response.headers.set(
-    'Cache-Control',
-    'public, max-age=60, stale-while-revalidate=300'
+  const isDev = process.env.NODE_ENV !== 'production';
+  response.headers.set('Cache-Control', isDev
+    ? 'no-cache, no-store, must-revalidate'
+    : 'public, max-age=60, stale-while-revalidate=300'
   );
 
   return response;

@@ -18,10 +18,12 @@ model Company {
   users        CompanyUser[]
   applications Application[]
   jobs         Job[]
-  branding     Branding?
-  cvTemplate   CVTemplate?
-  landingPage  LandingPage?
-  subscription Subscription?
+  branding         Branding?
+  cvTemplate       CVTemplate?
+  landingPage      LandingPage?
+  jobListingConfig JobListingConfig?
+  subscription     Subscription?
+  activityLogs     ActivityLog[]
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
 
@@ -58,21 +60,22 @@ model CompanyUser {
 // APPLICATIONS (incoming CVs)
 // status: new | screening | interviewing | offered | hired | rejected
 model Application {
-  id          String   @id @default(cuid())
-  companyId   String
-  company     Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
-  jobId       String?
-  job         Job?     @relation(fields: [jobId], references: [id], onDelete: SetNull)
-  cvData      Json
-  email       String
-  name        String?
-  phone       String?
-  status      String   @default("new")
-  notes       String?
-  aiScore     Int?
-  aiScoreData Json?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  id           String        @id @default(cuid())
+  companyId    String
+  company      Company       @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  jobId        String?
+  job          Job?          @relation(fields: [jobId], references: [id], onDelete: SetNull)
+  cvData       Json
+  email        String
+  name         String?
+  phone        String?
+  status       String        @default("new")
+  notes        String?
+  aiScore      Int?
+  aiScoreData  Json?
+  activityLogs ActivityLog[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
 
   @@index([companyId])
   @@index([jobId])
@@ -128,6 +131,24 @@ model CVTemplate {
   pdfConfig    Json?
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
+}
+
+// JOB LISTING CONFIG
+model JobListingConfig {
+  id                 String   @id @default(cuid())
+  companyId          String   @unique
+  company            Company  @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  templateId         String   @default("simple")
+  showFilters        Boolean  @default(true)
+  showSearch         Boolean  @default(true)
+  customTemplateCSS  String?  @db.Text
+  customTemplateName String?
+  customFontUrl      String?
+  customLayout       String?
+  customSourceUrl    String?
+  customDesignTokens Json?
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
 }
 
 // LANDING PAGE CONFIG
@@ -199,4 +220,22 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+// ACTIVITY LOG (timeline for applications)
+// type: application_created | status_change | note_added | ai_scored
+model ActivityLog {
+  id            String      @id @default(cuid())
+  companyId     String
+  company       Company     @relation(fields: [companyId], references: [id], onDelete: Cascade)
+  applicationId String
+  application   Application @relation(fields: [applicationId], references: [id], onDelete: Cascade)
+  type          String
+  data          Json
+  performedBy   String?
+  createdAt     DateTime    @default(now())
+
+  @@index([applicationId])
+  @@index([companyId])
+  @@index([createdAt])
 }

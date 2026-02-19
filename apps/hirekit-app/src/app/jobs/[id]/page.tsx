@@ -53,7 +53,7 @@ export default async function JobDetailPage({
             href="/jobs"
             className="inline-flex items-center gap-1 text-sm font-semibold text-[#4F46E5] hover:text-[#4338CA] transition-colors"
           >
-            <i className="ph-arrow-left" />
+            <i className="ph ph-arrow-left" />
             Back to Jobs
           </Link>
         </div>
@@ -80,25 +80,25 @@ export default async function JobDetailPage({
                   <div className="flex flex-wrap gap-4 mt-3">
                     {job.department && (
                       <span className="flex items-center gap-1.5 text-sm text-[#94A3B8]">
-                        <i className="ph-buildings" />
+                        <i className="ph ph-buildings" />
                         {job.department}
                       </span>
                     )}
                     {job.location && (
                       <span className="flex items-center gap-1.5 text-sm text-[#94A3B8]">
-                        <i className="ph-map-pin" />
+                        <i className="ph ph-map-pin" />
                         {job.location}
                       </span>
                     )}
                     {job.type && (
                       <span className="flex items-center gap-1.5 text-sm text-[#94A3B8]">
-                        <i className="ph-clock" />
+                        <i className="ph ph-clock" />
                         {job.type.charAt(0).toUpperCase() + job.type.slice(1)}
                       </span>
                     )}
                     {formatSalary() && (
                       <span className="flex items-center gap-1.5 text-sm text-[#94A3B8]">
-                        <i className="ph-money" />
+                        <i className="ph ph-money" />
                         {formatSalary()}
                       </span>
                     )}
@@ -120,7 +120,7 @@ export default async function JobDetailPage({
             {job.description && (
               <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
                 <div className="flex items-center gap-2 mb-5">
-                  <i className="ph-file-text text-xl text-[#4F46E5]" />
+                  <i className="ph ph-file-text text-xl text-[#4F46E5]" />
                   <h3 className="text-lg font-bold text-[#1E293B]">Description</h3>
                 </div>
                 <p className="text-[#1E293B] text-[15px] leading-relaxed whitespace-pre-wrap">

@@ -4,12 +4,12 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 
 const STATUSES = [
-  { value: 'new', label: 'New', icon: 'ph-envelope-simple', bg: '#E0E7FF', text: '#4F46E5', ring: '#4F46E5' },
-  { value: 'screening', label: 'Screening', icon: 'ph-eye', bg: '#FEF3C7', text: '#D97706', ring: '#D97706' },
-  { value: 'interviewing', label: 'Interviewing', icon: 'ph-video-camera', bg: '#DBEAFE', text: '#2563EB', ring: '#2563EB' },
-  { value: 'offered', label: 'Offered', icon: 'ph-hand-heart', bg: '#F3E8FF', text: '#7C3AED', ring: '#7C3AED' },
-  { value: 'hired', label: 'Hired', icon: 'ph-check-circle', bg: '#DCFCE7', text: '#16A34A', ring: '#16A34A' },
-  { value: 'rejected', label: 'Rejected', icon: 'ph-x-circle', bg: '#FEE2E2', text: '#DC2626', ring: '#DC2626' },
+  { value: 'new', label: 'New', icon: 'ph ph-envelope-simple', bg: '#E0E7FF', text: '#4F46E5', ring: '#4F46E5' },
+  { value: 'screening', label: 'Screening', icon: 'ph ph-eye', bg: '#FEF3C7', text: '#D97706', ring: '#D97706' },
+  { value: 'interviewing', label: 'Interviewing', icon: 'ph ph-video-camera', bg: '#DBEAFE', text: '#2563EB', ring: '#2563EB' },
+  { value: 'offered', label: 'Offered', icon: 'ph ph-hand-heart', bg: '#F3E8FF', text: '#7C3AED', ring: '#7C3AED' },
+  { value: 'hired', label: 'Hired', icon: 'ph ph-check-circle', bg: '#DCFCE7', text: '#16A34A', ring: '#16A34A' },
+  { value: 'rejected', label: 'Rejected', icon: 'ph ph-x-circle', bg: '#FEE2E2', text: '#DC2626', ring: '#DC2626' },
 ];
 
 export function StatusUpdater({
@@ -60,7 +60,7 @@ export function StatusUpdater({
             <i className={`${s.icon} text-base`} />
             {s.label}
             {isActive && (
-              <i className="ph-check-bold text-xs ml-auto" />
+              <i className="ph-bold ph-check text-xs ml-auto" />
             )}
           </button>
         );

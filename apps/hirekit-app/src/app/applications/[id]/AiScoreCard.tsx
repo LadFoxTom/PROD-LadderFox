@@ -81,7 +81,7 @@ export function AiScoreCard({
   return (
     <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
       <div className="flex items-center gap-2 mb-4">
-        <i className="ph-brain text-xl text-[#4F46E5]" />
+        <i className="ph ph-brain text-xl text-[#4F46E5]" />
         <h3 className="text-lg font-bold text-[#1E293B]">AI Score</h3>
       </div>
 
@@ -139,12 +139,12 @@ export function AiScoreCard({
           >
             {loading ? (
               <span className="flex items-center gap-2">
-                <i className="ph-spinner animate-spin" />
+                <i className="ph ph-spinner animate-spin" />
                 Analyzing...
               </span>
             ) : (
               <span className="flex items-center gap-2">
-                <i className="ph-brain" />
+                <i className="ph ph-brain" />
                 Score Candidate
               </span>
             )}

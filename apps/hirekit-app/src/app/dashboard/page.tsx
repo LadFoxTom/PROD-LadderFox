@@ -48,28 +48,28 @@ export default async function DashboardPage() {
           <StatCard
             label="Total Applications"
             value={totalApplications}
-            icon="ph-users"
+            icon="ph ph-users"
             color="#4F46E5"
             bgColor="#E0E7FF"
           />
           <StatCard
             label="New (Unreviewed)"
             value={newApplications}
-            icon="ph-envelope-simple"
+            icon="ph ph-envelope-simple"
             color="#FF6B6B"
             bgColor="#FEE2E2"
           />
           <StatCard
             label="Active Jobs"
             value={activeJobs}
-            icon="ph-briefcase"
+            icon="ph ph-briefcase"
             color="#2563EB"
             bgColor="#DBEAFE"
           />
           <StatCard
             label="Hired"
             value={hiredCount}
-            icon="ph-check-circle"
+            icon="ph ph-check-circle"
             color="#16A34A"
             bgColor="#DCFCE7"
           />
@@ -86,7 +86,7 @@ export default async function DashboardPage() {
           <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
             <div className="flex items-center gap-3 mb-4">
               <div className="w-10 h-10 bg-[#E0E7FF] rounded-[20px] flex items-center justify-center">
-                <i className="ph-code text-[#4F46E5] text-xl" />
+                <i className="ph ph-code text-[#4F46E5] text-xl" />
               </div>
               <div>
                 <h3 className="text-lg font-bold text-[#1E293B]">Install Widget</h3>
@@ -138,7 +138,7 @@ export default async function DashboardPage() {
           <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
             <div className="flex items-center gap-3 mb-6">
               <div className="w-10 h-10 bg-[#E0E7FF] rounded-[20px] flex items-center justify-center">
-                <i className="ph-lightning text-[#4F46E5] text-xl" />
+                <i className="ph ph-lightning text-[#4F46E5] text-xl" />
               </div>
               <div>
                 <h3 className="text-lg font-bold text-[#1E293B]">Quick Actions</h3>
@@ -150,21 +150,21 @@ export default async function DashboardPage() {
                 href="/jobs/new"
                 className="flex items-center gap-3 px-4 py-3 rounded-xl border border-slate-200 hover:border-[#4F46E5] hover:bg-[#FAFBFC] transition-all duration-300"
               >
-                <i className="ph-plus text-[#4F46E5]" />
+                <i className="ph ph-plus text-[#4F46E5]" />
                 <span className="text-sm font-semibold text-[#1E293B]">Create New Job</span>
               </Link>
               <Link
                 href="/applications?view=kanban"
                 className="flex items-center gap-3 px-4 py-3 rounded-xl border border-slate-200 hover:border-[#4F46E5] hover:bg-[#FAFBFC] transition-all duration-300"
               >
-                <i className="ph-kanban text-[#4F46E5]" />
+                <i className="ph ph-kanban text-[#4F46E5]" />
                 <span className="text-sm font-semibold text-[#1E293B]">Pipeline Board</span>
               </Link>
               <Link
                 href="/applications"
                 className="flex items-center gap-3 px-4 py-3 rounded-xl border border-slate-200 hover:border-[#4F46E5] hover:bg-[#FAFBFC] transition-all duration-300"
               >
-                <i className="ph-users text-[#4F46E5]" />
+                <i className="ph ph-users text-[#4F46E5]" />
                 <span className="text-sm font-semibold text-[#1E293B]">View All Applications</span>
               </Link>
             </div>
@@ -185,7 +185,7 @@ export default async function DashboardPage() {
           {recentApplications.length === 0 ? (
             <div className="p-16 text-center">
               <div className="w-16 h-16 bg-[#E0E7FF] rounded-full flex items-center justify-center mx-auto mb-4">
-                <i className="ph-users text-[#4F46E5] text-2xl" />
+                <i className="ph ph-users text-[#4F46E5] text-2xl" />
               </div>
               <p className="text-[#64748B] text-[15px]">
                 No applications yet. Install the widget to start receiving CVs.

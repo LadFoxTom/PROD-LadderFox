@@ -8,6 +8,34 @@ import { openApplyModal } from './components/ApplyModal';
 import { injectJsonLd } from './components/JsonLd';
 import styles from './styles.css?inline';
 
+// Google Fonts URLs for each template
+const TEMPLATE_FONTS: Record<string, string> = {
+  simple: 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap',
+  swiss: 'https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap',
+  terminal: 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap',
+  'saas-gradient': 'https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap',
+  editorial: 'https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@400;700&family=Inter:wght@400;500;600&display=swap',
+  glassdoor: 'https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap',
+  'compact-table': 'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap',
+  department: 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap',
+  'two-panel': 'https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap',
+  'vibrant-bento': 'https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap',
+};
+
+// Templates that use 'list' layout in the widget
+const TEMPLATE_LAYOUTS: Record<string, 'cards' | 'list'> = {
+  simple: 'cards',
+  swiss: 'list',
+  terminal: 'list',
+  'saas-gradient': 'cards',
+  editorial: 'list',
+  glassdoor: 'cards',
+  'compact-table': 'list',
+  department: 'list',
+  'two-panel': 'list',
+  'vibrant-bento': 'cards',
+};
+
 class HireKitJobs {
   private shadowRoot: ShadowRoot | null = null;
   private root: HTMLElement | null = null;
@@ -40,9 +68,14 @@ class HireKitJobs {
     styleSheet.replaceSync(styles);
     this.shadowRoot.adoptedStyleSheets = [styleSheet];
 
-    // Apply theme class
+    // Apply theme class (legacy support)
     if (config.theme === 'dark') {
       (this.shadowRoot as any).host.classList.add('hk-dark');
+    }
+
+    // Apply template class if provided directly
+    if (config.template) {
+      this.applyTemplate(config.template);
     }
 
     // Apply custom primary color
@@ -63,6 +96,23 @@ class HireKitJobs {
       this.state.filteredJobs = data.jobs;
       this.state.loading = false;
 
+      // Apply template from API if not overridden in config
+      if (!config.template && data.jobListingConfig?.templateId) {
+        this.applyTemplate(data.jobListingConfig.templateId, {
+          customCSS: data.jobListingConfig.customCSS,
+          customFontUrl: data.jobListingConfig.customFontUrl,
+          customLayout: data.jobListingConfig.customLayout,
+        });
+      }
+
+      // Apply showFilters/showSearch from API if not set in config
+      if (config.showFilters === undefined && data.jobListingConfig) {
+        this.config = { ...this.config, showFilters: data.jobListingConfig.showFilters };
+      }
+      if (config.showSearch === undefined && data.jobListingConfig) {
+        this.config = { ...this.config, showSearch: data.jobListingConfig.showSearch };
+      }
+
       // Use company's primary color if not overridden
       if (!config.primaryColor && data.company.primaryColor) {
         (this.shadowRoot as any).host.style.setProperty(
@@ -80,6 +130,79 @@ class HireKitJobs {
       this.state.loading = false;
       this.state.error = 'Failed to load job listings. Please try again later.';
       this.render();
+    }
+  }
+
+  private applyTemplate(templateId: string, customData?: { customCSS?: string; customFontUrl?: string; customLayout?: 'cards' | 'list' }): void {
+    if (!this.shadowRoot) return;
+    const host = (this.shadowRoot as any).host as HTMLElement;
+
+    // Remove any existing template classes
+    const classes = Array.from(host.classList);
+    classes.forEach(cls => {
+      if (cls.startsWith('hk-tpl-')) host.classList.remove(cls);
+    });
+
+    // Handle custom template
+    if (templateId === 'custom' && customData?.customCSS) {
+      host.classList.add('hk-tpl-custom');
+
+      // Inject custom CSS into Shadow DOM via adoptedStyleSheets
+      try {
+        const customSheet = new CSSStyleSheet();
+        customSheet.replaceSync(customData.customCSS);
+        const existing = this.shadowRoot.adoptedStyleSheets;
+        // Append custom sheet (don't replace base styles)
+        this.shadowRoot.adoptedStyleSheets = [...existing.filter(s => !(s as any).__hkCustom), customSheet];
+        (customSheet as any).__hkCustom = true;
+      } catch (e) {
+        console.warn('HireKitJobs: Failed to apply custom CSS', e);
+      }
+
+      // Inject custom Google Font
+      if (customData.customFontUrl) {
+        const existingLink = document.querySelector('link[data-hirekit-font="custom"]');
+        if (!existingLink) {
+          const link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.href = customData.customFontUrl;
+          link.setAttribute('data-hirekit-font', 'custom');
+          document.head.appendChild(link);
+        }
+      }
+
+      // Set layout from custom data
+      if (!this.config?.layout && customData.customLayout && this.config) {
+        this.config = { ...this.config, layout: customData.customLayout };
+      }
+      return;
+    }
+
+    // Apply the template class (skip 'simple' since it uses defaults)
+    if (templateId !== 'simple') {
+      host.classList.add(`hk-tpl-${templateId}`);
+    }
+
+    // Inject Google Fonts
+    const fontUrl = TEMPLATE_FONTS[templateId];
+    if (fontUrl) {
+      // Inject into document head (fonts don't load from Shadow DOM)
+      const existingLink = document.querySelector(`link[data-hirekit-font="${templateId}"]`);
+      if (!existingLink) {
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = fontUrl;
+        link.setAttribute('data-hirekit-font', templateId);
+        document.head.appendChild(link);
+      }
+    }
+
+    // Update layout based on template
+    if (!this.config?.layout) {
+      const templateLayout = TEMPLATE_LAYOUTS[templateId];
+      if (templateLayout && this.config) {
+        this.config = { ...this.config, layout: templateLayout };
+      }
     }
   }
 

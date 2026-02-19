@@ -3,6 +3,7 @@ import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { db } from '@repo/database-hirekit';
 import { ChatOpenAI } from '@langchain/openai';
+import { logActivity } from '@/lib/activity';
 
 export async function POST(
   request: NextRequest,
@@ -106,6 +107,14 @@ Respond ONLY with valid JSON in this exact format:
         aiScore: overallScore,
         aiScoreData: scoreData,
       },
+    });
+
+    logActivity({
+      companyId: company.id,
+      applicationId: application.id,
+      type: 'ai_scored',
+      data: { score: overallScore, summary: scoreData.summary },
+      performedBy: session.user.id,
     });
 
     return NextResponse.json({

@@ -4,9 +4,9 @@ import Link from 'next/link';
 import { authOptions } from '@/lib/auth';
 import { db } from '@repo/database-hirekit';
 import { DashboardLayout } from '@/app/components/DashboardLayout';
-import { StatusBadge } from '@/app/components/StatusBadge';
 import { KanbanBoard } from './components/KanbanBoard';
 import { JobFilter } from './components/JobFilter';
+import { ApplicationsTable } from './components/ApplicationsTable';
 
 export default async function ApplicationsPage({
   searchParams,
@@ -78,7 +78,7 @@ export default async function ApplicationsPage({
                   : 'text-[#64748B] hover:text-[#1E293B]'
               }`}
             >
-              <i className="ph-list text-base" />
+              <i className="ph ph-list text-base" />
             </Link>
             <Link
               href={buildUrl({ view: 'kanban' })}
@@ -88,7 +88,7 @@ export default async function ApplicationsPage({
                   : 'text-[#64748B] hover:text-[#1E293B]'
               }`}
             >
-              <i className="ph-kanban text-base" />
+              <i className="ph ph-kanban text-base" />
             </Link>
           </div>
         </div>
@@ -137,100 +137,18 @@ export default async function ApplicationsPage({
           />
         ) : (
           <>
-            {/* Table View */}
-            <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
-              {applications.length === 0 ? (
-                <div className="p-16 text-center">
-                  <div className="w-16 h-16 bg-[#E0E7FF] rounded-full flex items-center justify-center mx-auto mb-4">
-                    <i className="ph-users text-[#4F46E5] text-2xl" />
-                  </div>
-                  <p className="text-[#64748B] text-[15px]">
-                    {status === 'all'
-                      ? 'No applications yet. Install the widget to start receiving CVs.'
-                      : `No ${status} applications.`}
-                  </p>
-                </div>
-              ) : (
-                <table className="w-full">
-                  <thead>
-                    <tr className="border-b border-slate-200 bg-[#FAFBFC]">
-                      <th className="px-6 py-3.5 text-left text-xs font-semibold text-[#94A3B8] uppercase tracking-wider">
-                        Applicant
-                      </th>
-                      <th className="px-6 py-3.5 text-left text-xs font-semibold text-[#94A3B8] uppercase tracking-wider">
-                        Email
-                      </th>
-                      <th className="px-6 py-3.5 text-left text-xs font-semibold text-[#94A3B8] uppercase tracking-wider">
-                        Job
-                      </th>
-                      <th className="px-6 py-3.5 text-left text-xs font-semibold text-[#94A3B8] uppercase tracking-wider">
-                        AI Score
-                      </th>
-                      <th className="px-6 py-3.5 text-left text-xs font-semibold text-[#94A3B8] uppercase tracking-wider">
-                        Status
-                      </th>
-                      <th className="px-6 py-3.5 text-left text-xs font-semibold text-[#94A3B8] uppercase tracking-wider">
-                        Date
-                      </th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-slate-100">
-                    {applications.map((app) => {
-                      const aiScore = (app as any).aiScore as number | null;
-                      const scoreColor = aiScore
-                        ? aiScore >= 80
-                          ? '#16A34A'
-                          : aiScore >= 60
-                          ? '#D97706'
-                          : '#DC2626'
-                        : null;
-                      return (
-                        <tr
-                          key={app.id}
-                          className="hover:bg-[#FAFBFC] transition-colors duration-200"
-                        >
-                          <td className="px-6 py-4">
-                            <Link
-                              href={`/applications/${app.id}`}
-                              className="font-semibold text-[#4F46E5] hover:text-[#4338CA] transition-colors"
-                            >
-                              {app.name || 'Unnamed'}
-                            </Link>
-                          </td>
-                          <td className="px-6 py-4 text-sm text-[#64748B]">
-                            {app.email}
-                          </td>
-                          <td className="px-6 py-4 text-sm text-[#64748B]">
-                            {app.job?.title || '-'}
-                          </td>
-                          <td className="px-6 py-4">
-                            {aiScore !== null && aiScore !== undefined ? (
-                              <span
-                                className="inline-flex items-center rounded-full px-2.5 py-1 text-xs font-bold"
-                                style={{
-                                  backgroundColor: `${scoreColor}15`,
-                                  color: scoreColor!,
-                                }}
-                              >
-                                {aiScore}%
-                              </span>
-                            ) : (
-                              <span className="text-xs text-[#94A3B8]">-</span>
-                            )}
-                          </td>
-                          <td className="px-6 py-4">
-                            <StatusBadge status={app.status} />
-                          </td>
-                          <td className="px-6 py-4 text-sm text-[#94A3B8]">
-                            {new Date(app.createdAt).toLocaleDateString()}
-                          </td>
-                        </tr>
-                      );
-                    })}
-                  </tbody>
-                </table>
-              )}
-            </div>
+            {/* Table View with Bulk Actions */}
+            <ApplicationsTable
+              applications={applications.map((app) => ({
+                id: app.id,
+                name: app.name,
+                email: app.email,
+                status: app.status,
+                aiScore: (app as any).aiScore ?? null,
+                createdAt: app.createdAt.toISOString(),
+                job: app.job,
+              }))}
+            />
 
             {/* Pagination */}
             {totalPages > 1 && (

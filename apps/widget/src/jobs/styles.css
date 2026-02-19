@@ -17,7 +17,7 @@
   --hk-shadow-lg: 0 4px 12px rgba(0,0,0,0.1);
   --hk-radius: 12px;
   --hk-radius-sm: 8px;
-  --hk-font: Inter, system-ui, -apple-system, sans-serif;
+  --hk-font: 'Plus Jakarta Sans', Inter, system-ui, -apple-system, sans-serif;
 }
 
 /* Dark theme */
@@ -32,6 +32,204 @@
   --hk-badge-text: #A5B4FC;
   --hk-shadow: 0 1px 3px rgba(0,0,0,0.3);
   --hk-shadow-lg: 0 4px 12px rgba(0,0,0,0.4);
+}
+
+/* ═══════════════════════════════════════════
+   TEMPLATE THEMES
+   ═══════════════════════════════════════════ */
+
+/* Simple (default) - uses base variables */
+
+:host(.hk-tpl-swiss) {
+  --hk-font: 'Space Mono', monospace;
+  --hk-bg: #E3DCCF;
+  --hk-surface: #E3DCCF;
+  --hk-text: #0A0A0A;
+  --hk-text-secondary: #3A3A3A;
+  --hk-text-muted: #6A6A6A;
+  --hk-border: #0A0A0A;
+  --hk-primary: #FF2A00;
+  --hk-primary-hover: #CC2200;
+  --hk-badge-bg: #0A0A0A;
+  --hk-badge-text: #E3DCCF;
+  --hk-shadow: none;
+  --hk-shadow-lg: none;
+  --hk-radius: 0px;
+  --hk-radius-sm: 0px;
+}
+
+:host(.hk-tpl-terminal) {
+  --hk-font: 'JetBrains Mono', monospace;
+  --hk-bg: #0A0A0A;
+  --hk-surface: #111111;
+  --hk-text: #00FF41;
+  --hk-text-secondary: #00CC33;
+  --hk-text-muted: #338033;
+  --hk-border: #1A3A1A;
+  --hk-primary: #00FF41;
+  --hk-primary-hover: #00CC33;
+  --hk-badge-bg: #0D1F0D;
+  --hk-badge-text: #00FF41;
+  --hk-shadow: none;
+  --hk-shadow-lg: 0 0 12px rgba(0,255,65,0.1);
+  --hk-radius: 0px;
+  --hk-radius-sm: 0px;
+}
+
+:host(.hk-tpl-saas-gradient) {
+  --hk-font: 'Outfit', sans-serif;
+  --hk-bg: #FDF6F0;
+  --hk-surface: #FFFFFF;
+  --hk-text: #2A2A2A;
+  --hk-text-secondary: #6B6B6B;
+  --hk-text-muted: #A89B95;
+  --hk-border: #F0E6DE;
+  --hk-primary: #F29D68;
+  --hk-primary-hover: #E8884F;
+  --hk-badge-bg: #FEF3E2;
+  --hk-badge-text: #D4782A;
+  --hk-shadow: 0 1px 3px rgba(0,0,0,0.04);
+  --hk-shadow-lg: 0 4px 16px rgba(0,0,0,0.06);
+  --hk-radius: 20px;
+  --hk-radius-sm: 14px;
+}
+
+:host(.hk-tpl-editorial) {
+  --hk-font: 'Bodoni Moda', serif;
+  --hk-bg: #F5F5F0;
+  --hk-surface: #F5F5F0;
+  --hk-text: #050505;
+  --hk-text-secondary: #3A3A3A;
+  --hk-text-muted: #7A7A7A;
+  --hk-border: #050505;
+  --hk-primary: #D93025;
+  --hk-primary-hover: #B5281E;
+  --hk-badge-bg: #050505;
+  --hk-badge-text: #F5F5F0;
+  --hk-shadow: none;
+  --hk-shadow-lg: none;
+  --hk-radius: 0px;
+  --hk-radius-sm: 0px;
+}
+
+:host(.hk-tpl-glassdoor) {
+  --hk-font: 'Outfit', sans-serif;
+  --hk-bg: #0A0E1A;
+  --hk-surface: rgba(255,255,255,0.06);
+  --hk-text: #E5E5E5;
+  --hk-text-secondary: #A0A0B0;
+  --hk-text-muted: #6A6A7A;
+  --hk-border: rgba(255,255,255,0.1);
+  --hk-primary: #8B5CF6;
+  --hk-primary-hover: #7C3AED;
+  --hk-badge-bg: rgba(139,92,246,0.15);
+  --hk-badge-text: #C4B5FD;
+  --hk-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  --hk-shadow-lg: 0 4px 16px rgba(0,0,0,0.4);
+  --hk-radius: 16px;
+  --hk-radius-sm: 12px;
+}
+
+:host(.hk-tpl-compact-table) {
+  --hk-font: 'JetBrains Mono', monospace;
+  --hk-bg: #FF4F2A;
+  --hk-surface: #FFFFFF;
+  --hk-text: #000000;
+  --hk-text-secondary: #333333;
+  --hk-text-muted: #666666;
+  --hk-border: #000000;
+  --hk-primary: #FF4F2A;
+  --hk-primary-hover: #E04020;
+  --hk-badge-bg: #000000;
+  --hk-badge-text: #FFFFFF;
+  --hk-shadow: none;
+  --hk-shadow-lg: none;
+  --hk-radius: 0px;
+  --hk-radius-sm: 0px;
+}
+
+:host(.hk-tpl-department) {
+  --hk-font: 'Plus Jakarta Sans', sans-serif;
+  --hk-bg: #FAFAF8;
+  --hk-surface: #FFFFFF;
+  --hk-text: #2D2D2D;
+  --hk-text-secondary: #6B7280;
+  --hk-text-muted: #9CA3AF;
+  --hk-border: #E5E5E5;
+  --hk-primary: #4A7A45;
+  --hk-primary-hover: #3D6639;
+  --hk-badge-bg: #E8F0E4;
+  --hk-badge-text: #4A7A45;
+  --hk-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  --hk-shadow-lg: 0 4px 12px rgba(0,0,0,0.08);
+  --hk-radius: 12px;
+  --hk-radius-sm: 8px;
+}
+
+:host(.hk-tpl-two-panel) {
+  --hk-font: 'DM Sans', sans-serif;
+  --hk-bg: #1C2122;
+  --hk-surface: #24292A;
+  --hk-text: #E5E5E5;
+  --hk-text-secondary: #8A9294;
+  --hk-text-muted: #5A6466;
+  --hk-border: #C6A666;
+  --hk-primary: #C6A666;
+  --hk-primary-hover: #B39555;
+  --hk-badge-bg: rgba(198,166,102,0.15);
+  --hk-badge-text: #C6A666;
+  --hk-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  --hk-shadow-lg: 0 4px 12px rgba(0,0,0,0.4);
+  --hk-radius: 8px;
+  --hk-radius-sm: 6px;
+}
+
+:host(.hk-tpl-vibrant-bento) {
+  --hk-font: 'DM Sans', sans-serif;
+  --hk-bg: #F8F7F4;
+  --hk-surface: #FFFFFF;
+  --hk-text: #1A1A1A;
+  --hk-text-secondary: #555555;
+  --hk-text-muted: #999999;
+  --hk-border: #E8E6E1;
+  --hk-primary: #FF6B35;
+  --hk-primary-hover: #E55A28;
+  --hk-badge-bg: #FFF0E8;
+  --hk-badge-text: #FF6B35;
+  --hk-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  --hk-shadow-lg: 0 8px 24px rgba(0,0,0,0.1);
+  --hk-radius: 16px;
+  --hk-radius-sm: 12px;
+}
+
+/* Template-specific card styles */
+:host(.hk-tpl-saas-gradient) .hk-card {
+  border-left: 4px solid var(--hk-primary);
+}
+
+:host(.hk-tpl-editorial) .hk-card {
+  border: none;
+  border-bottom: 1px solid var(--hk-border);
+  border-radius: 0;
+}
+
+:host(.hk-tpl-swiss) .hk-card {
+  border-width: 2px;
+}
+
+:host(.hk-tpl-swiss) .hk-card-title,
+:host(.hk-tpl-editorial) .hk-card-title {
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+:host(.hk-tpl-glassdoor) .hk-card {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+:host(.hk-tpl-compact-table) .hk-card {
+  border-width: 2px;
 }
 
 /* ═══════════════════════════════════════════

@@ -63,7 +63,7 @@ export default function EmbedCodePage() {
 
         {copied && (
           <div className="mb-6 p-4 bg-[#DCFCE7] text-[#16A34A] rounded-2xl text-sm font-medium flex items-center gap-2">
-            <i className="ph-check-circle text-lg" />
+            <i className="ph ph-check-circle text-lg" />
             Copied to clipboard!
           </div>
         )}
@@ -78,7 +78,7 @@ export default function EmbedCodePage() {
                 : 'text-[#64748B] hover:text-[#1E293B] hover:bg-[#FAFBFC]'
             }`}
           >
-            <i className="ph-code" />
+            <i className="ph ph-code" />
             CV Builder
           </button>
           <button
@@ -89,7 +89,7 @@ export default function EmbedCodePage() {
                 : 'text-[#64748B] hover:text-[#1E293B] hover:bg-[#FAFBFC]'
             }`}
           >
-            <i className="ph-briefcase" />
+            <i className="ph ph-briefcase" />
             Job Listings
           </button>
         </div>
@@ -98,7 +98,7 @@ export default function EmbedCodePage() {
           <div className="space-y-6">
             <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
               <div className="flex items-center gap-2 mb-2">
-                <i className="ph-code text-xl text-[#4F46E5]" />
+                <i className="ph ph-code text-xl text-[#4F46E5]" />
                 <h3 className="text-lg font-bold text-[#1E293B]">Embed Widget</h3>
               </div>
               <p className="text-[15px] text-[#64748B] mb-6">
@@ -119,14 +119,14 @@ export default function EmbedCodePage() {
                 onClick={() => copyToClipboard(embedCode)}
                 className="mt-4 px-6 py-2.5 bg-white border border-slate-200 rounded-full text-sm font-semibold text-[#1E293B] hover:border-[#4F46E5] hover:text-[#4F46E5] transition-all duration-300"
               >
-                <i className="ph-copy mr-1.5" />
+                <i className="ph ph-copy mr-1.5" />
                 Copy to Clipboard
               </button>
             </div>
 
             <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
               <div className="flex items-center gap-2 mb-2">
-                <i className="ph-link text-xl text-[#4F46E5]" />
+                <i className="ph ph-link text-xl text-[#4F46E5]" />
                 <h3 className="text-lg font-bold text-[#1E293B]">With Job ID</h3>
               </div>
               <p className="text-[15px] text-[#64748B] mb-4">
@@ -156,7 +156,7 @@ export default function EmbedCodePage() {
 
             <div className="bg-[#E0E7FF] rounded-2xl p-6">
               <div className="flex items-start gap-3">
-                <i className="ph-lightbulb text-[#4F46E5] text-xl mt-0.5" />
+                <i className="ph ph-lightbulb text-[#4F46E5] text-xl mt-0.5" />
                 <div>
                   <h4 className="font-bold text-[#1E293B] text-sm">Local Testing</h4>
                   <p className="text-sm text-[#64748B] mt-1">
@@ -175,7 +175,7 @@ export default function EmbedCodePage() {
           <div className="space-y-6">
             <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
               <div className="flex items-center gap-2 mb-2">
-                <i className="ph-code text-xl text-[#4F46E5]" />
+                <i className="ph ph-code text-xl text-[#4F46E5]" />
                 <h3 className="text-lg font-bold text-[#1E293B]">Embed Code</h3>
               </div>
               <p className="text-[15px] text-[#64748B] mb-6">
@@ -196,14 +196,14 @@ export default function EmbedCodePage() {
                 onClick={() => copyToClipboard(jobsEmbedCode)}
                 className="mt-4 px-6 py-2.5 bg-white border border-slate-200 rounded-full text-sm font-semibold text-[#1E293B] hover:border-[#4F46E5] hover:text-[#4F46E5] transition-all duration-300"
               >
-                <i className="ph-copy mr-1.5" />
+                <i className="ph ph-copy mr-1.5" />
                 Copy to Clipboard
               </button>
             </div>
 
             <div className="bg-[#E0E7FF] rounded-2xl p-6">
               <div className="flex items-start gap-3">
-                <i className="ph-lightbulb text-[#4F46E5] text-xl mt-0.5" />
+                <i className="ph ph-lightbulb text-[#4F46E5] text-xl mt-0.5" />
                 <div>
                   <h4 className="font-bold text-[#1E293B] text-sm">Configuration</h4>
                   <p className="text-sm text-[#64748B] mt-1">

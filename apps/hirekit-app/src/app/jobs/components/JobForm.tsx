@@ -35,6 +35,9 @@ export function JobForm({ initialData, jobId, mode }: JobFormProps) {
   const router = useRouter();
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
+  const [showAiGen, setShowAiGen] = useState(false);
+  const [aiLoading, setAiLoading] = useState(false);
+  const [aiBullets, setAiBullets] = useState('');
   const [form, setForm] = useState<JobFormData>({
     title: initialData?.title || '',
     description: initialData?.description || '',
@@ -97,6 +100,32 @@ export function JobForm({ initialData, jobId, mode }: JobFormProps) {
     setForm((prev) => ({ ...prev, [field]: value }));
   };
 
+  const handleGenerateDescription = async () => {
+    if (!form.title.trim()) return;
+    setAiLoading(true);
+    try {
+      const res = await fetch('/api/v1/jobs/generate-description', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          title: form.title,
+          bullets: aiBullets || undefined,
+          department: form.department || undefined,
+        }),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        update('description', data.description);
+        setShowAiGen(false);
+        setAiBullets('');
+      }
+    } catch (err) {
+      console.error('Failed to generate description:', err);
+    } finally {
+      setAiLoading(false);
+    }
+  };
+
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {error && (
@@ -121,9 +150,54 @@ export function JobForm({ initialData, jobId, mode }: JobFormProps) {
 
       {/* Description */}
       <div>
-        <label className="block text-sm font-semibold text-[#1E293B] mb-2">
-          Description
-        </label>
+        <div className="flex items-center justify-between mb-2">
+          <label className="block text-sm font-semibold text-[#1E293B]">
+            Description
+          </label>
+          <button
+            type="button"
+            onClick={() => setShowAiGen(!showAiGen)}
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-[#4F46E5] hover:text-[#4338CA] transition-colors"
+          >
+            <i className="ph ph-sparkle" />
+            Generate with AI
+          </button>
+        </div>
+
+        {showAiGen && (
+          <div className="mb-3 p-4 bg-[#F8FAFC] border border-slate-200 rounded-xl space-y-3">
+            <p className="text-xs text-[#64748B]">
+              Enter optional bullet points for key responsibilities or requirements.
+              The AI will generate a full job description using your job title{form.department ? ` and department` : ''}.
+            </p>
+            <textarea
+              value={aiBullets}
+              onChange={(e) => setAiBullets(e.target.value)}
+              placeholder="e.g. 3+ years React experience, remote OK, lead a team of 5..."
+              rows={3}
+              className="w-full px-3 py-2 rounded-lg border border-slate-200 text-sm text-[#1E293B] placeholder:text-[#94A3B8] focus:outline-none focus:border-[#4F46E5] transition-all"
+            />
+            <button
+              type="button"
+              disabled={aiLoading || !form.title.trim()}
+              onClick={handleGenerateDescription}
+              className="px-4 py-2 bg-[#4F46E5] text-white text-sm font-semibold rounded-lg hover:bg-[#4338CA] transition-all disabled:opacity-50 inline-flex items-center gap-2"
+            >
+              {aiLoading ? (
+                <>
+                  <i className="ph ph-spinner animate-spin" />
+                  Generating...
+                </>
+              ) : (
+                <>
+                  <i className="ph ph-sparkle" />
+                  Generate
+                </>
+              )}
+            </button>
+          </div>
+        )}
+
         <textarea
           value={form.description}
           onChange={(e) => update('description', e.target.value)}

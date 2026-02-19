@@ -6,6 +6,7 @@ import { db } from '@repo/database-hirekit';
 import { DashboardLayout } from '@/app/components/DashboardLayout';
 import { StatusUpdater } from './StatusUpdater';
 import { AiScoreCard } from './AiScoreCard';
+import { ActivityTimeline } from './ActivityTimeline';
 
 export default async function ApplicationDetailPage({
   params,
@@ -39,7 +40,7 @@ export default async function ApplicationDetailPage({
             href="/applications"
             className="inline-flex items-center gap-1 text-sm font-semibold text-[#4F46E5] hover:text-[#4338CA] transition-colors"
           >
-            <i className="ph-arrow-left" />
+            <i className="ph ph-arrow-left" />
             Back to Applications
           </Link>
         </div>
@@ -63,19 +64,19 @@ export default async function ApplicationDetailPage({
                   <div className="flex flex-wrap gap-4 mt-3">
                     {application.email && (
                       <span className="flex items-center gap-1.5 text-sm text-[#94A3B8]">
-                        <i className="ph-envelope-simple" />
+                        <i className="ph ph-envelope-simple" />
                         {application.email}
                       </span>
                     )}
                     {application.phone && (
                       <span className="flex items-center gap-1.5 text-sm text-[#94A3B8]">
-                        <i className="ph-phone" />
+                        <i className="ph ph-phone" />
                         {application.phone}
                       </span>
                     )}
                     {cvData.contact?.location && (
                       <span className="flex items-center gap-1.5 text-sm text-[#94A3B8]">
-                        <i className="ph-map-pin" />
+                        <i className="ph ph-map-pin" />
                         {cvData.contact.location}
                       </span>
                     )}
@@ -86,7 +87,7 @@ export default async function ApplicationDetailPage({
 
             {/* Summary */}
             {cvData.summary && (
-              <Section title="Professional Summary" icon="ph-user-circle">
+              <Section title="Professional Summary" icon="ph ph-user-circle">
                 <p className="text-[#1E293B] text-[15px] leading-relaxed whitespace-pre-wrap">
                   {cvData.summary}
                 </p>
@@ -95,7 +96,7 @@ export default async function ApplicationDetailPage({
 
             {/* Experience */}
             {cvData.experience?.length > 0 && (
-              <Section title="Work Experience" icon="ph-briefcase">
+              <Section title="Work Experience" icon="ph ph-briefcase">
                 <div className="space-y-5">
                   {cvData.experience.map((exp: Record<string, any>, i: number) => (
                     <div key={i} className="border-l-2 border-[#4F46E5] pl-5">
@@ -117,7 +118,7 @@ export default async function ApplicationDetailPage({
                           {(exp.achievements || exp.content).map((item: string, j: number) => (
                             <li key={j} className="text-sm text-[#1E293B] flex gap-2">
                               <span className="text-[#51CF66] shrink-0 mt-0.5">
-                                <i className="ph-check-circle text-base" />
+                                <i className="ph ph-check-circle text-base" />
                               </span>
                               {item}
                             </li>
@@ -132,7 +133,7 @@ export default async function ApplicationDetailPage({
 
             {/* Education */}
             {cvData.education?.length > 0 && (
-              <Section title="Education" icon="ph-graduation-cap">
+              <Section title="Education" icon="ph ph-graduation-cap">
                 <div className="space-y-4">
                   {cvData.education.map((edu: Record<string, any>, i: number) => (
                     <div key={i} className="flex justify-between items-start">
@@ -157,7 +158,7 @@ export default async function ApplicationDetailPage({
 
             {/* Skills */}
             {skills.length > 0 && (
-              <Section title="Skills" icon="ph-star">
+              <Section title="Skills" icon="ph ph-star">
                 <div className="flex flex-wrap gap-2">
                   {skills.map((skill: string, i: number) => (
                     <span
@@ -170,6 +171,9 @@ export default async function ApplicationDetailPage({
                 </div>
               </Section>
             )}
+
+            {/* Activity Timeline */}
+            <ActivityTimeline applicationId={application.id} />
           </div>
 
           {/* Right: Meta & Actions */}

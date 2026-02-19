@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>HireKit Widget Test</title>
+  <title>NovaTech Solutions - Careers</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/regular/style.css">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -16,68 +15,104 @@
       color: #1E293B;
       min-height: 100vh;
     }
-    .career-header {
+
+    /* Navigation */
+    .site-header {
       background: white;
       border-bottom: 1px solid #E2E8F0;
       padding: 16px 0;
+      position: sticky;
+      top: 0;
+      z-index: 100;
     }
-    .career-header-inner {
-      max-width: 1000px;
+    .site-header-inner {
+      max-width: 1100px;
       margin: 0 auto;
       padding: 0 24px;
       display: flex;
       align-items: center;
       justify-content: space-between;
     }
-    .career-logo {
+    .site-logo {
       display: flex;
       align-items: center;
       gap: 10px;
     }
-    .career-logo-mark {
+    .site-logo-mark {
       width: 36px;
       height: 36px;
-      background: linear-gradient(135deg, #4F46E5, #7C3AED);
+      background: linear-gradient(135deg, #0EA5E9, #6366F1);
       border-radius: 10px;
       display: flex;
       align-items: center;
       justify-content: center;
       color: white;
       font-weight: 800;
-      font-size: 16px;
+      font-size: 15px;
     }
-    .career-logo-text {
+    .site-logo-text {
       font-size: 20px;
       font-weight: 800;
       color: #1E293B;
     }
-    .career-nav {
+    .site-nav {
       display: flex;
-      gap: 24px;
+      gap: 8px;
     }
-    .career-nav a {
+    .site-nav a {
       font-size: 14px;
       font-weight: 500;
       color: #64748B;
       text-decoration: none;
-      transition: color 0.2s;
+      padding: 8px 14px;
+      border-radius: 8px;
+      transition: all 0.2s;
+      cursor: pointer;
     }
-    .career-nav a:hover { color: #4F46E5; }
-    .career-nav a.active { color: #4F46E5; font-weight: 600; }
+    .site-nav a:hover { color: #1E293B; background: #F1F5F9; }
+    .site-nav a.active { color: #0EA5E9; font-weight: 600; background: #F0F9FF; }
 
-    .career-hero {
-      max-width: 1000px;
+    /* Page tabs */
+    .page-tabs {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 24px 24px 0;
+      display: flex;
+      gap: 4px;
+      border-bottom: 1px solid #E2E8F0;
+    }
+    .page-tab {
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 600;
+      color: #64748B;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.2s;
+      margin-bottom: -1px;
+    }
+    .page-tab:hover { color: #1E293B; }
+    .page-tab.active {
+      color: #0EA5E9;
+      border-bottom-color: #0EA5E9;
+    }
+
+    /* Hero */
+    .hero {
+      max-width: 1100px;
       margin: 0 auto;
       padding: 48px 24px 32px;
       text-align: center;
     }
-    .career-hero h1 {
-      font-size: 32px;
+    .hero h1 {
+      font-size: 36px;
       font-weight: 800;
       color: #1E293B;
       margin-bottom: 12px;
     }
-    .career-hero p {
+    .hero p {
       font-size: 16px;
       color: #64748B;
       max-width: 600px;
@@ -85,8 +120,17 @@
       line-height: 1.6;
     }
 
-    .widget-container {
-      max-width: 1000px;
+    /* Page sections */
+    .page-section {
+      display: none;
+    }
+    .page-section.active {
+      display: block;
+    }
+
+    /* Widget area */
+    .widget-area {
+      max-width: 1100px;
       margin: 0 auto 64px;
       padding: 0 24px;
     }
@@ -122,14 +166,15 @@
   </style>
 </head>
 <body>
-  <!-- Simulated career page header -->
-  <header class="career-header">
-    <div class="career-header-inner">
-      <div class="career-logo">
-        <div class="career-logo-mark">L</div>
-        <span class="career-logo-text">LadderFox</span>
+
+  <!-- Company header -->
+  <header class="site-header">
+    <div class="site-header-inner">
+      <div class="site-logo">
+        <div class="site-logo-mark">NT</div>
+        <span class="site-logo-text">NovaTech Solutions</span>
       </div>
-      <nav class="career-nav">
+      <nav class="site-nav">
         <a href="#">Home</a>
         <a href="#">About</a>
         <a href="#">Products</a>
@@ -139,33 +184,84 @@
     </div>
   </header>
 
-  <!-- Hero section -->
-  <div class="career-hero">
-    <h1>Join Our Team</h1>
-    <p>We're looking for talented people to help build the future. Submit your CV below and we'll get back to you.</p>
+  <!-- Page tabs to switch between widgets -->
+  <div class="page-tabs">
+    <button class="page-tab active" onclick="showPage('jobs')">Open Positions</button>
+    <button class="page-tab" onclick="showPage('apply')">Open Application</button>
   </div>
 
-  <!-- Widget embed area -->
-  <div class="widget-container">
-    <div id="hirekit-widget"></div>
-  </div>
+  <!-- Job Listings Page -->
+  <section id="page-jobs" class="page-section active">
+    <div class="hero">
+      <h1>Join NovaTech</h1>
+      <p>We're building the future of cloud infrastructure. Explore our open roles and find where you fit in.</p>
+    </div>
+    <div class="widget-area">
+      <div id="hirekit-jobs"></div>
+    </div>
+  </section>
 
-  <!-- Dev mode badge -->
+  <!-- CV Builder Page -->
+  <section id="page-apply" class="page-section">
+    <div class="hero">
+      <h1>Open Application</h1>
+      <p>Don't see a role that fits? Submit your CV as an open application and we'll reach out when a matching position opens up.</p>
+    </div>
+    <div class="widget-area">
+      <div id="hirekit-widget"></div>
+    </div>
+  </section>
+
+  <!-- Dev badge -->
   <div class="dev-badge">
     <span class="dot"></span>
-    HireKit Widget Dev Mode
+    HireKit Dev Mode &mdash; localhost
   </div>
 
-  <script type="module" src="/src/main.tsx"></script>
-  <script type="module">
-    const waitForHireKit = setInterval(() => {
-      if (window.HireKit) {
-        clearInterval(waitForHireKit);
-        window.HireKit.init({
-          companyId: 'cmlh07xc70001uc0cbsun2xap'
-        });
-      }
-    }, 100);
+  <!-- Tab switching -->
+  <script>
+    function showPage(page) {
+      document.querySelectorAll('.page-section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.page-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById('page-' + page).classList.add('active');
+      event.target.classList.add('active');
+    }
   </script>
+
+  <!-- Point widgets to local API -->
+  <script>
+    window.__HIREKIT_API_URL__ = 'http://localhost:3002/api';
+  </script>
+
+  <!-- Job Listings Widget (IIFE from local hirekit-app) -->
+  <script>
+    (function(w, d, s) {
+      var js = d.createElement(s);
+      js.async = 1;
+      js.src = 'http://localhost:3002/widget/hirekit-jobs.iife.js';
+      js.onload = function() {
+        w.HireKitJobs.init({
+          companyId: 'cmlppd3zo0001l704ovsosa32'
+        });
+      };
+      d.head.appendChild(js);
+    })(window, document, 'script');
+  </script>
+
+  <!-- CV Builder Widget (IIFE from local hirekit-app) -->
+  <script>
+    (function(w, d, s) {
+      var js = d.createElement(s);
+      js.async = 1;
+      js.src = 'http://localhost:3002/widget/hirekit-widget.iife.js';
+      js.onload = function() {
+        w.HireKit.init({
+          companyId: 'cmlppd3zo0001l704ovsosa32'
+        });
+      };
+      d.head.appendChild(js);
+    })(window, document, 'script');
+  </script>
+
 </body>
 </html>

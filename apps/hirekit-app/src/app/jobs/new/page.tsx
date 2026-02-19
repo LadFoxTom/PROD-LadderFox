@@ -23,7 +23,7 @@ export default async function NewJobPage() {
             href="/jobs"
             className="inline-flex items-center gap-1 text-sm font-semibold text-[#4F46E5] hover:text-[#4338CA] transition-colors"
           >
-            <i className="ph-arrow-left" />
+            <i className="ph ph-arrow-left" />
             Back to Jobs
           </Link>
         </div>

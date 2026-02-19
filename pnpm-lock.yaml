@@ -129,6 +129,9 @@ importers:
       next-auth:
         specifier: ^4.24.7
         version: 4.24.13(@auth/core@0.34.3(nodemailer@7.0.11))(next@14.2.30(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(nodemailer@7.0.11)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      puppeteer:
+        specifier: ^24.8.2
+        version: 24.37.2(typescript@5.9.3)
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -7900,6 +7903,15 @@ snapshots:
     optionalDependencies:
       typescript: 5.7.3
 
+  cosmiconfig@9.0.0(typescript@5.9.3):
+    dependencies:
+      env-paths: 2.2.1
+      import-fresh: 3.3.1
+      js-yaml: 4.1.1
+      parse-json: 5.2.0
+    optionalDependencies:
+      typescript: 5.9.3
+
   crc-32@1.2.2: {}
 
   critters@0.0.23:
@@ -10281,6 +10293,23 @@ snapshots:
       '@puppeteer/browsers': 2.12.0
       chromium-bidi: 13.1.1(devtools-protocol@0.0.1566079)
       cosmiconfig: 9.0.0(typescript@5.7.3)
+      devtools-protocol: 0.0.1566079
+      puppeteer-core: 24.37.2
+      typed-query-selector: 2.12.0
+    transitivePeerDependencies:
+      - bare-abort-controller
+      - bare-buffer
+      - bufferutil
+      - react-native-b4a
+      - supports-color
+      - typescript
+      - utf-8-validate
+
+  puppeteer@24.37.2(typescript@5.9.3):
+    dependencies:
+      '@puppeteer/browsers': 2.12.0
+      chromium-bidi: 13.1.1(devtools-protocol@0.0.1566079)
+      cosmiconfig: 9.0.0(typescript@5.9.3)
       devtools-protocol: 0.0.1566079
       puppeteer-core: 24.37.2
       typed-query-selector: 2.12.0

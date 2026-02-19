@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { db } from '@repo/database-hirekit';
+import { logActivity } from '@/lib/activity';
 
 const VALID_STATUSES = ['new', 'screening', 'interviewing', 'offered', 'hired', 'rejected'];
 
@@ -37,6 +38,25 @@ export async function PATCH(
 
   if (application.count === 0) {
     return NextResponse.json({ error: 'Not found' }, { status: 404 });
+  }
+
+  if (body.status) {
+    logActivity({
+      companyId: company.id,
+      applicationId: params.id,
+      type: 'status_change',
+      data: { to: body.status },
+      performedBy: session.user.id,
+    });
+  }
+  if (body.notes !== undefined) {
+    logActivity({
+      companyId: company.id,
+      applicationId: params.id,
+      type: 'note_added',
+      data: { notes: typeof body.notes === 'string' ? body.notes.substring(0, 200) : '' },
+      performedBy: session.user.id,
+    });
   }
 
   return NextResponse.json({ success: true });
