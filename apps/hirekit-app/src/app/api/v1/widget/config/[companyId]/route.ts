@@ -13,6 +13,7 @@ export async function GET(
       branding: true,
       cvTemplate: true,
       landingPage: true,
+      consentConfig: true,
     },
   });
 
@@ -49,5 +50,12 @@ export async function GET(
           redirectUrl: company.landingPage.redirectUrl,
         }
       : null,
+    consent: company.consentConfig?.enabled
+      ? {
+          enabled: true,
+          consentText: company.consentConfig.consentText,
+          privacyPolicyUrl: company.consentConfig.privacyPolicyUrl,
+        }
+      : { enabled: false },
   });
 }

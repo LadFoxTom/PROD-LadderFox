@@ -5,6 +5,9 @@ import { DashboardLayout } from '@/app/components/DashboardLayout';
 import { WIDGET_TEMPLATES, WidgetTemplateConfig, JOB_LISTING_TEMPLATES, JobListingTemplateConfig } from '@repo/types';
 import { EmailTemplatesTab } from './EmailTemplatesTab';
 import { TeamTab } from './TeamTab';
+import { CareerPageTab } from './CareerPageTab';
+import { ScorecardsTab } from './ScorecardsTab';
+import { GdprTab } from './GdprTab';
 
 interface Settings {
   company: { id: string; name: string; slug: string };
@@ -36,7 +39,7 @@ interface Settings {
   };
 }
 
-type Tab = 'general' | 'job-listings' | 'cv-builder' | 'email-templates' | 'team';
+type Tab = 'general' | 'job-listings' | 'cv-builder' | 'email-templates' | 'team' | 'career-page' | 'scorecards' | 'gdpr';
 
 export default function SettingsPage() {
   const [settings, setSettings] = useState<Settings | null>(null);
@@ -101,8 +104,11 @@ export default function SettingsPage() {
     { id: 'general', label: 'General', icon: 'ph ph-gear' },
     { id: 'job-listings', label: 'Job Listings', icon: 'ph ph-briefcase' },
     { id: 'cv-builder', label: 'CV Builder', icon: 'ph ph-file-text' },
+    { id: 'career-page', label: 'Career Page', icon: 'ph ph-globe' },
+    { id: 'scorecards', label: 'Scorecards', icon: 'ph ph-clipboard-text' },
     { id: 'email-templates', label: 'Email Templates', icon: 'ph ph-envelope' },
     { id: 'team', label: 'Team', icon: 'ph ph-users-three' },
+    { id: 'gdpr', label: 'GDPR', icon: 'ph ph-shield-check' },
   ];
 
   const sectionDefs = [
@@ -879,8 +885,20 @@ export default function SettingsPage() {
         )}
 
         {/* Team Tab */}
+        {activeTab === 'career-page' && (
+          <CareerPageTab companySlug={settings.company.slug} />
+        )}
+
+        {activeTab === 'scorecards' && (
+          <ScorecardsTab />
+        )}
+
         {activeTab === 'team' && (
           <TeamTab />
+        )}
+
+        {activeTab === 'gdpr' && (
+          <GdprTab />
         )}
 
       </div>

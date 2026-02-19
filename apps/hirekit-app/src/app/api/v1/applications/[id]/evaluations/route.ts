@@ -19,13 +19,33 @@ export async function GET(
     return NextResponse.json({ error: 'No company' }, { status: 404 });
   }
 
-  // Verify application belongs to company
+  // Verify application belongs to company and get job info
   const app = await db.application.findFirst({
     where: { id: params.id, companyId: ctx.companyId },
-    select: { id: true },
+    select: { id: true, jobId: true },
   });
   if (!app) {
     return NextResponse.json({ error: 'Not found' }, { status: 404 });
+  }
+
+  // Fetch scorecard for this job (if any)
+  let scorecard = null;
+  if (app.jobId) {
+    const job = await db.job.findUnique({
+      where: { id: app.jobId },
+      select: { scorecardId: true },
+    });
+    if (job?.scorecardId) {
+      scorecard = await db.scorecard.findUnique({
+        where: { id: job.scorecardId },
+      });
+    }
+  }
+  // Fallback: check for a company default scorecard
+  if (!scorecard) {
+    scorecard = await db.scorecard.findFirst({
+      where: { companyId: ctx.companyId, isDefault: true },
+    });
   }
 
   const evaluations = await db.evaluation.findMany({
@@ -47,6 +67,9 @@ export async function GET(
       userName: userMap[e.userId] || 'Unknown',
     })),
     currentUserId: session.user.id,
+    scorecard: scorecard
+      ? { id: scorecard.id, name: scorecard.name, criteria: scorecard.criteria }
+      : null,
   });
 }
 

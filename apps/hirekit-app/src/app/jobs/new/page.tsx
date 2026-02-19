@@ -15,6 +15,12 @@ export default async function NewJobPage() {
   });
   if (!company) redirect('/onboarding');
 
+  const scorecards = await db.scorecard.findMany({
+    where: { companyId: company.id },
+    select: { id: true, name: true },
+    orderBy: { name: 'asc' },
+  });
+
   return (
     <DashboardLayout>
       <div className="p-8">
@@ -36,7 +42,7 @@ export default async function NewJobPage() {
         </div>
 
         <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm max-w-3xl">
-          <JobForm mode="create" />
+          <JobForm mode="create" scorecards={scorecards} />
         </div>
       </div>
     </DashboardLayout>

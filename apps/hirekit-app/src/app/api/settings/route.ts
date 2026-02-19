@@ -81,6 +81,17 @@ export async function GET() {
           customLayout: null,
           customSourceUrl: null,
         },
+    careerPage: company.landingPage
+      ? {
+          published: company.landingPage.published,
+          title: company.landingPage.title,
+          subtitle: company.landingPage.subtitle,
+          introText: company.landingPage.introText,
+          templateId: company.landingPage.templateId,
+          heroImageUrl: company.landingPage.heroImageUrl,
+          metaDescription: company.landingPage.metaDescription,
+        }
+      : null,
   });
 }
 
@@ -158,6 +169,33 @@ export async function PUT(request: NextRequest) {
         successMessage: body.landingPage.successMessage,
         redirectUrl: body.landingPage.redirectUrl,
         ...(body.landingPage.widgetType && { widgetType: body.landingPage.widgetType }),
+      },
+    });
+  }
+
+  if (body.careerPage) {
+    await db.landingPage.upsert({
+      where: { companyId: ctx.companyId },
+      create: {
+        companyId: ctx.companyId,
+        domain: `${company?.slug || ctx.companyId}.hirekit.io`,
+        title: body.careerPage.title || `Careers at ${ctx.companyName}`,
+        successMessage: 'Thank you! Your application has been submitted.',
+        published: body.careerPage.published ?? false,
+        subtitle: body.careerPage.subtitle || null,
+        introText: body.careerPage.introText || null,
+        templateId: body.careerPage.templateId || 'modern',
+        heroImageUrl: body.careerPage.heroImageUrl || null,
+        metaDescription: body.careerPage.metaDescription || null,
+      },
+      update: {
+        ...(body.careerPage.published !== undefined && { published: body.careerPage.published }),
+        ...(body.careerPage.title !== undefined && { title: body.careerPage.title }),
+        ...(body.careerPage.subtitle !== undefined && { subtitle: body.careerPage.subtitle }),
+        ...(body.careerPage.introText !== undefined && { introText: body.careerPage.introText }),
+        ...(body.careerPage.templateId !== undefined && { templateId: body.careerPage.templateId }),
+        ...(body.careerPage.heroImageUrl !== undefined && { heroImageUrl: body.careerPage.heroImageUrl }),
+        ...(body.careerPage.metaDescription !== undefined && { metaDescription: body.careerPage.metaDescription }),
       },
     });
   }

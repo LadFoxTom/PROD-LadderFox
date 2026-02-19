@@ -49,7 +49,7 @@ export async function GET(
     <title><![CDATA[${job.title}]]></title>
     <date><![CDATA[${job.createdAt.toUTCString()}]]></date>
     <referencenumber>${job.id}</referencenumber>
-    <url><![CDATA[${baseUrl}/jobs/${job.id}]]></url>
+    <url><![CDATA[${baseUrl}/career/${company.slug}/${job.id}]]></url>
     <company><![CDATA[${company.name}]]></company>
     <city><![CDATA[${city}]]></city>
     <country><![CDATA[${country}]]></country>
@@ -60,7 +60,7 @@ export async function GET(
   const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <source>
   <publisher><![CDATA[${company.name}]]></publisher>
-  <publisherurl><![CDATA[${baseUrl}]]></publisherurl>
+  <publisherurl><![CDATA[${baseUrl}/career/${company.slug}]]></publisherurl>
   <lastBuildDate>${new Date().toUTCString()}</lastBuildDate>
 ${jobsXml}
 </source>`;

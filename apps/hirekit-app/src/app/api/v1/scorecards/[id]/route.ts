@@ -15,24 +15,21 @@ export async function GET(
 
   const ctx = await getCompanyForUser(session.user.id);
   if (!ctx) {
-    return NextResponse.json({ error: 'No company' }, { status: 404 });
+    return NextResponse.json({ error: 'No company found' }, { status: 404 });
   }
 
-  const job = await db.job.findFirst({
+  const scorecard = await db.scorecard.findFirst({
     where: { id: params.id, companyId: ctx.companyId },
-    include: {
-      _count: { select: { applications: true } },
-    },
   });
 
-  if (!job) {
+  if (!scorecard) {
     return NextResponse.json({ error: 'Not found' }, { status: 404 });
   }
 
-  return NextResponse.json(job);
+  return NextResponse.json({ scorecard });
 }
 
-export async function PATCH(
+export async function PUT(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
@@ -43,29 +40,21 @@ export async function PATCH(
 
   const ctx = await getCompanyForUser(session.user.id);
   if (!ctx) {
-    return NextResponse.json({ error: 'No company' }, { status: 404 });
+    return NextResponse.json({ error: 'No company found' }, { status: 404 });
   }
 
   const body = await request.json();
 
-  const data: Record<string, unknown> = {};
-  if (body.title !== undefined) data.title = body.title;
-  if (body.description !== undefined) data.description = body.description || null;
-  if (body.location !== undefined) data.location = body.location || null;
-  if (body.type !== undefined) data.type = body.type || null;
-  if (body.department !== undefined) data.department = body.department || null;
-  if (body.salaryMin !== undefined) data.salaryMin = body.salaryMin ? Number(body.salaryMin) : null;
-  if (body.salaryMax !== undefined) data.salaryMax = body.salaryMax ? Number(body.salaryMax) : null;
-  if (body.salaryCurrency !== undefined) data.salaryCurrency = body.salaryCurrency || 'EUR';
-  if (body.active !== undefined) data.active = Boolean(body.active);
-  if (body.scorecardId !== undefined) data.scorecardId = body.scorecardId || null;
-
-  const result = await db.job.updateMany({
+  const updated = await db.scorecard.updateMany({
     where: { id: params.id, companyId: ctx.companyId },
-    data,
+    data: {
+      ...(body.name !== undefined && { name: body.name }),
+      ...(body.criteria !== undefined && { criteria: body.criteria }),
+      ...(body.isDefault !== undefined && { isDefault: body.isDefault }),
+    },
   });
 
-  if (result.count === 0) {
+  if (updated.count === 0) {
     return NextResponse.json({ error: 'Not found' }, { status: 404 });
   }
 
@@ -83,18 +72,12 @@ export async function DELETE(
 
   const ctx = await getCompanyForUser(session.user.id);
   if (!ctx) {
-    return NextResponse.json({ error: 'No company' }, { status: 404 });
+    return NextResponse.json({ error: 'No company found' }, { status: 404 });
   }
 
-  // Soft delete by setting active to false
-  const result = await db.job.updateMany({
+  await db.scorecard.deleteMany({
     where: { id: params.id, companyId: ctx.companyId },
-    data: { active: false },
   });
-
-  if (result.count === 0) {
-    return NextResponse.json({ error: 'Not found' }, { status: 404 });
-  }
 
   return NextResponse.json({ success: true });
 }

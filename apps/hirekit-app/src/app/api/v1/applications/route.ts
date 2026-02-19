@@ -15,7 +15,7 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  let body: { cvData: Record<string, unknown>; jobId?: string };
+  let body: { cvData: Record<string, unknown>; jobId?: string; consent?: boolean };
   try {
     body = await request.json();
   } catch {
@@ -50,6 +50,12 @@ export async function POST(request: NextRequest) {
 
   // Email is optional — chat builder may not collect it early
 
+  // Determine application source
+  const xSource = request.headers.get('X-Source');
+  const referer = request.headers.get('referer') || '';
+  let source = xSource || 'widget';
+  if (!xSource && referer.includes('/career/')) source = 'career_page';
+
   const application = await db.application.create({
     data: {
       companyId,
@@ -59,8 +65,29 @@ export async function POST(request: NextRequest) {
       name,
       phone,
       status: 'new',
+      source,
+      sourceUrl: referer || null,
     },
   });
+
+  // Record GDPR consent if provided
+  if (body.consent && email) {
+    const consentConfig = await db.consentConfig.findUnique({
+      where: { companyId },
+    });
+    if (consentConfig?.enabled) {
+      await db.candidateConsent.create({
+        data: {
+          companyId,
+          applicationId: application.id,
+          email,
+          consentText: consentConfig.consentText,
+          ipAddress: request.headers.get('x-forwarded-for') || null,
+          userAgent: request.headers.get('user-agent') || null,
+        },
+      });
+    }
+  }
 
   logActivity({
     companyId,

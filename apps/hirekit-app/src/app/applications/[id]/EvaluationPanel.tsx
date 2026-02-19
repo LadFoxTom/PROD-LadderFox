@@ -1,6 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import { ScorecardEvaluation } from './ScorecardEvaluation';
+import { EvaluationComparison } from './EvaluationComparison';
 
 interface EvaluationData {
   id: string;
@@ -9,12 +11,27 @@ interface EvaluationData {
   rating: number;
   recommendation: string | null;
   notes: string | null;
+  scores: Record<string, number> | null;
   createdAt: string;
+}
+
+interface Criterion {
+  id: string;
+  name: string;
+  description: string;
+  weight: number;
+}
+
+interface ScorecardData {
+  id: string;
+  name: string;
+  criteria: Criterion[];
 }
 
 export function EvaluationPanel({ applicationId }: { applicationId: string }) {
   const [evaluations, setEvaluations] = useState<EvaluationData[]>([]);
   const [currentUserId, setCurrentUserId] = useState('');
+  const [scorecard, setScorecard] = useState<ScorecardData | null>(null);
   const [loading, setLoading] = useState(true);
   const [rating, setRating] = useState(0);
   const [recommendation, setRecommendation] = useState('');
@@ -28,6 +45,7 @@ export function EvaluationPanel({ applicationId }: { applicationId: string }) {
       .then((data) => {
         setEvaluations(data.evaluations || []);
         setCurrentUserId(data.currentUserId || '');
+        setScorecard(data.scorecard || null);
         // Pre-fill if current user already evaluated
         const myEval = (data.evaluations || []).find((e: EvaluationData) => e.userId === data.currentUserId);
         if (myEval) {
@@ -105,6 +123,20 @@ export function EvaluationPanel({ applicationId }: { applicationId: string }) {
             </div>
           )}
 
+          {/* Scorecard comparison matrix */}
+          {scorecard && evaluations.length > 1 && (
+            <EvaluationComparison
+              criteria={scorecard.criteria}
+              evaluations={evaluations.map((e) => ({
+                userId: e.userId,
+                userName: e.userName,
+                rating: e.rating,
+                scores: e.scores,
+                recommendation: e.recommendation,
+              }))}
+            />
+          )}
+
           {!showForm ? (
             <button
               onClick={() => setShowForm(true)}
@@ -112,6 +144,16 @@ export function EvaluationPanel({ applicationId }: { applicationId: string }) {
             >
               {evaluations.find((e) => e.userId === currentUserId) ? 'Update Your Evaluation' : 'Add Evaluation'}
             </button>
+          ) : scorecard ? (
+            <ScorecardEvaluation
+              applicationId={applicationId}
+              criteria={scorecard.criteria}
+              existingScores={evaluations.find((e) => e.userId === currentUserId)?.scores || null}
+              existingRating={rating}
+              existingRecommendation={recommendation}
+              existingNotes={notes}
+              onSaved={() => { setShowForm(false); load(); }}
+            />
           ) : (
             <div className="space-y-3 border border-slate-200 rounded-xl p-4">
               <div>

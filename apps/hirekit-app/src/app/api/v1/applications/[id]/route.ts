@@ -32,6 +32,7 @@ export async function PATCH(
     where: { id: params.id, companyId: ctx.companyId },
     data: {
       ...(body.status && { status: body.status }),
+      ...(body.status === 'hired' && { hiredAt: new Date() }),
       ...(body.notes !== undefined && { notes: body.notes }),
       ...(body.assignedTo !== undefined && { assignedTo: body.assignedTo }),
     },

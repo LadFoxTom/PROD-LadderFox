@@ -23,15 +23,22 @@ interface JobFormData {
   salaryMin: string;
   salaryMax: string;
   salaryCurrency: string;
+  scorecardId: string;
+}
+
+interface ScorecardOption {
+  id: string;
+  name: string;
 }
 
 interface JobFormProps {
   initialData?: Partial<JobFormData>;
   jobId?: string;
   mode: 'create' | 'edit';
+  scorecards?: ScorecardOption[];
 }
 
-export function JobForm({ initialData, jobId, mode }: JobFormProps) {
+export function JobForm({ initialData, jobId, mode, scorecards = [] }: JobFormProps) {
   const router = useRouter();
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState('');
@@ -47,6 +54,7 @@ export function JobForm({ initialData, jobId, mode }: JobFormProps) {
     salaryMin: initialData?.salaryMin || '',
     salaryMax: initialData?.salaryMax || '',
     salaryCurrency: initialData?.salaryCurrency || 'EUR',
+    scorecardId: initialData?.scorecardId || '',
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -74,6 +82,7 @@ export function JobForm({ initialData, jobId, mode }: JobFormProps) {
           salaryMin: form.salaryMin ? parseInt(form.salaryMin) : null,
           salaryMax: form.salaryMax ? parseInt(form.salaryMax) : null,
           salaryCurrency: form.salaryCurrency,
+          scorecardId: form.scorecardId || null,
         }),
       });
 
@@ -272,6 +281,28 @@ export function JobForm({ initialData, jobId, mode }: JobFormProps) {
             ))}
           </select>
         </div>
+
+        {/* Scorecard */}
+        {scorecards.length > 0 && (
+          <div>
+            <label className="block text-sm font-semibold text-[#1E293B] mb-2">
+              Evaluation Scorecard
+            </label>
+            <select
+              value={form.scorecardId}
+              onChange={(e) => update('scorecardId', e.target.value)}
+              className="w-full px-4 py-3 rounded-xl border border-slate-200 text-[#1E293B] focus:outline-none focus:border-[#4F46E5] focus:ring-2 focus:ring-[#4F46E5]/10 transition-all bg-white"
+            >
+              <option value="">No scorecard</option>
+              {scorecards.map((sc) => (
+                <option key={sc.id} value={sc.id}>
+                  {sc.name}
+                </option>
+              ))}
+            </select>
+            <p className="text-xs text-[#94A3B8] mt-1">Scorecard criteria used when evaluating candidates for this job</p>
+          </div>
+        )}
 
         {/* Salary Min */}
         <div>

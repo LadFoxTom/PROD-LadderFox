@@ -24,6 +24,12 @@ export default async function EditJobPage({
   });
   if (!job) notFound();
 
+  const scorecards = await db.scorecard.findMany({
+    where: { companyId: company.id },
+    select: { id: true, name: true },
+    orderBy: { name: 'asc' },
+  });
+
   return (
     <DashboardLayout>
       <div className="p-8">
@@ -46,6 +52,7 @@ export default async function EditJobPage({
           <JobForm
             mode="edit"
             jobId={job.id}
+            scorecards={scorecards}
             initialData={{
               title: job.title,
               description: job.description || '',
@@ -55,6 +62,7 @@ export default async function EditJobPage({
               salaryMin: job.salaryMin?.toString() || '',
               salaryMax: job.salaryMax?.toString() || '',
               salaryCurrency: job.salaryCurrency || 'EUR',
+              scorecardId: job.scorecardId || '',
             }}
           />
         </div>

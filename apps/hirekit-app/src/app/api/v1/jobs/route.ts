@@ -69,6 +69,7 @@ export async function POST(request: NextRequest) {
       salaryMin: body.salaryMin ? Number(body.salaryMin) : null,
       salaryMax: body.salaryMax ? Number(body.salaryMax) : null,
       salaryCurrency: (body.salaryCurrency as string) || 'EUR',
+      scorecardId: (body.scorecardId as string) || null,
     },
   });
 
