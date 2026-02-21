@@ -22,12 +22,20 @@ export interface Job {
   id: string;
   title: string;
   description: string | null;
+  requirements: string | null;
+  benefits: string | null;
+  benefitTags: string[];
   location: string | null;
   type: string | null;
+  workplaceType: string | null;
+  employmentTypes: string[];
+  experienceLevel: string | null;
   department: string | null;
   salaryMin: number | null;
   salaryMax: number | null;
   salaryCurrency: string | null;
+  salaryPeriod: string | null;
+  showSalary: boolean;
   createdAt: string;
 }
 

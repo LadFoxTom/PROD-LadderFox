@@ -8,4 +8,8 @@ module.exports = {
     '../../packages/ui/src/**/*.{js,ts,jsx,tsx}',
     '../../packages/cv-builder/src/**/*.{js,ts,jsx,tsx}',
   ],
+  plugins: [
+    ...(sharedConfig.plugins || []),
+    require('@tailwindcss/typography'),
+  ],
 };

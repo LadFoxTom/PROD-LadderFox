@@ -48,7 +48,7 @@ export default async function EditJobPage({
           <p className="text-[#64748B] text-[15px] mt-1">{job.title}</p>
         </div>
 
-        <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm max-w-3xl">
+        <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
           <JobForm
             mode="edit"
             jobId={job.id}
@@ -56,12 +56,20 @@ export default async function EditJobPage({
             initialData={{
               title: job.title,
               description: job.description || '',
+              requirements: (job as any).requirements || '',
+              benefits: (job as any).benefits || '',
+              benefitTags: (job as any).benefitTags || [],
               location: job.location || '',
               type: job.type || '',
+              workplaceType: (job as any).workplaceType || '',
+              employmentTypes: (job as any).employmentTypes || [],
+              experienceLevel: (job as any).experienceLevel || '',
               department: job.department || '',
               salaryMin: job.salaryMin?.toString() || '',
               salaryMax: job.salaryMax?.toString() || '',
               salaryCurrency: job.salaryCurrency || 'EUR',
+              salaryPeriod: (job as any).salaryPeriod || 'year',
+              showSalary: (job as any).showSalary !== false,
               scorecardId: job.scorecardId || '',
             }}
           />

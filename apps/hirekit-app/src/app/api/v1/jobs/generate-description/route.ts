@@ -31,7 +31,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: 'Title is required' }, { status: 400 });
   }
 
-  const prompt = `You are a professional HR content writer. Generate a complete job description for the following role.
+  const prompt = `You are a professional HR content writer. Generate job listing content for the following role.
 
 Company: ${company.name}
 ${company.branding?.tagline ? `Company tagline: ${company.branding.tagline}` : ''}
@@ -40,14 +40,12 @@ ${department ? `Department: ${department}` : ''}
 ${tone ? `Tone: ${tone}` : 'Tone: Professional and welcoming'}
 ${bullets ? `Key points to include:\n${bullets}` : ''}
 
-Generate a well-structured job description with these sections:
-1. About the Role (2-3 sentences)
-2. Responsibilities (5-7 bullet points)
-3. Requirements (5-7 bullet points)
-4. Nice to Have (3-4 bullet points)
-5. What We Offer (3-5 bullet points)
+Return a JSON object with exactly three fields:
+1. "description" — About the role and responsibilities. Use HTML tags: <h3> for section headers, <p> for paragraphs, <ul>/<li> for bullet lists. Include an "About the Role" paragraph and a "Responsibilities" section with 5-7 bullet points.
+2. "requirements" — Required qualifications. Use HTML: <ul>/<li> for 5-7 requirements, plus a <h3>Nice to Have</h3> section with 3-4 items.
+3. "benefits" — What the company offers. Use HTML: <ul>/<li> for 3-5 benefits/perks.
 
-Use plain text with line breaks. Do not use markdown headers (no # symbols). Use simple formatting like "About the Role:" as section headers. Use "- " for bullet points. Keep it concise and engaging.`;
+Return ONLY valid JSON, no markdown code fences.`;
 
   try {
     const model = new ChatOpenAI({
@@ -57,11 +55,20 @@ Use plain text with line breaks. Do not use markdown headers (no # symbols). Use
     });
 
     const response = await model.invoke(prompt);
-    const description = typeof response.content === 'string'
-      ? response.content
-      : '';
+    const raw = typeof response.content === 'string' ? response.content : '';
 
-    return NextResponse.json({ description });
+    // Try to parse JSON response
+    try {
+      const parsed = JSON.parse(raw.replace(/```json?\n?/g, '').replace(/```/g, '').trim());
+      return NextResponse.json({
+        description: parsed.description || '',
+        requirements: parsed.requirements || '',
+        benefits: parsed.benefits || '',
+      });
+    } catch {
+      // Fallback: return as single description field
+      return NextResponse.json({ description: raw });
+    }
   } catch (error: any) {
     console.error('AI description generation error:', error);
     return NextResponse.json(

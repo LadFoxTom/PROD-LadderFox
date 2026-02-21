@@ -41,7 +41,7 @@ export default async function NewJobPage() {
           </p>
         </div>
 
-        <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm max-w-3xl">
+        <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
           <JobForm mode="create" scorecards={scorecards} />
         </div>
       </div>

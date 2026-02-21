@@ -51,12 +51,20 @@ export async function PATCH(
   const data: Record<string, unknown> = {};
   if (body.title !== undefined) data.title = body.title;
   if (body.description !== undefined) data.description = body.description || null;
+  if (body.requirements !== undefined) data.requirements = body.requirements || null;
+  if (body.benefits !== undefined) data.benefits = body.benefits || null;
+  if (body.benefitTags !== undefined) data.benefitTags = Array.isArray(body.benefitTags) ? body.benefitTags : [];
   if (body.location !== undefined) data.location = body.location || null;
   if (body.type !== undefined) data.type = body.type || null;
+  if (body.workplaceType !== undefined) data.workplaceType = body.workplaceType || null;
+  if (body.employmentTypes !== undefined) data.employmentTypes = Array.isArray(body.employmentTypes) ? body.employmentTypes : [];
+  if (body.experienceLevel !== undefined) data.experienceLevel = body.experienceLevel || null;
   if (body.department !== undefined) data.department = body.department || null;
   if (body.salaryMin !== undefined) data.salaryMin = body.salaryMin ? Number(body.salaryMin) : null;
   if (body.salaryMax !== undefined) data.salaryMax = body.salaryMax ? Number(body.salaryMax) : null;
   if (body.salaryCurrency !== undefined) data.salaryCurrency = body.salaryCurrency || 'EUR';
+  if (body.salaryPeriod !== undefined) data.salaryPeriod = body.salaryPeriod || 'year';
+  if (body.showSalary !== undefined) data.showSalary = Boolean(body.showSalary);
   if (body.active !== undefined) data.active = Boolean(body.active);
   if (body.scorecardId !== undefined) data.scorecardId = body.scorecardId || null;
 

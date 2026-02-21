@@ -6,6 +6,7 @@ import { db } from '@repo/database-hirekit';
 import { DashboardLayout } from '@/app/components/DashboardLayout';
 import { StatusBadge } from '@/app/components/StatusBadge';
 import { JobActions } from './JobActions';
+import { ensureHtml } from '@/lib/html-utils';
 
 export default async function JobDetailPage({
   params,
@@ -35,15 +36,20 @@ export default async function JobDetailPage({
     where: { jobId: job.id },
   });
 
+  const periodLabel = (job as any).salaryPeriod === 'month' ? '/mo' : (job as any).salaryPeriod === 'hour' ? '/hr' : '/yr';
   const formatSalary = () => {
     if (!job.salaryMin && !job.salaryMax) return null;
     const currency = job.salaryCurrency || 'EUR';
     const fmt = (n: number) =>
       new Intl.NumberFormat('en', { style: 'currency', currency, maximumFractionDigits: 0 }).format(n);
-    if (job.salaryMin && job.salaryMax) return `${fmt(job.salaryMin)} - ${fmt(job.salaryMax)}`;
-    if (job.salaryMin) return `From ${fmt(job.salaryMin)}`;
-    return `Up to ${fmt(job.salaryMax!)}`;
+    if (job.salaryMin && job.salaryMax) return `${fmt(job.salaryMin)} - ${fmt(job.salaryMax)}${periodLabel}`;
+    if (job.salaryMin) return `From ${fmt(job.salaryMin)}${periodLabel}`;
+    return `Up to ${fmt(job.salaryMax!)}${periodLabel}`;
   };
+
+  const workplaceLabels: Record<string, string> = { 'on-site': 'On-site', hybrid: 'Hybrid', remote: 'Remote' };
+  const experienceLabels: Record<string, string> = { entry: 'Entry Level', mid: 'Mid Level', senior: 'Senior', lead: 'Lead', director: 'Director', executive: 'Executive' };
+  const typeLabels: Record<string, string> = { 'full-time': 'Full-time', 'part-time': 'Part-time', contract: 'Contract', internship: 'Internship', freelance: 'Freelance' };
 
   return (
     <DashboardLayout>
@@ -90,10 +96,27 @@ export default async function JobDetailPage({
                         {job.location}
                       </span>
                     )}
-                    {job.type && (
+                    {(job as any).workplaceType && (
+                      <span className="flex items-center gap-1.5 text-sm text-[#94A3B8]">
+                        <i className="ph ph-house" />
+                        {workplaceLabels[(job as any).workplaceType] || (job as any).workplaceType}
+                      </span>
+                    )}
+                    {(job as any).employmentTypes?.length > 0 ? (
                       <span className="flex items-center gap-1.5 text-sm text-[#94A3B8]">
                         <i className="ph ph-clock" />
-                        {job.type.charAt(0).toUpperCase() + job.type.slice(1)}
+                        {(job as any).employmentTypes.map((t: string) => typeLabels[t] || t).join(', ')}
+                      </span>
+                    ) : job.type ? (
+                      <span className="flex items-center gap-1.5 text-sm text-[#94A3B8]">
+                        <i className="ph ph-clock" />
+                        {typeLabels[job.type] || job.type}
+                      </span>
+                    ) : null}
+                    {(job as any).experienceLevel && (
+                      <span className="flex items-center gap-1.5 text-sm text-[#94A3B8]">
+                        <i className="ph ph-chart-line-up" />
+                        {experienceLabels[(job as any).experienceLevel] || (job as any).experienceLevel}
                       </span>
                     )}
                     {formatSalary() && (
@@ -123,9 +146,49 @@ export default async function JobDetailPage({
                   <i className="ph ph-file-text text-xl text-[#4F46E5]" />
                   <h3 className="text-lg font-bold text-[#1E293B]">Description</h3>
                 </div>
-                <p className="text-[#1E293B] text-[15px] leading-relaxed whitespace-pre-wrap">
-                  {job.description}
-                </p>
+                <div
+                  className="prose prose-slate max-w-none text-[15px]"
+                  dangerouslySetInnerHTML={{ __html: ensureHtml(job.description) }}
+                />
+              </div>
+            )}
+
+            {/* Requirements */}
+            {(job as any).requirements && (
+              <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
+                <div className="flex items-center gap-2 mb-5">
+                  <i className="ph ph-list-checks text-xl text-[#4F46E5]" />
+                  <h3 className="text-lg font-bold text-[#1E293B]">Requirements</h3>
+                </div>
+                <div
+                  className="prose prose-slate max-w-none text-[15px]"
+                  dangerouslySetInnerHTML={{ __html: ensureHtml((job as any).requirements) }}
+                />
+              </div>
+            )}
+
+            {/* Benefits */}
+            {((job as any).benefits || (job as any).benefitTags?.length > 0) && (
+              <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
+                <div className="flex items-center gap-2 mb-5">
+                  <i className="ph ph-gift text-xl text-[#4F46E5]" />
+                  <h3 className="text-lg font-bold text-[#1E293B]">Benefits & Perks</h3>
+                </div>
+                {(job as any).benefitTags?.length > 0 && (
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {(job as any).benefitTags.map((tag: string) => (
+                      <span key={tag} className="px-3 py-1.5 bg-[#E0E7FF] text-[#4F46E5] text-xs font-semibold rounded-full">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                )}
+                {(job as any).benefits && (
+                  <div
+                    className="prose prose-slate max-w-none text-[15px]"
+                    dangerouslySetInnerHTML={{ __html: ensureHtml((job as any).benefits) }}
+                  />
+                )}
               </div>
             )}
 
