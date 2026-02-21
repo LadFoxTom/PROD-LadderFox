@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ProblemCard, FeatureCard, FeatureShowcaseBlock, HeroMockup } from '@/components/InteractiveCards';
+import { ProblemCard, FeatureCard, FeatureShowcaseBlock, MobileNav } from '@/components/InteractiveCards';
 
 
 /* ═══════════════════════════════════════════
@@ -26,6 +26,7 @@ function Header() {
           >
             Start free trial <i className="ph-bold ph-arrow-right" />
           </a>
+          <MobileNav />
         </nav>
       </div>
     </header>
@@ -69,9 +70,16 @@ function Hero() {
             </div>
           </div>
 
-          {/* Right: Mockup */}
+          {/* Right: Video placeholder */}
           <div className="relative z-[2]">
-            <HeroMockup />
+            <div className="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden w-full aspect-video relative group cursor-pointer hover:shadow-xl transition-shadow duration-300">
+              <div className="absolute inset-0 bg-gradient-to-br from-indigo-50 to-slate-100 flex flex-col items-center justify-center gap-4">
+                <div className="w-20 h-20 bg-hk-primary rounded-full flex items-center justify-center shadow-lg shadow-indigo-500/30 group-hover:scale-110 transition-transform duration-300">
+                  <i className="ph-fill ph-play text-white text-3xl ml-1" />
+                </div>
+                <p className="text-slate-500 font-medium">See HireKit in action</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

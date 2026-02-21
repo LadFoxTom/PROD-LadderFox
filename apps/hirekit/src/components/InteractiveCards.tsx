@@ -199,69 +199,36 @@ export function FeatureShowcaseBlock({
   );
 }
 
-/* ── Hero Mockup Window (3D perspective) ── */
-export function HeroMockup() {
-  const [hovered, setHovered] = useState(false);
+/* ── Mobile Navigation (hamburger menu) ── */
+export function MobileNav() {
+  const [open, setOpen] = useState(false);
 
   return (
-    <div style={{ perspective: '1000px' }} className="relative">
-      {/* Floating icons */}
-      <div className="absolute -top-5 -left-5 bg-white p-4 rounded-[20px] shadow-sm text-[32px] animate-bounce-slow z-10">
-        <i className="ph-duotone ph-file-text text-hk-primary" />
-      </div>
-      <div className="absolute bottom-10 -right-7 bg-white p-4 rounded-[20px] shadow-sm text-[32px] animate-bounce-slow-delay z-10">
-        <i className="ph-duotone ph-check-circle text-hk-accent" />
-      </div>
-
-      {/* Mockup window */}
-      <div
-        className="bg-white rounded-2xl shadow-lg border border-slate-200 overflow-hidden w-full h-[450px] relative transition-transform duration-500"
-        style={{
-          transform: hovered ? 'rotateY(0) rotateX(0)' : 'rotateY(-10deg) rotateX(5deg)',
-        }}
-        onMouseEnter={() => setHovered(true)}
-        onMouseLeave={() => setHovered(false)}
+    <div className="md:hidden">
+      <button
+        onClick={() => setOpen(!open)}
+        className="p-2 text-hk-dark hover:text-hk-primary transition-colors"
+        aria-label="Toggle menu"
       >
-        {/* Title bar */}
-        <div className="h-10 bg-slate-100 flex items-center px-4 gap-2 border-b border-slate-200">
-          <div className="w-2.5 h-2.5 rounded-full bg-red-500" />
-          <div className="w-2.5 h-2.5 rounded-full bg-amber-500" />
-          <div className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
-        </div>
-        {/* Content skeleton */}
-        <div className="p-6 flex flex-col gap-4">
-          <div className="flex justify-between items-center">
-            <div className="w-2/5 h-6 bg-slate-200 rounded" />
-            <div className="w-8 h-8 bg-slate-200 rounded-full" />
-          </div>
-          <div className="w-full h-3 bg-slate-100 rounded" />
-          <div className="w-[70%] h-3 bg-slate-100 rounded" />
+        <i className={`${open ? 'ph-bold ph-x' : 'ph-bold ph-list'} text-2xl`} />
+      </button>
 
-          <div className="flex gap-4 mt-4">
-            <div className="flex-1 h-[120px] bg-hk-light border-2 border-dashed border-slate-300 rounded-xl flex items-center justify-center text-slate-400">
-              <div className="text-center">
-                <i className="ph-bold ph-users text-2xl mb-2 block" />
-                <div className="text-xs font-semibold">Candidates</div>
-              </div>
-            </div>
-            <div className="flex-1 h-[120px] bg-hk-light border-2 border-dashed border-slate-300 rounded-xl flex items-center justify-center text-slate-400">
-              <div className="text-center">
-                <i className="ph-bold ph-chart-bar text-2xl mb-2 block" />
-                <div className="text-xs font-semibold">Analytics</div>
-              </div>
-            </div>
-          </div>
-
-          <div className="bg-slate-100 rounded-lg p-3 mt-4 flex items-center gap-3">
-            <div className="w-10 h-10 bg-white rounded-full" />
-            <div>
-              <div className="w-[120px] h-2 bg-slate-300 rounded mb-1" />
-              <div className="w-20 h-2 bg-slate-200 rounded" />
-            </div>
-            <div className="ml-auto w-6 h-6 bg-hk-primary rounded" />
+      {open && (
+        <div className="absolute top-full left-0 right-0 bg-white border-b border-slate-200 shadow-lg z-50">
+          <div className="flex flex-col px-6 py-4 gap-1">
+            <a href="#features" onClick={() => setOpen(false)} className="py-3 font-medium text-hk-dark hover:text-hk-primary transition-colors">Features</a>
+            <a href="#how-it-works" onClick={() => setOpen(false)} className="py-3 font-medium text-hk-dark hover:text-hk-primary transition-colors">How it Works</a>
+            <a href="#pricing" onClick={() => setOpen(false)} className="py-3 font-medium text-hk-dark hover:text-hk-primary transition-colors">Pricing</a>
+            <a href="/auth/login" className="py-3 font-medium text-hk-dark hover:text-hk-primary transition-colors">Login</a>
+            <a
+              href="/auth/signup"
+              className="mt-2 inline-flex items-center justify-center gap-2 px-6 py-3 bg-hk-primary text-white rounded-full font-semibold shadow-md shadow-indigo-500/25"
+            >
+              Start free trial <i className="ph-bold ph-arrow-right" />
+            </a>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
