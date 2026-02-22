@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { db } from '@repo/database-hirekit';
+import { generateGoogleCalendarUrl, generateOutlookCalendarUrl } from '@/lib/calendar';
 
 // GET: validate scheduling link and return available info
 export async function GET(
@@ -85,5 +86,9 @@ export async function POST(
     data: { bookedAt: new Date() },
   });
 
-  return NextResponse.json({ success: true, startTime: start, endTime: end });
+  const calendarInput = { title: link.title, startTime: start, endTime: end };
+  const googleCalendarUrl = generateGoogleCalendarUrl(calendarInput);
+  const outlookCalendarUrl = generateOutlookCalendarUrl(calendarInput);
+
+  return NextResponse.json({ success: true, startTime: start, endTime: end, googleCalendarUrl, outlookCalendarUrl });
 }

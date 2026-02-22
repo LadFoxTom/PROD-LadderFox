@@ -6,6 +6,7 @@ import { db } from '@repo/database-hirekit';
 import { getCompanyForUser } from '@/lib/company';
 import { logActivity } from '@/lib/activity';
 import { sendInterviewEmail } from '@/lib/email';
+import { generateGoogleCalendarUrl, generateOutlookCalendarUrl } from '@/lib/calendar';
 
 export async function GET(
   request: NextRequest,
@@ -26,7 +27,25 @@ export async function GET(
     orderBy: { startTime: 'desc' },
   });
 
-  return NextResponse.json({ interviews });
+  const interviewsWithCalendar = interviews.map((iv) => ({
+    ...iv,
+    googleCalendarUrl: generateGoogleCalendarUrl({
+      title: iv.title,
+      startTime: iv.startTime,
+      endTime: iv.endTime,
+      location: iv.location,
+      meetingLink: iv.meetingLink,
+    }),
+    outlookCalendarUrl: generateOutlookCalendarUrl({
+      title: iv.title,
+      startTime: iv.startTime,
+      endTime: iv.endTime,
+      location: iv.location,
+      meetingLink: iv.meetingLink,
+    }),
+  }));
+
+  return NextResponse.json({ interviews: interviewsWithCalendar });
 }
 
 export async function POST(
@@ -132,5 +151,9 @@ export async function POST(
     console.error('Failed to send interview email:', err);
   });
 
-  return NextResponse.json({ interview, schedulingUrl }, { status: 201 });
+  const calendarInput = { title, startTime: new Date(startTime), endTime: new Date(endTime), location, meetingLink, candidateName: application.name };
+  const googleCalendarUrl = generateGoogleCalendarUrl(calendarInput);
+  const outlookCalendarUrl = generateOutlookCalendarUrl(calendarInput);
+
+  return NextResponse.json({ interview, schedulingUrl, googleCalendarUrl, outlookCalendarUrl }, { status: 201 });
 }

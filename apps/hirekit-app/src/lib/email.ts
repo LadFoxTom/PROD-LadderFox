@@ -1,4 +1,5 @@
 import { Resend } from 'resend';
+import { generateGoogleCalendarUrl, generateOutlookCalendarUrl } from './calendar';
 
 const resend = process.env.RESEND_API_KEY
   ? new Resend(process.env.RESEND_API_KEY)
@@ -174,6 +175,18 @@ export async function sendInterviewEmail({
     </div>
   ` : '';
 
+  const googleCalUrl = generateGoogleCalendarUrl({ title, startTime, endTime, location, meetingLink, candidateName });
+  const outlookCalUrl = generateOutlookCalendarUrl({ title, startTime, endTime, location, meetingLink, candidateName });
+  const calendarHtml = `
+    <div style="text-align: center; margin: 20px 0 8px;">
+      <span style="color: #94A3B8; font-size: 13px;">Add to calendar:</span>
+    </div>
+    <div style="text-align: center; margin: 0 0 16px;">
+      <a href="${googleCalUrl}" style="display: inline-block; color: #4F46E5; font-size: 13px; font-weight: 600; text-decoration: none; margin: 0 12px;">Google Calendar</a>
+      <a href="${outlookCalUrl}" style="display: inline-block; color: #4F46E5; font-size: 13px; font-weight: 600; text-decoration: none; margin: 0 12px;">Outlook</a>
+    </div>
+  `;
+
   return sendEmail({
     to,
     subject: `Interview: ${title} at ${companyName}`,
@@ -194,9 +207,10 @@ export async function sendInterviewEmail({
           ${linkHtml}
         </div>
         ${scheduleHtml}
+        ${calendarHtml}
         <p style="color: #94A3B8; font-size: 13px; margin-top: 24px;">Good luck!</p>
       </div>
     `,
-    text: `Interview Scheduled: ${title} at ${companyName}\nDate: ${dateStr}\nTime: ${timeStr} (${timezone})${location ? `\nLocation: ${location}` : ''}${meetingLink ? `\nMeeting Link: ${meetingLink}` : ''}${schedulingUrl ? `\nChoose your time slot: ${schedulingUrl}` : ''}`,
+    text: `Interview Scheduled: ${title} at ${companyName}\nDate: ${dateStr}\nTime: ${timeStr} (${timezone})${location ? `\nLocation: ${location}` : ''}${meetingLink ? `\nMeeting Link: ${meetingLink}` : ''}${schedulingUrl ? `\nChoose your time slot: ${schedulingUrl}` : ''}\n\nAdd to Google Calendar: ${googleCalUrl}\nAdd to Outlook: ${outlookCalUrl}`,
   });
 }
