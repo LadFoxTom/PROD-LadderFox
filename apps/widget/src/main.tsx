@@ -72,6 +72,20 @@ class HireKitWidget {
     const successMsg = companyConfig.landingPage?.successMessage
       || 'Thank you! Your application has been submitted.';
 
+    // Fetch screening questions if jobId is provided
+    let screeningQuestions: any[] = [];
+    if (config.jobId) {
+      try {
+        const jobRes = await fetch(`${apiUrl}/v1/public/jobs/${config.companyId}/${config.jobId}`);
+        if (jobRes.ok) {
+          const jobData = await jobRes.json();
+          screeningQuestions = jobData.screeningQuestions || [];
+        }
+      } catch (err) {
+        console.warn('HireKit: Could not load screening questions', err);
+      }
+    }
+
     const widgetType = companyConfig.widgetType || 'form';
 
     this.root = createRoot(mountPoint);
@@ -115,6 +129,7 @@ class HireKitWidget {
           context="widget"
           branding={companyConfig.branding}
           sections={companyConfig.sections}
+          screeningQuestions={screeningQuestions.length > 0 ? screeningQuestions : undefined}
           initialData={{}}
           onComplete={async (cvData) => {
             try {

@@ -78,6 +78,7 @@ export async function POST(request: NextRequest) {
       salaryPeriod: (body.salaryPeriod as string) || 'year',
       showSalary: body.showSalary !== false,
       scorecardId: (body.scorecardId as string) || null,
+      screeningQuestions: body.screeningQuestions ?? null,
     },
   });
 

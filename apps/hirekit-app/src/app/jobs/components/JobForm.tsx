@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { RichTextEditor } from '@/app/components/RichTextEditor';
+import type { ScreeningQuestion } from '@repo/types';
 
 const EMPLOYMENT_TYPES = [
   { value: 'full-time', label: 'Full-time' },
@@ -61,6 +62,7 @@ interface JobFormData {
   salaryPeriod: string;
   showSalary: boolean;
   scorecardId: string;
+  screeningQuestions: ScreeningQuestion[];
 }
 
 interface ScorecardOption {
@@ -119,6 +121,7 @@ export function JobForm({ initialData, jobId, mode, scorecards = [] }: JobFormPr
     salaryPeriod: initialData?.salaryPeriod || 'year',
     showSalary: initialData?.showSalary !== false,
     scorecardId: initialData?.scorecardId || '',
+    screeningQuestions: (initialData?.screeningQuestions as unknown as ScreeningQuestion[]) || [],
   });
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -155,6 +158,7 @@ export function JobForm({ initialData, jobId, mode, scorecards = [] }: JobFormPr
           salaryPeriod: form.salaryPeriod,
           showSalary: form.showSalary,
           scorecardId: form.scorecardId || null,
+          screeningQuestions: form.screeningQuestions.length > 0 ? form.screeningQuestions : null,
         }),
       });
 
@@ -200,6 +204,27 @@ export function JobForm({ initialData, jobId, mode, scorecards = [] }: JobFormPr
 
   const removeBenefitTag = (tag: string) => {
     update('benefitTags', form.benefitTags.filter((t) => t !== tag));
+  };
+
+  const addScreeningQuestion = () => {
+    const newQ: ScreeningQuestion = {
+      id: crypto.randomUUID(),
+      type: 'text',
+      label: '',
+      required: false,
+    };
+    update('screeningQuestions', [...form.screeningQuestions, newQ]);
+  };
+
+  const updateScreeningQuestion = (id: string, field: keyof ScreeningQuestion, value: any) => {
+    update(
+      'screeningQuestions',
+      form.screeningQuestions.map((q) => (q.id === id ? { ...q, [field]: value } : q))
+    );
+  };
+
+  const removeScreeningQuestion = (id: string) => {
+    update('screeningQuestions', form.screeningQuestions.filter((q) => q.id !== id));
   };
 
   const handleGenerateDescription = async () => {
@@ -565,6 +590,83 @@ export function JobForm({ initialData, jobId, mode, scorecards = [] }: JobFormPr
           </div>
         </div>
       )}
+
+      {/* === Section 6: Screening Questions === */}
+      <div>
+        <SectionHeader icon="ph ph-chat-circle-text" title="Screening Questions" subtitle="Ask candidates questions when they apply" />
+
+        <div className="space-y-4">
+          {form.screeningQuestions.map((q, idx) => (
+            <div key={q.id} className="p-4 bg-[#F8FAFC] border border-slate-200 rounded-xl space-y-3">
+              <div className="flex items-start gap-3">
+                <span className="text-xs font-bold text-[#94A3B8] mt-3 shrink-0">#{idx + 1}</span>
+                <div className="flex-1 space-y-3">
+                  <input
+                    type="text"
+                    value={q.label}
+                    onChange={(e) => updateScreeningQuestion(q.id, 'label', e.target.value)}
+                    placeholder="e.g. Are you authorized to work in the EU?"
+                    className={inputClass}
+                  />
+                  <div className="flex flex-wrap items-center gap-3">
+                    <select
+                      value={q.type}
+                      onChange={(e) => updateScreeningQuestion(q.id, 'type', e.target.value)}
+                      className="px-3 py-2 rounded-lg border border-slate-200 text-sm text-[#1E293B] bg-white focus:outline-none focus:border-[#4F46E5] transition-all"
+                    >
+                      <option value="text">Short Text</option>
+                      <option value="textarea">Long Text</option>
+                      <option value="select">Single Choice</option>
+                      <option value="boolean">Yes / No</option>
+                    </select>
+                    <label className="flex items-center gap-2 text-sm text-[#1E293B] cursor-pointer">
+                      <input
+                        type="checkbox"
+                        checked={q.required}
+                        onChange={(e) => updateScreeningQuestion(q.id, 'required', e.target.checked)}
+                        className="w-4 h-4 rounded border-slate-300 text-[#4F46E5] focus:ring-[#4F46E5]"
+                      />
+                      Required
+                    </label>
+                  </div>
+                  {q.type === 'select' && (
+                    <input
+                      type="text"
+                      value={(q.options || []).join(', ')}
+                      onChange={(e) =>
+                        updateScreeningQuestion(
+                          q.id,
+                          'options',
+                          e.target.value.split(',').map((s) => s.trim()).filter(Boolean)
+                        )
+                      }
+                      placeholder="Options (comma-separated): e.g. 0-2 years, 3-5 years, 5+ years"
+                      className={inputClass}
+                    />
+                  )}
+                </div>
+                <button
+                  type="button"
+                  onClick={() => removeScreeningQuestion(q.id)}
+                  className="mt-2 p-1.5 text-[#94A3B8] hover:text-red-500 transition-colors"
+                  title="Remove question"
+                >
+                  <i className="ph ph-trash text-base" />
+                </button>
+              </div>
+            </div>
+          ))}
+
+          <button
+            type="button"
+            onClick={addScreeningQuestion}
+            className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-semibold text-[#4F46E5] bg-white border border-dashed border-[#4F46E5]/30 rounded-xl hover:bg-[#EEF2FF] transition-all"
+          >
+            <i className="ph ph-plus" />
+            Add Question
+          </button>
+        </div>
+      </div>
 
       {/* Actions */}
       <div className="flex items-center gap-4 pt-4 border-t border-slate-200">

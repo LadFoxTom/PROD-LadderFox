@@ -56,6 +56,9 @@ export async function POST(request: NextRequest) {
   let source = xSource || 'widget';
   if (!xSource && referer.includes('/career/')) source = 'career_page';
 
+  // Extract screening answers from cvData
+  const screeningAnswers = cvData.screeningAnswers || null;
+
   const application = await db.application.create({
     data: {
       companyId,
@@ -67,6 +70,7 @@ export async function POST(request: NextRequest) {
       status: 'new',
       source,
       sourceUrl: referer || null,
+      screeningAnswers: screeningAnswers as any,
     },
   });
 

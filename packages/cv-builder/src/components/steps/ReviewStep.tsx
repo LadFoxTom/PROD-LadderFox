@@ -1,9 +1,10 @@
 import * as React from 'react';
-import type { CVData } from '@repo/types';
+import type { CVData, ScreeningQuestion } from '@repo/types';
 
 interface ReviewStepProps {
   data: Partial<CVData>;
   primaryColor?: string;
+  screeningQuestions?: ScreeningQuestion[];
 }
 
 function getSkillsArray(skills: CVData['skills']): string[] {
@@ -58,7 +59,7 @@ function FieldRow({ label, value }: { label: string; value?: string }) {
   );
 }
 
-export function ReviewStep({ data, primaryColor }: ReviewStepProps) {
+export function ReviewStep({ data, primaryColor, screeningQuestions }: ReviewStepProps) {
   const color = primaryColor || '#4F46E5';
   const skills = getSkillsArray(data.skills);
   const hasPersonalInfo =
@@ -66,6 +67,7 @@ export function ReviewStep({ data, primaryColor }: ReviewStepProps) {
   const hasExperience = data.experience && data.experience.length > 0;
   const hasEducation = data.education && data.education.length > 0;
   const hasSkills = skills.length > 0;
+  const hasScreeningAnswers = data.screeningAnswers && data.screeningAnswers.length > 0 && screeningQuestions && screeningQuestions.length > 0;
 
   return (
     <div className="space-y-6">
@@ -202,6 +204,32 @@ export function ReviewStep({ data, primaryColor }: ReviewStepProps) {
                 {skill}
               </span>
             ))}
+          </div>
+        </SectionCard>
+      )}
+
+      {/* Screening Questions */}
+      {hasScreeningAnswers && (
+        <SectionCard
+          title="Screening Questions"
+          icon="M8.625 9.75a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H8.25m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0H12m4.125 0a.375.375 0 11-.75 0 .375.375 0 01.75 0zm0 0h-.375m-13.5 3.01c0 1.6 1.123 2.994 2.707 3.227 1.087.16 2.185.283 3.293.369V21l4.184-4.183a1.14 1.14 0 01.778-.332 48.294 48.294 0 005.83-.498c1.585-.233 2.708-1.626 2.708-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0012 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018z"
+          primaryColor={color}
+        >
+          <div className="space-y-1">
+            {data.screeningAnswers!.map((sa) => {
+              const question = screeningQuestions!.find((q) => q.id === sa.questionId);
+              if (!question) return null;
+              const displayValue = typeof sa.answer === 'boolean'
+                ? (sa.answer ? 'Yes' : 'No')
+                : sa.answer || '—';
+              return (
+                <FieldRow
+                  key={sa.questionId}
+                  label={question.label}
+                  value={String(displayValue)}
+                />
+              );
+            })}
           </div>
         </SectionCard>
       )}

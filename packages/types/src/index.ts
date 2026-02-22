@@ -172,6 +172,9 @@ export interface CVData {
     hiddenSections?: string[]
   }
 
+  // Screening question answers (for job applications)
+  screeningAnswers?: ScreeningAnswer[]
+
   // Onboarding and metadata
   goal?: string
   experienceLevel?: string
@@ -592,6 +595,23 @@ export const JOB_LISTING_TEMPLATES: JobListingTemplateConfig[] = [
 // CV Builder Props - Configuration interface for the CV builder component
 // ============================================================================
 
+// ============================================================================
+// Screening Questions
+// ============================================================================
+
+export interface ScreeningQuestion {
+  id: string;
+  type: 'text' | 'textarea' | 'select' | 'boolean';
+  label: string;
+  required: boolean;
+  options?: string[];
+}
+
+export interface ScreeningAnswer {
+  questionId: string;
+  answer: string | boolean;
+}
+
 export interface CVBuilderProps {
   branding?: {
     primaryColor?: string
@@ -610,6 +630,7 @@ export interface CVBuilderProps {
     languages?: { enabled: boolean }
     coverLetter?: { enabled: boolean; required?: boolean }
   }
+  screeningQuestions?: ScreeningQuestion[];
   onComplete: (data: CVData) => void | Promise<void>
   onChange?: (data: Partial<CVData>) => void
   onError?: (error: Error) => void

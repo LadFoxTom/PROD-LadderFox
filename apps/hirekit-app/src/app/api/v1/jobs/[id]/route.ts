@@ -67,6 +67,7 @@ export async function PATCH(
   if (body.showSalary !== undefined) data.showSalary = Boolean(body.showSalary);
   if (body.active !== undefined) data.active = Boolean(body.active);
   if (body.scorecardId !== undefined) data.scorecardId = body.scorecardId || null;
+  if (body.screeningQuestions !== undefined) data.screeningQuestions = body.screeningQuestions ?? null;
 
   const result = await db.job.updateMany({
     where: { id: params.id, companyId: ctx.companyId },
