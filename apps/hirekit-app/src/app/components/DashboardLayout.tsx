@@ -39,9 +39,9 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
         rel="stylesheet"
         href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/regular/style.css"
       />
-      <div className="min-h-screen flex bg-[#FAFBFC]">
+      <div className="h-screen flex bg-[#FAFBFC] overflow-hidden">
         {/* Sidebar */}
-        <aside className="w-64 bg-white border-r border-slate-200 flex flex-col shrink-0">
+        <aside className="w-64 bg-white border-r border-slate-200 flex flex-col shrink-0 h-screen overflow-hidden">
           <div className="p-6 border-b border-slate-200">
             <Link href="/dashboard" className="flex items-center gap-2">
               <div className="w-8 h-8 bg-[#4F46E5] rounded-lg flex items-center justify-center">
@@ -50,7 +50,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
               <span className="text-xl font-extrabold text-[#4F46E5]">HireKit</span>
             </Link>
           </div>
-          <nav className="flex-1 p-4 space-y-1">
+          <nav className="flex-1 p-4 space-y-1 overflow-y-auto">
             {navItems.map((item) => {
               const isActive =
                 pathname === item.href ||
@@ -97,7 +97,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
           </div>
         </aside>
         {/* Main Content */}
-        <main className="flex-1 min-w-0">
+        <main className="flex-1 min-w-0 overflow-y-auto">
           <EmailVerificationBanner />
           {children}
         </main>

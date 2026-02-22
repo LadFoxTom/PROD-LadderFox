@@ -233,9 +233,12 @@ export function JobForm({ initialData, jobId, mode, scorecards = [] }: JobFormPr
     update('screeningQuestions', form.screeningQuestions.filter((q) => q.id !== id));
   };
 
+  const [aiError, setAiError] = useState('');
+
   const handleGenerateDescription = async () => {
     if (!form.title.trim()) return;
     setAiLoading(true);
+    setAiError('');
     try {
       const res = await fetch('/api/v1/jobs/generate-description', {
         method: 'POST',
@@ -253,9 +256,13 @@ export function JobForm({ initialData, jobId, mode, scorecards = [] }: JobFormPr
         if (data.benefits) update('benefits', data.benefits);
         setShowAiGen(false);
         setAiBullets('');
+      } else {
+        const data = await res.json().catch(() => ({}));
+        setAiError(data.error || 'Failed to generate. Please try again.');
       }
     } catch (err) {
       console.error('Failed to generate description:', err);
+      setAiError('Network error. Please check your connection and try again.');
     } finally {
       setAiLoading(false);
     }
@@ -305,7 +312,9 @@ export function JobForm({ initialData, jobId, mode, scorecards = [] }: JobFormPr
             {showAiGen && (
               <div className="mb-3 p-4 bg-[#F8FAFC] border border-slate-200 rounded-xl space-y-3">
                 <p className="text-xs text-[#64748B]">
-                  Enter optional bullet points. AI will generate description, requirements, and benefits.
+                  {form.title.trim()
+                    ? 'Enter optional bullet points. AI will generate description, requirements, and benefits.'
+                    : 'Fill in the Job Title above first, then AI can generate your description.'}
                 </p>
                 <textarea
                   value={aiBullets}
@@ -332,6 +341,9 @@ export function JobForm({ initialData, jobId, mode, scorecards = [] }: JobFormPr
                     </>
                   )}
                 </button>
+                {aiError && (
+                  <p className="text-xs text-red-600 mt-1">{aiError}</p>
+                )}
               </div>
             )}
 
