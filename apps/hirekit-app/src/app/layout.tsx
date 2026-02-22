@@ -6,8 +6,8 @@ import './globals.css';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'HireKit Dashboard',
-  description: 'Manage your embeddable CV builder',
+  title: 'HireKit — Dashboard',
+  description: 'Manage your hiring pipeline, candidates, career pages, and team — all from one dashboard.',
 };
 
 export default function RootLayout({
