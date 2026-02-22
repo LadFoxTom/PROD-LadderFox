@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import { DashboardLayout } from '../components/DashboardLayout';
 
 type Tab = 'cv-builder' | 'job-listings';
@@ -21,45 +21,9 @@ export default function LivePreviewPage() {
       .finally(() => setLoading(false));
   }, []);
 
-  const origin = typeof window !== 'undefined' ? window.location.origin : '';
-
-  const cvBuilderSrcdoc = useMemo(() => {
-    if (!companyId || !origin) return '';
-    return `<!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"></head>
-<body style="margin:0;padding:0;background:#fff;">
-<div id="hirekit-widget"></div>
-<script>window.__HIREKIT_API_URL__ = "${origin}/api";</script>
-<script src="${origin}/widget/hirekit-widget.iife.js"></script>
-<script>
-  if (window.HirekitWidget) {
-    HirekitWidget.init({ companyId: "${companyId}", container: "#hirekit-widget" });
-  }
-</script>
-</body>
-</html>`;
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [companyId, origin, refreshKey]);
-
-  const jobListingsSrcdoc = useMemo(() => {
-    if (!companyId || !origin) return '';
-    return `<!DOCTYPE html>
-<html>
-<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"></head>
-<body style="margin:0;padding:0;background:#fff;">
-<div id="hirekit-jobs"></div>
-<script>window.__HIREKIT_API_URL__ = "${origin}/api";</script>
-<script src="${origin}/widget/hirekit-jobs.iife.js"></script>
-<script>
-  if (window.HirekitJobs) {
-    HirekitJobs.init({ companyId: "${companyId}", container: "#hirekit-jobs" });
-  }
-</script>
-</body>
-</html>`;
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [companyId, origin, refreshKey]);
+  const iframeSrc = companyId
+    ? `/live-preview-frame.html?widget=${activeTab}&companyId=${companyId}&r=${refreshKey}`
+    : '';
 
   const tabs: { key: Tab; label: string; icon: string }[] = [
     { key: 'cv-builder', label: 'CV Builder', icon: 'ph ph-chat-circle-dots' },
@@ -133,10 +97,9 @@ export default function LivePreviewPage() {
           ) : (
             <iframe
               key={`${activeTab}-${refreshKey}`}
-              srcDoc={activeTab === 'cv-builder' ? cvBuilderSrcdoc : jobListingsSrcdoc}
+              src={iframeSrc}
               className="w-full border border-slate-200 rounded-xl"
               style={{ height: '800px' }}
-              sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
               title={activeTab === 'cv-builder' ? 'CV Builder Preview' : 'Job Listings Preview'}
             />
           )}

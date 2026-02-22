@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>body { margin: 0; padding: 0; background: #fff; }</style>
+</head>
+<body>
+  <div id="hirekit-widget"></div>
+  <div id="hirekit-jobs"></div>
+  <script>
+    (function() {
+      var params = new URLSearchParams(window.location.search);
+      var companyId = params.get('companyId');
+      var widget = params.get('widget') || 'cv-builder';
+      var apiBase = window.location.origin + '/api';
+
+      if (!companyId) {
+        document.body.innerHTML = '<p style="padding:20px;color:#64748B;">Missing company ID.</p>';
+        return;
+      }
+
+      window.__HIREKIT_API_URL__ = apiBase;
+
+      var script = document.createElement('script');
+      if (widget === 'job-listings') {
+        script.src = '/widget/hirekit-jobs.iife.js';
+        script.onload = function() {
+          if (window.HirekitJobs) {
+            window.HirekitJobs.init({ companyId: companyId, container: '#hirekit-jobs' });
+          }
+        };
+      } else {
+        script.src = '/widget/hirekit-widget.iife.js';
+        script.onload = function() {
+          if (window.HirekitWidget) {
+            window.HirekitWidget.init({ companyId: companyId, container: '#hirekit-widget' });
+          }
+        };
+      }
+      document.body.appendChild(script);
+    })();
+  </script>
+</body>
+</html>
