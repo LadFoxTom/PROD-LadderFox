@@ -5,19 +5,7 @@ export const alt = 'HireKit — The Hiring Platform That Replaces 5 Tools';
 export const size = { width: 1200, height: 630 };
 export const contentType = 'image/png';
 
-function HireKitIcon({ size: s = 36 }: { size?: number }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 256 256"
-      fill="white"
-      width={s}
-      height={s}
-    >
-      <path d="M120,80A40,40,0,1,1,80,40,40,40,0,0,1,120,80Zm56,40a40,40,0,1,0-40-40A40,40,0,0,0,176,120ZM80,136a40,40,0,1,0,40,40A40,40,0,0,0,80,136Zm128,32H184V144a8,8,0,0,0-16,0v24H144a8,8,0,0,0,0,16h24v24a8,8,0,0,0,16,0V184h24a8,8,0,0,0,0-16Z" />
-    </svg>
-  );
-}
+const ICON_SVG = `data:image/svg+xml,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" fill="white"><path d="M120,80A40,40,0,1,1,80,40,40,40,0,0,1,120,80Zm56,40a40,40,0,1,0-40-40A40,40,0,0,0,176,120ZM80,136a40,40,0,1,0,40,40A40,40,0,0,0,80,136Zm128,32H184V144a8,8,0,0,0-16,0v24H144a8,8,0,0,0,0,16h24v24a8,8,0,0,0,16,0V184h24a8,8,0,0,0,0-16Z"/></svg>')}`;
 
 export default function TwitterImage() {
   return new ImageResponse(
@@ -71,7 +59,8 @@ export default function TwitterImage() {
               justifyContent: 'center',
             }}
           >
-            <HireKitIcon size={32} />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={ICON_SVG} alt="" width={32} height={32} />
           </div>
           <span style={{ fontSize: 34, fontWeight: 800, color: '#4F46E5', letterSpacing: -0.5 }}>
             HireKit
@@ -79,6 +68,8 @@ export default function TwitterImage() {
         </div>
         <div
           style={{
+            display: 'flex',
+            flexWrap: 'wrap',
             fontSize: 68,
             fontWeight: 800,
             color: '#1E293B',
@@ -88,7 +79,7 @@ export default function TwitterImage() {
             maxWidth: 900,
           }}
         >
-          The Hiring Platform That{' '}
+          <span>The Hiring Platform That </span>
           <span style={{ color: '#4F46E5' }}>Replaces 5 Tools</span>
         </div>
         <div
