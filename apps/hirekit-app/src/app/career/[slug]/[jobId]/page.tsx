@@ -98,10 +98,15 @@ export default async function JobDetailPage({ params }: PageProps) {
       name: company.name,
       ...(branding.logoUrl && { logo: branding.logoUrl }),
     },
-    ...(job.location && {
+    ...((job.city || job.region || job.country) && {
       jobLocation: {
         '@type': 'Place',
-        address: { '@type': 'PostalAddress', addressLocality: job.location },
+        address: {
+          '@type': 'PostalAddress',
+          ...(job.city && { addressLocality: job.city }),
+          ...(job.region && { addressRegion: job.region }),
+          ...(job.country && { addressCountry: job.country }),
+        },
       },
     }),
     ...(employmentTypes.length && { employmentType: employmentTypes.length === 1 ? employmentTypes[0] : employmentTypes }),

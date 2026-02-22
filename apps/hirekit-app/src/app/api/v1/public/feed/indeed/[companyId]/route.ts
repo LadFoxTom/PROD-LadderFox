@@ -31,10 +31,8 @@ export async function GET(
   const baseUrl = process.env.NEXTAUTH_URL || 'https://app.hirekit.io';
 
   const jobsXml = company.jobs.map((job) => {
-    const location = job.location || '';
-    const parts = location.split(',').map(s => s.trim());
-    const city = parts[0] || '';
-    const country = parts.length > 1 ? parts[parts.length - 1] : '';
+    const city = job.city || '';
+    const country = job.country || '';
 
     let salary = '';
     if (job.salaryMin && job.salaryMax) {

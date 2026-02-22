@@ -50,7 +50,9 @@ interface JobFormData {
   requirements: string;
   benefits: string;
   benefitTags: string[];
-  location: string;
+  city: string;
+  region: string;
+  country: string;
   type: string;
   workplaceType: string;
   employmentTypes: string[];
@@ -109,7 +111,9 @@ export function JobForm({ initialData, jobId, mode, scorecards = [] }: JobFormPr
     requirements: initialData?.requirements || '',
     benefits: initialData?.benefits || '',
     benefitTags: initialData?.benefitTags || [],
-    location: initialData?.location || '',
+    city: initialData?.city || '',
+    region: initialData?.region || '',
+    country: initialData?.country || '',
     type: initialData?.type || '',
     workplaceType: initialData?.workplaceType || '',
     employmentTypes: initialData?.employmentTypes || (initialData?.type ? [initialData.type] : []),
@@ -146,7 +150,9 @@ export function JobForm({ initialData, jobId, mode, scorecards = [] }: JobFormPr
           requirements: form.requirements || null,
           benefits: form.benefits || null,
           benefitTags: form.benefitTags,
-          location: form.location.trim() || null,
+          city: form.city.trim() || null,
+          region: form.region.trim() || null,
+          country: form.country.trim() || null,
           type: form.employmentTypes[0] || form.type || null,
           workplaceType: form.workplaceType || null,
           employmentTypes: form.employmentTypes,
@@ -419,14 +425,34 @@ export function JobForm({ initialData, jobId, mode, scorecards = [] }: JobFormPr
       <div>
         <SectionHeader icon="ph ph-map-pin" title="Location & Workplace" subtitle="Where and how the work happens" />
 
-        <div className="grid md:grid-cols-2 gap-5">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
           <div>
-            <label className={labelClass}>Location</label>
+            <label className={labelClass}>City</label>
             <input
               type="text"
-              value={form.location}
-              onChange={(e) => update('location', e.target.value)}
-              placeholder="e.g. Berlin, Germany"
+              value={form.city}
+              onChange={(e) => update('city', e.target.value)}
+              placeholder="e.g. Berlin"
+              className={inputClass}
+            />
+          </div>
+          <div>
+            <label className={labelClass}>Region / State</label>
+            <input
+              type="text"
+              value={form.region}
+              onChange={(e) => update('region', e.target.value)}
+              placeholder="e.g. Berlin"
+              className={inputClass}
+            />
+          </div>
+          <div>
+            <label className={labelClass}>Country</label>
+            <input
+              type="text"
+              value={form.country}
+              onChange={(e) => update('country', e.target.value)}
+              placeholder="e.g. Germany"
               className={inputClass}
             />
           </div>

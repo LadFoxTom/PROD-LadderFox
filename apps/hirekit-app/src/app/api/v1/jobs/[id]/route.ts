@@ -54,7 +54,15 @@ export async function PATCH(
   if (body.requirements !== undefined) data.requirements = body.requirements || null;
   if (body.benefits !== undefined) data.benefits = body.benefits || null;
   if (body.benefitTags !== undefined) data.benefitTags = Array.isArray(body.benefitTags) ? body.benefitTags : [];
-  if (body.location !== undefined) data.location = body.location || null;
+  if (body.city !== undefined) data.city = body.city || null;
+  if (body.region !== undefined) data.region = body.region || null;
+  if (body.country !== undefined) data.country = body.country || null;
+  if (body.city !== undefined || body.region !== undefined || body.country !== undefined) {
+    const city = body.city !== undefined ? body.city : undefined;
+    const region = body.region !== undefined ? body.region : undefined;
+    const country = body.country !== undefined ? body.country : undefined;
+    data.location = [city, region, country].filter(Boolean).join(', ') || null;
+  }
   if (body.type !== undefined) data.type = body.type || null;
   if (body.workplaceType !== undefined) data.workplaceType = body.workplaceType || null;
   if (body.employmentTypes !== undefined) data.employmentTypes = Array.isArray(body.employmentTypes) ? body.employmentTypes : [];

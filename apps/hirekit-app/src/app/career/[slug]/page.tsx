@@ -78,10 +78,15 @@ export default async function CareerPage({ params }: PageProps) {
       name: company.name,
       ...(branding.logoUrl && { logo: branding.logoUrl }),
     },
-    ...(job.location && {
+    ...((job.city || job.region || job.country) && {
       jobLocation: {
         '@type': 'Place',
-        address: { '@type': 'PostalAddress', addressLocality: job.location },
+        address: {
+          '@type': 'PostalAddress',
+          ...(job.city && { addressLocality: job.city }),
+          ...(job.region && { addressRegion: job.region }),
+          ...(job.country && { addressCountry: job.country }),
+        },
       },
     }),
     ...(job.type && { employmentType: job.type.toUpperCase().replace('-', '_') }),

@@ -23,7 +23,17 @@ export function injectJsonLd(jobs: Job[], company: CompanyInfo): void {
       posting.description = job.description;
     }
 
-    if (job.location) {
+    if (job.city || job.region || job.country) {
+      posting.jobLocation = {
+        '@type': 'Place',
+        address: {
+          '@type': 'PostalAddress',
+          ...(job.city && { addressLocality: job.city }),
+          ...(job.region && { addressRegion: job.region }),
+          ...(job.country && { addressCountry: job.country }),
+        },
+      };
+    } else if (job.location) {
       posting.jobLocation = {
         '@type': 'Place',
         address: {

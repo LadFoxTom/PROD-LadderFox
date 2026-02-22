@@ -26,6 +26,9 @@ export interface Job {
   benefits: string | null;
   benefitTags: string[];
   location: string | null;
+  city: string | null;
+  region: string | null;
+  country: string | null;
   type: string | null;
   workplaceType: string | null;
   employmentTypes: string[];

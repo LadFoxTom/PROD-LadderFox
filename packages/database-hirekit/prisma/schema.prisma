@@ -116,6 +116,9 @@ model Job {
   benefits        String?
   benefitTags     String[]
   location        String?
+  city            String?
+  region          String?
+  country         String?
   type            String?
   workplaceType   String?
   employmentTypes String[]
