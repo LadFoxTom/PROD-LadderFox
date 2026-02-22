@@ -7,8 +7,10 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const response = NextResponse.next();
 
-  // Security Headers
-  response.headers.set('X-Frame-Options', 'DENY');
+  // Security Headers – allow framing for the live preview iframe
+  if (pathname !== '/live-preview-frame.html') {
+    response.headers.set('X-Frame-Options', 'DENY');
+  }
   response.headers.set('X-Content-Type-Options', 'nosniff');
   response.headers.set('Referrer-Policy', 'origin-when-cross-origin');
   response.headers.set('Strict-Transport-Security', 'max-age=31536000; includeSubDomains');
@@ -42,7 +44,7 @@ export async function middleware(request: NextRequest) {
   }
 
   // Auth Protection (exclude /schedule/* for candidate self-booking)
-  if (pathname.startsWith('/dashboard') || pathname.startsWith('/applications') || pathname.startsWith('/settings') || pathname.startsWith('/onboarding') || pathname.startsWith('/jobs') || pathname.startsWith('/embed') || pathname.startsWith('/configuration') || pathname.startsWith('/reports') || pathname.startsWith('/talent')) {
+  if (pathname.startsWith('/dashboard') || pathname.startsWith('/applications') || pathname.startsWith('/settings') || pathname.startsWith('/onboarding') || pathname.startsWith('/jobs') || pathname.startsWith('/embed') || pathname.startsWith('/configuration') || pathname.startsWith('/reports') || pathname.startsWith('/talent') || pathname.startsWith('/live-preview')) {
     const token = await getToken({ req: request });
     if (!token) {
       return NextResponse.redirect(new URL('/auth/login', request.url));
