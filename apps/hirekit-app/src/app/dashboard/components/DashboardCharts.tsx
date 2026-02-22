@@ -1,23 +1,21 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-
-interface TrendData {
+export interface TrendData {
   date: string;
   count: number;
 }
 
-interface PipelineData {
+export interface PipelineData {
   status: string;
   count: number;
 }
 
-interface TopJob {
+export interface TopJob {
   title: string;
   count: number;
 }
 
-interface AnalyticsData {
+export interface AnalyticsData {
   trend: TrendData[];
   pipeline: PipelineData[];
   topJobs: TopJob[];
@@ -89,35 +87,7 @@ function PipelineBar({
   );
 }
 
-export function DashboardCharts() {
-  const [data, setData] = useState<AnalyticsData | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch('/api/v1/analytics')
-      .then((res) => res.json())
-      .then((d) => setData(d))
-      .catch(() => {})
-      .finally(() => setLoading(false));
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="grid md:grid-cols-2 gap-6">
-        {[1, 2, 3].map((i) => (
-          <div
-            key={i}
-            className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm animate-pulse"
-          >
-            <div className="h-4 bg-[#F1F5F9] rounded w-1/3 mb-6" />
-            <div className="h-24 bg-[#F1F5F9] rounded" />
-          </div>
-        ))}
-      </div>
-    );
-  }
-
-  if (!data) return null;
+export function DashboardCharts({ data }: { data: AnalyticsData }) {
 
   const trendMax = Math.max(...data.trend.map((t) => t.count), 1);
   const pipelineMax = Math.max(...data.pipeline.map((p) => p.count), 1);

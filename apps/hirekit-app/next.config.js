@@ -3,6 +3,9 @@ const isDev = process.env.NODE_ENV !== 'production';
 
 const nextConfig = {
   transpilePackages: ['@repo/ui', '@repo/cv-builder'],
+  experimental: {
+    optimizePackageImports: ['@repo/ui', '@repo/types'],
+  },
   async headers() {
     return [
       {

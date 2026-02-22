@@ -3,13 +3,37 @@
 import { useEffect, useState, useRef } from 'react';
 import { DashboardLayout } from '@/app/components/DashboardLayout';
 import { WIDGET_TEMPLATES, WidgetTemplateConfig, JOB_LISTING_TEMPLATES, JobListingTemplateConfig } from '@repo/types';
-import { EmailTemplatesTab } from './EmailTemplatesTab';
-import { TeamTab } from './TeamTab';
-import { CareerPageTab } from './CareerPageTab';
-import { ScorecardsTab } from './ScorecardsTab';
-import { GdprTab } from './GdprTab';
-import { PipelineTab } from './PipelineTab';
-import { WebhooksTab } from './WebhooksTab';
+import dynamic from 'next/dynamic';
+
+const EmailTemplatesTab = dynamic(() => import('./EmailTemplatesTab').then(m => m.EmailTemplatesTab), {
+  loading: () => <TabSpinner />,
+});
+const TeamTab = dynamic(() => import('./TeamTab').then(m => m.TeamTab), {
+  loading: () => <TabSpinner />,
+});
+const CareerPageTab = dynamic(() => import('./CareerPageTab').then(m => m.CareerPageTab), {
+  loading: () => <TabSpinner />,
+});
+const ScorecardsTab = dynamic(() => import('./ScorecardsTab').then(m => m.ScorecardsTab), {
+  loading: () => <TabSpinner />,
+});
+const GdprTab = dynamic(() => import('./GdprTab').then(m => m.GdprTab), {
+  loading: () => <TabSpinner />,
+});
+const PipelineTab = dynamic(() => import('./PipelineTab').then(m => m.PipelineTab), {
+  loading: () => <TabSpinner />,
+});
+const WebhooksTab = dynamic(() => import('./WebhooksTab').then(m => m.WebhooksTab), {
+  loading: () => <TabSpinner />,
+});
+
+function TabSpinner() {
+  return (
+    <div className="flex items-center justify-center py-12">
+      <div className="w-6 h-6 border-2 border-slate-200 border-t-[#4F46E5] rounded-full animate-spin" />
+    </div>
+  );
+}
 
 interface Settings {
   company: { id: string; name: string; slug: string };

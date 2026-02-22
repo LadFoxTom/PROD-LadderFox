@@ -6,7 +6,7 @@ import { db } from '@repo/database-hirekit';
 import { getCompanyForUser } from '@/lib/company';
 import { DashboardLayout } from '@/app/components/DashboardLayout';
 import { StatusBadge } from '@/app/components/StatusBadge';
-import { DashboardCharts } from './components/DashboardCharts';
+import { DashboardCharts, AnalyticsData } from './components/DashboardCharts';
 
 export default async function DashboardPage() {
   const session = await getServerSession(authOptions);
@@ -21,7 +21,10 @@ export default async function DashboardPage() {
   });
   if (!company) redirect('/onboarding');
 
-  const [totalApplications, newApplications, activeJobs, hiredCount, recentApplications, upcomingInterviews] =
+  const thirtyDaysAgo = new Date();
+  thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+
+  const [totalApplications, newApplications, activeJobs, hiredCount, recentApplications, upcomingInterviews, recentAppsForTrend, pipelineGroups, topJobs] =
     await Promise.all([
       db.application.count({ where: { companyId: company.id } }),
       db.application.count({ where: { companyId: company.id, status: 'new' } }),
@@ -43,7 +46,48 @@ export default async function DashboardPage() {
         orderBy: { startTime: 'asc' },
         take: 5,
       }),
+      db.application.findMany({
+        where: { companyId: company.id, createdAt: { gte: thirtyDaysAgo } },
+        select: { createdAt: true },
+        orderBy: { createdAt: 'asc' },
+      }),
+      db.application.groupBy({
+        by: ['status'],
+        where: { companyId: company.id },
+        _count: { id: true },
+      }),
+      db.job.findMany({
+        where: { companyId: company.id, active: true },
+        include: { _count: { select: { applications: true } } },
+        orderBy: { applications: { _count: 'desc' } },
+        take: 5,
+      }),
     ]);
+
+  // Build analytics data for charts
+  const dailyTrend: Record<string, number> = {};
+  for (let i = 0; i < 30; i++) {
+    const d = new Date();
+    d.setDate(d.getDate() - (29 - i));
+    const key = d.toISOString().split('T')[0]!;
+    dailyTrend[key] = 0;
+  }
+  for (const app of recentAppsForTrend) {
+    const key = app.createdAt.toISOString().split('T')[0]!;
+    if (dailyTrend[key] !== undefined) {
+      dailyTrend[key]++;
+    }
+  }
+
+  const pipelineOrder = ['new', 'screening', 'interviewing', 'offered', 'hired', 'rejected'];
+  const analyticsData: AnalyticsData = {
+    trend: Object.entries(dailyTrend).map(([date, count]) => ({ date, count })),
+    pipeline: pipelineOrder.map((status) => {
+      const found = pipelineGroups.find((a) => a.status === status);
+      return { status, count: found?._count?.id || 0 };
+    }),
+    topJobs: topJobs.map((job) => ({ title: job.title, count: job._count.applications })),
+  };
 
   const primaryColor = company.branding?.primaryColor || '#4F46E5';
 
@@ -91,7 +135,7 @@ export default async function DashboardPage() {
 
         {/* Charts */}
         <div className="mb-8">
-          <DashboardCharts />
+          <DashboardCharts data={analyticsData} />
         </div>
 
         {/* Quick Actions */}

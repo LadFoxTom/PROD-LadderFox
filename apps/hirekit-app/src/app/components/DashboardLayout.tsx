@@ -35,10 +35,6 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <link
-        rel="stylesheet"
-        href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/regular/style.css"
-      />
       <div className="h-screen flex bg-[#FAFBFC] overflow-hidden">
         {/* Sidebar */}
         <aside className="w-64 bg-white border-r border-slate-200 flex flex-col shrink-0 h-screen overflow-hidden">

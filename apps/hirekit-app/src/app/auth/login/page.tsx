@@ -32,10 +32,6 @@ export default function LoginPage() {
 
   return (
     <>
-      <link
-        rel="stylesheet"
-        href="https://unpkg.com/@phosphor-icons/web@2.0.3/src/regular/style.css"
-      />
       <div className="min-h-screen flex">
         {/* Left panel - branding */}
         <div className="hidden lg:flex lg:w-1/2 bg-[#4F46E5] relative overflow-hidden flex-col justify-between p-12">
