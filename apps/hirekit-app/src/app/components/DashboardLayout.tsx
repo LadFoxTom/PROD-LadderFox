@@ -12,6 +12,7 @@ const navItems = [
   { href: '/reports', label: 'Reports', icon: 'ph ph-chart-line' },
   { href: '/configuration', label: 'Configuration', icon: 'ph ph-sliders' },
   { href: '/embed', label: 'Embed Code', icon: 'ph ph-code' },
+  { href: '/live-preview', label: 'Live Preview', icon: 'ph ph-eye' },
 ];
 
 function EmailVerificationBanner() {
