@@ -144,6 +144,9 @@ importers:
       next-auth:
         specifier: ^4.24.7
         version: 4.24.13(@auth/core@0.34.3(nodemailer@7.0.11))(next@14.2.30(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(nodemailer@7.0.11)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      pdf-parse:
+        specifier: ^1.1.4
+        version: 1.1.4
       puppeteer:
         specifier: ^24.8.2
         version: 24.37.2(typescript@5.9.3)
@@ -193,6 +196,9 @@ importers:
       '@types/node':
         specifier: ^20.0.0
         version: 20.19.33
+      '@types/pdf-parse':
+        specifier: ^1.1.5
+        version: 1.1.5
       '@types/react':
         specifier: ^18.3.1
         version: 18.3.28

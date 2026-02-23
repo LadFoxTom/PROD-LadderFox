@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { authOptions } from '@/lib/auth';
 import { db } from '@repo/database-hirekit';
 import { DashboardLayout } from '@/app/components/DashboardLayout';
-import { JobForm } from '../components/JobForm';
+import { NewJobClient } from './NewJobClient';
 
 export default async function NewJobPage() {
   const session = await getServerSession(authOptions);
@@ -41,9 +41,7 @@ export default async function NewJobPage() {
           </p>
         </div>
 
-        <div className="bg-white rounded-2xl border border-slate-200 p-8 shadow-sm">
-          <JobForm mode="create" scorecards={scorecards} />
-        </div>
+        <NewJobClient scorecards={scorecards} />
       </div>
     </DashboardLayout>
   );

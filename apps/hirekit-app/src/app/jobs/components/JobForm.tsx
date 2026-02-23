@@ -44,7 +44,7 @@ const POPULAR_BENEFIT_TAGS = [
   'Gym Membership', 'Commuter Benefits', 'Parental Leave', 'Home Office Stipend',
 ];
 
-interface JobFormData {
+export interface JobFormData {
   title: string;
   description: string;
   requirements: string;
