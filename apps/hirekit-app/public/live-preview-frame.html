@@ -26,15 +26,15 @@
       if (widget === 'job-listings') {
         script.src = '/widget/hirekit-jobs.iife.js';
         script.onload = function() {
-          if (window.HirekitJobs) {
-            window.HirekitJobs.init({ companyId: companyId, container: '#hirekit-jobs' });
+          if (window.HireKitJobs) {
+            window.HireKitJobs.init({ companyId: companyId, container: '#hirekit-jobs' });
           }
         };
       } else {
         script.src = '/widget/hirekit-widget.iife.js';
         script.onload = function() {
-          if (window.HirekitWidget) {
-            window.HirekitWidget.init({ companyId: companyId, container: '#hirekit-widget' });
+          if (window.HireKit) {
+            window.HireKit.init({ companyId: companyId, container: '#hirekit-widget' });
           }
         };
       }
