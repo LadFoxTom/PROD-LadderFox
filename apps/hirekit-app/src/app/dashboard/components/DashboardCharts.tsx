@@ -1,5 +1,7 @@
 'use client';
 
+import Link from 'next/link';
+
 export interface TrendData {
   date: string;
   count: number;
@@ -11,6 +13,7 @@ export interface PipelineData {
 }
 
 export interface TopJob {
+  id: string;
   title: string;
   count: number;
 }
@@ -69,13 +72,16 @@ function PipelineBar({
   const width = maxCount > 0 ? Math.max((count / maxCount) * 100, 4) : 4;
 
   return (
-    <div className="flex items-center gap-3">
-      <span className="text-sm text-[#64748B] w-24 text-right capitalize">
+    <Link
+      href={`/applications?status=${status}`}
+      className="flex items-center gap-3 group cursor-pointer"
+    >
+      <span className="text-sm text-[#64748B] w-24 text-right capitalize group-hover:text-[#1E293B] transition-colors">
         {status}
       </span>
-      <div className="flex-1 bg-[#F1F5F9] rounded-full h-6 overflow-hidden">
+      <div className="flex-1 bg-[#F1F5F9] rounded-full h-6 overflow-hidden group-hover:bg-[#E8ECF1] transition-colors">
         <div
-          className="h-full rounded-full flex items-center justify-end pr-2 transition-all duration-500"
+          className="h-full rounded-full flex items-center justify-end pr-2 transition-all duration-500 group-hover:opacity-90"
           style={{ width: `${width}%`, backgroundColor: color }}
         >
           {count > 0 && (
@@ -83,7 +89,7 @@ function PipelineBar({
           )}
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 
@@ -144,23 +150,27 @@ export function DashboardCharts({ data }: { data: AnalyticsData }) {
             <p className="text-sm text-[#64748B]">Most popular open positions</p>
           </div>
           <div className="space-y-3">
-            {data.topJobs.map((job, i) => {
+            {data.topJobs.map((job) => {
               const maxJobCount = Math.max(...data.topJobs.map((j) => j.count), 1);
               const width = Math.max((job.count / maxJobCount) * 100, 8);
               return (
-                <div key={i} className="flex items-center gap-3">
-                  <span className="text-sm text-[#1E293B] font-medium w-48 truncate">
+                <Link
+                  key={job.id}
+                  href={`/applications?jobId=${job.id}`}
+                  className="flex items-center gap-3 group cursor-pointer"
+                >
+                  <span className="text-sm text-[#1E293B] font-medium w-48 truncate group-hover:text-[#4F46E5] transition-colors">
                     {job.title}
                   </span>
-                  <div className="flex-1 bg-[#F1F5F9] rounded-full h-6 overflow-hidden">
+                  <div className="flex-1 bg-[#F1F5F9] rounded-full h-6 overflow-hidden group-hover:bg-[#E8ECF1] transition-colors">
                     <div
-                      className="h-full rounded-full flex items-center justify-end pr-2 bg-[#4F46E5] transition-all duration-500"
+                      className="h-full rounded-full flex items-center justify-end pr-2 bg-[#4F46E5] transition-all duration-500 group-hover:opacity-90"
                       style={{ width: `${width}%` }}
                     >
                       <span className="text-xs font-bold text-white">{job.count}</span>
                     </div>
                   </div>
-                </div>
+                </Link>
               );
             })}
           </div>

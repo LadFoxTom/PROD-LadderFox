@@ -86,7 +86,7 @@ export default async function DashboardPage() {
       const found = pipelineGroups.find((a) => a.status === status);
       return { status, count: found?._count?.id || 0 };
     }),
-    topJobs: topJobs.map((job) => ({ title: job.title, count: job._count.applications })),
+    topJobs: topJobs.map((job) => ({ id: job.id, title: job.title, count: job._count.applications })),
   };
 
   const primaryColor = company.branding?.primaryColor || '#4F46E5';
@@ -109,6 +109,7 @@ export default async function DashboardPage() {
             icon="ph ph-users"
             color="#4F46E5"
             bgColor="#E0E7FF"
+            href="/applications"
           />
           <StatCard
             label="New (Unreviewed)"
@@ -116,6 +117,7 @@ export default async function DashboardPage() {
             icon="ph ph-envelope-simple"
             color="#FF6B6B"
             bgColor="#FEE2E2"
+            href="/applications?status=new"
           />
           <StatCard
             label="Active Jobs"
@@ -123,6 +125,7 @@ export default async function DashboardPage() {
             icon="ph ph-briefcase"
             color="#2563EB"
             bgColor="#DBEAFE"
+            href="/jobs"
           />
           <StatCard
             label="Hired"
@@ -130,6 +133,7 @@ export default async function DashboardPage() {
             icon="ph ph-check-circle"
             color="#16A34A"
             bgColor="#DCFCE7"
+            href="/applications?status=hired"
           />
         </div>
 
@@ -330,15 +334,17 @@ function StatCard({
   icon,
   color,
   bgColor,
+  href,
 }: {
   label: string;
   value: number;
   icon: string;
   color: string;
   bgColor: string;
+  href?: string;
 }) {
-  return (
-    <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:-translate-y-0.5 transition-all duration-300">
+  const content = (
+    <>
       <div className="flex items-center justify-between mb-4">
         <div
           className="w-12 h-12 rounded-[20px] flex items-center justify-center"
@@ -349,6 +355,18 @@ function StatCard({
       </div>
       <p className="text-3xl font-bold text-[#1E293B]">{value}</p>
       <p className="text-sm text-[#64748B] mt-1">{label}</p>
-    </div>
+    </>
   );
+
+  const className = `bg-white rounded-2xl border border-slate-200 p-6 shadow-sm hover:-translate-y-0.5 hover:shadow-md transition-all duration-300${href ? ' cursor-pointer' : ''}`;
+
+  if (href) {
+    return (
+      <Link href={href} className={className}>
+        {content}
+      </Link>
+    );
+  }
+
+  return <div className={className}>{content}</div>;
 }
