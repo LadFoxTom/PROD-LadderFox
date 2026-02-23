@@ -27,14 +27,14 @@
         script.src = '/widget/hirekit-jobs.iife.js';
         script.onload = function() {
           if (window.HireKitJobs) {
-            window.HireKitJobs.init({ companyId: companyId, container: '#hirekit-jobs' });
+            window.HireKitJobs.init({ companyId: companyId, container: document.getElementById('hirekit-jobs') });
           }
         };
       } else {
         script.src = '/widget/hirekit-widget.iife.js';
         script.onload = function() {
           if (window.HireKit) {
-            window.HireKit.init({ companyId: companyId, container: '#hirekit-widget' });
+            window.HireKit.init({ companyId: companyId, container: document.getElementById('hirekit-widget') });
           }
         };
       }
