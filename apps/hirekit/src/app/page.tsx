@@ -14,18 +14,25 @@ function Header() {
             <i className="ph-fill ph-circles-three-plus text-[32px]" />
             HireKit
           </Link>
-          <div className="hidden md:flex gap-8">
+          <div className="hidden md:flex gap-8 items-center">
             <a href="#features" className="font-medium text-hk-dark hover:text-hk-primary transition-colors">Features</a>
             <a href="#how-it-works" className="font-medium text-hk-dark hover:text-hk-primary transition-colors">How it Works</a>
             <a href="#pricing" className="font-medium text-hk-dark hover:text-hk-primary transition-colors">Pricing</a>
-            <a href="/auth/login" className="font-medium text-hk-dark hover:text-hk-primary transition-colors">Login</a>
           </div>
-          <a
-            href="/auth/signup"
-            className="hidden md:inline-flex items-center gap-2 px-6 py-3 bg-hk-primary text-white rounded-full font-semibold shadow-md shadow-indigo-500/25 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/35 transition-all duration-300"
-          >
-            Start free trial <i className="ph-bold ph-arrow-right" />
-          </a>
+          <div className="hidden md:flex items-center gap-3">
+            <a
+              href="/auth/login"
+              className="inline-flex items-center px-5 py-2.5 border border-slate-300 text-hk-dark rounded-full font-semibold hover:border-hk-primary hover:text-hk-primary transition-all duration-300"
+            >
+              Login
+            </a>
+            <a
+              href="/auth/signup"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-hk-primary text-white rounded-full font-semibold shadow-md shadow-indigo-500/25 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-indigo-500/35 transition-all duration-300"
+            >
+              Start free trial <i className="ph-bold ph-arrow-right" />
+            </a>
+          </div>
           <MobileNav />
         </nav>
       </div>
@@ -96,25 +103,25 @@ function ProblemsSection() {
       <div className="max-w-container mx-auto px-6">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <ProblemCard
-            icon="ph-fill ph-file-x"
-            title="PDF Chaos"
-            description="Parsing unstructured PDFs is a nightmare. Missing data and broken formatting kill productivity."
+            icon="ph-fill ph-puzzle-piece"
+            title="Scattered Tools"
+            description="Juggling separate tools for job posting, candidate tracking, career pages, and communication wastes time and creates blind spots."
             iconBg="#FEE2E2"
             iconColor="#FF6B6B"
             rotate="rotate(-2deg)"
           />
           <ProblemCard
-            icon="ph-fill ph-envelope-open"
-            title="Inbox Overflow"
-            description="Email attachments get lost. Keeping track of versions across threads is impossible."
+            icon="ph-fill ph-hourglass-medium"
+            title="Slow Hiring"
+            description="Without AI scoring and structured pipelines, top candidates slip away while you're still reviewing spreadsheets."
             iconBg="#E0E7FF"
             iconColor="#4F46E5"
             rotate="rotate(1deg)"
           />
           <ProblemCard
-            icon="ph-fill ph-mask-sad"
-            title="Bad UX"
-            description="Clunky forms drive top talent away. Candidates hate re-typing their resume 50 times."
+            icon="ph-fill ph-storefront"
+            title="No Employer Brand"
+            description="Generic job board listings don't represent your company. Candidates deserve a branded career page experience."
             iconBg="#DCFCE7"
             iconColor="#51CF66"
             rotate="rotate(2deg)"
